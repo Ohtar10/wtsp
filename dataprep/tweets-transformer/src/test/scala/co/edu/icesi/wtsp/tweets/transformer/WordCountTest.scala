@@ -1,6 +1,5 @@
 package co.edu.icesi.wtsp.tweets.transformer
 
-transformer
 
 /**
  * A simple test for everyone's favourite wordcount example.
