@@ -3,14 +3,23 @@ package co.edu.icesi.wtsp.tweets.transformer
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
+/**
+  * Twitter Filter
+  * This class assumes the input directory contains files in json format
+  * corresponding to tweet objects (https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object)
+  * and applies a filter in sql clause form to them to finally sink them in the
+  * provided output folder as parquet files.
+  *
+  * @param spark SparkSession object
+  * @param input Path to the original files
+  * @param output Path to the filtered results
+  */
 class TwitterFilter(spark: SparkSession, input: String, output: String){
 
   import spark.implicits._
   private val datePattern = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"
 
-  private def loadDataframe(): DataFrame = {
-    //to read from hadooop recursively
-    //spark.sparkContext.hadoopConfiguration.set("mapreduce.input.fileinputformat.input.dir.recursive", "true")
+  private def loadDataFrame(): DataFrame = {
 
     val df = spark.read.json(input)
         .withColumn("created_timestamp", to_timestamp($"created_at", datePattern))
@@ -21,16 +30,23 @@ class TwitterFilter(spark: SparkSession, input: String, output: String){
     df
   }
 
-  private def sinkDataframe(df: DataFrame): Unit = {
+  private def sinkDataFrame(df: DataFrame): Unit = {
     df.write.mode("append")
       .partitionBy("year", "month", "day", "hour")
       .parquet(output)
   }
 
+  /**
+    * Applies the provided expression to the data frame created
+    * from the input source and sink the results into the output
+    * directory.
+    *
+    * @param expression an sql expression to be applied for filtering
+    */
   def filterWithExpression(expression: String): Unit = {
-    val df = loadDataframe()
+    val df = loadDataFrame()
     val filtered = df.select("*").where(expression)
-    sinkDataframe(filtered)
+    sinkDataFrame(filtered)
   }
 
 }
