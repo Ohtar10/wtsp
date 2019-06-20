@@ -31,6 +31,7 @@ object TwitterFilteringApp extends App{
   // spark-submit command should supply all necessary config elements
   val spark = SparkSession.builder()
       .appName("Twitter Filtering App")
+      .enableHiveSupport()
       .getOrCreate()
   Runner.run(spark, inputFile, outputFile, expression)
 }
