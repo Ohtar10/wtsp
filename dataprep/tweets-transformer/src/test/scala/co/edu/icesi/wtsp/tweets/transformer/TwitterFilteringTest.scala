@@ -8,23 +8,24 @@ import org.scalatest.FunSuite
 class TwitterFilteringTest extends FunSuite with DataFrameSuiteBase{
 
   test("filter tweets with location only"){
-    val input: String = "src/test/resources/tweets/00.json"
+    val input: String = "src/test/resources/tweets/00"
     val output: String = "src/test/resources/output/"
 
     val tweetsDF = spark.read.json(input)
     val fields = tweetsDF.schema.fieldNames.toSet
-    assert(tweetsDF.count() == 3347)
+    assert(tweetsDF.count() == 6562)
 
     val twitterFilter = TwitterFilter(spark, input, output)
     twitterFilter.filterWithExpression("coordinates is not null")
 
     val locTweetsDF = spark.read.parquet(s"${output}")
-    val filteredFields = locTweetsDF.schema.fieldNames.toSet
-    assert(locTweetsDF.count() == 48)
-    //assert(filteredFields.subsetOf(fields))
+    //We are adding date related columns not present in the original dataset
+    val filteredFields = locTweetsDF.schema.fieldNames.toSet -- Set("created_timestamp", "year", "month", "day", "hour")
+    assert(locTweetsDF.count() == 83)
+    assert(filteredFields.subsetOf(fields))
 
     //clean the results
-    //deleteRecursively(new File(output))
+    deleteRecursively(new File(output))
   }
 
   def deleteRecursively(file: File): Unit = {
