@@ -18,7 +18,7 @@ class TwitterFilteringTest extends FunSuite with DataFrameSuiteBase{
     assert(tweetsDF.count() == 6562)
 
     val twitterFilter = TwitterFilter(spark, input, output)
-    twitterFilter.filterWithExpression("coordinates is not null")
+    twitterFilter.filterWithExpression(expression = "coordinates is not null")
 
     val locTweetsDF = spark.read.parquet(output)
     //We are adding date related columns not present in the original dataset
@@ -39,12 +39,44 @@ class TwitterFilteringTest extends FunSuite with DataFrameSuiteBase{
     assert(tweetsDF.count() == 15585)
 
     val twitterFilter = TwitterFilter(spark, input, output)
-    twitterFilter.filterWithExpression("coordinates is not null")
+    twitterFilter.filterWithExpression(expression = "coordinates is not null")
 
     val locTweetsDF = spark.read.parquet(output)
     val filtetedFields = locTweetsDF.schema.fieldNames.toSet -- additionalFields
     assert(locTweetsDF.count() == 205)
     assert(filtetedFields.subsetOf(fields))
+
+    deleteRecursively(new File(output))
+  }
+
+  test("read tweets and select/flatten some fields"){
+    val input: String = "src/test/resources/tweets/*/"
+    val output: String = "src/test/resources/output"
+
+    val tweetsDF = spark.read.json(input)
+    assert(tweetsDF.count() == 15585)
+
+    val twitterFilter = TwitterFilter(spark, input, output)
+    val columns = Array(
+      "id",
+      "text",
+      "lang",
+      "created_timestamp",
+      "year",
+      "month",
+      "day",
+      "hour",
+      "coordinates",
+      "place"
+    )
+    twitterFilter.filterWithExpression(columns)
+
+    val locTweetsDF = spark.read.parquet(output)
+    locTweetsDF.printSchema()
+    val filteredFields = locTweetsDF.schema.fieldNames
+
+    assert(locTweetsDF.count() == 15585)
+    assert(filteredFields.sameElements(columns))
 
     deleteRecursively(new File(output))
   }

@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
   *  (+ select CountingLocalApp when prompted)
   */
 object TwitterFilteringLocalApp extends App {
-  val (inputFile, outputFile, expression) = (args(0), args(1), args(2))
+  val (inputFile, outputFile, fields, expression) = (args(0), args(1), args(2), args(3))
   val conf = new SparkConf()
     .setMaster("local")
     .setAppName("Twitter Filtering App")
@@ -19,25 +19,25 @@ object TwitterFilteringLocalApp extends App {
       .master("local")
       .getOrCreate()
 
-  Runner.run(spark, inputFile, outputFile, expression)
+  Runner.run(spark, inputFile, outputFile, fields, expression)
 }
 
 /**
   * Use this when submitting the app to a cluster with spark-submit
   * */
 object TwitterFilteringApp extends App{
-  val (inputFile, outputFile, expression) = (args(0), args(1), args(2))
+  val (inputFile, outputFile, fields, expression) = (args(0), args(1), args(2), args(3))
 
   // spark-submit command should supply all necessary config elements
   val spark = SparkSession.builder()
       .appName("Twitter Filtering App")
       .enableHiveSupport()
       .getOrCreate()
-  Runner.run(spark, inputFile, outputFile, expression)
+  Runner.run(spark, inputFile, outputFile, fields, expression)
 }
 
 object Runner {
-  def run(spark: SparkSession, input: String, output: String, expression: String): Unit = {
-    TwitterFilter(spark, input, output).filterWithExpression(expression)
+  def run(spark: SparkSession, input: String, output: String, fields: String, expression: String): Unit = {
+    TwitterFilter(spark, input, output).filterWithExpression(fields.split(","), expression)
   }
 }

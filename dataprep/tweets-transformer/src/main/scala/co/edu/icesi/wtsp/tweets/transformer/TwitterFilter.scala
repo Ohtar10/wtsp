@@ -41,11 +41,12 @@ class TwitterFilter(spark: SparkSession, input: String, output: String){
     * from the input source and sink the results into the output
     * directory.
     *
+    * @param fields the desired fields to get from the dataset
     * @param expression an sql expression to be applied for filtering
     */
-  def filterWithExpression(expression: String): Unit = {
+  def filterWithExpression(fields: Array[String] = Array("*"), expression: String = ""): Unit = {
     val df = loadDataFrame()
-    val filtered = df.select("*").where(expression)
+    val filtered = if (expression.nonEmpty) df.select(fields.head, fields.tail:_*).where(expression) else df.select(fields.head, fields.tail:_*)
     sinkDataFrame(filtered)
   }
 
