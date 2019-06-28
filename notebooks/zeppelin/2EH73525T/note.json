@@ -44,7 +44,7 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:07:02.957",
+      "dateUpdated": "2019-06-28 20:58:54.245",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561648436932_1746958530",
       "id": "20190627-151356_152958527",
       "dateCreated": "2019-06-27 15:13:56.932",
-      "dateStarted": "2019-06-28 02:07:03.923",
-      "dateFinished": "2019-06-28 02:07:27.293",
+      "dateStarted": "2019-06-28 20:58:54.622",
+      "dateFinished": "2019-06-28 20:59:22.027",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/tweets_json/*/\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:07:30.277",
+      "dateUpdated": "2019-06-28 20:59:25.014",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -114,8 +114,8 @@
       "jobName": "paragraph_1561648186513_-299486839",
       "id": "20190627-150946_1511877108",
       "dateCreated": "2019-06-27 15:09:46.513",
-      "dateStarted": "2019-06-28 02:07:30.837",
-      "dateFinished": "2019-06-28 02:07:31.238",
+      "dateStarted": "2019-06-28 20:59:25.210",
+      "dateFinished": "2019-06-28 20:59:25.495",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -161,9 +161,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "val tweetsDF \u003d spark.read.json(tweetsPath)\ntweetsDF.count()",
+      "text": "import org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval tweetsDF \u003d spark.read.json(tweetsPath)\nval tweetCount \u003d tweetsDF.count()\nval userCount \u003d tweetsDF.select($\"user.id\".alias(\"user\")).distinct().count()\n\nprintln(s\"Total tweets: ${tweetCount}\")\nprintln(s\"Total users: ${userCount}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:07:35.791",
+      "dateUpdated": "2019-06-28 21:07:16.689",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -186,7 +186,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "tweetsDF: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres2: Long \u003d 15585\n"
+            "data": "Total tweets: 15585\nTotal users: 13641\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\ntweetsDF: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\ntweetCount: Long \u003d 15585\nuserCount: Long \u003d 13641\n"
           }
         ]
       },
@@ -197,8 +197,9 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d0",
-            "http://172.17.0.2:4040/jobs/job?id\u003d1"
+            "http://172.17.0.2:4040/jobs/job?id\u003d10",
+            "http://172.17.0.2:4040/jobs/job?id\u003d11",
+            "http://172.17.0.2:4040/jobs/job?id\u003d12"
           ],
           "interpreterSettingId": "spark"
         }
@@ -207,15 +208,15 @@
       "jobName": "paragraph_1561648327335_-676819327",
       "id": "20190627-151207_1653329165",
       "dateCreated": "2019-06-27 15:12:07.335",
-      "dateStarted": "2019-06-28 02:07:35.981",
-      "dateFinished": "2019-06-28 02:07:52.191",
+      "dateStarted": "2019-06-28 21:07:16.790",
+      "dateFinished": "2019-06-28 21:07:31.518",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:07:55.772",
+      "dateUpdated": "2019-06-28 21:07:53.875",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -311,7 +312,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d2"
+            "http://172.17.0.2:4040/jobs/job?id\u003d13"
           ],
           "interpreterSettingId": "spark"
         }
@@ -320,8 +321,8 @@
       "jobName": "paragraph_1561648378056_-588099574",
       "id": "20190627-151258_1100319193",
       "dateCreated": "2019-06-27 15:12:58.056",
-      "dateStarted": "2019-06-28 02:07:56.406",
-      "dateFinished": "2019-06-28 02:08:00.966",
+      "dateStarted": "2019-06-28 21:07:54.047",
+      "dateFinished": "2019-06-28 21:07:57.707",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -367,9 +368,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import spark.implicits._\n\nval datePattern \u003d \"EEE MMM dd HH:mm:ss ZZZZZ yyyy\"\n\nval tweetsWithPlaces \u003d tweetsDF.select(\"*\")\n    .where(\"place is not null\")\n    .withColumn(\"created_timestamp\", to_timestamp($\"created_at\", datePattern))\n    .withColumn(\"year\", year($\"created_timestamp\"))\n    .withColumn(\"month\", month($\"created_timestamp\"))\n    .withColumn(\"day\", dayofmonth($\"created_timestamp\"))\n    .withColumn(\"hour\", hour($\"created_timestamp\"))\n    \ntweetsWithPlaces.count()",
+      "text": "import spark.implicits._\n\nval datePattern \u003d \"EEE MMM dd HH:mm:ss ZZZZZ yyyy\"\n\nval tweetsWithPlaces \u003d tweetsDF.select(\"*\")\n    .where(\"place is not null\")\n    .withColumn(\"created_timestamp\", to_timestamp($\"created_at\", datePattern))\n    .withColumn(\"year\", year($\"created_timestamp\"))\n    .withColumn(\"month\", month($\"created_timestamp\"))\n    .withColumn(\"day\", dayofmonth($\"created_timestamp\"))\n    .withColumn(\"hour\", hour($\"created_timestamp\"))\n    .cache()\n    \nval withPlaceTweetCount \u003d tweetsWithPlaces.count()\nval withPlaceUserCount \u003d tweetsWithPlaces.select($\"user.id\".alias(\"user\")).distinct().count()\n\nprintln(s\"Total tweets with place: ${withPlaceTweetCount}\")\nprintln(s\"Total users tweeting with place: ${withPlaceUserCount}\")\n\ntweetsWithPlaces.createOrReplaceTempView(\"tweets_with_place\")",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:08:07.456",
+      "dateUpdated": "2019-06-28 22:03:15.717",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -392,7 +393,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import spark.implicits._\ndatePattern: String \u003d EEE MMM dd HH:mm:ss ZZZZZ yyyy\ntweetsWithPlaces: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 30 more fields]\nres4: Long \u003d 195\n"
+            "data": "Total tweets with place: 195\nTotal users tweeting with place: 194\nimport spark.implicits._\ndatePattern: String \u003d EEE MMM dd HH:mm:ss ZZZZZ yyyy\ntweetsWithPlaces: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 30 more fields]\nwithPlaceTweetCount: Long \u003d 195\nwithPlaceUserCount: Long \u003d 194\n"
           }
         ]
       },
@@ -403,7 +404,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3"
+            "http://172.17.0.2:4040/jobs/job?id\u003d146",
+            "http://172.17.0.2:4040/jobs/job?id\u003d147"
           ],
           "interpreterSettingId": "spark"
         }
@@ -412,15 +414,15 @@
       "jobName": "paragraph_1561650070810_-553926685",
       "id": "20190627-154110_633365497",
       "dateCreated": "2019-06-27 15:41:10.810",
-      "dateStarted": "2019-06-28 02:08:07.585",
-      "dateFinished": "2019-06-28 02:08:16.157",
+      "dateStarted": "2019-06-28 22:03:15.786",
+      "dateFinished": "2019-06-28 22:03:25.582",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsWithPlaces)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:08:11.993",
+      "dateUpdated": "2019-06-28 22:03:28.283",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -517,7 +519,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d4"
+            "http://172.17.0.2:4040/jobs/job?id\u003d148"
           ],
           "interpreterSettingId": "spark"
         }
@@ -526,15 +528,15 @@
       "jobName": "paragraph_1561650142209_1342872145",
       "id": "20190627-154222_388485723",
       "dateCreated": "2019-06-27 15:42:22.210",
-      "dateStarted": "2019-06-28 02:08:12.132",
-      "dateFinished": "2019-06-28 02:08:24.382",
+      "dateStarted": "2019-06-28 22:03:28.371",
+      "dateFinished": "2019-06-28 22:03:29.698",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "tweetsWithPlaces.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:08:15.045",
+      "dateUpdated": "2019-06-28 22:03:34.225",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -565,15 +567,15 @@
       "jobName": "paragraph_1561650703144_-338492958",
       "id": "20190627-155143_1746259442",
       "dateCreated": "2019-06-27 15:51:43.144",
-      "dateStarted": "2019-06-28 02:08:16.867",
-      "dateFinished": "2019-06-28 02:08:25.187",
+      "dateStarted": "2019-06-28 22:03:34.312",
+      "dateFinished": "2019-06-28 22:03:34.676",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val tweetsWithPlacesAndNoCoordinates \u003d tweetsDF.select(\"*\").where(\"place is not null and coordinates is null\")\ns\"We have ${tweetsWithPlacesAndNoCoordinates.count()} tweets with place but without an exact location.\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 02:08:20.892",
+      "dateUpdated": "2019-06-28 22:03:38.398",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -596,7 +598,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres7: String \u003d We have 15 tweets with place but without an exact location.\n"
+            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres13: String \u003d We have 15 tweets with place but without an exact location.\n"
           }
         ]
       },
@@ -607,7 +609,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d5"
+            "http://172.17.0.2:4040/jobs/job?id\u003d149"
           ],
           "interpreterSettingId": "spark"
         }
@@ -616,8 +618,1186 @@
       "jobName": "paragraph_1561650178637_1978698279",
       "id": "20190627-154258_1541299227",
       "dateCreated": "2019-06-27 15:42:58.637",
-      "dateStarted": "2019-06-28 02:08:24.567",
-      "dateFinished": "2019-06-28 02:08:33.365",
+      "dateStarted": "2019-06-28 22:03:38.461",
+      "dateFinished": "2019-06-28 22:03:43.330",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Different place types\n\nWe can observe from the places that the vast majority of tweets comes from cities, i,e., the granularity of the majority of tweets is city. This would need to be compensated with tweets that have the exact location.",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 21:56:08.889",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eDifferent place types\u003c/h3\u003e\n\u003cp\u003eWe can observe from the places that the vast majority of tweets comes from cities, i,e., the granularity of the majority of tweets is city. This would need to be compensated with tweets that have the exact location.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561756634406_1393588544",
+      "id": "20190628-211714_1561699932",
+      "dateCreated": "2019-06-28 21:17:14.407",
+      "dateStarted": "2019-06-28 21:56:08.890",
+      "dateFinished": "2019-06-28 21:56:08.923",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect place.place_type as place_type, count(1) as places \nfrom tweets_with_place \ngroup by place_type",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:04:16.259",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "place_type": "string",
+                      "places": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "place_type",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "places",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "place_type\tplaces\ncity\t167\ncountry\t11\nadmin\t14\nneighborhood\t3\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d150",
+            "http://172.17.0.2:4040/jobs/job?id\u003d151",
+            "http://172.17.0.2:4040/jobs/job?id\u003d152",
+            "http://172.17.0.2:4040/jobs/job?id\u003d153",
+            "http://172.17.0.2:4040/jobs/job?id\u003d154"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561756276282_1839030536",
+      "id": "20190628-211116_1081747377",
+      "dateCreated": "2019-06-28 21:11:16.282",
+      "dateStarted": "2019-06-28 22:04:14.237",
+      "dateFinished": "2019-06-28 22:04:15.716",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Tweets by language and country\n\nDue to linguistic complexity, we will only consider tweets in english, however, these tweets can come from different countries, even from countries where english is not the official language.",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 21:53:59.186",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eTweets by language and country\u003c/h3\u003e\n\u003cp\u003eDue to linguistic complexity, we will only consider tweets in english, however, these tweets can come from different countries, even from countries where english is not the official language.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561758765915_877720548",
+      "id": "20190628-215245_1873662779",
+      "dateCreated": "2019-06-28 21:52:45.915",
+      "dateStarted": "2019-06-28 21:53:59.187",
+      "dateFinished": "2019-06-28 21:53:59.227",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect distinct(lang) as lang, place.country as country, count(1) as lang_count \nfrom tweets_with_place \ngroup by lang, country \nsort by lang_count desc",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:16:17.406",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "stackedAreaChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "lang",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0.0,
+                          "direction": "asc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "country",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "lang_count",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "lang": "string",
+                      "country": "string",
+                      "lang_count": "number"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": true,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "stacked": true
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "style": "stack"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "country",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "lang",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "lang_count",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "lang\tcountry\tlang_count\nnl\tNederland\t1\nid\tJapan\t1\nvi\tFrance\t1\ntr\tTurkey\t1\nsl\tUnited States\t1\nsl\tSpain\t1\nvi\tIndonesia\t1\nid\tUnited States\t1\nit\tItalia\t1\nsl\t日本\t1\nes\tMéxico\t4\nes\tChile\t2\nen\tMéxico\t1\nnl\tUnited States\t1\nlv\tUnited States\t1\nes\tIndonesia\t1\nes\tArgentina\t1\ntl\tIndonesia\t3\npt\tBrasil\t3\net\tSouth Africa\t1\nen\tUnited States\t59\nes\tBrasil\t2\nsl\tIndonesia\t1\nen\tMalaysia\t5\nund\tIndonesia\t1\nid\tMalaysia\t7\nund\tUnited Kingdom\t1\nja\tIndonesia\t1\nen\tJapan\t1\nen\tIndonesia\t8\nen\tMexico\t1\ntr\tTürkiye\t5\nen\tCanada\t3\ntl\tPhilippines\t1\nja\t日本\t7\nbg\tРоссия\t1\nid\tIndonesia\t40\nru\tРоссия\t5\nja\tJapan\t1\nfr\tCanada\t1\nno\tNorway\t1\nund\tMalaysia\t1\nfr\tAllemagne\t1\nund\tUnited States\t3\nen\tGermany\t1\net\tUnited Kingdom\t1\nen\tUnited Kingdom\t8\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d136",
+            "http://172.17.0.2:4040/jobs/job?id\u003d137",
+            "http://172.17.0.2:4040/jobs/job?id\u003d138",
+            "http://172.17.0.2:4040/jobs/job?id\u003d139",
+            "http://172.17.0.2:4040/jobs/job?id\u003d140"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561758333693_155259193",
+      "id": "20190628-214533_1966487770",
+      "dateCreated": "2019-06-28 21:45:33.694",
+      "dateStarted": "2019-06-28 21:51:11.353",
+      "dateFinished": "2019-06-28 21:51:18.715",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nAs expected, the vast majority of english tweets are comming from the US.",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:01:25.044",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eAs expected, the vast majority of english tweets are comming from the US.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561759251642_2111155151",
+      "id": "20190628-220051_191216165",
+      "dateCreated": "2019-06-28 22:00:51.642",
+      "dateStarted": "2019-06-28 22:01:25.045",
+      "dateFinished": "2019-06-28 22:01:25.057",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect place.country as country, count(1) as lang_count \nfrom tweets_with_place \nwhere lang \u003d \u0027en\u0027\ngroup by country \nsort by lang_count desc",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:19:26.732",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "country",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "lang_count",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0.0,
+                          "direction": "desc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "country": "string",
+                      "lang_count": "number"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "country",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "lang_count",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "country\tlang_count\nMalaysia\t5\nGermany\t1\nUnited States\t59\nMexico\t1\nIndonesia\t8\nCanada\t3\nJapan\t1\nMéxico\t1\nUnited Kingdom\t8\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d141",
+            "http://172.17.0.2:4040/jobs/job?id\u003d142",
+            "http://172.17.0.2:4040/jobs/job?id\u003d143",
+            "http://172.17.0.2:4040/jobs/job?id\u003d144",
+            "http://172.17.0.2:4040/jobs/job?id\u003d145"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561759158839_-1281568004",
+      "id": "20190628-215918_1318763224",
+      "dateCreated": "2019-06-28 21:59:18.839",
+      "dateStarted": "2019-06-28 22:00:02.580",
+      "dateFinished": "2019-06-28 22:00:09.063",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Tweets per day",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 21:30:33.682",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eTweets per day\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561756696456_-767713452",
+      "id": "20190628-211816_2144996466",
+      "dateCreated": "2019-06-28 21:18:16.456",
+      "dateStarted": "2019-06-28 21:30:33.682",
+      "dateFinished": "2019-06-28 21:30:33.694",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect avg(tweets_per_day) as avg_tweets_per_day from (\n    select date_format(created_timestamp, \"yyyy-MM-dd\") as created_day, count(1) as tweets_per_day \n    from tweets_with_place \n    group by created_day\n    )",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:09:21.116",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "avg_tweets_per_day": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "avg_tweets_per_day\n195.0\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d165"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561756694114_1930863174",
+      "id": "20190628-211814_519844368",
+      "dateCreated": "2019-06-28 21:18:14.114",
+      "dateStarted": "2019-06-28 22:09:18.964",
+      "dateFinished": "2019-06-28 22:09:20.738",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Tweets per month",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:09:54.880",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eTweets per month\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561759774533_862943351",
+      "id": "20190628-220934_970658418",
+      "dateCreated": "2019-06-28 22:09:34.533",
+      "dateStarted": "2019-06-28 22:09:54.881",
+      "dateFinished": "2019-06-28 22:09:54.890",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect avg(tweets_per_month) as avg_tweets_per_month from (\n    select date_format(created_timestamp, \"yyyy-MM\") as created_month, count(1) as tweets_per_month\n    from tweets_with_place \n    group by created_month\n    )\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:10:41.443",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "avg_tweets_per_month": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "avg_tweets_per_month\n195.0\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d166"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561759793062_-1102486113",
+      "id": "20190628-220953_1433068681",
+      "dateCreated": "2019-06-28 22:09:53.062",
+      "dateStarted": "2019-06-28 22:10:38.349",
+      "dateFinished": "2019-06-28 22:10:40.072",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Tweets per place\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 21:33:21.547",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eTweets per place\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561757541871_1333095954",
+      "id": "20190628-213221_1836742275",
+      "dateCreated": "2019-06-28 21:32:21.871",
+      "dateStarted": "2019-06-28 21:33:21.547",
+      "dateFinished": "2019-06-28 21:33:21.572",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect place.country as country, place.name as place, count(1) as tweets_per_place\nfrom tweets_with_place \ngroup by country, place",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:16:41.672",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 354.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "place": "string",
+                      "country": "string",
+                      "tweets_per_place": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-90"
+                  },
+                  "xLabelStatus": "hide",
+                  "stacked": true
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "scatterChart": {
+                  "xAxis": {
+                    "name": "place",
+                    "index": 0.0,
+                    "aggr": "sum"
+                  },
+                  "yAxis": {
+                    "name": "count(1)",
+                    "index": 2.0,
+                    "aggr": "sum"
+                  },
+                  "size": {
+                    "name": "country",
+                    "index": 1.0,
+                    "aggr": "sum"
+                  },
+                  "group": {
+                    "name": "count(1)",
+                    "index": 2.0,
+                    "aggr": "sum"
+                  }
+                }
+              },
+              "keys": [
+                {
+                  "name": "country",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "tweets_per_place",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ],
+              "commonSetting": {}
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "country\tplace\ttweets_per_place\nMalaysia\tKeratong\t1\nUnited States\tNew York\t1\nUnited States\tSan Jose\t1\nUnited States\tWyandanch\t1\nIndonesia\tColomadu\t1\nGermany\tCologne\t1\nMalaysia\tMukim 4\t1\nРоссия\tЧелябинск\t1\nBrasil\tCanoas\t1\nIndonesia\tCiputat\t1\nUnited States\tMontevallo\t1\nIndonesia\tDenpasar Timur\t1\nSpain\tMarbella\t1\nIndonesia\tCengkareng\t1\nUnited Kingdom\tMidlothian\t1\nIndonesia\tKota Surabaya\t1\nUnited States\tNorth Lauderdale\t1\nIndonesia\tDenpasar Barat\t1\nUnited Kingdom\tSouth Somerset\t1\nUnited States\tMission\t1\nUnited States\tDanbury\t1\nIndonesia\tTambora\t1\nIndonesia\tJatinegara\t1\nIndonesia\tTrenggalek\t1\nUnited States\tSeal Beach\t2\nIndonesia\tBekasi Utara\t1\nРоссия\tПриозерский район\t1\nCanada\tYork\t1\nUnited States\tFairfield\t1\nAllemagne\tMunich\t1\nNederland\tZwolle\t1\nIndonesia\tBekasi Selatan\t1\nArgentina\tArgentina\t1\nIndonesia\tSumbersari\t1\nUnited States\tManhattan\t1\n日本\t町田市\t1\nIndonesia\tKota Baru\t1\nIndonesia\tKuta Alam\t2\nUnited States\tSouth Carolina\t1\nIndonesia\tLasolo\t1\nUnited States\tFargo\t1\nIndonesia\tGrogol Petamburan\t1\nUnited States\tNorth Bay Village\t1\nUnited States\tGrand Mound\t1\nIndonesia\tSenen\t1\nUnited States\tCanisteo\t1\nIndonesia\tSedati\t1\nIndonesia\tCiwandan\t1\nIndonesia\tWonokromo\t1\nUnited States\tSanta Ana\t1\nIndonesia\tLembang\t1\nUnited States\tPeoria\t1\nJapan\tNerima Ward\t1\nCanada\tOkanagan-Similkameen\t1\nUnited States\tLancaster\t1\nIndonesia\tPurwakarta\t1\nIndonesia\tKedaton\t1\nBrasil\tMacaé\t1\nJapan\tFuchu City\t1\n日本\t調布市\t1\nMalaysia\tPetaling\t1\nIndonesia\tMampang Prapatan\t1\nUnited States\tHawthorne\t1\nUnited States\tPauma Valley\t1\nUnited States\tNew York\t1\nUnited States\tDearborn Heights\t1\nIndonesia\tWest Borneo\t1\nPhilippines\tPhilippines\t1\nUnited States\tPalmdale\t1\nРоссия\tИркутск\t1\nMexico\tGuaymas\t1\nJapan\tChiyoda Ward\t1\nIndonesia\tPondok Aren\t1\nUnited States\tLynnfield\t1\nIndonesia\tGambir\t1\nUnited States\tPuyallup\t1\nUnited Kingdom\tCraven\t1\nUnited States\tNorth Peninsula\t1\nUnited States\tFlorida\t1\n日本\t気仙沼市\t1\nUnited States\tGalena Park\t1\nSouth Africa\tPietermaritzburg\t1\nUnited States\tBonifay\t1\nMalaysia\tLabu\t1\nIndonesia\tPanakkukang\t1\nUnited States\tTacoma\t1\nCanada\tMontréal\t1\nIndonesia\tPenjaringan\t1\nUnited States\tRancho Cucamonga\t1\nMalaysia\tKuala Lumpur\t1\nUnited States\tStanton\t1\nUnited States\tMilton\t1\nMéxico\tReynosa\t1\nРоссия\tКалининград\t1\nUnited States\tCorona\t1\nIndonesia\tMedan Polonia\t1\nUnited States\tChinatown\t1\nUnited States\tLas Vegas\t1\nUnited States\tTampa\t2\nMéxico\tGuadalajara\t1\nUnited States\tLong Beach\t1\nMéxico\tVenustiano Carranza\t1\nIndonesia\tCibatu\t1\nUnited States\tKent\t1\nIndonesia\tNgemplak\t1\nIndonesia\tBekasi Timur\t1\nFrance\tFos-sur-Mer\t1\nUnited Kingdom\tTewkesbury\t1\nIndonesia\tLegok\t1\nUnited States\tSoutheast Bexar\t1\nMalaysia\tJohore\t1\nBrasil\tRio Grande do Sul\t1\n日本\tみなかみ町（利根郡）\t1\nIndonesia\tBenda\t1\nUnited Kingdom\tKnowsley\t1\nIndonesia\tJagakarsa\t1\n日本\t新潟市西区\t1\nTurkey\tTurkey\t1\nUnited States\tWest Valley City\t1\nCanada\tDivision No. 11\t1\nUnited States\tThorndale\t1\nNorway\tBodø\t1\nUnited Kingdom\tBedford Borough\t1\nIndonesia\tKedunghalang\t1\nIndonesia\tCurug\t1\nIndonesia\tNongsa\t1\nIndonesia\tSukawati\t1\nIndonesia\tSemarang Tengah\t1\nUnited States\tHope\t1\nMalaysia\tTanjung Belanja\t1\nUnited States\tPlacentia\t1\nUnited States\tCivic Center\t1\nIndonesia\tCakung\t1\nIndonesia\tKalimantan Timur\t1\nIndonesia\tKoja\t1\n日本\t長野市\t1\nUnited States\tUpper Christiana\t1\nIndonesia\tCipondoh\t1\nIndonesia\tUmbulharjo\t1\nUnited Kingdom\tWarwick\t1\nMalaysia\tHulu Kinta\t1\nMéxico\tVeracruz\t1\nUnited States\tBurkburnett\t1\nРоссия\tОдинцовский район\t1\nUnited States\tSilver Springs Shores\t1\nUnited States\tChicago\t2\nUnited States\tCentral\t1\nItalia\tBolzano\t1\nMéxico\tMérida\t1\nMalaysia\tCheras\t1\nTürkiye\tTürkiye\t5\nUnited States\tAhtanum\t1\nUnited States\tMonroe\t1\nBrasil\tBrasil\t1\n日本\t川口市\t1\nUnited Kingdom\tWestminster\t2\nUnited Kingdom\tChiltern\t1\nUnited States\tMichigan\t1\nUnited States\tHinsdale\t1\nUnited States\tWeatherford\t1\nUnited States\tJersey City\t1\nMalaysia\tBandar Shah Alam\t1\nUnited States\tPhoenix\t1\nIndonesia\tMulyorejo\t1\nMalaysia\tTelok Kitang\t1\nBrasil\tBetim\t1\nUnited States\tCalifornia\t2\n日本\t市川市\t1\nUnited States\tLynn\t1\nРоссия\tГаврилов-Ямский район\t1\nUnited States\tEagan\t1\nIndonesia\tMedan Baru\t1\nIndonesia\tTandes\t1\nIndonesia\tBaros\t1\nUnited States\tSan Diego\t1\nIndonesia\tPadalarang 1\t1\nIndonesia\tKemuning\t1\nMalaysia\tAlor Star\t1\nIndonesia\tSunggal\t1\nMalaysia\tBandar Kuala Lumpur\t1\nIndonesia\tPolombangkeng Selatan\t1\nChile\tChile\t2\nUnited States\tSnake Creek\t1\nIndonesia\tBogor Barat\t1\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d172",
+            "http://172.17.0.2:4040/jobs/job?id\u003d173",
+            "http://172.17.0.2:4040/jobs/job?id\u003d174",
+            "http://172.17.0.2:4040/jobs/job?id\u003d175",
+            "http://172.17.0.2:4040/jobs/job?id\u003d176"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561757538039_1909261456",
+      "id": "20190628-213218_2001199312",
+      "dateCreated": "2019-06-28 21:32:18.039",
+      "dateStarted": "2019-06-28 22:12:14.434",
+      "dateFinished": "2019-06-28 22:12:16.198",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Tweets in the United States",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:28:11.459",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eTweets in the United States\u003c/h3\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561760879592_-200854220",
+      "id": "20190628-222759_551643612",
+      "dateCreated": "2019-06-28 22:27:59.592",
+      "dateStarted": "2019-06-28 22:28:11.461",
+      "dateFinished": "2019-06-28 22:28:11.492",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nselect place.name as place, count(1) as tweets_per_place\nfrom tweets_with_place\nwhere place.country_code \u003d \u0027US\u0027\ngroup by place\nsort by tweets_per_place desc",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 22:27:49.572",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "place",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "tweets_per_place",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0.0,
+                          "direction": "desc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "place": "string",
+                      "tweets_per_place": "number"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "place",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "tweets_per_place",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "place\ttweets_per_place\nRancho Cucamonga\t1\nSeal Beach\t2\nSouth Carolina\t1\nNew York\t1\nSanta Ana\t1\nSnake Creek\t1\nPuyallup\t1\nStanton\t1\nPlacentia\t1\nPhoenix\t1\nSoutheast Bexar\t1\nWeatherford\t1\nCalifornia\t2\nUpper Christiana\t1\nTampa\t2\nFairfield\t1\nNew York\t1\nGalena Park\t1\nMonroe\t1\nLynn\t1\nPauma Valley\t1\nSan Jose\t1\nKent\t1\nWyandanch\t1\nFlorida\t1\nBonifay\t1\nChinatown\t1\nHope\t1\nMontevallo\t1\nNorth Lauderdale\t1\nMichigan\t1\nTacoma\t1\nCivic Center\t1\nHinsdale\t1\nEagan\t1\nManhattan\t1\nMission\t1\nNorth Bay Village\t1\nBurkburnett\t1\nChicago\t2\nLancaster\t1\nLynnfield\t1\nNorth Peninsula\t1\nSilver Springs Shores\t1\nLong Beach\t1\nFargo\t1\nPalmdale\t1\nJersey City\t1\nThorndale\t1\nPeoria\t1\nLas Vegas\t1\nCentral\t1\nGrand Mound\t1\nMilton\t1\nCorona\t1\nAhtanum\t1\nCanisteo\t1\nDearborn Heights\t1\nDanbury\t1\nWest Valley City\t1\nHawthorne\t1\nSan Diego\t1\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d187",
+            "http://172.17.0.2:4040/jobs/job?id\u003d188",
+            "http://172.17.0.2:4040/jobs/job?id\u003d189",
+            "http://172.17.0.2:4040/jobs/job?id\u003d190",
+            "http://172.17.0.2:4040/jobs/job?id\u003d191"
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1561760401523_1074037403",
+      "id": "20190628-222001_453171111",
+      "dateCreated": "2019-06-28 22:20:01.523",
+      "dateStarted": "2019-06-28 22:24:51.378",
+      "dateFinished": "2019-06-28 22:24:53.507",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -730,18 +1910,6 @@
             "data": "+--------------------+\n|      place_geometry|\n+--------------------+\n|POLYGON ((-75.707...|\n|POLYGON ((106.865...|\n|POLYGON ((102.695...|\n|POLYGON ((-79.762...|\n|                    |\n+--------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions._\n"
           }
         ]
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d20"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1561650494704_1933215285",
