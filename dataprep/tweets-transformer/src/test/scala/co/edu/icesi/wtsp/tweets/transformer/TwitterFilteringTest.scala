@@ -81,6 +81,7 @@ class TwitterFilteringTest extends FunSuite with DataFrameSuiteBase{
     deleteRecursively(new File(output))
   }
 
+
   def deleteRecursively(file: File): Unit = {
     if (file.isDirectory)
     {

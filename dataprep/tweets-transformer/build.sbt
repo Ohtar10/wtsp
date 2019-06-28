@@ -18,6 +18,7 @@ lazy val root = (project in file(".")).
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     parallelExecution in Test := false,
     fork := true,
+    assemblyJarName in assembly := s"tweets-transformer-with-deps-${version}",
 
     coverageHighlighting := true,
 
@@ -27,7 +28,9 @@ lazy val root = (project in file(".")).
 
       "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
-      "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test"
+      "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test",
+
+      "com.easri.geometry" % "esri-geometry-api" % "2.2.2"
     ),
 
     // uses compile classpath for the run task, including "provided" jar (cf http://stackoverflow.com/a/21803413/3827)
