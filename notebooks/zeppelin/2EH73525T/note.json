@@ -44,7 +44,7 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:40:05.627",
+      "dateUpdated": "2019-06-28 02:07:02.957",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561648436932_1746958530",
       "id": "20190627-151356_152958527",
       "dateCreated": "2019-06-27 15:13:56.932",
-      "dateStarted": "2019-06-27 15:40:05.769",
-      "dateFinished": "2019-06-27 15:40:28.901",
+      "dateStarted": "2019-06-28 02:07:03.923",
+      "dateFinished": "2019-06-28 02:07:27.293",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "val basePath \u003d \"/zeppelin/notebook/datasets\"\nval tweetsPath \u003d basePath + \"/tweets/*/\"",
+      "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/tweets_json/*/\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:40:40.120",
+      "dateUpdated": "2019-06-28 02:07:30.277",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -106,7 +106,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "basePath: String \u003d /zeppelin/notebook/datasets\ntweetsPath: String \u003d /zeppelin/notebook/datasets/tweets/*/\n"
+            "data": "basePath: String \u003d /zeppelin/datasets\ntweetsPath: String \u003d /zeppelin/datasets/tweets_json/*/\n"
           }
         ]
       },
@@ -114,8 +114,8 @@
       "jobName": "paragraph_1561648186513_-299486839",
       "id": "20190627-150946_1511877108",
       "dateCreated": "2019-06-27 15:09:46.513",
-      "dateStarted": "2019-06-27 15:40:40.185",
-      "dateFinished": "2019-06-27 15:40:40.750",
+      "dateStarted": "2019-06-28 02:07:30.837",
+      "dateFinished": "2019-06-28 02:07:31.238",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -163,13 +163,19 @@
     {
       "text": "val tweetsDF \u003d spark.read.json(tweetsPath)\ntweetsDF.count()",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:42:30.963",
+      "dateUpdated": "2019-06-28 02:07:35.791",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
         "results": {},
-        "editorSetting": {}
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -180,7 +186,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "tweetsDF: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres4: Long \u003d 15585\n"
+            "data": "tweetsDF: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres2: Long \u003d 15585\n"
           }
         ]
       },
@@ -191,8 +197,8 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3",
-            "http://172.17.0.2:4040/jobs/job?id\u003d4"
+            "http://172.17.0.2:4040/jobs/job?id\u003d0",
+            "http://172.17.0.2:4040/jobs/job?id\u003d1"
           ],
           "interpreterSettingId": "spark"
         }
@@ -201,15 +207,15 @@
       "jobName": "paragraph_1561648327335_-676819327",
       "id": "20190627-151207_1653329165",
       "dateCreated": "2019-06-27 15:12:07.335",
-      "dateStarted": "2019-06-27 15:42:31.077",
-      "dateFinished": "2019-06-27 15:42:40.817",
+      "dateStarted": "2019-06-28 02:07:35.981",
+      "dateFinished": "2019-06-28 02:07:52.191",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:46:44.674",
+      "dateUpdated": "2019-06-28 02:07:55.772",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -269,7 +275,13 @@
             }
           }
         },
-        "editorSetting": {}
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -299,7 +311,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d1"
+            "http://172.17.0.2:4040/jobs/job?id\u003d2"
           ],
           "interpreterSettingId": "spark"
         }
@@ -308,15 +320,15 @@
       "jobName": "paragraph_1561648378056_-588099574",
       "id": "20190627-151258_1100319193",
       "dateCreated": "2019-06-27 15:12:58.056",
-      "dateStarted": "2019-06-27 15:41:10.877",
-      "dateFinished": "2019-06-27 15:41:16.901",
+      "dateStarted": "2019-06-28 02:07:56.406",
+      "dateFinished": "2019-06-28 02:08:00.966",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n### Filter by those who has place\nAccording to twitter docs, a tweet might contain a place but not exact location. A place is a bounding box where the tweet might have come from. The coordinate is the exact geographical location of the tweet.\n\n#### References:\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary",
+      "text": "%md\n### Filter by those who has place\nAccording to twitter docs, a tweet might contain a place but not exact location. A place is a bounding box where the tweet might have come from. The coordinate is the exact geographical location of the tweet.\n\n#### References:\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\n \nTo partition the data as even as possible, we will add fields corresponding to the timestamp when the tweet was posted and separate them by year, month, day and hour.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:46:34.975",
+      "dateUpdated": "2019-06-28 01:24:03.552",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -341,7 +353,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eFilter by those who has place\u003c/h3\u003e\n\u003cp\u003eAccording to twitter docs, a tweet might contain a place but not exact location. A place is a bounding box where the tweet might have come from. The coordinate is the exact geographical location of the tweet.\u003c/p\u003e\n\u003ch4\u003eReferences:\u003c/h4\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eFilter by those who has place\u003c/h3\u003e\n\u003cp\u003eAccording to twitter docs, a tweet might contain a place but not exact location. A place is a bounding box where the tweet might have come from. The coordinate is the exact geographical location of the tweet.\u003c/p\u003e\n\u003ch4\u003eReferences:\u003c/h4\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\"\u003ehttps://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eTo partition the data as even as possible, we will add fields corresponding to the timestamp when the tweet was posted and separate them by year, month, day and hour.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -349,15 +361,15 @@
       "jobName": "paragraph_1561650213445_-655266753",
       "id": "20190627-154333_100326201",
       "dateCreated": "2019-06-27 15:43:33.446",
-      "dateStarted": "2019-06-27 15:46:34.984",
-      "dateFinished": "2019-06-27 15:46:37.206",
+      "dateStarted": "2019-06-28 01:24:03.552",
+      "dateFinished": "2019-06-28 01:24:06.119",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import spark.implicits._\n\nval datePattern \u003d \"EEE MMM dd HH:mm:ss ZZZZZ yyyy\"\n\nval tweetsWithPlaces \u003d tweetsDF.select(\"*\")\n    .where(\"place is not null\")\n    .withColumn(\"created_timestamp\", to_timestamp($\"created_at\", datePattern))\n    .withColumn(\"year\", year($\"created_timestamp\"))\n    .withColumn(\"month\", month($\"created_timestamp\"))\n    .withColumn(\"day\", dayofmonth($\"created_timestamp\"))\n    .withColumn(\"hour\", hour($\"created_timestamp\"))\n    \ntweetsWithPlaces.count()",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:54:54.182",
+      "dateUpdated": "2019-06-28 02:08:07.456",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -380,7 +392,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import spark.implicits._\ndatePattern: String \u003d EEE MMM dd HH:mm:ss ZZZZZ yyyy\ntweetsWithPlaces: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 30 more fields]\nres12: Long \u003d 195\n"
+            "data": "import spark.implicits._\ndatePattern: String \u003d EEE MMM dd HH:mm:ss ZZZZZ yyyy\ntweetsWithPlaces: org.apache.spark.sql.DataFrame \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 30 more fields]\nres4: Long \u003d 195\n"
           }
         ]
       },
@@ -391,7 +403,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d11"
+            "http://172.17.0.2:4040/jobs/job?id\u003d3"
           ],
           "interpreterSettingId": "spark"
         }
@@ -400,15 +412,15 @@
       "jobName": "paragraph_1561650070810_-553926685",
       "id": "20190627-154110_633365497",
       "dateCreated": "2019-06-27 15:41:10.810",
-      "dateStarted": "2019-06-27 15:54:54.272",
-      "dateFinished": "2019-06-27 15:55:00.504",
+      "dateStarted": "2019-06-28 02:08:07.585",
+      "dateFinished": "2019-06-28 02:08:16.157",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsWithPlaces)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:55:16.854",
+      "dateUpdated": "2019-06-28 02:08:11.993",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -505,7 +517,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d12"
+            "http://172.17.0.2:4040/jobs/job?id\u003d4"
           ],
           "interpreterSettingId": "spark"
         }
@@ -514,15 +526,15 @@
       "jobName": "paragraph_1561650142209_1342872145",
       "id": "20190627-154222_388485723",
       "dateCreated": "2019-06-27 15:42:22.210",
-      "dateStarted": "2019-06-27 15:55:08.760",
-      "dateFinished": "2019-06-27 15:55:14.337",
+      "dateStarted": "2019-06-28 02:08:12.132",
+      "dateFinished": "2019-06-28 02:08:24.382",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "tweetsWithPlaces.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:55:42.052",
+      "dateUpdated": "2019-06-28 02:08:15.045",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -553,15 +565,15 @@
       "jobName": "paragraph_1561650703144_-338492958",
       "id": "20190627-155143_1746259442",
       "dateCreated": "2019-06-27 15:51:43.144",
-      "dateStarted": "2019-06-27 15:55:42.114",
-      "dateFinished": "2019-06-27 15:55:42.335",
+      "dateStarted": "2019-06-28 02:08:16.867",
+      "dateFinished": "2019-06-28 02:08:25.187",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val tweetsWithPlacesAndNoCoordinates \u003d tweetsDF.select(\"*\").where(\"place is not null and coordinates is null\")\ns\"We have ${tweetsWithPlacesAndNoCoordinates.count()} tweets with place but without an exact location.\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:48:57.365",
+      "dateUpdated": "2019-06-28 02:08:20.892",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -584,7 +596,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres10: String \u003d We have 15 tweets with place but without an exact location.\n"
+            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres7: String \u003d We have 15 tweets with place but without an exact location.\n"
           }
         ]
       },
@@ -595,7 +607,7 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d10"
+            "http://172.17.0.2:4040/jobs/job?id\u003d5"
           ],
           "interpreterSettingId": "spark"
         }
@@ -604,15 +616,15 @@
       "jobName": "paragraph_1561650178637_1978698279",
       "id": "20190627-154258_1541299227",
       "dateCreated": "2019-06-27 15:42:58.637",
-      "dateStarted": "2019-06-27 15:48:57.440",
-      "dateFinished": "2019-06-27 15:49:02.068",
+      "dateStarted": "2019-06-28 02:08:24.567",
+      "dateFinished": "2019-06-28 02:08:33.365",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet datastructures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.",
+      "text": "%md\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:52:13.468",
+      "dateUpdated": "2019-06-28 01:31:09.024",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -637,7 +649,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet datastructures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -645,15 +657,15 @@
       "jobName": "paragraph_1561650553468_-769261429",
       "id": "20190627-154913_911235331",
       "dateCreated": "2019-06-27 15:49:13.468",
-      "dateStarted": "2019-06-27 15:52:13.466",
-      "dateFinished": "2019-06-27 15:52:13.487",
+      "dateStarted": "2019-06-28 01:31:09.024",
+      "dateFinished": "2019-06-28 01:31:09.055",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.sql.functions._\n\ntweetsWithPlaces.select(\"from_json(coordinates)\").collect().foreach(println)",
+      "text": "import com.esri.core.geometry.ogc.OGCGeometry\n\nval wktFromGeoJson \u003d (json: String) \u003d\u003e {\n    if (json !\u003d null)\n        OGCGeometry.fromGeoJson(json).asText()\n    else\n        \"\"\n}\n\nval stWKTFromGeoJson \u003d udf(wktFromGeoJson)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 18:15:05.887",
+      "dateUpdated": "2019-06-28 03:00:05.048",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -672,21 +684,72 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.spark.sql.AnalysisException: cannot resolve \u0027`from_json(coordinates)`\u0027 given input columns: [entities, delete, id_str, retweet_count, day, id, in_reply_to_user_id_str, in_reply_to_user_id, scopes, favorited, filter_level, contributors, retweeted_status, source, user, text, created_at, created_timestamp, month, favorite_count, in_reply_to_status_id_str, in_reply_to_status_id, year, in_reply_to_screen_name, geo, truncated, lang, retweeted, coordinates, place, possibly_sensitive, hour];;\n\u0027Project [\u0027from_json(coordinates)]\n+- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 8 more fields]\n   +- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 7 more fields]\n      +- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 6 more fields]\n         +- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 5 more fields]\n            +- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 4 more fields]\n               +- Filter isnotnull(place#154)\n                  +- Project [contributors#137, coordinates#138, created_at#139, delete#140, entities#141, favorite_count#142L, favorited#143, filter_level#144, geo#145, id#146L, id_str#147, in_reply_to_screen_name#148, in_reply_to_status_id#149L, in_reply_to_status_id_str#150, in_reply_to_user_id#151L, in_reply_to_user_id_str#152, lang#153, place#154, possibly_sensitive#155, retweet_count#156L, retweeted#157, retweeted_status#158, scopes#159, source#160, ... 3 more fields]\n                     +- Relation[contributors#137,coordinates#138,created_at#139,delete#140,entities#141,favorite_count#142L,favorited#143,filter_level#144,geo#145,id#146L,id_str#147,in_reply_to_screen_name#148,in_reply_to_status_id#149L,in_reply_to_status_id_str#150,in_reply_to_user_id#151L,in_reply_to_user_id_str#152,lang#153,place#154,possibly_sensitive#155,retweet_count#156L,retweeted#157,retweeted_status#158,scopes#159,source#160,... 3 more fields] json\n\n  at org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)\n  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:88)\n  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:85)\n  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)\n  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:289)\n  at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)\n  at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:288)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:268)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:268)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:279)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:289)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1$1.apply(QueryPlan.scala:293)\n  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)\n  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)\n  at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)\n  at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)\n  at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)\n  at scala.collection.AbstractTraversable.map(Traversable.scala:104)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:293)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$6.apply(QueryPlan.scala:298)\n  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:187)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:298)\n  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:268)\n  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:85)\n  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:78)\n  at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:127)\n  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:78)\n  at org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:91)\n  at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:52)\n  at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:67)\n  at org.apache.spark.sql.Dataset.org$apache$spark$sql$Dataset$$withPlan(Dataset.scala:2884)\n  at org.apache.spark.sql.Dataset.select(Dataset.scala:1150)\n  at org.apache.spark.sql.Dataset.select(Dataset.scala:1168)\n  ... 49 elided\n"
+            "data": "import com.esri.core.geometry.ogc.OGCGeometry\nwktFromGeoJson: String \u003d\u003e String \u003d \u003cfunction1\u003e\nstWKTFromGeoJson: org.apache.spark.sql.expressions.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType,Some(List(StringType)))\n"
           }
         ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561687495157_1527779594",
+      "id": "20190628-020455_557881478",
+      "dateCreated": "2019-06-28 02:04:55.161",
+      "dateStarted": "2019-06-28 03:00:05.946",
+      "dateFinished": "2019-06-28 03:00:08.085",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.sql.functions._\n\n//tweetsWithPlaces.select($\"place.bounding_box.type\".alias(\"place_geom_type\")).show(5)\ntweetsWithPlaces.select(stWKTFromGeoJson( to_json($\"place.bounding_box\")).alias(\"place_geometry\")).where(\"place is not null\").show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-28 03:01:00.639",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+\n|      place_geometry|\n+--------------------+\n|POLYGON ((-75.707...|\n|POLYGON ((106.865...|\n|POLYGON ((102.695...|\n|POLYGON ((-79.762...|\n|                    |\n+--------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions._\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d20"
+          ],
+          "interpreterSettingId": "spark"
+        }
       },
       "apps": [],
       "jobName": "paragraph_1561650494704_1933215285",
       "id": "20190627-154814_967019010",
       "dateCreated": "2019-06-27 15:48:14.704",
-      "dateStarted": "2019-06-27 18:15:05.968",
-      "dateFinished": "2019-06-27 18:15:06.705",
-      "status": "ERROR",
+      "dateStarted": "2019-06-28 03:01:01.030",
+      "dateFinished": "2019-06-28 03:01:02.254",
+      "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
