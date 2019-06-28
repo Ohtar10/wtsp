@@ -1802,9 +1802,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.",
+      "text": "%md\n### Select and transform tweet data into a flattened parquet table\n\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 01:31:09.024",
+      "dateUpdated": "2019-06-28 22:31:42.820",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1829,7 +1829,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eSelect and transform tweet data into a flattened parquet table\u003c/h3\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1837,8 +1837,8 @@
       "jobName": "paragraph_1561650553468_-769261429",
       "id": "20190627-154913_911235331",
       "dateCreated": "2019-06-27 15:49:13.468",
-      "dateStarted": "2019-06-28 01:31:09.024",
-      "dateFinished": "2019-06-28 01:31:09.055",
+      "dateStarted": "2019-06-28 22:31:42.821",
+      "dateFinished": "2019-06-28 22:31:42.842",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
