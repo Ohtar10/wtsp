@@ -8,13 +8,7 @@ object UDF {
 
   val wktFromGeoJson: String => String = (json: String) => {
     if (json != null)
-      try{
-        OGCGeometry.fromGeoJson(json).asText()
-      }
-      catch {
-        case e: NullPointerException => e.printStackTrace(); ""
-      }
-
+      OGCGeometry.fromGeoJson(json).asText()
     else
       ""
   }

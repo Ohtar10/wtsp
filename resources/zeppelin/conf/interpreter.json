@@ -1613,7 +1613,54 @@
       }
     }
   },
-  "interpreterBindings": {},
+  "interpreterBindings": {
+    "2EF9P1SN2": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
+    "2EH73525T": [
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "livy",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ]
+  },
   "interpreterRepositories": [
     {
       "id": "central",

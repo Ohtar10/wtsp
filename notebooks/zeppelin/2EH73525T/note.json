@@ -3,7 +3,7 @@
     {
       "text": "%md\n# Where to sell products\n## Tweets data exploratory analysis\n### Author: Luis Eduardo Ferro Diez \u003ca href\u003d\"luis.ferro1@correo.icesi.edu.co\"\u003eluis.ferro1@correo.icesi.edu.co\u003c/a\u003e\n\nThis notebook contains code and notes for the exploratory analysis made over the twitter dataset.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:09:46.566",
+      "dateUpdated": "2019-06-29 00:18:09.080",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -36,15 +36,15 @@
       "jobName": "paragraph_1561648098463_-1419606472",
       "id": "20190627-150818_829183783",
       "dateCreated": "2019-06-27 15:08:18.463",
-      "dateStarted": "2019-06-27 15:09:46.573",
-      "dateFinished": "2019-06-27 15:09:48.957",
+      "dateStarted": "2019-06-29 00:18:09.317",
+      "dateFinished": "2019-06-29 00:18:11.709",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 20:58:54.245",
+      "dateUpdated": "2019-06-29 00:18:11.758",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561648436932_1746958530",
       "id": "20190627-151356_152958527",
       "dateCreated": "2019-06-27 15:13:56.932",
-      "dateStarted": "2019-06-28 20:58:54.622",
-      "dateFinished": "2019-06-28 20:59:22.027",
+      "dateStarted": "2019-06-29 00:18:12.163",
+      "dateFinished": "2019-06-29 00:18:30.109",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/tweets_json/*/\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 20:59:25.014",
+      "dateUpdated": "2019-06-29 00:18:30.158",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -114,15 +114,15 @@
       "jobName": "paragraph_1561648186513_-299486839",
       "id": "20190627-150946_1511877108",
       "dateCreated": "2019-06-27 15:09:46.513",
-      "dateStarted": "2019-06-28 20:59:25.210",
-      "dateFinished": "2019-06-28 20:59:25.495",
+      "dateStarted": "2019-06-29 00:18:30.489",
+      "dateFinished": "2019-06-29 00:18:30.835",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Load the tweet json files",
       "user": "anonymous",
-      "dateUpdated": "2019-06-27 15:43:24.532",
+      "dateUpdated": "2019-06-29 00:18:30.877",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -155,15 +155,15 @@
       "jobName": "paragraph_1561650186447_-1750828948",
       "id": "20190627-154306_1697645567",
       "dateCreated": "2019-06-27 15:43:06.447",
-      "dateStarted": "2019-06-27 15:43:24.530",
-      "dateFinished": "2019-06-27 15:43:26.541",
+      "dateStarted": "2019-06-29 00:18:31.237",
+      "dateFinished": "2019-06-29 00:18:31.270",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval tweetsDF \u003d spark.read.json(tweetsPath)\nval tweetCount \u003d tweetsDF.count()\nval userCount \u003d tweetsDF.select($\"user.id\".alias(\"user\")).distinct().count()\n\nprintln(s\"Total tweets: ${tweetCount}\")\nprintln(s\"Total users: ${userCount}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:07:16.689",
+      "dateUpdated": "2019-06-29 00:18:31.320",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -190,33 +190,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d10",
-            "http://172.17.0.2:4040/jobs/job?id\u003d11",
-            "http://172.17.0.2:4040/jobs/job?id\u003d12"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561648327335_-676819327",
       "id": "20190627-151207_1653329165",
       "dateCreated": "2019-06-27 15:12:07.335",
-      "dateStarted": "2019-06-28 21:07:16.790",
-      "dateFinished": "2019-06-28 21:07:31.518",
+      "dateStarted": "2019-06-29 00:18:31.626",
+      "dateFinished": "2019-06-29 00:18:52.952",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:07:53.875",
+      "dateUpdated": "2019-06-29 00:18:53.037",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -305,31 +291,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d13"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561648378056_-588099574",
       "id": "20190627-151258_1100319193",
       "dateCreated": "2019-06-27 15:12:58.056",
-      "dateStarted": "2019-06-28 21:07:54.047",
-      "dateFinished": "2019-06-28 21:07:57.707",
+      "dateStarted": "2019-06-29 00:18:53.323",
+      "dateFinished": "2019-06-29 00:18:57.165",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Filter by those who has place\nAccording to twitter docs, a tweet might contain a place but not exact location. A place is a bounding box where the tweet might have come from. The coordinate is the exact geographical location of the tweet.\n\n#### References:\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates-dictionary\n* https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary\n \nTo partition the data as even as possible, we will add fields corresponding to the timestamp when the tweet was posted and separate them by year, month, day and hour.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 01:24:03.552",
+      "dateUpdated": "2019-06-29 00:18:57.243",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -362,15 +336,15 @@
       "jobName": "paragraph_1561650213445_-655266753",
       "id": "20190627-154333_100326201",
       "dateCreated": "2019-06-27 15:43:33.446",
-      "dateStarted": "2019-06-28 01:24:03.552",
-      "dateFinished": "2019-06-28 01:24:06.119",
+      "dateStarted": "2019-06-29 00:18:57.556",
+      "dateFinished": "2019-06-29 00:18:57.625",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import spark.implicits._\n\nval datePattern \u003d \"EEE MMM dd HH:mm:ss ZZZZZ yyyy\"\n\nval tweetsWithPlaces \u003d tweetsDF.select(\"*\")\n    .where(\"place is not null\")\n    .withColumn(\"created_timestamp\", to_timestamp($\"created_at\", datePattern))\n    .withColumn(\"year\", year($\"created_timestamp\"))\n    .withColumn(\"month\", month($\"created_timestamp\"))\n    .withColumn(\"day\", dayofmonth($\"created_timestamp\"))\n    .withColumn(\"hour\", hour($\"created_timestamp\"))\n    .cache()\n    \nval withPlaceTweetCount \u003d tweetsWithPlaces.count()\nval withPlaceUserCount \u003d tweetsWithPlaces.select($\"user.id\".alias(\"user\")).distinct().count()\n\nprintln(s\"Total tweets with place: ${withPlaceTweetCount}\")\nprintln(s\"Total users tweeting with place: ${withPlaceUserCount}\")\n\ntweetsWithPlaces.createOrReplaceTempView(\"tweets_with_place\")",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:03:15.717",
+      "dateUpdated": "2019-06-29 00:18:57.654",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -397,32 +371,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d146",
-            "http://172.17.0.2:4040/jobs/job?id\u003d147"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561650070810_-553926685",
       "id": "20190627-154110_633365497",
       "dateCreated": "2019-06-27 15:41:10.810",
-      "dateStarted": "2019-06-28 22:03:15.786",
-      "dateFinished": "2019-06-28 22:03:25.582",
+      "dateStarted": "2019-06-29 00:18:57.934",
+      "dateFinished": "2019-06-29 00:19:08.383",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "z.show(tweetsWithPlaces)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:03:28.283",
+      "dateUpdated": "2019-06-29 00:19:08.401",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -512,31 +473,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d148"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561650142209_1342872145",
       "id": "20190627-154222_388485723",
       "dateCreated": "2019-06-27 15:42:22.210",
-      "dateStarted": "2019-06-28 22:03:28.371",
-      "dateFinished": "2019-06-28 22:03:29.698",
+      "dateStarted": "2019-06-29 00:19:08.650",
+      "dateFinished": "2019-06-29 00:19:09.891",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "tweetsWithPlaces.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:03:34.225",
+      "dateUpdated": "2019-06-29 00:19:09.954",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -567,15 +516,15 @@
       "jobName": "paragraph_1561650703144_-338492958",
       "id": "20190627-155143_1746259442",
       "dateCreated": "2019-06-27 15:51:43.144",
-      "dateStarted": "2019-06-28 22:03:34.312",
-      "dateFinished": "2019-06-28 22:03:34.676",
+      "dateStarted": "2019-06-29 00:19:10.260",
+      "dateFinished": "2019-06-29 00:19:10.556",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val tweetsWithPlacesAndNoCoordinates \u003d tweetsDF.select(\"*\").where(\"place is not null and coordinates is null\")\ns\"We have ${tweetsWithPlacesAndNoCoordinates.count()} tweets with place but without an exact location.\"",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:03:38.398",
+      "dateUpdated": "2019-06-29 00:19:10.563",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -598,35 +547,23 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres13: String \u003d We have 15 tweets with place but without an exact location.\n"
+            "data": "tweetsWithPlacesAndNoCoordinates: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [contributors: string, coordinates: struct\u003ccoordinates: array\u003cdouble\u003e, type: string\u003e ... 25 more fields]\nres7: String \u003d We have 15 tweets with place but without an exact location.\n"
           }
         ]
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d149"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1561650178637_1978698279",
       "id": "20190627-154258_1541299227",
       "dateCreated": "2019-06-27 15:42:58.637",
-      "dateStarted": "2019-06-28 22:03:38.461",
-      "dateFinished": "2019-06-28 22:03:43.330",
+      "dateStarted": "2019-06-29 00:19:10.746",
+      "dateFinished": "2019-06-29 00:19:15.666",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Different place types\n\nWe can observe from the places that the vast majority of tweets comes from cities, i,e., the granularity of the majority of tweets is city. This would need to be compensated with tweets that have the exact location.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:56:08.889",
+      "dateUpdated": "2019-06-29 00:19:15.676",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -659,15 +596,15 @@
       "jobName": "paragraph_1561756634406_1393588544",
       "id": "20190628-211714_1561699932",
       "dateCreated": "2019-06-28 21:17:14.407",
-      "dateStarted": "2019-06-28 21:56:08.890",
-      "dateFinished": "2019-06-28 21:56:08.923",
+      "dateStarted": "2019-06-29 00:19:15.930",
+      "dateFinished": "2019-06-29 00:19:15.950",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect place.place_type as place_type, count(1) as places \nfrom tweets_with_place \ngroup by place_type",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:04:16.259",
+      "dateUpdated": "2019-07-01 16:22:24.471",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -749,35 +686,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d150",
-            "http://172.17.0.2:4040/jobs/job?id\u003d151",
-            "http://172.17.0.2:4040/jobs/job?id\u003d152",
-            "http://172.17.0.2:4040/jobs/job?id\u003d153",
-            "http://172.17.0.2:4040/jobs/job?id\u003d154"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561756276282_1839030536",
       "id": "20190628-211116_1081747377",
       "dateCreated": "2019-06-28 21:11:16.282",
-      "dateStarted": "2019-06-28 22:04:14.237",
-      "dateFinished": "2019-06-28 22:04:15.716",
+      "dateStarted": "2019-06-29 00:19:16.179",
+      "dateFinished": "2019-06-29 00:19:17.949",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Tweets by language and country\n\nDue to linguistic complexity, we will only consider tweets in english, however, these tweets can come from different countries, even from countries where english is not the official language.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:53:59.186",
+      "dateUpdated": "2019-06-29 00:19:17.993",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -810,15 +731,15 @@
       "jobName": "paragraph_1561758765915_877720548",
       "id": "20190628-215245_1873662779",
       "dateCreated": "2019-06-28 21:52:45.915",
-      "dateStarted": "2019-06-28 21:53:59.187",
-      "dateFinished": "2019-06-28 21:53:59.227",
+      "dateStarted": "2019-06-29 00:19:18.189",
+      "dateFinished": "2019-06-29 00:19:18.198",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect distinct(lang) as lang, place.country as country, count(1) as lang_count \nfrom tweets_with_place \ngroup by lang, country \nsort by lang_count desc",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:16:17.406",
+      "dateUpdated": "2019-07-01 16:22:24.666",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -963,35 +884,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d136",
-            "http://172.17.0.2:4040/jobs/job?id\u003d137",
-            "http://172.17.0.2:4040/jobs/job?id\u003d138",
-            "http://172.17.0.2:4040/jobs/job?id\u003d139",
-            "http://172.17.0.2:4040/jobs/job?id\u003d140"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561758333693_155259193",
       "id": "20190628-214533_1966487770",
       "dateCreated": "2019-06-28 21:45:33.694",
-      "dateStarted": "2019-06-28 21:51:11.353",
-      "dateFinished": "2019-06-28 21:51:18.715",
+      "dateStarted": "2019-06-29 00:19:18.426",
+      "dateFinished": "2019-06-29 00:19:21.486",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\nAs expected, the vast majority of english tweets are comming from the US.",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:01:25.044",
+      "dateUpdated": "2019-06-29 00:19:21.522",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1024,15 +929,15 @@
       "jobName": "paragraph_1561759251642_2111155151",
       "id": "20190628-220051_191216165",
       "dateCreated": "2019-06-28 22:00:51.642",
-      "dateStarted": "2019-06-28 22:01:25.045",
-      "dateFinished": "2019-06-28 22:01:25.057",
+      "dateStarted": "2019-06-29 00:19:21.702",
+      "dateFinished": "2019-06-29 00:19:21.715",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect place.country as country, count(1) as lang_count \nfrom tweets_with_place \nwhere lang \u003d \u0027en\u0027\ngroup by country \nsort by lang_count desc",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:19:26.732",
+      "dateUpdated": "2019-07-01 16:22:24.902",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1152,35 +1057,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d141",
-            "http://172.17.0.2:4040/jobs/job?id\u003d142",
-            "http://172.17.0.2:4040/jobs/job?id\u003d143",
-            "http://172.17.0.2:4040/jobs/job?id\u003d144",
-            "http://172.17.0.2:4040/jobs/job?id\u003d145"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561759158839_-1281568004",
       "id": "20190628-215918_1318763224",
       "dateCreated": "2019-06-28 21:59:18.839",
-      "dateStarted": "2019-06-28 22:00:02.580",
-      "dateFinished": "2019-06-28 22:00:09.063",
+      "dateStarted": "2019-06-29 00:19:21.942",
+      "dateFinished": "2019-06-29 00:19:23.615",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Tweets per day",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:30:33.682",
+      "dateUpdated": "2019-06-29 00:19:23.657",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1213,15 +1102,15 @@
       "jobName": "paragraph_1561756696456_-767713452",
       "id": "20190628-211816_2144996466",
       "dateCreated": "2019-06-28 21:18:16.456",
-      "dateStarted": "2019-06-28 21:30:33.682",
-      "dateFinished": "2019-06-28 21:30:33.694",
+      "dateStarted": "2019-06-29 00:19:23.819",
+      "dateFinished": "2019-06-29 00:19:23.833",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect avg(tweets_per_day) as avg_tweets_per_day from (\n    select date_format(created_timestamp, \"yyyy-MM-dd\") as created_day, count(1) as tweets_per_day \n    from tweets_with_place \n    group by created_day\n    )",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:09:21.116",
+      "dateUpdated": "2019-06-29 00:19:23.919",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1280,31 +1169,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d165"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561756694114_1930863174",
       "id": "20190628-211814_519844368",
       "dateCreated": "2019-06-28 21:18:14.114",
-      "dateStarted": "2019-06-28 22:09:18.964",
-      "dateFinished": "2019-06-28 22:09:20.738",
+      "dateStarted": "2019-06-29 00:19:24.044",
+      "dateFinished": "2019-06-29 00:19:25.796",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Tweets per month",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:09:54.880",
+      "dateUpdated": "2019-06-29 00:19:25.858",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1337,15 +1214,15 @@
       "jobName": "paragraph_1561759774533_862943351",
       "id": "20190628-220934_970658418",
       "dateCreated": "2019-06-28 22:09:34.533",
-      "dateStarted": "2019-06-28 22:09:54.881",
-      "dateFinished": "2019-06-28 22:09:54.890",
+      "dateStarted": "2019-06-29 00:19:25.996",
+      "dateFinished": "2019-06-29 00:19:26.012",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect avg(tweets_per_month) as avg_tweets_per_month from (\n    select date_format(created_timestamp, \"yyyy-MM\") as created_month, count(1) as tweets_per_month\n    from tweets_with_place \n    group by created_month\n    )\n",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:10:41.443",
+      "dateUpdated": "2019-06-29 00:19:26.093",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1404,31 +1281,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d166"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561759793062_-1102486113",
       "id": "20190628-220953_1433068681",
       "dateCreated": "2019-06-28 22:09:53.062",
-      "dateStarted": "2019-06-28 22:10:38.349",
-      "dateFinished": "2019-06-28 22:10:40.072",
+      "dateStarted": "2019-06-29 00:19:26.221",
+      "dateFinished": "2019-06-29 00:19:27.478",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Tweets per place\n",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 21:33:21.547",
+      "dateUpdated": "2019-06-29 00:19:27.527",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1461,15 +1326,15 @@
       "jobName": "paragraph_1561757541871_1333095954",
       "id": "20190628-213221_1836742275",
       "dateCreated": "2019-06-28 21:32:21.871",
-      "dateStarted": "2019-06-28 21:33:21.547",
-      "dateFinished": "2019-06-28 21:33:21.572",
+      "dateStarted": "2019-06-29 00:19:27.691",
+      "dateFinished": "2019-06-29 00:19:27.703",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect place.country as country, place.name as place, count(1) as tweets_per_place\nfrom tweets_with_place \ngroup by country, place",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:16:41.672",
+      "dateUpdated": "2019-07-01 16:22:19.908",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1587,35 +1452,19 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d172",
-            "http://172.17.0.2:4040/jobs/job?id\u003d173",
-            "http://172.17.0.2:4040/jobs/job?id\u003d174",
-            "http://172.17.0.2:4040/jobs/job?id\u003d175",
-            "http://172.17.0.2:4040/jobs/job?id\u003d176"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561757538039_1909261456",
       "id": "20190628-213218_2001199312",
       "dateCreated": "2019-06-28 21:32:18.039",
-      "dateStarted": "2019-06-28 22:12:14.434",
-      "dateFinished": "2019-06-28 22:12:16.198",
+      "dateStarted": "2019-06-29 00:19:27.901",
+      "dateFinished": "2019-06-29 00:19:29.390",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n### Tweets in the United States",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:28:11.459",
+      "dateUpdated": "2019-06-29 00:19:29.407",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1648,15 +1497,15 @@
       "jobName": "paragraph_1561760879592_-200854220",
       "id": "20190628-222759_551643612",
       "dateCreated": "2019-06-28 22:27:59.592",
-      "dateStarted": "2019-06-28 22:28:11.461",
-      "dateFinished": "2019-06-28 22:28:11.492",
+      "dateStarted": "2019-06-29 00:19:29.603",
+      "dateFinished": "2019-06-29 00:19:29.615",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%sql\nselect place.name as place, count(1) as tweets_per_place\nfrom tweets_with_place\nwhere place.country_code \u003d \u0027US\u0027\ngroup by place\nsort by tweets_per_place desc",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:27:49.572",
+      "dateUpdated": "2019-06-29 00:19:29.703",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1776,35 +1625,90 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d187",
-            "http://172.17.0.2:4040/jobs/job?id\u003d188",
-            "http://172.17.0.2:4040/jobs/job?id\u003d189",
-            "http://172.17.0.2:4040/jobs/job?id\u003d190",
-            "http://172.17.0.2:4040/jobs/job?id\u003d191"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1561760401523_1074037403",
       "id": "20190628-222001_453171111",
       "dateCreated": "2019-06-28 22:20:01.523",
-      "dateStarted": "2019-06-28 22:24:51.378",
-      "dateFinished": "2019-06-28 22:24:53.507",
+      "dateStarted": "2019-06-29 00:19:29.791",
+      "dateFinished": "2019-06-29 00:19:31.848",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n### Select and transform tweet data into a flattened parquet table\n\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.",
+      "text": "%sql\nselect scopes from tweets_with_place where scopes is not null",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 22:31:42.820",
+      "dateUpdated": "2019-06-29 00:59:25.305",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "scopes": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "scopes\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561768277597_628006682",
+      "id": "20190629-003117_867045839",
+      "dateCreated": "2019-06-29 00:31:17.598",
+      "dateStarted": "2019-06-29 00:59:25.381",
+      "dateFinished": "2019-06-29 00:59:25.530",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n### Select and transform tweet data into a flattened parquet table\n\nJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0027s more compressed and will help for results storage.\n\nHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks. Particularly the geometry fields.",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-29 00:20:37.603",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1829,7 +1733,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eSelect and transform tweet data into a flattened parquet table\u003c/h3\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks.\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch3\u003eSelect and transform tweet data into a flattened parquet table\u003c/h3\u003e\n\u003cp\u003eJSON files occupy significant disk space. We choose to store the results in parquet format since it\u0026rsquo;s more compressed and will help for results storage.\u003c/p\u003e\n\u003cp\u003eHowever, some parquet readers in python does not support deeply nested parquet data structures. Hence, we need to flatten the fields so they can be easily imported in other languages or frameworks. Particularly the geometry fields.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -1837,15 +1741,15 @@
       "jobName": "paragraph_1561650553468_-769261429",
       "id": "20190627-154913_911235331",
       "dateCreated": "2019-06-27 15:49:13.468",
-      "dateStarted": "2019-06-28 22:31:42.821",
-      "dateFinished": "2019-06-28 22:31:42.842",
+      "dateStarted": "2019-06-29 00:20:37.610",
+      "dateFinished": "2019-06-29 00:20:37.651",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import com.esri.core.geometry.ogc.OGCGeometry\n\nval wktFromGeoJson \u003d (json: String) \u003d\u003e {\n    if (json !\u003d null)\n        OGCGeometry.fromGeoJson(json).asText()\n    else\n        \"\"\n}\n\nval stWKTFromGeoJson \u003d udf(wktFromGeoJson)",
+      "text": "import com.esri.core.geometry.ogc.OGCGeometry\n\n/**\n * This function will transform the given geo json object\n * into its WKT representation\n * \n*/\nval wktFromGeoJson: String \u003d\u003e String \u003d (json: String) \u003d\u003e {\n    if (json !\u003d null)\n        OGCGeometry.fromGeoJson(json).asText()\n    else\n        \"\"\n}\n\nval stWKTFromGeoJson \u003d udf(wktFromGeoJson)",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 03:00:05.048",
+      "dateUpdated": "2019-06-29 00:25:10.314",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1876,15 +1780,15 @@
       "jobName": "paragraph_1561687495157_1527779594",
       "id": "20190628-020455_557881478",
       "dateCreated": "2019-06-28 02:04:55.161",
-      "dateStarted": "2019-06-28 03:00:05.946",
-      "dateFinished": "2019-06-28 03:00:08.085",
+      "dateStarted": "2019-06-29 00:25:10.525",
+      "dateFinished": "2019-06-29 00:25:11.973",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.sql.functions._\n\n//tweetsWithPlaces.select($\"place.bounding_box.type\".alias(\"place_geom_type\")).show(5)\ntweetsWithPlaces.select(stWKTFromGeoJson( to_json($\"place.bounding_box\")).alias(\"place_geometry\")).where(\"place is not null\").show(5)",
+      "text": "import org.apache.spark.sql.functions._\n\nval final_tweets \u003d tweetsWithPlaces.select($\"id\".alias(\"tweet_id\"),\n    $\"text\".alias(\"tweet_text\"),\n    $\"created_timestamp\",\n    $\"year\",\n    $\"month\",\n    $\"day\",\n    $\"hour\",\n    $\"user.id\".alias(\"user_id\"),\n    $\"user.screen_name\".alias(\"user_name\"),\n    concat_ws(\";\", $\"entities.hashtags.text\").alias(\"hashtags\"),\n    concat_ws(\";\", $\"entities.user_mentions.screen_name\").alias(\"user_mentions\"),\n    concat_ws(\";\", $\"entities.user_mentions.id\").alias(\"user_id_mentions\"),\n    concat_ws(\";\", $\"entities.urls.expanded_url\").alias(\"expanded_urls\"),\n    $\"favorite_count\",\n    stWKTFromGeoJson( to_json($\"coordinates\")).alias(\"location_geometry\"),\n    stWKTFromGeoJson( to_json($\"place.bounding_box\")).alias(\"place_geometry\")\n    ).where(\"place is not null and lang \u003d \u0027en\u0027\")\n    \nval final_total_tweets \u003d final_tweets.count()\nval final_total_users \u003d final_tweets.select($\"user_id\").distinct().count()\n\nprintln(s\"The final tweet subset is: ${final_total_tweets}\")\nprintln(s\"The final user subset is: ${final_total_users}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-06-28 03:01:00.639",
+      "dateUpdated": "2019-06-29 01:04:24.102",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -1907,7 +1811,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "+--------------------+\n|      place_geometry|\n+--------------------+\n|POLYGON ((-75.707...|\n|POLYGON ((106.865...|\n|POLYGON ((102.695...|\n|POLYGON ((-79.762...|\n|                    |\n+--------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions._\n"
+            "data": "The final tweet subset is: 87\nThe final user subset is: 86\nimport org.apache.spark.sql.functions._\nfinal_tweets: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [tweet_id: bigint, tweet_text: string ... 14 more fields]\nfinal_total_tweets: Long \u003d 87\nfinal_total_users: Long \u003d 86\n"
           }
         ]
       },
@@ -1915,8 +1819,88 @@
       "jobName": "paragraph_1561650494704_1933215285",
       "id": "20190627-154814_967019010",
       "dateCreated": "2019-06-27 15:48:14.704",
-      "dateStarted": "2019-06-28 03:01:01.030",
-      "dateFinished": "2019-06-28 03:01:02.254",
+      "dateStarted": "2019-06-29 01:04:24.181",
+      "dateFinished": "2019-06-29 01:04:27.000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "z.show(final_tweets)",
+      "user": "anonymous",
+      "dateUpdated": "2019-06-29 01:01:09.495",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "tweet_id": "string",
+                      "tweet_text": "string",
+                      "created_timestamp": "string",
+                      "year": "string",
+                      "month": "string",
+                      "day": "string",
+                      "hour": "string",
+                      "user_id": "string",
+                      "user_name": "string",
+                      "hashtags": "string",
+                      "user_mentions": "string",
+                      "user_id_mentions": "string",
+                      "expanded_urls": "string",
+                      "favorite_count": "string",
+                      "location_geometry": "string",
+                      "place_geometry": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "tweet_id\ttweet_text\tcreated_timestamp\tyear\tmonth\tday\thour\tuser_id\tuser_name\thashtags\tuser_mentions\tuser_id_mentions\texpanded_urls\tfavorite_count\tlocation_geometry\tplace_geometry\n374048987034419200\t@adambeyer234: I already miss Jace like hell\t2013-09-01 06:00:02.0\t2013\t9\t1\t6\t363516745\trilez_sharp\t\tadambeyer234\t440460960\t\t0\tPOINT (-78.70704417 42.72388254)\tPOLYGON ((-79.76259 40.477399, -71.777491 40.477399, -71.777491 45.015865, -79.76259 45.015865, -79.76259 40.477399))\n374048991224160256\tI really really hate texting unless we\u0027re talking about something important\t2013-09-01 06:00:03.0\t2013\t9\t1\t6\t542867684\tivonne_xoxo\t\t\t\t\t0\tPOINT (-87.70697188 41.91776638)\tPOLYGON ((-87.940101 41.643919, -87.523661 41.643919, -87.523661 42.023135, -87.940101 42.023135, -87.940101 41.643919))\n374048995414659072\tWind 4.0 mph SSE. Barometer 1040.0 mb, Falling slowly. Temperature 11.7 °C. Rain today 0.0 mm. Humidity 72%\t2013-09-01 06:00:04.0\t2013\t9\t1\t6\t1035302827\tMossleyWX\t\t\t\t\t0\tPOINT (-2.02833333 53.87583333)\tPOLYGON ((-2.564736 53.850139, -1.8167289999999998 53.850139, -1.8167289999999998 54.257152, -2.564736 54.257152, -2.564736 53.850139))\n374048999642120192\t\"@3gerardpique: Congratulations to Bayern München and Pep Guardiola for winning the European Super Cup!\"@i love u in football\t2013-09-01 06:00:05.0\t2013\t9\t1\t6\t1716178933\t456ronnys\t\t3gerardpique\t224223563\t\t0\tPOINT (106.9500834 -6.187764)\tPOLYGON ((106.909353 -6.2215885, 106.980499 -6.2215885, 106.980499 -6.148186, 106.909353 -6.148186, 106.909353 -6.2215885))\n374048999625723904\t@612wildabeast ima do that brah lol\t2013-09-01 06:00:05.0\t2013\t9\t1\t6\t373470202\tBrandonWarren40\t\t612wildabeast\t584618024\t\t0\tPOINT (-82.4594779 27.9374764)\tPOLYGON ((-82.64882 27.817487, -82.287551 27.817487, -82.287551 28.171291, -82.64882 28.171291, -82.64882 27.817487))\n374049003798671361\tJust Give Me a Reason (feat. Nate Ruess) by P!nk — https://t.co/NqjO5ZYxxE\t2013-09-01 06:00:06.0\t2013\t9\t1\t6\t615858188\tNamiraNRA\t\t\t\thttps://path.com/p/2blKGl\t0\tPOINT (106.56876 -6.22107)\tPOLYGON ((106.54873 -6.279013, 106.652494 -6.279013, 106.652494 -6.208549, 106.54873 -6.208549, 106.54873 -6.279013))\n374049012204466176\t#Cleeve #Cheltenham #UKWeather: Wind 0.0km/h ---. Pres. 1032.0mb Steady. Temp. 9.3C. Rain today 0.0mm Humid. 84% Sun:07:00\t2013-09-01 06:00:08.0\t2013\t9\t1\t6\t95305536\tcleeveweather\tCleeve;Cheltenham;UKWeather\t\t\t\t0\tPOINT (-2.06916667 51.94805556)\tPOLYGON ((-2.3527549999999997 51.819306, -1.801447 51.819306, -1.801447 52.050562, -2.3527549999999997 52.050562, -2.3527549999999997 51.819306))\n374049024778989568\tEnjoyment of good music \u0026amp; famous dessert in the afternoon.😊#weekend #hightea #dessert @ High Society Café http://t.co/pjuejG7flC\t2013-09-01 06:00:11.0\t2013\t9\t1\t6\t317683060\tHandsomePoh\tweekend;hightea;dessert\t\t\thttp://instagram.com/p/dtPJ0bDvrF/\t0\tPOINT (103.85960474 1.28566387)\tPOLYGON ((102.4673462 1.2624726, 104.2971115 1.2624726, 104.2971115 2.8337522, 102.4673462 2.8337522, 102.4673462 1.2624726))\n374049049952788480\tUNITED DAY!!\t2013-09-01 06:00:17.0\t2013\t9\t1\t6\t447528893\tgabreey\t\t\t\t\t0\tPOINT (104.0349722 1.1096028)\tPOLYGON ((104.022457 0.981943, 104.189888 0.981943, 104.189888 1.19735, 104.022457 1.19735, 104.022457 0.981943))\n374049070924709888\tChan 20 now so she my cougar lmao\t2013-09-01 06:00:22.0\t2013\t9\t1\t6\t230669027\tiAmKilo_Bae\t\t\t\t\t0\tPOINT (-82.01388384 29.10235086)\tPOLYGON ((-82.032456 29.079443, -81.983678 29.079443, -81.983678 29.121034, -82.032456 29.121034, -82.032456 29.079443))\n374049075106447360\t@nicholasmegalis Could you wish @iTweetTatiana a happy birthday, that\u0027s all she would like for her birthday plz plz plz😊\t2013-09-01 06:00:23.0\t2013\t9\t1\t6\t380623827\ttammynjohnson\t\tnicholasmegalis;iTweetTatiana\t22977875;353458051\t\t0\tPOINT (-80.1597134 25.85120383)\tPOLYGON ((-80.161768 25.842774, -80.143168 25.842774, -80.143168 25.856073, -80.161768 25.856073, -80.161768 25.842774))\n374049100276068352\tCliff is the man 😂\t2013-09-01 06:00:29.0\t2013\t9\t1\t6\t512884319\tMattylovestofly\t\t\t\t\t0\tPOINT (-117.53836468 34.11107444)\tPOLYGON ((-117.636887 34.076883, -117.478673 34.076883, -117.478673 34.17138, -117.636887 34.17138, -117.636887 34.076883))\n374049104462352384\tEarly start but going to be worth it, buzzing for the races today! #Silverstone\t2013-09-01 06:00:30.0\t2013\t9\t1\t6\t193045126\tJake_Newman49\tSilverstone\t\t\t\t0\tPOINT (-0.3410096 52.17356371)\tPOLYGON ((-0.668771 52.054542, -0.24073899999999998 52.054542, -0.24073899999999998 52.322973, -0.668771 52.322973, -0.668771 52.054542))\n374049108664659968\t#nw Pair Of King . @mitchelmusso Iloveyou .\t2013-09-01 06:00:31.0\t2013\t9\t1\t6\t879171078\t_FarahIzaham\tnw\tmitchelmusso\t23228600\t\t0\tPOINT (100.4156014 5.4024789)\tPOLYGON ((100.4062639 5.3855653, 100.439955 5.3855653, 100.439955 5.4125574, 100.4062639 5.4125574, 100.4062639 5.3855653))\n374049125454458880\tHe hates me.\t2013-09-01 06:00:35.0\t2013\t9\t1\t6\t573305307\tyazzy_mari\t\t\t\t\t0\tPOINT (-116.1491561 34.1795242)\tPOLYGON ((-124.48200299999999 32.528832, -114.131211 32.528832, -114.131211 42.009516999999995, -124.48200299999999 42.009516999999995, -124.48200299999999 32.528832))\n374049138041565184\tI expect a couple DM\u0027s and text messages. K? K.\t2013-09-01 06:00:38.0\t2013\t9\t1\t6\t447500294\tJohnMcBride17\t\t\t\t\t0\tPOINT (-92.11209052 32.55395298)\tPOLYGON ((-92.135508 32.42969, -91.988821 32.42969, -91.988821 32.621037, -92.135508 32.621037, -92.135508 32.42969))\n374049138041561088\tReal nigga ✊“@DFrazier_: Dang she my only follower tonight lol”\t2013-09-01 06:00:38.0\t2013\t9\t1\t6\t280556253\tDKashdashian_\t\tDFrazier_\t37270098\t\t0\tPOINT (-83.76099745 43.03025442)\tPOLYGON ((-90.418392 41.696118, -82.12297099999999 41.696118, -82.12297099999999 48.306062999999995, -90.418392 48.306062999999995, -90.418392 41.696118))\n374049146421796864\tStop Using my word.......\t2013-09-01 06:00:40.0\t2013\t9\t1\t6\t264635774\tkassidy_trimble\t\t\t\t\t0\tPOINT (-95.09085546 36.17696921)\tPOLYGON ((-95.13647 36.16152, -95.06455 36.16152, -95.06455 36.206192, -95.13647 36.206192, -95.13647 36.16152))\n374049150616469504\tBouta Take It Down\t2013-09-01 06:00:41.0\t2013\t9\t1\t6\t380343333\t_iAm_Real_\t\t\t\t\t0\tPOINT (-74.08648677 40.71240092)\tPOLYGON ((-74.117057 40.661622, -74.020405 40.661622, -74.020405 40.768867, -74.117057 40.768867, -74.117057 40.661622))\n374049175786098690\t@mysuperdianne omg.. I WILL!😂👌  tomorrow tho im lazy 😒\t2013-09-01 06:00:47.0\t2013\t9\t1\t6\t404549940\tJamsterJae\t\tmysuperdianne\t231331790\t\t0\tPOINT (-113.52478766 53.4121351)\tPOLYGON ((-115.611798 52.755326, -112.839715 52.755326, -112.839715 54.03264, -115.611798 54.03264, -115.611798 52.755326))\n374049200935145472\tBYE WORLD :3 believe in your dreams and never give up #neversaynever http://t.co/fsvmOfQ1Gq\t2013-09-01 06:00:53.0\t2013\t9\t1\t6\t1562176441\tFthymaSwag\tneversaynever\t\t\t\t0\t\tPOLYGON ((-103.410515 20.6005851, -103.262645 20.6005851, -103.262645 20.7527191, -103.410515 20.7527191, -103.410515 20.6005851))\n374049209336348672\t@tj4543 lol ask Tiff\t2013-09-01 06:00:55.0\t2013\t9\t1\t6\t262256734\t_MadeBeautiful_\t\ttj4543\t377755634\t\t0\tPOINT (-93.5910642 33.6490259)\tPOLYGON ((-93.625565 33.626902, -93.553105 33.626902, -93.553105 33.69769, -93.625565 33.69769, -93.625565 33.626902))\n374049213531058176\tFall asleep\t2013-09-01 06:00:56.0\t2013\t9\t1\t6\t238256579\tIts_Me_Mariah_\t\t\t\t\t0\tPOINT (-71.0281819 42.5333906)\tPOLYGON ((-71.075298 42.501547, -70.985821 42.501547, -70.985821 42.574588, -71.075298 42.574588, -71.075298 42.501547))\n374049226126139392\t@j_didddy sometimes they do. But they usually ask if I play basketball\t2013-09-01 06:00:59.0\t2013\t9\t1\t6\t148240818\tJustinLaFlame_\t\tj_didddy\t104369559\t\t0\tPOINT (-117.8905259 33.74252154)\tPOLYGON ((-117.944059 33.691631, -117.830624 33.691631, -117.830624 33.788151, -117.944059 33.788151, -117.944059 33.691631))\n374049234497982465\tTalk to me\t2013-09-01 06:01:01.0\t2013\t9\t1\t6\t965914428\t_ensen\t\t\t\t\t0\tPOINT (-122.43086074 47.24520712)\tPOLYGON ((-122.565437 47.166528, -122.348214 47.166528, -122.348214 47.331984, -122.565437 47.331984, -122.565437 47.166528))\n374049238696480768\t@ulovesbrix3 @RobbyyRayy she go to school with me\t2013-09-01 06:01:02.0\t2013\t9\t1\t6\t265656071\tTJudson4_\t\tulovesbrix3;RobbyyRayy\t612234708;148141933\t\t0\tPOINT (-81.01352286 29.2362733)\tPOLYGON ((-81.107731 29.205359, -80.946448 29.205359, -80.946448 29.432462, -81.107731 29.432462, -81.107731 29.205359))\n374049255486672896\t@l_ashley11 you should come visit me when I get back next year.\t2013-09-01 06:01:06.0\t2013\t9\t1\t6\t328303195\trobby_ritter\t\tl_ashley11\t340637340\t\t0\tPOINT (-85.68212945 30.79580198)\tPOLYGON ((-85.701117 30.7587, -85.666998 30.7587, -85.666998 30.808391, -85.701117 30.808391, -85.701117 30.7587))\n374049263853916160\tThis \"@_idgafaiq: \"orang malaysia tak payah nak tweet/speak in english, bajet mat salleh\" excuse me sir, your malaysian is showing\"\t2013-09-01 06:01:08.0\t2013\t9\t1\t6\t1338047478\tluhanwife_\t\t_idgafaiq\t414872428\t\t0\tPOINT (101.7127007 3.1033266)\tPOLYGON ((101.6151605 3.0811498, 101.7536633 3.0811498, 101.7536633 3.1675065, 101.6151605 3.1675065, 101.6151605 3.0811498))\n374049268065001472\tTooooo lazy to take ma pants off\t2013-09-01 06:01:09.0\t2013\t9\t1\t6\t1504872764\tfuckdaabs\t\t\t\t\t0\tPOINT (-118.35937888 33.90515449)\tPOLYGON ((-118.378741 33.893266, -118.313391 33.893266, -118.313391 33.934542, -118.378741 33.934542, -118.378741 33.893266))\n374049268061179904\tOff to work gotta work hard and go to the gym and go hard\t2013-09-01 06:01:09.0\t2013\t9\t1\t6\t1131296748\tarmystrong941\t\t\t\t\t0\tPOINT (-82.5189534 27.4417053)\tPOLYGON ((-87.634896 24.396307999999998, -79.974306 24.396307999999998, -79.974306 31.000968, -87.634896 31.000968, -87.634896 24.396307999999998))\n374049339359764480\tLiterally couldn\u0027t be in a worse mood\t2013-09-01 06:01:26.0\t2013\t9\t1\t6\t226428846\tjaaysgroi\t\t\t\t\t0\tPOINT (-79.45146144 43.87570071)\tPOLYGON ((-79.775531 43.749829999999996, -79.156126 43.749829999999996, -79.156126 44.460065, -79.775531 44.460065, -79.775531 43.749829999999996))\n374049406468620288\tI do alot of sittin at home thinkin I should be out doing stuff but when Im out doing stuff I spend it thinking I should be home doin nothin\t2013-09-01 06:01:42.0\t2013\t9\t1\t6\t1285256364\tJOEY_FRESHNESS\t\t\t\t\t0\tPOINT (-122.98952713 46.81733566)\tPOLYGON ((-123.037034 46.787674, -122.989051 46.787674, -122.989051 46.822548, -123.037034 46.822548, -123.037034 46.787674))\n374049414848847873\t@Carol_Whiteside me too\t2013-09-01 06:01:44.0\t2013\t9\t1\t6\t533964171\tKG_II\t\tCarol_Whiteside\t347019045\t\t0\tPOINT (-89.6141732 40.6967837)\tPOLYGON ((-89.69671 40.651938, -89.546494 40.651938, -89.546494 40.844085, -89.69671 40.844085, -89.69671 40.651938))\n374049444238745600\tFrench Cassettes @ Great American Music Hall http://t.co/6s7iWk7t8C\t2013-09-01 06:01:51.0\t2013\t9\t1\t6\t29887589\tmattsai\t\t\t\thttp://instagram.com/p/dtPx4bRnjp/\t0\tPOINT (-122.41892788 37.7849192)\tPOLYGON ((-122.42548187999999 37.77322896, -122.40997884 37.77322896, -122.40997884 37.79084502, -122.42548187999999 37.79084502, -122.42548187999999 37.77322896))\n374049456804855808\t“@x0_Juliaa: I want some tacosssss”omg me to I\u0027m so hungry #TheStruggle\t2013-09-01 06:01:54.0\t2013\t9\t1\t6\t1420915844\tQueenCee_Xo\tTheStruggle\tx0_Juliaa\t72428029\t\t0\tPOINT (-70.98172397 42.46881796)\tPOLYGON ((-71.011469 42.438297, -70.901493 42.438297, -70.901493 42.512383, -71.011469 42.512383, -71.011469 42.438297))\n374064338182483968\tPCH - sublime with Rome\t2013-09-01 07:01:02.0\t2013\t9\t1\t7\t635458648\tTreBoutilier\t\t\t\t\t0\tPOINT (-118.09004135 33.74454204)\tPOLYGON ((-118.118946 33.722283, -118.04168 33.722283, -118.04168 33.78757, -118.118946 33.78757, -118.118946 33.722283))\n374064359183753216\t@Brady_21_ u aint staying up\t2013-09-01 07:01:07.0\t2013\t9\t1\t7\t86135820\tT_Dro24\t\tBrady_21_\t28919483\t\t0\tPOINT (-79.95878492 39.6432557)\tPOLYGON ((-79.992965 39.601882, -79.917256 39.601882, -79.917256 39.669086, -79.992965 39.669086, -79.992965 39.601882))\n374064363348312064\t50 shades of sit on my face.\t2013-09-01 07:01:08.0\t2013\t9\t1\t7\t377792912\tBig_Dave_31\t\t\t\t\t0\tPOINT (-98.56464714 34.07728891)\tPOLYGON ((-98.605013 34.035028, -98.517052 34.035028, -98.517052 34.104723, -98.605013 34.104723, -98.605013 34.035028))\n374064375948013568\t@Jaspanglish did you bring pokemon stickers...\t2013-09-01 07:01:11.0\t2013\t9\t1\t7\t1138340456\tvStevieBv\t\tJaspanglish\t239778394\t\t0\t\tPOLYGON ((139.562922222222 35.7117361111111, 139.681160833333 35.7117361111111, 139.681160833333 35.7799583333333, 139.562922222222 35.7799583333333, 139.562922222222 35.7117361111111))\n374064392708423681\t@lex_rufus I don\u0027t care how long its been lol just come back\t2013-09-01 07:01:15.0\t2013\t9\t1\t7\t42728745\tlukedowell95\t\tlex_rufus\t397771140\t\t0\tPOINT (-120.60623787 46.57074925)\tPOLYGON ((-120.671017 46.540041, -120.528269 46.540041, -120.528269 46.582174, -120.671017 46.582174, -120.671017 46.540041))\n374064396898553856\tCounting days until January 2014.\t2013-09-01 07:01:16.0\t2013\t9\t1\t7\t52650373\tAshhoAsh\t\t\t\t\t0\tPOINT (101.5229523 3.0845266)\tPOLYGON ((101.4898224 3.0518925, 101.5489197 3.0518925, 101.5489197 3.0933838, 101.4898224 3.0933838, 101.4898224 3.0518925))\n374064426292244480\tBloood im sooo tired ! Im finnah get to the brib and call babe lmao\t2013-09-01 07:01:23.0\t2013\t9\t1\t7\t719627131\t_johnwoo_\t\t\t\t\t0\tPOINT (-122.06473932 38.25729136)\tPOLYGON ((-122.174914 38.156417, -121.892073 38.156417, -121.892073 38.308742, -122.174914 38.308742, -122.174914 38.156417))\n374064438858354688\tOhhhh kill em\t2013-09-01 07:01:26.0\t2013\t9\t1\t7\t58236243\teas_17\t\t\t\t\t0\tPOINT (-98.35679032 29.25641469)\tPOLYGON ((-98.484267 29.114435, -98.204587 29.114435, -98.204587 29.392014, -98.484267 29.392014, -98.484267 29.114435))\n374064447234387968\tBitches got me fucked up saying Jackie\u0027s theirs when everyone knows she\u0027s clearly mine. Been fucking with her longer than all you hoes. ✌\t2013-09-01 07:01:28.0\t2013\t9\t1\t7\t109609460\tecastilloooo\t\t\t\t\t0\tPOINT (-122.2845078 47.3637236)\tPOLYGON ((-122.309417 47.32976, -122.043215 47.32976, -122.043215 47.441546, -122.309417 47.441546, -122.309417 47.32976))\n374064455623008256\tTired of games ... That shit ages you\t2013-09-01 07:01:30.0\t2013\t9\t1\t7\t31016566\tHolli_World\t\t\t\t\t0\tPOINT (-80.23149627 26.21129299)\tPOLYGON ((-80.244196 26.198018, -80.195463 26.198018, -80.195463 26.229797, -80.244196 26.229797, -80.244196 26.198018))\n374064459834064896\tDont Hate ME by EPIK HIGH\t2013-09-01 07:01:31.0\t2013\t9\t1\t7\t363102786\tOvaae\t\t\t\t\t0\t\tPOLYGON ((105.191887 -5.401314, 105.299294 -5.401314, 105.299294 -5.321865, 105.191887 -5.321865, 105.191887 -5.401314))\n374064476586143744\tOnly way to go\t2013-09-01 07:01:35.0\t2013\t9\t1\t7\t415307549\tCashMeOutLT\t\t\t\t\t0\tPOINT (-122.4047768 37.7922429)\tPOLYGON ((-122.41018188 37.79022798, -122.40392687999999 37.79022798, -122.40392687999999 37.79798004, -122.41018188 37.79798004, -122.41018188 37.79022798))\n374064476594511872\tWTF I HAVE TO WAIT ANOTHER HOUR CAUSE I DON\u0027T HAVE AN ACCOUNT😡😡\t2013-09-01 07:01:35.0\t2013\t9\t1\t7\t1644340850\tDirty_25\t\t\t\t\t0\tPOINT (-87.93931083 41.81016723)\tPOLYGON ((-87.952441 41.763863, -87.900017 41.763863, -87.900017 41.825832, -87.952441 41.825832, -87.952441 41.763863))\n374064476619685889\tWhen a girl says I have hoes...smh http://t.co/eb5wegIUPJ\t2013-09-01 07:01:35.0\t2013\t9\t1\t7\t750454056\tjust_follow_bro\t\t\t\t\t0\tPOINT (-97.20442884 30.6157518)\tPOLYGON ((-97.220024 30.605323, -97.192429 30.605323, -97.192429 30.621992, -97.220024 30.621992, -97.220024 30.605323))\n374064489186217984\tRT @iDntWearCondoms: I don\u0027t love these hoes at all\t2013-09-01 07:01:38.0\t2013\t9\t1\t7\t179159734\tParadise_Papi\t\tiDntWearCondoms\t139747863\t\t0\tPOINT (-82.36901536 28.14938434)\tPOLYGON ((-82.64882 27.817487, -82.287551 27.817487, -82.287551 28.171291, -82.64882 28.171291, -82.64882 27.817487))\n374064505984008192\tShould I make waffles y/n\t2013-09-01 07:01:42.0\t2013\t9\t1\t7\t234281203\tparchaaa\t\t\t\t\t0\tPOINT (-121.3463637 36.9041377)\tPOLYGON ((-124.48200299999999 32.528832, -114.131211 32.528832, -114.131211 42.009516999999995, -124.48200299999999 42.009516999999995, -124.48200299999999 32.528832))\n374064510157340674\tAuto correct strikes again. My mom try to text me i love you but it came out your a disappointment @jesseramirez310\t2013-09-01 07:01:43.0\t2013\t9\t1\t7\t728967036\tcalichris310\t\tjesseramirez310\t487018376\t\t0\tPOINT (-117.57844451 33.85107385)\tPOLYGON ((-117.651238 33.80272, -117.483803 33.80272, -117.483803 33.916143, -117.651238 33.916143, -117.651238 33.80272))\n374064510140940288\t@adames_marvelyn Youuu make it sooo obvious but haha yaaaa.😄😏\t2013-09-01 07:01:43.0\t2013\t9\t1\t7\t344843551\tjenniferrrrr_14\t\tadames_marvelyn\t1490486756\t\t0\tPOINT (-73.44050571 41.38619401)\tPOLYGON ((-73.543416 41.325772, -73.400825 41.325772, -73.400825 41.463834, -73.543416 41.463834, -73.543416 41.325772))\n374064526926176256\tRainy..GOd cover our flight..amen (with Azwien, Kres Setiawan, and 3 others at LCCT KL International Airport) — https://t.co/okuk4BB827\t2013-09-01 07:01:47.0\t2013\t9\t1\t7\t142190931\tSolihinThen\t\t\t\thttps://path.com/p/2DsgGK\t0\tPOINT (101.7206 2.73964)\tPOLYGON ((101.6311944 2.7274768, 101.7596509 2.7274768, 101.7596509 2.8155286, 101.6311944 2.8155286, 101.6311944 2.7274768))\n374064560480612352\tI feel obliged to listen to this song considering the fact I live here\t2013-09-01 07:01:55.0\t2013\t9\t1\t7\t635458648\tTreBoutilier\t\t\t\t\t0\tPOINT (-118.09000555 33.74454787)\tPOLYGON ((-118.118946 33.722283, -118.04168 33.722283, -118.04168 33.78757, -118.118946 33.78757, -118.118946 33.722283))\n374064086536843264\tWaitng for the last train home. Show was a blast #brickandmortarfreepour #blast #outpastmybedtime\t2013-09-01 07:00:02.0\t2013\t9\t1\t7\t46035230\tpamaluv33\tbrickandmortarfreepour;blast;outpastmybedtime\t\t\t\t0\tPOINT (-122.4199603 37.7699371)\tPOLYGON ((-122.42288195999998 37.74296097, -122.40894599999999 37.74296097, -122.40894599999999 37.77052896, -122.42288195999998 37.77052896, -122.42288195999998 37.74296097))\n374064141045997568\tYes. That would be you.\t2013-09-01 07:00:15.0\t2013\t9\t1\t7\t419923413\tBaileeSchlueter\t\t\t\t\t0\tPOINT (-97.75111533 32.73654962)\tPOLYGON ((-97.842451 32.71639, -97.66748 32.71639, -97.66748 32.80374, -97.842451 32.80374, -97.842451 32.71639))\n374064141046390784\tRed eyes\t2013-09-01 07:00:15.0\t2013\t9\t1\t7\t50297370\tChloeHarris687\t\t\t\t\t0\tPOINT (-71.08962158 42.26252185)\tPOLYGON ((-71.130808 42.200777, -71.03149 42.200777, -71.03149 42.277699, -71.130808 42.277699, -71.130808 42.200777))\n374064145248681985\t@haacheng Thanks for the info ate cheng!!❤\t2013-09-01 07:00:16.0\t2013\t9\t1\t7\t48248385\ttineranchezz\t\thaacheng\t33834458\t\t0\tPOINT (-117.99005625 33.78374618)\tPOLYGON ((-118.018863 33.77379, -117.967575 33.77379, -117.967575 33.815744, -118.018863 33.815744, -118.018863 33.77379))\n374064170431688705\tYou\u0027re so hot. Why are you a douche?\t2013-09-01 07:00:22.0\t2013\t9\t1\t7\t252722754\tBrookeRemchuk\t\t\t\t\t0\tPOINT (-77.60927285 42.27158381)\tPOLYGON ((-77.618065 42.259119, -77.590035 42.259119, -77.590035 42.281698, -77.618065 42.281698, -77.618065 42.259119))\n374064183014195200\tfly.lol (at Kokapi Beach) [pic] — https://t.co/ncJJ6iWe39\t2013-09-01 07:00:25.0\t2013\t9\t1\t7\t471775745\tShfrNingrum\t\t\t\thttps://path.com/p/3aeDEt\t0\tPOINT (122.44608 -3.76674)\tPOLYGON ((122.0816366 -3.8666935000000002, 122.488128 -3.8666935000000002, 122.488128 -3.2561221, 122.0816366 -3.2561221, 122.0816366 -3.8666935000000002))\n374064195589132288\t@Sean1MH what! My house is in Fargo! Come\t2013-09-01 07:00:28.0\t2013\t9\t1\t7\t329769998\ttkdubbs\t\tSean1MH\t38485435\t\t0\tPOINT (-96.78591252 46.85870177)\tPOLYGON ((-96.883189 46.787971, -96.753257 46.787971, -96.753257 46.942, -96.883189 46.942, -96.883189 46.787971))\n374064216568631296\tA campaign to boycott the installation of #Israeli-made #water meters has been launched in Lewes now http://t.co/dxZoCJqFHG\t2013-09-01 07:00:33.0\t2013\t9\t1\t7\t265418806\tThirsty4Justice\tIsraeli;water\t\t\thttp://bit.ly/15pP2Ko\t0\t\tPOLYGON ((-0.21607010000000001 51.483717999999996, -0.10997799999999999 51.483717999999996, -0.10997799999999999 51.5397916, -0.21607010000000001 51.5397916, -0.21607010000000001 51.483717999999996))\n374064224953053184\tKillstreak of 12 don\u0027t even deserve it\t2013-09-01 07:00:35.0\t2013\t9\t1\t7\t346952304\tNedaChuon\t\t\t\t\t0\tPOINT (-118.18284996 33.85294835)\tPOLYGON ((-118.248966 33.697272, -118.063162 33.697272, -118.063162 33.885459, -118.248966 33.885459, -118.248966 33.697272))\n374064224928272384\t- DJDRAMA AINT SHIT\t2013-09-01 07:00:35.0\t2013\t9\t1\t7\t366984422\tAliyahhSimonee_\t\t\t\t\t0\tPOINT (-73.37216922 40.75302428)\tPOLYGON ((-73.402955 40.727637, -73.344331 40.727637, -73.344331 40.765075, -73.402955 40.765075, -73.402955 40.727637))\n374064229159940096\tThis is the headache that never ends 😱\t2013-09-01 07:00:36.0\t2013\t9\t1\t7\t389844634\tmichaela_bruce\t\t\t\t\t0\tPOINT (-119.58907097 49.46607771)\tPOLYGON ((-121.098011 48.999418999999996, -119.17567 48.999418999999996, -119.17567 49.912209999999995, -121.098011 49.912209999999995, -121.098011 48.999418999999996))\n374064237527592960\tAIO Robotics\u0027 cool teaser for the up-coming \"All-in-one\" machine ZEUS http://t.co/lUwzSroTzG #3dprinting #fabbing\t2013-09-01 07:00:38.0\t2013\t9\t1\t7\t83793339\tfabbing\t3dprinting;fabbing\t\t\thttp://dlvr.it/3trz7j\t0\tPOINT (6.94623593 50.95794195)\tPOLYGON ((6.772567 50.830287, 7.162373 50.830287, 7.162373 51.0849471, 6.772567 51.0849471, 6.772567 50.830287))\n374064241742843904\tI always fall for the wrong type.\t2013-09-01 07:00:39.0\t2013\t9\t1\t7\t223900287\tMelissa_890\t\t\t\t\t0\tPOINT (-115.21210793 36.14652823)\tPOLYGON ((-115.414628 36.129554, -115.062066 36.129554, -115.062066 36.336243, -115.414628 36.336243, -115.414628 36.129554))\n374064245920370689\t#indojassfest2013 (with Wendy and astri) [pic] — https://t.co/mAxEbR7fSu\t2013-09-01 07:00:40.0\t2013\t9\t1\t7\t462227667\tBahri507\tindojassfest2013\t\t\thttps://path.com/p/2ul7WC\t0\tPOINT (106.79602 -6.15401)\tPOLYGON ((106.772307 -6.185643, 106.811502 -6.185643, 106.811502 -6.138046, 106.772307 -6.138046, 106.772307 -6.185643))\n374064283673296896\t#clon #doshermosas #lassie http://t.co/Iji9uHyfDX\t2013-09-01 07:00:49.0\t2013\t9\t1\t7\t31506274\tIlseDaniela\tclon;doshermosas;lassie\t\t\t\t0\tPOINT (-110.94091872 27.91872309)\tPOLYGON ((-111.3916961 27.1338123, -110.052958 27.1338123, -110.052958 28.6335869, -111.3916961 28.6335869, -111.3916961 27.1338123))\n374064300446720000\t@warlecilson no it\u0027s part time :)\t2013-09-01 07:00:53.0\t2013\t9\t1\t7\t484072787\tCraaigForrest\t\twarlecilson\t399512009\t\t0\tPOINT (-3.15611034 55.88200109)\tPOLYGON ((-3.369026 55.710347, -2.846235 55.710347, -2.846235 55.932083999999996, -3.369026 55.932083999999996, -3.369026 55.710347))\n374064317215166464\t1st of the month😌\t2013-09-01 07:00:57.0\t2013\t9\t1\t7\t532694389\tIzzy__11\t\t\t\t\t0\tPOINT (-118.03032463 34.56303091)\tPOLYGON ((-118.287107 34.509813, -117.915747 34.509813, -117.915747 34.661043, -118.287107 34.661043, -118.287107 34.509813))\n374064581465079808\tDay trip to Exeter to collect my keys, for my new house. Definitely an adult now 👌🙈🔑🏠\t2013-09-01 07:02:00.0\t2013\t9\t1\t7\t456852402\tnikkilowe8\t\t\t\t\t0\tPOINT (-0.55687339 51.66786895)\tPOLYGON ((-0.7621629999999999 51.589389, -0.5052909999999999 51.589389, -0.5052909999999999 51.768512, -0.7621629999999999 51.768512, -0.7621629999999999 51.589389))\n374064615002767360\t@lexstomania you forgot with heels on\t2013-09-01 07:02:08.0\t2013\t9\t1\t7\t1055881351\tgggggabz\t\tlexstomania\t424346387\t\t0\tPOINT (-79.83588683 34.15942757)\tPOLYGON ((-83.353928 32.033454, -78.499301 32.033454, -78.499301 35.21554, -83.353928 35.21554, -83.353928 32.033454))\n374064656974770176\tI can be anything I want to be with hard work and dedication. The world is mine to conquer. 🌍😊 #NightTimeInspiration\t2013-09-01 07:02:18.0\t2013\t9\t1\t7\t428017410\talyshabush4\tNightTimeInspiration\t\t\t\t0\tPOINT (-121.87813447 37.33546207)\tPOLYGON ((-122.045672 37.124503, -121.589153 37.124503, -121.589153 37.469168, -122.045672 37.469168, -122.045672 37.124503))\n374064665363763200\tThis sober thing was not worth it\t2013-09-01 07:02:20.0\t2013\t9\t1\t7\t860552288\t___Edith___\t\t\t\t\t0\tPOINT (-93.16636403 44.85841948)\tPOLYGON ((-93.228115 44.775311, -93.104812 44.775311, -93.104812 44.86306, -93.228115 44.86306, -93.228115 44.775311))\n374064677942493184\t@wordtoPINK u didnt answer my text\t2013-09-01 07:02:23.0\t2013\t9\t1\t7\t54084469\tLadiies_luv_Nay\t\twordtoPINK\t59961322\t\t0\tPOINT (-74.02850079 40.61584333)\tPOLYGON ((-74.25909 40.477399, -73.700272 40.477399, -73.700272 40.917577, -74.25909 40.917577, -74.25909 40.477399))\n374064698884243456\tGood Job Percy!!! (at Paragon XXI) [pic] — https://t.co/VyGMgEAFAC\t2013-09-01 07:02:28.0\t2013\t9\t1\t7\t235468651\tyohanajeng\t\t\t\thttps://path.com/p/419nOq\t0\tPOINT (110.41533 -6.9795)\tPOLYGON ((110.406629 -6.988064, 110.430289 -6.988064, 110.430289 -6.968350999999999, 110.406629 -6.968350999999999, 110.406629 -6.988064))\n374064711475527681\tTwitters deaddddd\t2013-09-01 07:02:31.0\t2013\t9\t1\t7\t528169740\tDizzymayo\t\t\t\t\t0\tPOINT (-122.30207862 47.16869802)\tPOLYGON ((-122.327487 47.147458, -122.234836 47.147458, -122.234836 47.218178, -122.327487 47.218178, -122.327487 47.147458))\n374064736632983552\t@BrentPiazza so where you from?\t2013-09-01 07:02:37.0\t2013\t9\t1\t7\t432650454\tGuitarFingers_\t\tBrentPiazza\t827881117\t\t0\tPOINT (-87.57124364 41.72034502)\tPOLYGON ((-87.940101 41.643919, -87.523661 41.643919, -87.523661 42.023135, -87.940101 42.023135, -87.940101 41.643919))\n374064745047142400\tFound the quietest Starbucks ever.\nIt\u0027s phenomenal.\t2013-09-01 07:02:39.0\t2013\t9\t1\t7\t56425589\tTheBlue_Print\t\t\t\t\t0\tPOINT (-0.14106786 51.49314829)\tPOLYGON ((-0.21607010000000001 51.483717999999996, -0.10997799999999999 51.483717999999996, -0.10997799999999999 51.5397916, -0.21607010000000001 51.5397916, -0.21607010000000001 51.483717999999996))\n374064765997289472\tGuys with hats ♥♥♥♥♥\t2013-09-01 07:02:44.0\t2013\t9\t1\t7\t948362736\tMchavez_1233\t\t\t\t\t0\tPOINT (-112.2706917 33.4679522)\tPOLYGON ((-112.324056 33.29026, -111.926046 33.29026, -111.926046 33.89264, -112.324056 33.89264, -112.324056 33.29026))\n374064778605367296\t😂 Kiddinggggg.\t2013-09-01 07:02:47.0\t2013\t9\t1\t7\t577775848\t_karinarrrr\t\t\t\t\t0\tPOINT (-95.23200944 29.73960048)\tPOLYGON ((-95.254599 29.725823, -95.210911 29.725823, -95.210911 29.759736, -95.254599 29.759736, -95.254599 29.725823))\n374064786985590785\tAnd on top of that I\u0027m sick.\t2013-09-01 07:02:49.0\t2013\t9\t1\t7\t46598021\txmikex801\t\t\t\t\t0\tPOINT (-111.96403555 40.67777997)\tPOLYGON ((-112.096366 40.630863, -111.920344 40.630863, -111.920344 40.72683, -112.096366 40.72683, -112.096366 40.630863))\n374064786969231360\tTatum had a fun night\t2013-09-01 07:02:49.0\t2013\t9\t1\t7\t50865875\taronmcree\t\t\t\t\t0\tPOINT (-86.8670607 33.105641)\tPOLYGON ((-86.899466 33.08411, -86.817713 33.08411, -86.817713 33.148715, -86.899466 33.148715, -86.899466 33.08411))\n374064820556800000\tMarry You (Made Famous By Bruno Mars) by Off the Record — https://t.co/RfrwL2TsQ5\t2013-09-01 07:02:57.0\t2013\t9\t1\t7\t236391148\trayukadhe\t\t\t\thttps://path.com/p/Xg3wC\t0\tPOINT (106.98415 -6.23171)\tPOLYGON ((106.956558 -6.26807, 107.019722 -6.26807, 107.019722 -6.203595, 106.956558 -6.203595, 106.956558 -6.26807))\n374064828933230593\t@drewbeatsuk nah was on the chills last night hustler Hudlin x\t2013-09-01 07:02:59.0\t2013\t9\t1\t7\t544576648\trobynecox\t\tdrewbeatsuk\t1111145935\t\t0\tPOINT (-1.5986973 52.2887924)\tPOLYGON ((-1.780179 52.213691999999995, -1.406089 52.213691999999995, -1.406089 52.389295, -1.780179 52.389295, -1.780179 52.213691999999995))\n"
+          },
+          {
+            "type": "TEXT",
+            "data": ""
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1561658519672_1100707846",
+      "id": "20190627-180159_1793468865",
+      "dateCreated": "2019-06-27 18:01:59.680",
+      "dateStarted": "2019-06-29 01:01:04.489",
+      "dateFinished": "2019-06-29 01:01:05.075",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1928,14 +1912,14 @@
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1561658519672_1100707846",
-      "id": "20190627-180159_1793468865",
-      "dateCreated": "2019-06-27 18:01:59.680",
+      "jobName": "paragraph_1561770064327_685843571",
+      "id": "20190629-010104_276758408",
+      "dateCreated": "2019-06-29 01:01:04.327",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "zeppelin/tweets",
+  "name": "zeppelin/tweets-exploratory-analysis",
   "id": "2EH73525T",
   "noteParams": {},
   "noteForms": {},
