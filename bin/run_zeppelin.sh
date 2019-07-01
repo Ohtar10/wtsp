@@ -6,4 +6,5 @@ project_dir=$(dirname ${current_dir})
 docker container run -it --rm -v ${project_dir}/notebooks/zeppelin/:/zeppelin/notebook \
 -v ${project_dir}/datasets/:/zeppelin/datasets \
 -v ${project_dir}/resources/zeppelin/conf/interpreter.json:/zeppelin/conf/interpreter.json \
+-e SPARK_WORKER_MEMORY=4G \
 -p 8080:8080 -p 4040:4040 apache/zeppelin:0.8.1

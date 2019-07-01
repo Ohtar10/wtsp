@@ -1231,12 +1231,12 @@
         },
         "spark.cores.max": {
           "name": "spark.cores.max",
-          "value": "",
+          "value": "4",
           "type": "number"
         },
         "spark.executor.memory": {
           "name": "spark.executor.memory",
-          "value": "",
+          "value": "6g",
           "type": "string"
         },
         "zeppelin.spark.sql.interpolation": {
@@ -1244,10 +1244,30 @@
           "value": false,
           "type": "checkbox"
         },
+        "spark.driver.memory": {
+          "name": "spark.driver.memory",
+          "value": "2g",
+          "type": "textarea"
+        },
+        "spark.driver.cores": {
+          "name": "spark.driver.cores",
+          "value": "1",
+          "type": "textarea"
+        },
         "spark.app.name": {
           "name": "spark.app.name",
           "value": "Zeppelin",
           "type": "string"
+        },
+        "spark.memory.storageFraction": {
+          "name": "spark.memory.storageFraction",
+          "value": "0.8",
+          "type": "textarea"
+        },
+        "spark.executor.cores": {
+          "name": "spark.executor.cores",
+          "value": "2",
+          "type": "textarea"
         },
         "zeppelin.spark.maxResult": {
           "name": "zeppelin.spark.maxResult",
@@ -1289,6 +1309,16 @@
           "value": true,
           "type": "checkbox"
         },
+        "spark.executor.extraJavaOptions ": {
+          "name": "spark.executor.extraJavaOptions ",
+          "value": "-XX:+UseG1GC -XX:InitiatingHeapOccupancyPercent\u003d35 -XX:ConcGCThreads\u003d4",
+          "type": "textarea"
+        },
+        "spark.scheduler.mode": {
+          "name": "spark.scheduler.mode",
+          "value": "FAIR",
+          "type": "textarea"
+        },
         "zeppelin.spark.uiWebUrl": {
           "name": "zeppelin.spark.uiWebUrl",
           "value": "",
@@ -1297,6 +1327,11 @@
         "zeppelin.R.render.options": {
           "name": "zeppelin.R.render.options",
           "value": "out.format \u003d \u0027html\u0027, comment \u003d NA, echo \u003d FALSE, results \u003d \u0027asis\u0027, message \u003d F, warning \u003d F, fig.retina \u003d 2",
+          "type": "textarea"
+        },
+        "spark.memory.fraction": {
+          "name": "spark.memory.fraction",
+          "value": "0.8",
           "type": "textarea"
         }
       },
