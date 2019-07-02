@@ -44,7 +44,7 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:55:40.419",
+      "dateUpdated": "2019-07-02 21:13:54.806",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561998117536_1272361701",
       "id": "20190701-162157_1845555219",
       "dateCreated": "2019-07-01 16:21:57.536",
-      "dateStarted": "2019-07-01 21:55:40.529",
-      "dateFinished": "2019-07-01 21:55:50.639",
+      "dateStarted": "2019-07-02 21:13:55.224",
+      "dateFinished": "2019-07-02 21:14:09.671",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/twitter-spam\"\nval training \u003d tweetsPath + \"/train.csv\"\nval testing \u003d tweetsPath + \"/test.csv\"",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:58:05.653",
+      "dateUpdated": "2019-07-02 21:14:12.456",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -114,8 +114,8 @@
       "jobName": "paragraph_1561998167851_-893590518",
       "id": "20190701-162247_1075318024",
       "dateCreated": "2019-07-01 16:22:47.852",
-      "dateStarted": "2019-07-01 21:58:05.712",
-      "dateFinished": "2019-07-01 21:58:05.902",
+      "dateStarted": "2019-07-02 21:14:12.676",
+      "dateFinished": "2019-07-02 21:14:13.022",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -163,7 +163,7 @@
     {
       "text": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  .add(\"Type\", StringType, false)\n  \nval trainingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(training)\n    .select($\"Id\", \n        $\"Tweet\", \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"),\n        $\"Type\").where(\"Type is not null\")\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:58:13.689",
+      "dateUpdated": "2019-07-02 21:14:48.729",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -373,15 +373,15 @@
       "jobName": "paragraph_1561998307565_-1681631936",
       "id": "20190701-162507_992250565",
       "dateCreated": "2019-07-01 16:25:07.565",
-      "dateStarted": "2019-07-01 21:58:07.696",
-      "dateFinished": "2019-07-01 21:58:12.012",
+      "dateStarted": "2019-07-02 21:14:48.855",
+      "dateFinished": "2019-07-02 21:14:53.740",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "trainingDF.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:58:18.826",
+      "dateUpdated": "2019-07-02 21:15:02.327",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -412,8 +412,8 @@
       "jobName": "paragraph_1562005124311_1055963192",
       "id": "20190701-181844_1465805024",
       "dateCreated": "2019-07-01 18:18:44.316",
-      "dateStarted": "2019-07-01 21:58:18.867",
-      "dateFinished": "2019-07-01 21:58:19.099",
+      "dateStarted": "2019-07-02 21:15:02.417",
+      "dateFinished": "2019-07-02 21:15:02.643",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -461,7 +461,7 @@
     {
       "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"Type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"Tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval pipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval transformed \u003d pipeline.fit(trainingDF).transform(trainingDF)\nz.show(transformed)\n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:59:10.030",
+      "dateUpdated": "2019-07-02 21:15:11.766",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -664,15 +664,15 @@
       "jobName": "paragraph_1561998364882_-1650240881",
       "id": "20190701-162604_51293922",
       "dateCreated": "2019-07-01 16:26:04.884",
-      "dateStarted": "2019-07-01 21:58:51.763",
-      "dateFinished": "2019-07-01 21:59:08.434",
+      "dateStarted": "2019-07-02 21:15:11.844",
+      "dateFinished": "2019-07-02 21:15:30.710",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(transformed)\nprintln(s\"Area Under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:14:34.521",
+      "dateUpdated": "2019-07-02 21:15:43.315",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -695,7 +695,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_12169ea6167c\nroc: Double \u003d 0.9898635053827866\n"
+            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_0b81641ac0be\nroc: Double \u003d 0.9898635053827866\n"
           }
         ]
       },
@@ -706,9 +706,9 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d117",
-            "http://172.17.0.2:4040/jobs/job?id\u003d118",
-            "http://172.17.0.2:4040/jobs/job?id\u003d119"
+            "http://172.17.0.2:4040/jobs/job?id\u003d114",
+            "http://172.17.0.2:4040/jobs/job?id\u003d115",
+            "http://172.17.0.2:4040/jobs/job?id\u003d116"
           ],
           "interpreterSettingId": "spark"
         }
@@ -717,8 +717,8 @@
       "jobName": "paragraph_1562009777622_-1671370548",
       "id": "20190701-193617_28467861",
       "dateCreated": "2019-07-01 19:36:17.625",
-      "dateStarted": "2019-07-01 22:14:34.567",
-      "dateFinished": "2019-07-01 22:14:35.648",
+      "dateStarted": "2019-07-02 21:15:43.421",
+      "dateFinished": "2019-07-02 21:15:45.528",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -766,7 +766,7 @@
     {
       "text": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\n\nval paramGrid \u003d new ParamGridBuilder()\n  .addGrid(hashingTF.numFeatures, Array(10, 100, 1000))\n  .addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  .addGrid(lr.maxIter, Array(10, 50, 100))\n  .build()\n  \nval cv \u003d new CrossValidator()\n  .setEstimator(pipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(paramGrid)\n  .setNumFolds(3)\n  //.setParallelism(2) In spark 2.4.3\n  \n val cvModel \u003d cv.fit(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:28:25.890",
+      "dateUpdated": "2019-07-02 21:16:55.040",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -789,7 +789,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_662a9b373ae1-maxIter: 10,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662a9b373ae1-regParam: 0.1\n}, {\n\tlogreg_662a9b373ae1-maxIter: 50,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662a9b373ae1-regParam: 0.1\n}, {\n\tlogreg_662a9b373ae1-maxIter: 100,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662a9b373ae1-regParam: 0.1\n}, {\n\tlogreg_662a9b373ae1-maxIter: 10,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662a9b373ae1-regParam: 0.01\n}, {\n\tlogreg_662a9b373ae1-maxIter: 50,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662a9b373ae1-regParam: 0.01\n}, {\n\tlogreg_662a9b373ae1-maxIter: 100,\n\thashingTF_8ea5bf987d3d-numFeatures: 10,\n\tlogreg_662..."
+            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.1\n}, {\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.01\n}, {\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.001\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.1\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.01\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9..."
           }
         ]
       },
@@ -800,6 +800,9 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
+            "http://172.17.0.2:4040/jobs/job?id\u003d117",
+            "http://172.17.0.2:4040/jobs/job?id\u003d118",
+            "http://172.17.0.2:4040/jobs/job?id\u003d119",
             "http://172.17.0.2:4040/jobs/job?id\u003d120",
             "http://172.17.0.2:4040/jobs/job?id\u003d121",
             "http://172.17.0.2:4040/jobs/job?id\u003d122",
@@ -3770,10 +3773,7 @@
             "http://172.17.0.2:4040/jobs/job?id\u003d3087",
             "http://172.17.0.2:4040/jobs/job?id\u003d3088",
             "http://172.17.0.2:4040/jobs/job?id\u003d3089",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3090",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3091",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3092",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3093"
+            "http://172.17.0.2:4040/jobs/job?id\u003d3090"
           ],
           "interpreterSettingId": "spark"
         }
@@ -3782,15 +3782,15 @@
       "jobName": "paragraph_1562019384714_327314747",
       "id": "20190701-221624_1043106137",
       "dateCreated": "2019-07-01 22:16:24.715",
-      "dateStarted": "2019-07-01 22:28:25.930",
-      "dateFinished": "2019-07-01 22:30:07.186",
+      "dateStarted": "2019-07-02 21:16:55.129",
+      "dateFinished": "2019-07-02 21:19:11.057",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val predictions \u003d cvModel.transform(trainingDF)\nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:33:43.719",
+      "dateUpdated": "2019-07-02 21:45:28.005",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3824,9 +3824,9 @@
           "tooltip": "View in Spark web UI",
           "group": "spark",
           "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3094",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3095",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3096"
+            "http://172.17.0.2:4040/jobs/job?id\u003d3091",
+            "http://172.17.0.2:4040/jobs/job?id\u003d3092",
+            "http://172.17.0.2:4040/jobs/job?id\u003d3093"
           ],
           "interpreterSettingId": "spark"
         }
@@ -3835,8 +3835,8 @@
       "jobName": "paragraph_1562019981104_-924602663",
       "id": "20190701-222621_761565090",
       "dateCreated": "2019-07-01 22:26:21.104",
-      "dateStarted": "2019-07-01 22:33:43.764",
-      "dateFinished": "2019-07-01 22:33:44.645",
+      "dateStarted": "2019-07-02 21:45:28.049",
+      "dateFinished": "2019-07-02 21:45:29.449",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -3950,18 +3950,6 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3097"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1562020513135_-2083533107",
       "id": "20190701-223513_628683752",
@@ -4040,18 +4028,6 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3101"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1562020750193_1235581531",
       "id": "20190701-223910_1873246941",
@@ -4091,18 +4067,6 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3128"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1562020937262_283917060",
       "id": "20190701-224217_1908767990",
@@ -4137,19 +4101,6 @@
         "code": "SUCCESS",
         "msg": []
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3134",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3135"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
       "apps": [],
       "jobName": "paragraph_1562021190753_-1648635580",
       "id": "20190701-224630_1129659402",
@@ -4183,35 +4134,6 @@
       "results": {
         "code": "SUCCESS",
         "msg": []
-      },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3136",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3137",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3138",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3139",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3140",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3141",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3142",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3143",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3144",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3145",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3146",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3147",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3148",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3149",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3150",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3151",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3152",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3153"
-          ],
-          "interpreterSettingId": "spark"
-        }
       },
       "apps": [],
       "jobName": "paragraph_1562025026906_-1933521662",

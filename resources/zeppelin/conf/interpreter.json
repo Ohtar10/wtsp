@@ -1236,7 +1236,7 @@
         },
         "spark.executor.memory": {
           "name": "spark.executor.memory",
-          "value": "6g",
+          "value": "2g",
           "type": "string"
         },
         "zeppelin.spark.sql.interpolation": {
@@ -1246,7 +1246,7 @@
         },
         "spark.driver.memory": {
           "name": "spark.driver.memory",
-          "value": "2g",
+          "value": "1g",
           "type": "textarea"
         },
         "spark.driver.cores": {
@@ -1335,7 +1335,7 @@
           "type": "textarea"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "spark",
