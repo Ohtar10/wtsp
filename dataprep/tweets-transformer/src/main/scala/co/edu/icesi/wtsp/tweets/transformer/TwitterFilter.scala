@@ -31,7 +31,6 @@ class TwitterFilter(spark: SparkSession, input: String, output: String){
   }
 
   private def sinkDataFrame(df: DataFrame): Unit = {
-    df.na.fill
     df.write.mode("append")
       .partitionBy("year", "month", "day", "hour")
       .parquet(output)

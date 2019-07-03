@@ -6,7 +6,7 @@ import co.edu.icesi.wtsp.util.UDF
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.scalatest.FunSuite
 
-class TwitterFilteringTest extends FunSuite with DataFrameSuiteBase{
+class TwitterFilteringSpec extends FunSuite with DataFrameSuiteBase{
 
   private val additionalFields = Set("created_timestamp", "year", "month", "day", "hour")
 

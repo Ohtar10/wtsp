@@ -44,7 +44,7 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:13:54.806",
+      "dateUpdated": "2019-07-03 21:15:04.401",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561998117536_1272361701",
       "id": "20190701-162157_1845555219",
       "dateCreated": "2019-07-01 16:21:57.536",
-      "dateStarted": "2019-07-02 21:13:55.224",
-      "dateFinished": "2019-07-02 21:14:09.671",
+      "dateStarted": "2019-07-03 21:15:04.442",
+      "dateFinished": "2019-07-03 21:15:17.570",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/twitter-spam\"\nval training \u003d tweetsPath + \"/train.csv\"\nval testing \u003d tweetsPath + \"/test.csv\"",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:14:12.456",
+      "dateUpdated": "2019-07-03 21:15:19.674",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -114,8 +114,8 @@
       "jobName": "paragraph_1561998167851_-893590518",
       "id": "20190701-162247_1075318024",
       "dateCreated": "2019-07-01 16:22:47.852",
-      "dateStarted": "2019-07-02 21:14:12.676",
-      "dateFinished": "2019-07-02 21:14:13.022",
+      "dateStarted": "2019-07-03 21:15:19.713",
+      "dateFinished": "2019-07-03 21:15:19.948",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -163,7 +163,7 @@
     {
       "text": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  .add(\"Type\", StringType, false)\n  \nval trainingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(training)\n    .select($\"Id\", \n        $\"Tweet\", \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"),\n        $\"Type\").where(\"Type is not null\")\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:14:48.729",
+      "dateUpdated": "2019-07-03 21:15:22.863",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -373,15 +373,15 @@
       "jobName": "paragraph_1561998307565_-1681631936",
       "id": "20190701-162507_992250565",
       "dateCreated": "2019-07-01 16:25:07.565",
-      "dateStarted": "2019-07-02 21:14:48.855",
-      "dateFinished": "2019-07-02 21:14:53.740",
+      "dateStarted": "2019-07-03 21:15:22.923",
+      "dateFinished": "2019-07-03 21:15:28.876",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "trainingDF.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:15:02.327",
+      "dateUpdated": "2019-07-03 21:15:32.888",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -412,8 +412,8 @@
       "jobName": "paragraph_1562005124311_1055963192",
       "id": "20190701-181844_1465805024",
       "dateCreated": "2019-07-01 18:18:44.316",
-      "dateStarted": "2019-07-02 21:15:02.417",
-      "dateFinished": "2019-07-02 21:15:02.643",
+      "dateStarted": "2019-07-03 21:15:32.924",
+      "dateFinished": "2019-07-03 21:15:33.137",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -459,9 +459,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"Type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"Tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval pipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval transformed \u003d pipeline.fit(trainingDF).transform(trainingDF)\nz.show(transformed)\n    ",
+      "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"Type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"Tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval pipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval predictions \u003d pipeline.fit(trainingDF).transform(trainingDF)\nz.show(predictions)\n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:15:11.766",
+      "dateUpdated": "2019-07-03 21:15:37.567",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -664,15 +664,15 @@
       "jobName": "paragraph_1561998364882_-1650240881",
       "id": "20190701-162604_51293922",
       "dateCreated": "2019-07-01 16:26:04.884",
-      "dateStarted": "2019-07-02 21:15:11.844",
-      "dateFinished": "2019-07-02 21:15:30.710",
+      "dateStarted": "2019-07-03 21:15:37.630",
+      "dateFinished": "2019-07-03 21:15:56.638",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(transformed)\nprintln(s\"Area Under ROC ${roc}\")",
+      "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area Under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:15:43.315",
+      "dateUpdated": "2019-07-03 21:16:00.702",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -695,7 +695,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_0b81641ac0be\nroc: Double \u003d 0.9898635053827866\n"
+            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_2a715b358ecb\nroc: Double \u003d 0.9898635053827866\n"
           }
         ]
       },
@@ -717,8 +717,8 @@
       "jobName": "paragraph_1562009777622_-1671370548",
       "id": "20190701-193617_28467861",
       "dateCreated": "2019-07-01 19:36:17.625",
-      "dateStarted": "2019-07-02 21:15:43.421",
-      "dateFinished": "2019-07-02 21:15:45.528",
+      "dateStarted": "2019-07-03 21:16:00.745",
+      "dateFinished": "2019-07-03 21:16:02.603",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -766,7 +766,7 @@
     {
       "text": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\n\nval paramGrid \u003d new ParamGridBuilder()\n  .addGrid(hashingTF.numFeatures, Array(10, 100, 1000))\n  .addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  .addGrid(lr.maxIter, Array(10, 50, 100))\n  .build()\n  \nval cv \u003d new CrossValidator()\n  .setEstimator(pipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(paramGrid)\n  .setNumFolds(3)\n  //.setParallelism(2) In spark 2.4.3\n  \n val cvModel \u003d cv.fit(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:16:55.040",
+      "dateUpdated": "2019-07-03 21:16:15.276",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -789,7 +789,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.1\n}, {\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.01\n}, {\n\tlogreg_3d9c89088196-maxIter: 10,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.001\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.1\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9c89088196-regParam: 0.01\n}, {\n\tlogreg_3d9c89088196-maxIter: 50,\n\thashingTF_f95cd29d51a8-numFeatures: 10,\n\tlogreg_3d9..."
+            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_7f90022d64e4-maxIter: 10,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 50,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 100,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 10,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.01\n}, {\n\tlogreg_7f90022d64e4-maxIter: 50,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.01\n}, {\n\tlogreg_7f90022d64e4-maxIter: 100,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f9..."
           }
         ]
       },
@@ -3673,107 +3673,7 @@
             "http://172.17.0.2:4040/jobs/job?id\u003d2987",
             "http://172.17.0.2:4040/jobs/job?id\u003d2988",
             "http://172.17.0.2:4040/jobs/job?id\u003d2989",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2990",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2991",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2992",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2993",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2994",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2995",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2996",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2997",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2998",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2999",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3000",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3001",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3002",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3003",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3004",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3005",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3006",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3007",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3008",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3009",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3010",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3011",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3012",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3013",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3014",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3015",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3016",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3017",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3018",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3019",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3020",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3021",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3022",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3023",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3024",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3025",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3026",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3027",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3028",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3029",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3030",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3031",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3032",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3033",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3034",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3035",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3036",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3037",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3038",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3039",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3040",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3041",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3042",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3043",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3044",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3045",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3046",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3047",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3048",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3049",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3050",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3051",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3052",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3053",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3054",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3055",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3056",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3057",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3058",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3059",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3060",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3061",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3062",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3063",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3064",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3065",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3066",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3067",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3068",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3069",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3070",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3071",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3072",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3073",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3074",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3075",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3076",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3077",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3078",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3079",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3080",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3081",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3082",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3083",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3084",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3085",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3086",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3087",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3088",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3089",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3090"
+            "http://172.17.0.2:4040/jobs/job?id\u003d2990"
           ],
           "interpreterSettingId": "spark"
         }
@@ -3782,8 +3682,8 @@
       "jobName": "paragraph_1562019384714_327314747",
       "id": "20190701-221624_1043106137",
       "dateCreated": "2019-07-01 22:16:24.715",
-      "dateStarted": "2019-07-02 21:16:55.129",
-      "dateFinished": "2019-07-02 21:19:11.057",
+      "dateStarted": "2019-07-03 21:16:15.322",
+      "dateFinished": "2019-07-03 21:18:37.779",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -3817,20 +3717,7 @@
           }
         ]
       },
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            "http://172.17.0.2:4040/jobs/job?id\u003d3091",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3092",
-            "http://172.17.0.2:4040/jobs/job?id\u003d3093"
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "apps": [],
       "jobName": "paragraph_1562019981104_-924602663",
       "id": "20190701-222621_761565090",
