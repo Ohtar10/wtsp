@@ -8,7 +8,7 @@ lazy val root = (project in file(".")).
       scalaVersion := "2.11.8"
     )),
     name := "tweets-transformer",
-    version := "0.0.1",
+    version := "0.2.0",
 
     sparkVersion := "2.4.3",
     sparkComponents := Seq(),
@@ -25,10 +25,12 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       "org.apache.spark" %% "spark-streaming" % "2.4.3" % "provided",
       "org.apache.spark" %% "spark-sql" % "2.4.3" % "provided",
+      "org.apache.spark" %% "spark-mllib" % "2.4.3" % "provided",
 
       "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
       "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test",
+      "org.mockito" %% "mockito-scala" % "0.4.5" % "test",
 
       "com.esri.geometry" % "esri-geometry-api" % "2.2.2"
     ),
