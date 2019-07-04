@@ -543,7 +543,7 @@
       "properties": {
         "livy.spark.executor.instances": {
           "name": "livy.spark.executor.instances",
-          "value": "",
+          "value": "3",
           "type": "number"
         },
         "livy.spark.dynamicAllocation.cachedExecutorIdleTimeout": {
@@ -558,7 +558,7 @@
         },
         "zeppelin.livy.url": {
           "name": "zeppelin.livy.url",
-          "value": "http://localhost:8998",
+          "value": "http://ec2-13-59-180-241.us-east-2.compute.amazonaws.com:8998",
           "type": "url"
         },
         "zeppelin.livy.pull_status.interval.millis": {
@@ -568,7 +568,7 @@
         },
         "livy.spark.executor.memory": {
           "name": "livy.spark.executor.memory",
-          "value": "",
+          "value": "8g",
           "type": "string"
         },
         "zeppelin.livy.restart_dead_session": {
@@ -578,7 +578,7 @@
         },
         "livy.spark.dynamicAllocation.enabled": {
           "name": "livy.spark.dynamicAllocation.enabled",
-          "value": false,
+          "value": true,
           "type": "checkbox"
         },
         "zeppelin.livy.maxLogLines": {
@@ -593,7 +593,7 @@
         },
         "livy.spark.executor.cores": {
           "name": "livy.spark.executor.cores",
-          "value": "",
+          "value": "6",
           "type": "number"
         },
         "zeppelin.livy.session.create_timeout": {
@@ -608,7 +608,7 @@
         },
         "livy.spark.driver.cores": {
           "name": "livy.spark.driver.cores",
-          "value": "",
+          "value": "2",
           "type": "number"
         },
         "livy.spark.jars.packages": {
@@ -623,7 +623,7 @@
         },
         "livy.spark.driver.memory": {
           "name": "livy.spark.driver.memory",
-          "value": "",
+          "value": "4g",
           "type": "string"
         },
         "zeppelin.livy.displayAppInfo": {
@@ -1231,7 +1231,7 @@
         },
         "spark.cores.max": {
           "name": "spark.cores.max",
-          "value": "4",
+          "value": "2",
           "type": "number"
         },
         "spark.executor.memory": {
@@ -1246,7 +1246,7 @@
         },
         "spark.driver.memory": {
           "name": "spark.driver.memory",
-          "value": "1g",
+          "value": "4g",
           "type": "textarea"
         },
         "spark.driver.cores": {
@@ -1266,7 +1266,7 @@
         },
         "spark.executor.cores": {
           "name": "spark.executor.cores",
-          "value": "2",
+          "value": "1",
           "type": "textarea"
         },
         "zeppelin.spark.maxResult": {
@@ -1335,7 +1335,7 @@
           "type": "textarea"
         }
       },
-      "status": "DOWNLOADING_DEPENDENCIES",
+      "status": "READY",
       "interpreterGroup": [
         {
           "name": "spark",
@@ -1649,6 +1649,29 @@
     }
   },
   "interpreterBindings": {
+    "2EEPNXQ7R": [
+      "livy",
+      "spark",
+      "md",
+      "angular",
+      "sh",
+      "alluxio",
+      "file",
+      "flink",
+      "python",
+      "ignite",
+      "lens",
+      "cassandra",
+      "kylin",
+      "elasticsearch",
+      "jdbc",
+      "hbase",
+      "bigquery",
+      "pig",
+      "groovy",
+      "neo4j",
+      "sap"
+    ],
     "2EF9P1SN2": [
       "spark",
       "md",

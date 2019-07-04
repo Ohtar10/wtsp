@@ -1,0 +1,1237 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Tweets Spam-Ham Classifier\n## Author: Luis Eduardo Ferro Diez \u003ca href\u003d\u0027mailto:luis.ferro1@correo.icesi.edu.co\u0027\u003eluis.ferro1@correo.icesi.edu.co\u003c/a\u003e\n\nThis notebook contains the steps taken to train a model to classify spam-ham tweets in Scala-Spark for later usage in the Where to Sell Products project.\n\n## Dataset\n* https://www.kaggle.com/c/twitter-spam/data\n\n## Resources\n* https://www.kaggle.com/c/twitter-spam/overview\n* https://github.com/ageron/handson-ml/blob/master/03_classification.ipynb",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.485",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eTweets Spam-Ham Classifier\u003c/h1\u003e\n\u003ch2\u003eAuthor: Luis Eduardo Ferro Diez \u003ca href\u003d\u0027mailto:luis.ferro1@correo.icesi.edu.co\u0027\u003e\u003ca href\u003d\"mailto:\u0026#108;u\u0026#105;\u0026#x73;\u0026#x2e;\u0026#x66;\u0026#x65;\u0026#114;\u0026#x72;\u0026#x6f;1\u0026#64;\u0026#x63;\u0026#111;r\u0026#114;\u0026#101;\u0026#111;.\u0026#105;c\u0026#x65;\u0026#115;\u0026#x69;\u0026#x2e;\u0026#101;\u0026#100;u\u0026#x2e;\u0026#x63;o\"\u003e\u0026#108;u\u0026#105;\u0026#x73;\u0026#x2e;\u0026#x66;\u0026#x65;\u0026#114;\u0026#x72;\u0026#x6f;1\u0026#64;\u0026#x63;\u0026#111;r\u0026#114;\u0026#101;\u0026#111;.\u0026#105;c\u0026#x65;\u0026#115;\u0026#x69;\u0026#x2e;\u0026#101;\u0026#100;u\u0026#x2e;\u0026#x63;o\u003c/a\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cp\u003eThis notebook contains the steps taken to train a model to classify spam-ham tweets in Scala-Spark for later usage in the Where to Sell Products project.\u003c/p\u003e\n\u003ch2\u003eDataset\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://www.kaggle.com/c/twitter-spam/data\"\u003ehttps://www.kaggle.com/c/twitter-spam/data\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eResources\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://www.kaggle.com/c/twitter-spam/overview\"\u003ehttps://www.kaggle.com/c/twitter-spam/overview\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://github.com/ageron/handson-ml/blob/master/03_classification.ipynb\"\u003ehttps://github.com/ageron/handson-ml/blob/master/03_classification.ipynb\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440479_222191174",
+      "id": "20190701-161854_1209539658",
+      "dateCreated": "2019-07-04 22:30:40.479",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "spark.version",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:02:13.078",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res0: String \u003d 2.4.2"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440488_342181223",
+      "id": "20190701-162157_1845555219",
+      "dateCreated": "2019-07-04 22:30:40.488",
+      "dateStarted": "2019-07-04 23:02:13.120",
+      "dateFinished": "2019-07-04 23:03:01.987",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val basePath \u003d \"s3://spark-emrlab-bucket-lefd\"\nval tweetsPath \u003d basePath + \"\"\nval training \u003d tweetsPath + \"/train.csv\"\nval testing \u003d tweetsPath + \"/test.csv\"",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:03:22.716",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "basePath: String \u003d s3://spark-emrlab-bucket-lefd\ntweetsPath: String \u003d s3://spark-emrlab-bucket-lefd\ntraining: String \u003d s3://spark-emrlab-bucket-lefd/train.csv\ntesting: String \u003d s3://spark-emrlab-bucket-lefd/test.csv"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440488_606098798",
+      "id": "20190701-162247_1075318024",
+      "dateCreated": "2019-07-04 22:30:40.488",
+      "dateStarted": "2019-07-04 23:03:22.773",
+      "dateFinished": "2019-07-04 23:03:25.186",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nLet\u0027s load and explore the testing set",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.489",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eLet\u0026rsquo;s load and explore the testing set\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440489_-990841332",
+      "id": "20190701-162446_1006428036",
+      "dateCreated": "2019-07-04 22:30:40.489",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval schema \u003d new StructType().add(\"Id\", LongType, false).add(\"Tweet\",StringType, false).add(\"following\",DoubleType, true).add(\"followers\",DoubleType, true).add(\"actions\", DoubleType, true).add(\"is_retweet\", DoubleType, true).add(\"location\", StringType, true).add(\"Type\", StringType, false)\n  \nval trainingDF \u003d spark.read.option(\"header\", true).schema(schema).csv(training).select($\"Id\", $\"Tweet\", $\"following\", $\"followers\", $\"actions\", $\"is_retweet\", $\"location\", when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"), $\"Type\").where(\"Type is not null\").na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \ntrainingDF.show(10)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:03:28.791",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "Id",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Tweet",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "following",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "followers",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "actions",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "is_retweet",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "location",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "has_location",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "Type",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1.0,
+                      "paginationPageSize": 250.0
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Id": "string",
+                      "Tweet": "string",
+                      "following": "string",
+                      "followers": "string",
+                      "actions": "string",
+                      "is_retweet": "string",
+                      "location": "string",
+                      "has_location": "string",
+                      "Type": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "Id",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "Tweet",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\nschema: org.apache.spark.sql.types.StructType \u003d StructType(StructField(Id,LongType,false), StructField(Tweet,StringType,false), StructField(following,DoubleType,true), StructField(followers,DoubleType,true), StructField(actions,DoubleType,true), StructField(is_retweet,DoubleType,true), StructField(location,StringType,true), StructField(Type,StringType,false))\ntrainingDF: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 7 more fields]\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+\n|   Id|               Tweet|following|followers|actions|is_retweet|            location|has_location|   Type|\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+\n|10091|It\u0027s the everythi...|      0.0|  11500.0|    0.0|       0.0|             Chicago|         1.0|Quality|\n|10172|Eren sent a glare...|      0.0|      0.0|    0.0|       0.0|                null|         0.0|Quality|\n| 7012|I posted a new ph...|      0.0|      0.0|    0.0|       0.0|       Scotland, U.K|         1.0|Quality|\n| 3697|#jan Idiot Chelse...|   3319.0|    611.0|  294.0|       0.0|         Atlanta, Ga|         1.0|   Spam|\n|10740|Pedophile Anthony...|   4840.0|   1724.0| 1522.0|       0.0|            Blumberg|         1.0|   Spam|\n| 9572|EBMUD ending pena...|   4435.0|  16041.0|27750.0|       0.0|                 UPS|         1.0|   Spam|\n|10792|Big day.  #WeTheN...|      0.0|      0.0|    0.0|       0.0|         Toronto, ON|         1.0|Quality|\n|10963|Paraguayan man li...|   9025.0|  20165.0| 6331.0|       0.0|Cape Town, South ...|         1.0|   Spam|\n|10778|Tagged by @CFOAlb...|      0.0|      0.0|    0.0|       0.0|        siempre, rct|         1.0|Quality|\n| 5401|\"#NowPlaying: De ...|    780.0|    897.0| 4792.0|       1.0|                  UK|         1.0|   Spam|\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+\nonly showing top 10 rows"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440489_1775504167",
+      "id": "20190701-162507_992250565",
+      "dateCreated": "2019-07-04 22:30:40.489",
+      "dateStarted": "2019-07-04 23:03:28.856",
+      "dateFinished": "2019-07-04 23:03:48.183",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "trainingDF.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:03:53.354",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- Id: long (nullable \u003d true)\n |-- Tweet: string (nullable \u003d true)\n |-- following: double (nullable \u003d false)\n |-- followers: double (nullable \u003d false)\n |-- actions: double (nullable \u003d false)\n |-- is_retweet: double (nullable \u003d false)\n |-- location: string (nullable \u003d true)\n |-- has_location: double (nullable \u003d false)\n |-- Type: string (nullable \u003d true)"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440492_645364627",
+      "id": "20190701-181844_1465805024",
+      "dateCreated": "2019-07-04 22:30:40.492",
+      "dateStarted": "2019-07-04 23:03:53.393",
+      "dateFinished": "2019-07-04 23:03:54.692",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nWe can observe the \u0027Type\u0027 field corresponds to a binary class: \"Spam\" for spam tweets and \"Quality\" for genuine tweets.\n\nWe also observe that as features we can use:\n\n* Tweet: The tweet text\n* following: The amount of accounts the author of this particular tweet is following\n* followers: The amount of followers the author of this particalr tweet has\n* actions: The total amount of favourites, retweets and replies this particular tweet has\n* is_reweet: Binary where 0 means the tweet is not a retweet and 1 that it is a retweet.\n* location: The user provided location for the account.\n\nFor the non-text attributes we could train a simple classification model. However, since we are dealing with text, we need to incorporate some NLP techniques to create a feature vector out of the tweet text.\n\nWe have two options: we can either implement a stemming + wordcount algorithm, probably removing the stop words to build the feature vector. Or, we can train a LDA to discover topics among the text corpora and associate them with the target class.\n\nLet\u0027s first create a feature vector with the non-text attributes. We will create a spark pipeline for this",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.493",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe can observe the \u0026lsquo;Type\u0026rsquo; field corresponds to a binary class: \u0026ldquo;Spam\u0026rdquo; for spam tweets and \u0026ldquo;Quality\u0026rdquo; for genuine tweets.\u003c/p\u003e\n\u003cp\u003eWe also observe that as features we can use:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eTweet: The tweet text\u003c/li\u003e\n  \u003cli\u003efollowing: The amount of accounts the author of this particular tweet is following\u003c/li\u003e\n  \u003cli\u003efollowers: The amount of followers the author of this particalr tweet has\u003c/li\u003e\n  \u003cli\u003eactions: The total amount of favourites, retweets and replies this particular tweet has\u003c/li\u003e\n  \u003cli\u003eis_reweet: Binary where 0 means the tweet is not a retweet and 1 that it is a retweet.\u003c/li\u003e\n  \u003cli\u003elocation: The user provided location for the account.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eFor the non-text attributes we could train a simple classification model. However, since we are dealing with text, we need to incorporate some NLP techniques to create a feature vector out of the tweet text.\u003c/p\u003e\n\u003cp\u003eWe have two options: we can either implement a stemming + wordcount algorithm, probably removing the stop words to build the feature vector. Or, we can train a LDA to discover topics among the text corpora and associate them with the target class.\u003c/p\u003e\n\u003cp\u003eLet\u0026rsquo;s first create a feature vector with the non-text attributes. We will create a spark pipeline for this\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440492_2092608779",
+      "id": "20190701-162652_1335683813",
+      "dateCreated": "2019-07-04 22:30:40.492",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer().setInputCol(\"Type\").setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer().setInputCol(\"Tweet\").setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover().setInputCol(\"text_tokens\").setOutputCol(\"text_filtered\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF().setNumFeatures(1000).setInputCol(\"text_filtered\").setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler().setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\")).setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression().setMaxIter(100).setRegParam(0.001)\n    \nval pipeline \u003d new Pipeline().setStages(Array(classIndexer, tokenizer, stopWordsRemover, hashingTF, vectorAssembler, lr))\n    \nval predictions \u003d pipeline.fit(trainingDF).transform(trainingDF)\npredictions.show(10)\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:03:59.054",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Id": "string",
+                      "Tweet": "string",
+                      "following": "string",
+                      "followers": "string",
+                      "actions": "string",
+                      "is_retweet": "string",
+                      "location": "string",
+                      "has_location": "string",
+                      "Type": "string",
+                      "label": "string",
+                      "text_tokens": "string",
+                      "text_filtered": "string",
+                      "text_features": "string",
+                      "features": "string",
+                      "rawPrediction": "string",
+                      "probability": "string",
+                      "prediction": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\nclassIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_586dc2419fab\ntokenizer: org.apache.spark.ml.feature.Tokenizer \u003d tok_2a6fcaab3666\nstopWordsRemover: org.apache.spark.ml.feature.StopWordsRemover \u003d stopWords_102cecd66d21\nhashingTF: org.apache.spark.ml.feature.HashingTF \u003d hashingTF_8ca51d9db9f7\nvectorAssembler: org.apache.spark.ml.feature.VectorAssembler \u003d vecAssembler_8fae087fa1f2\nlr: org.apache.spark.ml.classification.LogisticRegression \u003d logreg_4f7a1afa72b0\npipeline: org.apache.spark.ml.Pipeline \u003d pipeline_0a2853ddf3e5\npredictions: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 15 more fields]\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n|   Id|               Tweet|following|followers|actions|is_retweet|            location|has_location|   Type|label|         text_tokens|       text_filtered|       text_features|            features|       rawPrediction|         probability|prediction|\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n|10091|It\u0027s the everythi...|      0.0|  11500.0|    0.0|       0.0|             Chicago|         1.0|Quality|  1.0|[it\u0027s, the, every...|[everything, else...|(1000,[34,225,398...|(1005,[1,4,39,230...|[9.99350320785553...|[0.12057128832842...|       1.0|\n|10172|Eren sent a glare...|      0.0|      0.0|    0.0|       0.0|                null|         0.0|Quality|  1.0|[eren, sent, a, g...|[eren, sent, glar...|(1000,[62,77,117,...|(1005,[67,82,122,...|[7.87561084522723...|[0.00151200414517...|       1.0|\n| 7012|I posted a new ph...|      0.0|      0.0|    0.0|       0.0|       Scotland, U.K|         1.0|Quality|  1.0|[i, posted, a, ne...|[posted, new, pho...|(1000,[25,193,373...|(1005,[4,30,198,3...|[9.27748997684064...|[0.02563768924894...|       1.0|\n| 3697|#jan Idiot Chelse...|   3319.0|    611.0|  294.0|       0.0|         Atlanta, Ga|         1.0|   Spam|  0.0|[#jan, idiot, che...|[#jan, idiot, che...|(1000,[190,313,76...|(1005,[0,1,2,4,19...|[12.4743239542236...|[0.93664851005060...|       0.0|\n|10740|Pedophile Anthony...|   4840.0|   1724.0| 1522.0|       0.0|            Blumberg|         1.0|   Spam|  0.0|[pedophile, antho...|[pedophile, antho...|(1000,[10,124,132...|(1005,[0,1,2,4,15...|[12.5749317689664...|[0.95580932090250...|       0.0|\n| 9572|EBMUD ending pena...|   4435.0|  16041.0|27750.0|       0.0|                 UPS|         1.0|   Spam|  0.0|[ebmud, ending, p...|[ebmud, ending, p...|(1000,[69,130,165...|(1005,[0,1,2,4,74...|[20.2454124814920...|[0.99999991332944...|       0.0|\n|10792|Big day.  #WeTheN...|      0.0|      0.0|    0.0|       0.0|         Toronto, ON|         1.0|Quality|  1.0|[big, day., , #we...|[big, day., , #we...|(1000,[17,191,372...|(1005,[4,22,196,3...|[10.1894130248342...|[0.13279714502868...|       1.0|\n|10963|Paraguayan man li...|   9025.0|  20165.0| 6331.0|       0.0|Cape Town, South ...|         1.0|   Spam|  0.0|[paraguayan, man,...|[paraguayan, man,...|(1000,[80,230,620...|(1005,[0,1,2,4,85...|[13.4784685852271...|[0.98954387200620...|       0.0|\n|10778|Tagged by @CFOAlb...|      0.0|      0.0|    0.0|       0.0|        siempre, rct|         1.0|Quality|  1.0|[tagged, by, @cfo...|[tagged, @cfoalba...|(1000,[31,514,529...|(1005,[4,36,519,5...|[9.2606033013686,...|[0.02975404118465...|       1.0|\n| 5401|\"#NowPlaying: De ...|    780.0|    897.0| 4792.0|       1.0|                  UK|         1.0|   Spam|  0.0|[\"#nowplaying:, d...|[\"#nowplaying:, d...|(1000,[236,254,28...|(1005,[0,1,2,3,4,...|[13.6256105421955...|[0.99304316616532...|       0.0|\n+-----+--------------------+---------+---------+-------+----------+--------------------+------------+-------+-----+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\nonly showing top 10 rows"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440493_-638180203",
+      "id": "20190701-162604_51293922",
+      "dateCreated": "2019-07-04 22:30:40.493",
+      "dateStarted": "2019-07-04 23:03:59.101",
+      "dateFinished": "2019-07-04 23:04:34.584",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator().setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area Under ROC ${roc}\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:04:40.681",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_7ecf84aa8a8f\nroc: Double \u003d 0.9902137868289783\nArea Under ROC 0.9902137868289783"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440495_1520353197",
+      "id": "20190701-193617_28467861",
+      "dateCreated": "2019-07-04 22:30:40.495",
+      "dateStarted": "2019-07-04 23:04:40.729",
+      "dateFinished": "2019-07-04 23:04:44.249",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \nWe got a model capable of predicting 99% of the classes in the training set. \n\nTo ensure we are not overfitting, let\u0027s do cross validation before going with the testing set.",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:55:12.618",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe got a model capable of predicting 99% of the classes in the training set. \u003c/p\u003e\n\u003cp\u003eTo ensure we are not overfitting, let\u0026rsquo;s do cross validation before going with the testing set.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440496_-2109229746",
+      "id": "20190701-221234_1178786141",
+      "dateCreated": "2019-07-04 22:30:40.496",
+      "dateStarted": "2019-07-04 22:55:12.619",
+      "dateFinished": "2019-07-04 22:55:15.197",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\n\nval paramGrid \u003d new ParamGridBuilder().addGrid(hashingTF.numFeatures, Array(10, 25, 50)).addGrid(lr.regParam, Array(0.01, 0.001, 0.0001)).addGrid(lr.maxIter, Array(100, 200, 500)).build()\n  \nval cv \u003d new CrossValidator().setEstimator(pipeline).setEvaluator(evaluator).setEstimatorParamMaps(paramGrid).setNumFolds(3).setParallelism(2)\n  \nval cvModel \u003d cv.fit(trainingDF)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:04:49.042",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.01\n}, {\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.001\n}, {\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 1.0E-4\n}, {\n\tlogreg_4f7a1afa72b0-maxIter: 200,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.01\n}, {\n\tlogreg_4f7a1afa72b0-maxIter: 200,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.001\n}, {\n\tlogreg_4f7a1afa72b0-maxIter: 200,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 1.0E-4\n}, {\n\tlogreg_4f7a1afa72b0-maxIt...cv: org.apache.spark.ml.tuning.CrossValidator \u003d cv_1e89cccc6a5f\ncvModel: org.apache.spark.ml.tuning.CrossValidatorModel \u003d cv_1e89cccc6a5f"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440496_1163546645",
+      "id": "20190701-221624_1043106137",
+      "dateCreated": "2019-07-04 22:30:40.497",
+      "dateStarted": "2019-07-04 23:04:49.095",
+      "dateFinished": "2019-07-04 23:09:41.329",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val predictions \u003d cvModel.transform(trainingDF)\nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area under ROC ${roc}\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:11:38.517",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "predictions: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 15 more fields]\nroc: Double \u003d 0.9738633683785917\nArea under ROC 0.9738633683785917"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440497_882645270",
+      "id": "20190701-222621_761565090",
+      "dateCreated": "2019-07-04 22:30:40.497",
+      "dateStarted": "2019-07-04 23:11:38.565",
+      "dateFinished": "2019-07-04 23:11:42.837",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nWe got 97% in the evaluation which confirms that this model is excellent.\n\nLet\u0027s explore the model best parameters.",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.498",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe got 97% in the evaluation which confirms that this model is excellent.\u003c/p\u003e\n\u003cp\u003eLet\u0026rsquo;s explore the model best parameters.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440497_-522248236",
+      "id": "20190701-223321_993045122",
+      "dateCreated": "2019-07-04 22:30:40.497",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.PipelineModel\nimport org.apache.spark.ml.classification.LogisticRegressionModel\n\n//Average metrics per param grid\nval avgMetricsParamGrid \u003d cvModel.avgMetrics\n\n//Combibe with param grid to see how they affect the overall metrics\nval combined \u003d paramGrid.zip(avgMetricsParamGrid)\n\nval bestModel \u003d cvModel.bestModel.asInstanceOf[PipelineModel]\n\n//Explain params for each stage\nval bestHashingTFNumFeatures \u003d bestModel.stages(3).asInstanceOf[HashingTF].explainParams\nval bestLRParams \u003d bestModel.stages(5).asInstanceOf[LogisticRegressionModel].explainParams\n\nprintln(\"#\" * 10)\nprintln(s\"The best HashingTF number of features are: \")\nprintln(bestHashingTFNumFeatures)\nprintln(\"#\" * 10)\nprintln(s\"The best logistic regression parameters are:\")\nprintln(bestLRParams)\nprintln(\"#\" * 10)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:11:52.404",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.PipelineModel\nimport org.apache.spark.ml.classification.LogisticRegressionModel\navgMetricsParamGrid: Array[Double] \u003d Array(0.9432231527641818, 0.9692958620430375, 0.9863463729264978, 0.9432231527641818, 0.9692958620430375, 0.9863463729264978, 0.9432231527641818, 0.9692958620430375, 0.9863463729264978, 0.9431111436491953, 0.9688242939124677, 0.9858390254302013, 0.9431111436491953, 0.9688242939124677, 0.9858390254302013, 0.9431111436491953, 0.9688242939124677, 0.9858390254302013, 0.9433388829634358, 0.9686384420201911, 0.9853155844013227, 0.9433388829634358, 0.9686384420201911, 0.9853155844013227, 0.9433388829634358, 0.9686384420201911, 0.9853155844013227)\ncombined: Array[(org.apache.spark.ml.param.ParamMap, Double)] \u003d\nArray(({\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.01\n},0.9432231527641818), ({\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.001\n},0.9692958620430375), ({\n\tlogreg_4f7a1afa72b0-maxIter: 100,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 1.0E-4\n},0.9863463729264978), ({\n\tlogreg_4f7a1afa72b0-maxIter: 200,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.01\n},0.9432231527641818), ({\n\tlogreg_4f7a1afa72b0-maxIter: 200,\n\thashingTF_8ca51d9db9f7-numFeatures: 10,\n\tlogreg_4f7a1afa72b0-regParam: 0.001\n},0.9692958620430375), ({\n\tlogreg_4f7a1afa72b0-maxIter: ...bestModel: org.apache.spark.ml.PipelineModel \u003d pipeline_0a2853ddf3e5\nbestHashingTFNumFeatures: String \u003d\nbinary: If true, all non zero counts are set to 1. This is useful for discrete probabilistic models that model binary events rather than integer counts (default: false)\ninputCol: input column name (current: text_filtered)\nnumFeatures: number of features (\u003e 0) (default: 262144, current: 10)\noutputCol: output column name (default: hashingTF_8ca51d9db9f7__output, current: text_features)\nbestLRParams: String \u003d\naggregationDepth: suggested depth for treeAggregate (\u003e\u003d 2) (default: 2)\nelasticNetParam: the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty (default: 0.0)\nfamily: The name of family which is a description of the label distribution to be used in the model. Supported options: auto, binomial, multinomial. (default: auto)\nfeaturesCol: features column name (default: features)\nfitIntercept: whether to fit an intercept term (default: true)\nlabelCol: label column name (default: label)\nlowerBoundsOnCoefficients: The lower bounds on coefficients if fitting under bound constrained optimization. (undefined)\nlowerBoundsOnIntercepts: The lower bounds on intercepts if fitting under bound constrained o...##########\nThe best HashingTF number of features are: \nbinary: If true, all non zero counts are set to 1. This is useful for discrete probabilistic models that model binary events rather than integer counts (default: false)\ninputCol: input column name (current: text_filtered)\nnumFeatures: number of features (\u003e 0) (default: 262144, current: 10)\noutputCol: output column name (default: hashingTF_8ca51d9db9f7__output, current: text_features)\n##########\nThe best logistic regression parameters are:\naggregationDepth: suggested depth for treeAggregate (\u003e\u003d 2) (default: 2)\nelasticNetParam: the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty (default: 0.0)\nfamily: The name of family which is a description of the label distribution to be used in the model. Supported options: auto, binomial, multinomial. (default: auto)\nfeaturesCol: features column name (default: features)\nfitIntercept: whether to fit an intercept term (default: true)\nlabelCol: label column name (default: label)\nlowerBoundsOnCoefficients: The lower bounds on coefficients if fitting under bound constrained optimization. (undefined)\nlowerBoundsOnIntercepts: The lower bounds on intercepts if fitting under bound constrained optimization. (undefined)\nmaxIter: maximum number of iterations (\u003e\u003d 0) (default: 100, current: 100)\npredictionCol: prediction column name (default: prediction)\nprobabilityCol: Column name for predicted class conditional probabilities. Note: Not all models output well-calibrated probability estimates! These probabilities should be treated as confidences, not precise probabilities (default: probability)\nrawPredictionCol: raw prediction (a.k.a. confidence) column name (default: rawPrediction)\nregParam: regularization parameter (\u003e\u003d 0) (default: 0.0, current: 1.0E-4)\nstandardization: whether to standardize the training features before fitting the model (default: true)\nthreshold: threshold in binary classification prediction, in range [0, 1] (default: 0.5)\nthresholds: Thresholds in multi-class classification to adjust the probability of predicting each class. Array must have length equal to the number of classes, with values \u003e 0 excepting that at most one value may be 0. The class with largest value p/t is predicted, where p is the original probability of that class and t is the class\u0027s threshold (undefined)\ntol: the convergence tolerance for iterative algorithms (\u003e\u003d 0) (default: 1.0E-6)\nupperBoundsOnCoefficients: The upper bounds on coefficients if fitting under bound constrained optimization. (undefined)\nupperBoundsOnIntercepts: The upper bounds on intercepts if fitting under bound constrained optimization. (undefined)\nweightCol: weight column name. If this is not set or empty, we treat all instance weights as 1.0 (undefined)\n##########"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1562279154250_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\"\u003ehttp://ip-172-32-1-51.us-east-2.compute.internal:20888/proxy/application_1562279154250_0003/\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440498_-1020895277",
+      "id": "20190704-155645_1713657517",
+      "dateCreated": "2019-07-04 22:30:40.498",
+      "dateStarted": "2019-07-04 23:11:52.459",
+      "dateFinished": "2019-07-04 23:11:57.059",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nSo, the best parameters are:\n\n* For the Hashing TF: 10 number of features\n* For the LogisticRegression: 100 iterations and 0.001 for the regularization parameter\n\nWe can safely use these hyper parameters to train the pipeline and persist the best model (pipeline) for later usage of the twitter dataset pre-processing",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 23:15:14.468",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eSo, the best parameters are:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eFor the Hashing TF: 10 number of features\u003c/li\u003e\n  \u003cli\u003eFor the LogisticRegression: 100 iterations and 0.001 for the regularization parameter\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eWe can safely use these hyper parameters to train the pipeline and persist the best model (pipeline) for later usage of the twitter dataset pre-processing\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440498_-473991085",
+      "id": "20190704-162521_1163038300",
+      "dateCreated": "2019-07-04 22:30:40.498",
+      "dateStarted": "2019-07-04 23:15:14.468",
+      "dateFinished": "2019-07-04 23:15:14.495",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  \nval testingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(testing)\n    .select($\"Id\", \n        $\"Tweet\", \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"))\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(testingDF)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.499",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Id": "string",
+                      "Tweet": "string",
+                      "following": "string",
+                      "followers": "string",
+                      "actions": "string",
+                      "is_retweet": "string",
+                      "location": "string",
+                      "has_location": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Id\tTweet\tfollowing\tfollowers\tactions\tis_retweet\tlocation\thas_location\n0\tCops shoot blacks almost everyday, and there are still people who denies #policeBrutality is quite an issue #AntiPoliceBrutalityDay\t5509.0\t5977.0\t8062.0\t1.0\tですpacito\t1.0\n1\t#HAPPYTAEYANGDAY  Oppa,happy birthday to you, pic.twitter.com/47kRvAZzGJ\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n2\tRT @HoneyBadger10: Panthers in the super bowl. Black panther outfits. #staywoke\t471.0\t229.0\t747.0\t0.0\tB\u0027klyn, NYC, LA\t1.0\n3\tSorry my Twitter keeps posting my retweets a million times.\t0.0\t79800.0\t48.0\t0.0\tnull\t0.0\n4\tHeart attack causes and symptoms are different in women  #health\t902.0\t5797.0\t4270.0\t0.0\tChicago\t1.0\n5\tdon\u0027t facetime me or ask for a selfie after 8pm. you know damn well i already showered and won\u0027t stop looking like a hamster till 8am\t144.0\t8.0\t575.0\t0.0\tnew yawk\t1.0\n6\tit is the one reason that actually scares me .I was taught in school that Turkey was part of Asia only 3% in Europehttps://twitter.com/COLRICHARDKEMP/status/731959637302497280 …\t0.0\t0.0\t0.0\t0.0\tEngland, United Kingdom\t1.0\n7\tOur Latino Olympians: Puerto Rican Field Hockey Player Melissa Gonzalez https://t.co/rr0awGPcbi #RoadToRio #Rio2016 https://t.co/d0ikjen50F\t2226.0\t2737.0\t1654.0\t1.0\teverywhere #teamCHOCOLATE\t1.0\n8\tGBI: Man dies after being tazed by police during altercation and drug bust https://t.co/3lxNw77FaX https://t.co/DSw0VutXDd\t8550.0\t17694.0\t7358.0\t0.0\tМосква, Россия\t1.0\n9\tRT bocavista2016: DEAR #AMERICA  #FakeNews says #Antifa are non-violent  Do they look non-violent to you??  https://t.co/zwAy6qQlX8 #DoSom\t22.0\t7.0\t964.0\t0.0\tin way too many fandoms\t1.0\n10\tlol they be some big ones !?\t0.0\t0.0\t0.0\t0.0\tTexas\t1.0\n11\tStackable Spinner Ring in Beaded Sterling Silver R126 http://etsy.me/S7bh1W  #jewelryonetsy #CollectableJewelrypic.twitter.com/9RL1jPSHmn\t0.0\t0.0\t32.0\t0.0\tPacific County Washington\t1.0\n12\tI want pancakes right now\t45200.0\t678000.0\t0.0\t0.0\tnull\t0.0\n13\t#Oakland voices: Trip to South Africa for West Oakland McClymonds High School students is \u0027transformative\u0027  https://t.co/x3fuAE6jhG\t6490.0\t10242.0\t7363.0\t0.0\tAnfield, Liverpool\t1.0\n14\tSwimming in the Shallow End of the Gene Pool. #schoolofhardknocksclasses\t96.0\t228.0\t814.0\t1.0\t❤ D\u0027s Heart  ❤\t1.0\n15\tLol. Nigggggaaaaaaaahttps://twitter.com/yall_aint_shit/status/732587322655543296 …\t0.0\t0.0\t0.0\t0.0\tMacon Community, Florida.\t1.0\n16\tVIDEO: Blippar boss: \u0027I was quite a rebel\u0027: Rish Mitra began his career in the slums of Delhi ... http://bbc.in/1OBAdKZ  #tweetuk #kprs\t18300.0\t36500.0\t0.0\t0.0\tUK Business Directory\t1.0\n17\t\u0027Little Giant\u0027 gets the spotlight thanks to Watergate https://t.co/5359ImlOox\t2423.0\t1072.0\t446.0\t0.0\tThe here and now\t1.0\n18\tHermosoo!pic.twitter.com/E8tJwWVJF0\t0.0\t0.0\t0.0\t0.0\tArgentina\t1.0\n19\tThis nap is gonna find me\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n20\tNow why would DOJ under Obama deny (in a flunky lawsuit charging he wasn\u0027t born in Hawaii) he held a dual citizenship @LouiseMensch\t1749.0\t1791.0\t4813.0\t1.0\tPittsburgh, PA\t1.0\n21\tPAMM Collecting Legos for New Ai Weiwei Artwork  #art #Miami\t4574.0\t14832.0\t5572.0\t0.0\tThe here and now\t1.0\n22\tRT KORANISBURNING: 8 years of Obama  #Charlottesville\t0.0\t0.0\t246.0\t0.0\tℓσeу\t1.0\n23\tLug nuts and $35,000 fine still the talk around Tony Stewart  #sports\t4424.0\t15612.0\t22897.0\t0.0\tRepublic of the Philippines\t1.0\n24\t@JohnLester Thank you Joh for following @mrslandlady of the Collect Back #Rent Training Course For #landlords\t0.0\t0.0\t0.0\t0.0\tNew Mexico, USA\t1.0\n25\tTeen in Critical Condition After Brooklyn Hit-and-Run https://t.co/BdzsxGDmPp https://t.co/VnsZBTJnvR\t9984.0\t61715.0\t58011.0\t0.0\tAltoona, PA\t1.0\n26\tRevealed: Attitudes Top 20 Bachelors of the Year:  https://t.co/K8mor446We https://t.co/3HQviUZRSJ\t558.0\t861.0\t5967.0\t1.0\tBodegraven\t1.0\n27\tHope. It\u0027s the only thing stronger than fear. #iHQ\t0.0\t0.0\t330.0\t0.0\tUnited States\t1.0\n28\tTrump team seeks records on #border barriers.  - https://t.co/vmYsoCHEtJ\t2191.0\t2134.0\t4295.0\t1.0\tar ✈️ga ✈️tx\t1.0\n29\tDon\u0027t forget putting people in the mix. Can ask people to go to highest place around \u0026 use sensor on their phone.https://twitter.com/feitenlangley/status/732410962729402368 …\t0.0\t0.0\t0.0\t0.0\tSolana Beach, CA\t1.0\n30\ttimtheearlyman\t0.0\t0.0\t0.0\t1.0\t(251)\t1.0\n31\tAn example of #innovation 2.0\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n32\tI love rap. It\u0027s my favorite genre of music by far. But sometimes I gotta tell it to shut the fuck up.\t890.0\t817.0\t2820.0\t1.0\tUnknown\t1.0\n33\tIt is my #DirtyLittleSecret too!  @bbluntindia @AdhunaAkhtar pic.twitter.com/ppOtugyz8N\t0.0\t0.0\t9.0\t0.0\tIndia\t1.0\n34\tWrite a song a day.. #thingsido\t0.0\t28200.0\t0.0\t0.0\tnull\t0.0\n35\tsuffocated my name and started missing my chance\t0.0\t0.0\t0.0\t0.0\tNorton, MA\t1.0\n36\tRelease Blitz: Waiting on Summer by Bella Settarra http://goo.gl/SnbHXI  via @ScarlettFlame2\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n37\tIndia \u0027extremely disturbed\u0027 by Ala. police treatment of citizen  #news\t0.0\t9.0\t3460.0\t0.0\tSF x MNL\t1.0\n38\tKimmel Backpedals, Says Hes NOT the Moral Compass of America  https://t.co/HR3iNoJmbt\t1.0\t1467.0\t3684.0\t0.0\tMost likely at some airport\t1.0\n39\t24. we didn\u0027t choose the thug life, the thug life chose uspic.twitter.com/h3sqT2SWv7\t0.0\t0.0\t0.0\t0.0\tportugal\t1.0\n40\t#ABCNews  #ABCGOPDebate Trump-ABC feud intensifies overdebate as he plans rival event\t119.0\t97.0\t79.0\t0.0\t🇨🇺 🇲🇽\t1.0\n41\tI am more fabulous than you.\t0.0\t0.0\t0.0\t0.0\tShopping on the nearest Beach\t1.0\n42\tFun morning @FAUpresident @FloridaAtlantic BOT honoring @fauowlssoftball for championship season! #OWLin #22Strongpic.twitter.com/liKvTZBKaO\t0.0\t0.0\t0.0\t0.0\tPullman, WA\t1.0\n43\tEat (more) Drink (more) \u0026amp; Be Merry (more) #My2017Resolution\t6953.0\t8669.0\t24805.0\t1.0\tThe Snow Forest\t1.0\n44\tBay Area Highway Shut Down After Pair of Wild Horses Gallop Alongside Drivers https://t.co/UKXQODmRuC https://t.co/xAhJCJCdmf\t7524.0\t18060.0\t13028.0\t0.0\tHouston, TX\t1.0\n45\tOrioles\u0027 Hardy suffers fractured foot  #sports\t5093.0\t14007.0\t12167.0\t0.0\tIndia\t1.0\n46\tDonald Trump under fire from Republicans for response to Charlottesvilleviolence https://t.co/AmrvYuPIUJ\t694.0\t767.0\t8298.0\t1.0\tFlorianópolis, Brazil\t1.0\n47\tYOU BOUGHT THEM?\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n48\tWas wonderful to meet all of you today!https://twitter.com/mayasaryyeva/status/732571693307297792 …\t0.0\t1860000.0\t984.0\t0.0\tHere and there.\t1.0\n49\tmaster\t0.0\t0.0\t0.0\t1.0\tMarysville, Ohio\t1.0\n50\tHillary Clinton talks up unity to break down barriers, blasts Trump, in Cleveland appearance: The former secreta...  #Cleveland #politics\t7645.0\t14463.0\t15585.0\t0.0\tNederland\t1.0\n51\tExcited nakus episode 5 sa GOT. omg\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n52\tFederal judge to hear arguments Monday over Mississippi LGBT law  #news\t4307.0\t2351.0\t4871.0\t0.0\than\t1.0\n53\tKarabo did it for me. https://t.co/t3pko3geP9\t453.0\t188.0\t684.0\t1.0\tUSR\t1.0\n54\tMe at school vs. Me on the weekendspic.twitter.com/nnbSPK17LM\t15800.0\t29600.0\t136.0\t0.0\tnull\t0.0\n55\t5 top food events this week (and more to anticipate) https://t.co/j1RyyryCcC\t7175.0\t27659.0\t41642.0\t0.0\tthe Wild Wild West\t1.0\n56\tgoodgirl\t0.0\t0.0\t0.0\t0.0\trm 201\t1.0\n57\tBec knows best. @rlm2000pic.twitter.com/rQU1NyW82r\t0.0\t0.0\t4.0\t0.0\tnull\t0.0\n58\tPopular on 500px : GARDENS BY THE BAY by nut4691pic.twitter.com/DCPvgGuQxI\t0.0\t0.0\t0.0\t0.0\tМосква, Россия\t1.0\n59\tI want sushi\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n60\tBig doggie vs. tiny kitten https://vine.co/v/i2LwQZ5gjPU\t161000.0\t270000.0\t0.0\t0.0\tWest Hollywood, CA\t1.0\n61\t#politics Illegal immigrants: State Senate approves health care for some\t68.0\t79.0\t836.0\t1.0\teverywhere #teamCHOCOLATE\t1.0\n62\tLogic merely sanctions the conquests of the intuition. Jacques Hadamard\t0.0\t0.0\t0.0\t0.0\t数学ナビ\t1.0\n63\tHow to rack up on points with Posh Perk Points. https://youtu.be/hx4U8EGe09o pic.twitter.com/hWiqyZymDW\t0.0\t0.0\t0.0\t0.0\tEdinburgh, Scotland\t1.0\n64\tBucks County missing men: Who they are https://t.co/oZn2loXQSW https://t.co/AWDRlj6NsF\t7232.0\t16797.0\t19201.0\t0.0\tSwindon, England\t1.0\n65\tRT Park_Of_America: Largest USA Flag to be built by Park of America a non-profit, over 2/3 of a mile long 77 stori https://t.co/SxdwpRPMlb\t1983.0\t1038.0\t2511.0\t0.0\tBowling Green, OH\t1.0\n66\t#HowToSpotASocialist they aren\u0027t watching Fox News or MSNBC\t3670.0\t3213.0\t4518.0\t1.0\tportugal\t1.0\n67\tJoy Behar gets SMACKED DOWN on The View after trashing #POTUSTrump https://t.co/6M7V7o3odB #tcot\t3230.0\t3245.0\t2936.0\t1.0\tmaster threadlist\t1.0\n68\t\"What \"\"foreign interference\"\" really looks like. Hillary took MILLIONS from foreign governments. Media? Crickets. #ComeyHearing https://t.co/xB4IWyWArI\"\t2503.0\t2069.0\t4639.0\t1.0\tAustralia\t1.0\n69\tThat @billclinton speech in #PuertoRico felt underwhelming, felt like an old campaign event on the island from the 90s.\t0.0\t27900.0\t0.0\t0.0\tBoston and Harlem\t1.0\n70\t2 bed flat, Rightmove, Durham Terrace, Notting Hill W2, £1,495,000\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n71\t#ff Peace \u0026 Liberty  @LeaSavoy @BryonWine @elk_l @SerendipityDizl @readwriteblue @CajunCatsup @wickwife   https://t.co/Mqt0a2RnUT\t3151.0\t2603.0\t1876.0\t1.0\tWindsor Ontario\t1.0\n72\tStabbing Prompted Lockdown at El Cajon School https://t.co/R0BOEqKwAd https://t.co/I8OfL1QQXF\t7072.0\t16304.0\t20951.0\t0.0\tportugal\t1.0\n73\tVin Weber Says GOP Needs to Back Off Paul Ryan  #politics\t922.0\t5809.0\t2204.0\t0.0\tJA  🇯🇲\t1.0\n74\tthat was good to steal game 1 don\u0027t get me wrong but you still got A LOT of basketball to be played\t0.0\t0.0\t0.0\t1.0\tBuffalo, NY\t1.0\n75\tI RT this ever time I see this https://twitter.com/niggason2ksay/status/732377973500710913 …\t0.0\t0.0\t0.0\t0.0\tCharlotte, NC\t1.0\n76\tThat\u0027s what true love looks like https://t.co/DxOit51sQz\t4044.0\t5580.0\t1322.0\t0.0\tSolana Beach, CA\t1.0\n77\tCheck out  LATE 1960s CUBISM OF BAR GRAPH SILKSCREEN  SIGNED AND NUMBERED PRINT #Minimalism http://www.ebay.com/itm/LATE-1960s-CUBISM-OF-TOWER-TALL-SILKSCREEN-SIGNED-AND-NUMBERED-PRINT-/172206636243?roken\u003dcUgayN\u0026soutkn\u003dm8RqYa … via @eBay\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n78\tRT pnehlen: RT if you want to see a debate between me and SpeakerRyan   cc: seanhannity TuckerCarlson LouDobbs https://t.co/fTHVEl7fmM #t\t0.0\t0.0\t86.0\t0.0\tUnknown\t1.0\n79\t♫ Best Of EDM ♫ Anikdote - Turn It Up [NCS Release] ♫ New Electro house ... https://youtu.be/B7K3Qsa8dB4  qua @YouTube\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n80\tDo you know what to do when you get into a #FenderBender? One great tip: Never admit fault too soon! http://bit.ly/1qnwIw8\t0.0\t0.0\t0.0\t0.0\tWarwick, RI\t1.0\n81\tPush for encryption law falters despite Apple case spotlight  #tech\t8605.0\t12298.0\t22418.0\t0.0\t138 Student Union\t1.0\n82\thttps://t.co/iN0daJ6nst\t521.0\t879.0\t5635.0\t1.0\t138 Student Union\t1.0\n83\t\"\"\"It works everytime!\"\" http://fb.me/ALfbbk8L\"\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n84\tNew listing in New Orleans : 2234 CHARTRES Street,  $1200 http://www.latter-blum.com/property/2057330 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n85\t+++  he said this, they reached their goal and Suga uploaded the picture.\t0.0\t12800.0\t0.0\t0.0\tmyg + knj\t1.0\n86\tI CANNOT BELIVEJDJXNCNDNSNNZNDND YOU KYUNG HOLY SHIT\t0.0\t0.0\t0.0\t0.0\tSLAM\t1.0\n87\t#Pakistan: Bloggers Feared Abducted   https://t.co/81X9iBm98M\t848.0\t807.0\t3157.0\t1.0\tLimerick, Ireland\t1.0\n88\tFour beautiful couples will share their love stories with us this afternoon.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n89\tjimin was wearing yoongi\u0027s boots i\u0027m-pic.twitter.com/sD1i3Xm1gZ\t0.0\t95500.0\t416.0\t0.0\tnull\t0.0\n90\tApple Watch glitch :3pic.twitter.com/5YfMOPTdk2\t0.0\t0.0\t0.0\t0.0\tterminal\t1.0\n91\tUniversity of Illinois names new federal lobbyist https://t.co/9tbAAJQXiY\t4308.0\t3027.0\t21968.0\t0.0\tin way too many fandoms\t1.0\n92\tS: Now we have a chance to find e/o all over again. I have missed you so much. I love you so much.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n93\tMy interview with @AFRnet discussing NC\u0027s lawsuit against the Obama Administration https://vimeo.com/166212615\t0.0\t0.0\t35.0\t0.0\tRaleigh, NC\t1.0\n94\tRT papabearnc: DebAlwaystrump And I and 63million others are calling Bullshit!!!\t1724.0\t1415.0\t6812.0\t0.0\tChapel Hill, NC\t1.0\n95\tBREAKING : One Dead, 19 Injured in VA, State of Emergency Declared! https://t.co/Pj91LOGmDh https://t.co/b8QY1AUcAs\t1.0\t22.0\t3218.0\t0.0\tSouthampton, England\t1.0\n96\tSlain Florida priest had asked for mercy for his killer https://t.co/dQzRoxLTGo https://t.co/X8QnvdatY9\t5951.0\t60592.0\t47041.0\t0.0\t天朝：星霜之下 逆势择天\t1.0\n97\tTbh all of medicine needs to get on board with this https://t.co/eSGFa5ebQu\t525.0\t682.0\t1340.0\t1.0\tThe Republic of South Africa\t1.0\n98\tWoman pays it forward to Baldwin Village friend who saved her life https://t.co/luVVFmpDTG https://t.co/WUYwTPzFsz\t9010.0\t18499.0\t13974.0\t0.0\tAnfield, Liverpool\t1.0\n99\tFinal rigging of the jib. #c4news #BehindTheScenespic.twitter.com/KzwyOHLO16\t0.0\t0.0\t0.0\t0.0\tWest Sussex, UK\t1.0\n100\tI shitted while we were talking, you little son of a bitch. Want me to teach you anything by WhatsApp or...?\t0.0\t0.0\t0.0\t1.0\tNowhere\t1.0\n101\tgood morning love\t0.0\t0.0\t0.0\t1.0\tin way too many fandoms\t1.0\n102\tAn Older Man Put Money Into Her Son\u0027s Pocket. What He Said After Left Mom In Tears. https://t.co/9Ol5Nj60W6\t4845.0\t2258.0\t1450.0\t0.0\tCarmel, IN\t1.0\n103\t\u0027@SheriB1957 https://t.co/eGweGqFo89\u0027\t247.0\t2507.0\t154730.0\t1.0\tPullman, WA\t1.0\n104\tDiamond and Silk are on their way to Bradenton Florida  #WomenUnited4Trump https://youtu.be/APsk56-tt_A  via @YouTube #politics\t0.0\t0.0\t0.0\t0.0\tthe Wild Wild West\t1.0\n105\t Good Morning Patriots!!!  May our beam of Patriotism be seen far \u0026amp; wide https://t.co/tonMaH0BNC #just\t2951.0\t957.0\t3243.0\t0.0\tNY \u0026 DC\t1.0\n106\tPolice release video in fatal officer-involved shooting near Coppin State University https://t.co/tClCCk829Z https://t.co/sa4rxbfAuP\t5259.0\t6428.0\t11473.0\t0.0\tPennsylvania\t1.0\n107\t#storieseverywhere Betrayal. Loss. Wasted ambition. Words failed to capture the disappointment of sugar-free icescream\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n108\teBay: Boat/Motor/Trailer Fishing Set-Up Evinrude… http://rssdata.net/LKvZnm  #boatsales #boats http://usdeals.rssdata.net pic.twitter.com/fROMXFWyjI\t0.0\t0.0\t0.0\t0.0\tAbuja, Nigeria\t1.0\n109\tThompson: Golden State Warriors cement ownership of Cleveland Cavaliers  #sports\t6774.0\t10160.0\t7097.0\t0.0\tLagos, Nigeria\t1.0\n110\tBrothers get prison for homeless immigrant attack they said Trump inspired http://bit.ly/1Tlt6VQ pic.twitter.com/c37SbOtKIy\t0.0\t278000.0\t115.0\t0.0\tNY \u0026 DC\t1.0\n111\tThe 6 Top B2B Website Metrics to Monitor Using Google Analytics http://ift.tt/1rR5mzZ  #SocialMedia\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n112\tWHOOP #TRUMP #Trump2016 Together we\u0027ll #MakeAmericaGreatAgain  https://t.co/CM5iL55sZN\t553.0\t235.0\t525.0\t1.0\tNYC \u0026 Worldwide\t1.0\n113\t#IdBeMorePopularIf I were good enough, and smart enough, and if people liked me. https://t.co/jKQZIgmNjr\t2639.0\t2244.0\t11168.0\t1.0\tWhere I am - There I am.\t1.0\n114\t#SignsYouAreAmerican this is an anti-theft system https://t.co/fiJSvPPVLd\t18331.0\t21830.0\t9270.0\t0.0\tsampaloc\t1.0\n115\tPerfect Question  https://t.co/JSBHXYAxaX\t997.0\t791.0\t1646.0\t1.0\tUSR\t1.0\n116\ti can feel your heart inside of mine \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n117\t#TopNews More flooding in Texas after week of storms http://t.co/iljENAcLOU\t10898.0\t12803.0\t5449.0\t0.0\tNew Mexico, USA\t1.0\n118\tCycling no longer the black sheep, says Tour de France director  #sports\t8555.0\t12277.0\t29994.0\t0.0\tFlorianópolis, Brazil\t1.0\n119\tLol @ fake fans of lil mix .  BITCH PLEASE .  @gucciharrryy @OiOiLoueeeh\t0.0\t0.0\t0.0\t0.0\tMetro Manila, Philippines\t1.0\n120\t#rantfortoday It is such that are the more exercised that have the spiritual strength to handle \u0027strong meat\u0027. #ccot\t2555.0\t2255.0\t16839.0\t1.0\tMassachusetts, USA\t1.0\n121\tNEWS: Jonathan Kodjia has been called up to @FIFCI_tweet squad for the first time. http://www.bcfc.co.uk/news/article/kodjia-earns-ivory-coast-call-up-3116756.aspx …pic.twitter.com/kftAIztJwG\t0.0\t164000.0\t331.0\t0.0\tAshton Gate, Bristol\t1.0\n122\tPedestrian Struck, Killed Along 10 Freeway in East L.A. https://t.co/nsnKUTqYuO https://t.co/0UyAtxjm8b\t7825.0\t18835.0\t16657.0\t0.0\tcapricorn ☉ virgo☽ leo⇡\t1.0\n123\tSo much can change in a year.\t0.0\t0.0\t2.0\t0.0\tAtlanta, GA\t1.0\n124\tBREAKING: Awaiting President Trump\u0027s Motorcade #News @PBCountySheriff  Secret Service https://t.co/p41rZoRDvW\t1940.0\t1869.0\t2986.0\t1.0\tEarth\t1.0\n125\tWATCH: Graphic shooting captured on Facebook live prompts police probe https://t.co/i8raBQaSjs https://t.co/AelIbbniMc\t17991.0\t30574.0\t29515.0\t0.0\tHavering\t1.0\n126\tUber Driver Rapes Customer In Santa Ana, CA! https://t.co/BcIzdPl9ea https://t.co/fD9uiYiIz1\t4275.0\t3017.0\t25631.0\t0.0\tNairobi\t1.0\n127\tBag the future! http://marstyle.nl/2015/09/08/bag-the-future/ …pic.twitter.com/RhHlkMUTHr\t0.0\t0.0\t0.0\t0.0\tBodegraven\t1.0\n128\tIn crushing heat wave, Border Patrol ready to rescue migrants https://t.co/ej5MWulxSj https://t.co/jhYtdqZQe7\t6083.0\t15185.0\t25016.0\t0.0\tJakarta-Indonesia\t1.0\n129\tJust think about this for a second. https://t.co/UYHdhxUdJt\t4569.0\t3307.0\t320.0\t0.0\tℓσeу\t1.0\n130\tReducing Preventable Hospitalizations With Two Models of Transitional Care https://lnkd.in/bTFv3PD\t0.0\t0.0\t0.0\t0.0\tLos Angeles, CA\t1.0\n131\tMeet the Journalist: Robin Shulman | Pulitzer Center http://pulitzercenter.org/education/meet-journalist-robin-shulman … via @pulitzercenter #Canada #Refugees\t15800.0\t14600.0\t0.0\t0.0\tnull\t0.0\n132\t\"News post: \"\"Could #RussianHackers have used a cloaking device to hide Wisconsin from Hillary? Theories abound\"\" https://t.co/Y18hYG6ZcE\"\t3166.0\t2693.0\t1779.0\t1.0\tThe Multiverse\t1.0\n133\tPerfect day for a Hot Turkey Reuben lunch special. #rayscafenj #seagirt #seagirtnj #spring… http://ift.tt/1Xj3Vpt pic.twitter.com/MB3uZlK0r2\t0.0\t0.0\t0.0\t0.0\tSpring Lake \u0026 Sea Girt, NJ\t1.0\n134\tLegislators Demand #Obama Fire Ben Rhodes For Duping Media \u0026 Congress. http://ln.is/dailycaller.com/2016/maVwP … #Trump #GOP #DNC #Trump #hillary #bernie #RNC\t0.0\t0.0\t0.0\t0.0\tOne nation, under God\t1.0\n135\tHave a complaint about @iiNet #Service? use TwoHoots to get your complaint resolvedhttp://www.twohootsapp.com\t0.0\t0.0\t0.0\t1.0\tAustralia\t1.0\n136\tDon Mattingly out as Dodgers manager  #sports\t3705.0\t11436.0\t12881.0\t0.0\tMacon Community, Florida.\t1.0\n137\tWhen i hear my own voice in a videopic.twitter.com/6iKgArBFSy\t15800.0\t29700.0\t134.0\t0.0\tnull\t0.0\n138\tLying is the most fun a girl can have without taking her clothes off\t0.0\t0.0\t0.0\t0.0\tterram fatali\t1.0\n139\tFeel bad for them Lil niggaz tho, their hairlines are gunna be trashhh\t0.0\t0.0\t0.0\t0.0\tCambridge, MA\t1.0\n140\t— larry x camren —                                                        Power couples af (Vine by wot edits) https://vine.co/v/ixOWZYYxq7a\t0.0\t0.0\t7.0\t0.0\tnull\t0.0\n141\tYou\u0027ll have to stop talking to me for a while so I can think heavily on the foundation and stability of our friendship.\t0.0\t0.0\t0.0\t0.0\tSIMP J01365663+0933473\t1.0\n142\twow wow wow. Love your adventure. Are there any photos? Connect on FB?\t0.0\t0.0\t0.0\t1.0\tLondon, UK\t1.0\n143\tNobody hurt as several freight train cars derail in Houston  #Texas #news\t74.0\t166.0\t8444.0\t1.0\tSac-Ra-Mento\t1.0\n144\tWTF?! Its only in New Yorks #Walmart? #USDA https://t.co/YuFEZBketz\t52.0\t36.0\t464.0\t0.0\tBROOKLYN\t1.0\n145\tThe Six W\u0027s of Success: ➔ Work ➔ Will ➔ Win ➔ When ➔ Wishing ➔ Won\u0027t #TeamFollowBack\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n146\tlet me regale you with this story from my chinese workbook\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n147\tNot talking about \u0027sector of pharmacy\u0027 but \u0027pharmacy\u0027 #allforoneoneforall #shapingpharmacy\t0.0\t0.0\t9.0\t0.0\tEdinburgh, Scotland\t1.0\n148\tIf we\u0027d had a s 9, they\u0027d\u0027ve killed Beckett here, and end the season with Castle moving out of the loft. NO, THANKSpic.twitter.com/sgUoD6pyN5\t0.0\t0.0\t0.0\t0.0\tBarcelona\t1.0\n149\tICYMI: Hillary Clintons Benghazi Testimony in 2 Minutes  #politics\t921.0\t5812.0\t2469.0\t0.0\tWest Point, NY\t1.0\n150\tunfortunately yes!!   I have to say I do bruise easily but some are massive !!  Xxx\t0.0\t0.0\t0.0\t0.0\tSouthampton, England\t1.0\n151\tSpecial hours\t0.0\t445000.0\t129.0\t0.0\tflat earth\t1.0\n152\t$11,000 motorcycle stolen from a Collins Avenue condo https://t.co/yIq4C7pXX2 https://t.co/ligEc9bykf\t10059.0\t19466.0\t3654.0\t0.0\tChicago\t1.0\n153\tGuys need to know more about preventing skin cancer http://bit.ly/1XpUtRy\t0.0\t0.0\t0.0\t0.0\tHarrisonville, Missouri\t1.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n155\t\u0027@gold5K that\u0027s my idea\u0027\t19213.0\t48293.0\t15163.0\t0.0\tMapua University\t1.0\n156\tlet\u0027s do the things that we say on text\t13900.0\t190000.0\t761.0\t0.0\tnull\t0.0\n157\tAmazing that Crooked Hillary can do a hit ad on me concerning women when her husband was the WORST abuser of woman in U.S. political history\t0.0\t5.92E7\t0.0\t0.0\tWashington, DC\t1.0\n158\tLeveraging a Christmas song for a Halloween tag #OnlyAcceptableToday  https://t.co/kTBWZhXwWG\t2134.0\t2456.0\t4248.0\t1.0\tSLAM\t1.0\n159\tMeet Danyela DAngelo, the 14-year-old girl who is dominating the competitive shooting field. https://t.co/BUzCDpVgAQ\t42525.0\t52956.0\t3955.0\t0.0\tPennsylvania\t1.0\n160\tShe was talkin too much shit pic.twitter.com/dtLWyVBXu6\t0.0\t0.0\t283.0\t0.0\tDM for promotions!\t1.0\n161\tMarlins pitcher Jose Fernandez killed in boating accident  #StLouis\t5258.0\t8355.0\t16339.0\t0.0\texo ifnt vixx nct bp twice 9%\t1.0\n162\t#BecauseOfTelecom i don\u0027t find time for myself :D\t0.0\t0.0\t0.0\t0.0\tAjmer, India\t1.0\n163\tDNC Speech: Hillary Clinton Deletes Foreign Policy Disasters as Secretary of State https://t.co/mg7ViygFFo\t2031.0\t2267.0\t1865.0\t1.0\tNowhere or Everywhere.\t1.0\n164\tWhen people get involved in shit that doesn\u0027t concern them and fuck it  up and lie \u003e\t0.0\t0.0\t0.0\t0.0\tIreland\t1.0\n165\tThousands mourn murdered critic of Cambodian government  #news\t10158.0\t11269.0\t29088.0\t0.0\tMumbai, India\t1.0\n166\tI posted a new photo to Facebook http://fb.me/3jdIQPHff\t0.0\t0.0\t0.0\t0.0\tTozeur Tunisia\t1.0\n167\tThis is the immigration plan I support.  https://t.co/2OWU4a0590\t511.0\t430.0\t1433.0\t1.0\tterminal\t1.0\n168\tI\u0027m crying pic.twitter.com/vAjAmdl9tn\t0.0\t28200.0\t178.0\t0.0\t天朝：星霜之下 逆势择天\t1.0\n169\tRemember 2008! @Simona_Halep won her first GS title, at the juniors French Open, @rolandgarros pic.twitter.com/pPUl0xy1AD\t0.0\t0.0\t40.0\t0.0\tworldwide\t1.0\n170\tRyan\u0027s request to block Clinton from intelligence briefings denied https://t.co/qbLfCs2OUC #politics\t13636.0\t25322.0\t39318.0\t0.0\texo ifnt vixx nct bp twice 9%\t1.0\n171\tNew fire from Brother @Kembaland https://m.soundcloud.com/kembaland/the-new-black-theory … #DamnSonWheredYouFindThis pic.twitter.com/UF2Kdx1lAt\t0.0\t0.0\t2.0\t0.0\tastral plane\t1.0\n172\tGoing to see Project Itoh: Harmony today w/ my dad! I\u0027m excited.\t0.0\t0.0\t0.0\t0.0\tDMV\t1.0\n173\tDespite the⛆We managed to deliver Cricket to over children in 3 Schools Thanks to @BrynYear4 @BrynYear3 @SwissValleyCP \u0026 @penygaerprimary\t0.0\t0.0\t8.0\t0.0\tLlanelli, Wales\t1.0\n174\tFormer CalPERS CEO who accepted bribes sentenced to four years, six months https://t.co/pIOtSTi8cb\t6412.0\t15876.0\t29889.0\t0.0\t138 Student Union\t1.0\n175\tA year ago today was the last time I saw my dad alive...\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n176\tHalf of the critically endangered saiga antelope population has died within weeks. (via @TIME) http://t.co/tuWKdlDr6S http://t.co/KZ8wOxidwL\t96.0\t230.0\t1000.0\t1.0\tWorldwide\t1.0\n177\tFSB: Moscow will only strengthen fight against terrorism after force reduction in Syria https://t.co/hSNe5V2Wo0\t7493.0\t17587.0\t3529.0\t0.0\tPA\t1.0\n178\tImprovements unveiled at historic T.O. Fuller State Park https://t.co/oK3wvvfUw6 | https://t.co/mFl5YFFfuB https://t.co/xsdltNZ3fx\t11049.0\t18873.0\t6655.0\t0.0\tEVERY MAJOR PARTY SCENE\t1.0\n179\tThe world is a mirror. It reflects back to you what you are. If you are loving, friendly, helpful. The world will be those things to you.\t0.0\t34600.0\t222.0\t0.0\tATL | LA\t1.0\n180\tHey AVST thanks for the follow!\t0.0\t0.0\t0.0\t0.0\tNairobi, Kenya\t1.0\n181\tI f*cking love America #NationalFriedChickenDay http://t.co/6CeFZdT9PB\t5185.0\t26151.0\t4158.0\t0.0\tLucknow, India\t1.0\n182\tWoman, 30, stabbed in head with scissors outside Queens pool hall https://t.co/GefzCLrjt3 https://t.co/SXv9oLPiv1\t11870.0\t61444.0\t49778.0\t0.0\tMalaysia\t1.0\n183\tMan who hit baby\u0027s head with bottle bonks his noggin in cell https://t.co/XgBBn3tevv\t12200.0\t61182.0\t50799.0\t0.0\tvinny@sigaint.org\t1.0\n184\tI just  want to go home and watch house\t0.0\t0.0\t0.0\t0.0\tSouth Texas\t1.0\n185\t@Addup4adhd This week is #mentalhealth awareness week #MHAW16 \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n186\tMan arrested in connection of Cleveland\u0027s East Side shooting that injured a little girl https://t.co/x5WCY1u1UD https://t.co/EIeSmrysR7\t6805.0\t17013.0\t26679.0\t0.0\teverywhere #teamCHOCOLATE\t1.0\n187\t#LifeTaughtMe it\u0027s better to be alone then to be someone who makes you feel alone ;-)\t0.0\t0.0\t6.0\t0.0\tUSR\t1.0\n188\tWord to Jah https://twitter.com/jamzldn/status/731938865511071749 …\t0.0\t0.0\t0.0\t0.0\tThe Secret\t1.0\n189\t6 St. Paul schools chosen to pilot approach to disciplinehttp://www.twincities.com/2016/05/16/st-paul-schools-pilot-restorative-practices-student-discipline-suspensions/ …\t0.0\t0.0\t2.0\t0.0\tSt Paul, MN\t1.0\n190\tDon\u0027t hold your Breath they have already  Started with their EXCUSES and LIES https://t.co/RAmNbkmGR2\t861.0\t159.0\t8814.0\t1.0\tRepublic of the Philippines\t1.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n192\tHSBC to shift 840 IT jobs abroad including 600 from Sheffield http://goo.gl/kL8A5G pic.twitter.com/qvWNTcnWNs\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n193\tMT @dcexaminer: Justice Department declined an FBI request to investigate the Clinton Foundation https://t.co/BLzFqUxtTq #PJNET\t2069.0\t1698.0\t2742.0\t1.0\tEVERY MAJOR PARTY SCENE\t1.0\n194\tSo Louis to blame for Mata  \u0026 Morgan \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n195\t\"\"\"Obama is the anti christ and the Pope is the false profit\"\" ok dad @_nsmith28 @ErinMaxwell420 @Stitchress @lea_athaya http://t.co/xVrDnP2HRx\"\t0.0\t12.0\t5258.0\t0.0\tThe here and now\t1.0\n196\tNegative voices will always play the loudest. Take control of your thought life. You are fearfully and wonderfully made.\t309.0\t91.0\t273.0\t0.0\tMinnesota, USA\t1.0\n197\t\"but the funniest thing is that exo even admitted that kyungsoo is like a ghost in exo\u0027s groupchat bcs he only replies them with an \"\"okay\"\"\"\t0.0\t70500.0\t0.0\t0.0\tmaster threadlist\t1.0\n198\tAh, yes, but it had to be.\t0.0\t0.0\t0.0\t0.0\tparty camp\t1.0\n199\tFDA to allow Amarin to promote fish oil pill for off-label use  #health\t893.0\t5795.0\t5396.0\t0.0\tSELL ON VHF JIRAYA\t1.0\n200\tshe took that niggah talent like the MOnstars.https://twitter.com/SoloDahSystem/status/732566075347505152 …\t0.0\t0.0\t0.0\t0.0\tnew yawk\t1.0\n201\tRT thecjpearson: A quick history lesson on white nationalism from a 15 year old black realDonaldTrump supporter. # https://t.co/iLNGxZSqZl\t37.0\t86.0\t2177.0\t0.0\tEngland\t1.0\n202\t\"@realDonaldTrump \"\"I gave a dollar to a homeless guy and he still hasn\u0027t pledged everlasting loyalty to me. Bad!\"\"\"\t0.0\t0.0\t0.0\t1.0\tHouston, TX\t1.0\n203\tWedding and honeymoon inside a camp: 2,000 #Yezidi refugees tie the knot  https://t.co/2PgMNwe7Gb https://t.co/ArXG8QVfaE\t6392.0\t23486.0\t7787.0\t0.0\tNYC \u0026 Worldwide\t1.0\n204\tBrian Kilmeade on NFL Protesters The Only People Losing Are The Fans https://t.co/ALkayHvoKC\t4842.0\t1703.0\t1463.0\t0.0\tNorton, MA\t1.0\n205\t\"#Iraq | New #ISIS POV video from \"\"Wilayat al-Furat\"\" shows combat against Iraqi forces.  https://t.co/My3WHmpgBG https://t.co/MpjQuBhgk4\"\t7497.0\t29456.0\t11927.0\t0.0\tnew yawk\t1.0\n206\tThe Biggest Concern at Twitter: Where Does the Platform Go Next? http://bit.ly/1OB5bD2  #SMM #business #startup\t0.0\t0.0\t0.0\t0.0\tSt Paul, MN\t1.0\n207\t3 is smaller than 4 https://t.co/NOTfCnlqWO\t28979.0\t41441.0\t8971.0\t1.0\tBethel, CT\t1.0\n208\tSylvia McLaughlin, last living founder of Save the Bay, dies at age 99  #news\t7202.0\t10391.0\t7921.0\t0.0\tCanada\t1.0\n209\thi i jUst want to warning    you guys.. i am a weed snoker .thats right 4 20 im proud . look at my blunt in piCTUREpic.twitter.com/xQ4BQvZiPp\t0.0\t0.0\t74.0\t0.0\tSnapchat  👻 Simongamer987\t1.0\n210\tNew podcast on EBRD investment in Russia, Ukraine reform and foreign investment http://j.mp/ebrd-podcast-2 pic.twitter.com/5ZYWiMFnu1\t0.0\t0.0\t0.0\t0.0\tThe here and now\t1.0\n211\t, just got off the bridge .\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n212\tTap: A wearable keyboard that turns everything you touch into a typing surface http://btl.st/23W2s8R pic.twitter.com/nDKCSMI4Vp\t0.0\t61000.0\t148.0\t0.0\tAhead of the curve\t1.0\n213\tIt\u0027s amazing how most American A list Hollywood stars started out as Child Stars...\t0.0\t0.0\t0.0\t0.0\tThe Republic of South Africa\t1.0\n214\tPolice Seek Suspect In Shooting Near Cal Us Campus  #news\t2982.0\t13410.0\t19139.0\t0.0\tLondon\t1.0\n215\tBe frustrated when things don\u0027t move! DEMAND bigger challenges for and FROM yourself!\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n216\tZombies take over Monroeville again  #local\t7840.0\t12855.0\t12170.0\t0.0\tSac-Ra-Mento\t1.0\n217\tHave a big #ShawnWorldTour announcement in a few minutes !\t58400.0\t2.14E7\t0.0\t0.0\tnull\t0.0\n218\tNicki Minaj road crew member killed  #entertainment\t0.0\t9.0\t2717.0\t0.0\tUnited Kingdom\t1.0\n219\tDear American Progressives, see your future, be your future.   #ThisIsACoup\t396.0\t283.0\t1255.0\t1.0\tChicago, IL\t1.0\n220\t\u0027@jomo32284 The #Libtards wanted Trump because he was beatable. @ChrisSl66335686 @OregonWolfman @tedcruz @JFABtm @jc1ndiana @PeculiarBaptist\u0027\t1867.0\t2079.0\t3996.0\t1.0\tToronto, Canada\t1.0\n221\tCAN THE RAIN PLEASE LEAVE LIKE SERIOUSLY\t0.0\t0.0\t4.0\t0.0\tBish why you wanna know\t1.0\n222\tWe Gotta Get It! You My Ass Goals Ok\t0.0\t0.0\t0.0\t1.0\tBROOKLYN\t1.0\n223\tSanta Cruz shooting left victims targeted in a car with no leads on suspect  #news\t5067.0\t19854.0\t23954.0\t0.0\tWeirton, West Virginia\t1.0\n224\tImmigration Reformers: Three Big Reasons to Oppose DACA Re-Amnesty https://t.co/Pp6BK9hYb1 https://t.co/9SO5He6RWa\t1024.0\t489.0\t101.0\t0.0\tw astrid\t1.0\n225\t#DontTellYourFather that your nephews don\u0027t wear pants http://t.co/rKeFLiXPbd\t454.0\t46.0\t536.0\t1.0\tlos angeles\t1.0\n226\tWhoa!https://twitter.com/DJCincoPBeatz/status/732450943946481664 …\t0.0\t32000.0\t0.0\t0.0\tHouston,TX\t1.0\n227\tWant your music/video included in our feed..? All u need is $5 https://t.co/dfvvyY9x3g https://t.co/sCUiIsWoHx\t836.0\t1034.0\t1970.0\t1.0\tEdinburgh, Scotland\t1.0\n228\twatch out now\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n229\t#IStartCryingWhen the chocolate runs out \t3548.0\t3109.0\t6325.0\t1.0\tHavering\t1.0\n230\tWhen you fail your ac lab final\t0.0\t0.0\t5.0\t0.0\tCreve Coeur, MO\t1.0\n231\tPresident Obama almost gives school kids heart attack with surprise visit and message of encouragement. I miss him so much!  #FlashbackFriday https://t.co/O54jv08uDf\t5501.0\t8715.0\t1473.0\t0.0\tmaryland or DC\t1.0\n232\tshe just sighs*\t0.0\t0.0\t0.0\t0.0\tThe Snow Forest\t1.0\n233\tKnight Arts Challenge People\u0027s Choice: Artefactus Aims to Tell Hispanic Stories on Stage  #art #Miami\t6338.0\t14813.0\t5441.0\t0.0\tdanielrocks • bedan\t1.0\n234\t#News #US Mom, grandparents take pleas in case of starved 7-year-old (The Arizona Republic) http://t.co/8DuTu7IJIZ\t606.0\t71.0\t2741.0\t0.0\tUnknown\t1.0\n235\t\"Remy Ma explains how incarcerated black women are routinely \"\"forgotten\"\" https://t.co/JAToZjlsze via @blackvoices\"\t2375.0\t3082.0\t2175.0\t1.0\tEarth\t1.0\n236\tLibertarian VP Candidate Basically Concedes Three Weeks Out From Election https://t.co/W8LJJc2sXR via @dailycaller\t2167.0\t2207.0\t7993.0\t1.0\tSouth MY\t1.0\n237\tCops looking for man who tried to rape woman in Brooklyn https://t.co/iPbSA9XxRL https://t.co/Bx27BiXQeG\t248.0\t2245.0\t148917.0\t1.0\tThe Secret\t1.0\n238\tRacist Cops are trophy-hunting Black ppl. #FergusonRemembers\t261.0\t157.0\t502.0\t0.0\tAustralia\t1.0\n239\tBut then, you kinda miss the rough and rusty sound of the rev and the performance of your car that youve cracked earlier.\t0.0\t0.0\t0.0\t0.0\tSouth MY\t1.0\n240\tIntegrity is vital when most people\u0027s decisions aren\u0027t rational: your brand must deliver on its promises #thefuturestory #engagePRIDE\t0.0\t0.0\t0.0\t0.0\tHeaton Moor, Manchester, UK\t1.0\n241\tRicky- aka zesty, we go way back to the old days but we have also progressed a lot since then. You\u0027re pretty inactive which sucks but ily\t0.0\t0.0\t0.0\t0.0\tMinnesota, USA\t1.0\n242\tNabeel... . Don\u0027t mess with my bb Leila  or I will cut youpic.twitter.com/ESSHVir3e4\t0.0\t0.0\t0.0\t1.0\t🌞 🌍 🌙\t1.0\n243\tBOMBSHELL: Obama Blocked FBI Informant from Testifying on Uranium One Deal https://t.co/tDehZSvbJy https://t.co/KyH1HPWtFj\t2.0\t2421.0\t6074.0\t0.0\tBuffalo, NY\t1.0\n244\tLORD OF THE AMAZON: https://t.co/GRBfOBcNrH\t508.0\t400.0\t1080.0\t1.0\tbandung\t1.0\n245\tHow does something like this happen bee? https://t.co/YSTMmBZRZG\t798.0\t910.0\t3992.0\t1.0\tNorton, MA\t1.0\n246\tPray for someone today\t817.0\t1094.0\t4612.0\t1.0\tUK Business Directory\t1.0\n247\t#Miami Sex offenders cluster in Miami-Dade: Zip code 33142  #local\t6582.0\t12423.0\t2053.0\t0.0\t🌞 🌍 🌙\t1.0\n248\t#CNNDebate People #FightFor15 while our #GOP candidates argue who can scream louder #VegasGOPDebate\t72.0\t55.0\t263.0\t1.0\tWhere I am - There I am.\t1.0\n249\tBOBO has 4 letters, so does IKAW https://twitter.com/MalditangMayora/status/732507747351044096 …\t0.0\t0.0\t18.0\t0.0\tnull\t0.0\n250\tPoll: Majority Of Americans Believe Country Will Go To War Under Donald Trump https://t.co/phuCR8HxCn\t1708.0\t1627.0\t3565.0\t1.0\tUSR\t1.0\n251\tHaruo Nakajima, who played original 1954 Godzilla, dies at 88 https://t.co/Xp0bBdrNqn https://t.co/RSlAq6DabL\t9735.0\t19164.0\t18949.0\t0.0\tUnknown\t1.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n253\tEAT A ROCK\t0.0\t0.0\t0.0\t1.0\tcapricorn ☉ virgo☽ leo⇡\t1.0\n254\t\"\"\"what are you gonna do after high school\"\"pic.twitter.com/hwTGDy3s4O\"\t0.0\t0.0\t2.0\t0.0\tnull\t0.0\n255\t\u0027@midnight man always said life was like a box of dildos #onewordoffmoviequotes\u0027\t1740.0\t1155.0\t1437.0\t0.0\tOutbak  ✈️ CLE\t1.0\n256\tThe Story Of Us Macoy /nn\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n257\t[Lumineers concert]\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n258\t#eli Laura Ingraham Just Reminded Everyone of ANOTHER Reason McMaster Should be FIRED! https://t.co/T5QY8GDPwK #elins https://t.co/dHhco4Et9e\t1977.0\t1272.0\t929.0\t0.0\tHarrisonville, Missouri\t1.0\n259\tprobably not\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n260\tTHE ULTIMATE WONDER WOMAN DANCING COMBOpic.twitter.com/K8NECPj3eQ\t0.0\t17200.0\t1408.0\t0.0\tUn Provinciano en Capital.\t1.0\n261\tI hate uhttps://twitter.com/wopstaysplashin/status/732566713418579968 …\t0.0\t0.0\t0.0\t0.0\t704\t1.0\n262\tWhen youve trusted the wrong personpic.twitter.com/YQHotCU93D\t70300.0\t224000.0\t63.0\t0.0\tChicago, IL\t1.0\n263\tIf you wanna be great you gotta be comfortable with being uncomfortable\t0.0\t849000.0\t1472.0\t0.0\tUP THRU DERE!\t1.0\n264\tteach me what you learn\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n265\tPurdue targeting promising 2016 wing http://on.jconline.com/27r1DcL  via @JCOnline\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n266\t2 down 2 to go!!!!\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n267\tBreitbart warned us http://t.co/d4p2WTWNMV\t64.0\t194.0\t5002.0\t1.0\tthe Wild Wild West\t1.0\n268\tAll of my friends are out of town #WorstThingAboutSummerIs\t10294.0\t21347.0\t18725.0\t0.0\tUnited Kingdom\t1.0\n269\tI would love to see some of y\u0027all LIVE!!!\t0.0\t0.0\t0.0\t0.0\tAtlanta, GA\t1.0\n270\t#th Black Conservative EXPOSES that Leftists are Trying to Instigate a RACE WAR https://t.co/NlC5oBOOz0 #th https://t.co/kdXdlMblEc\t3869.0\t962.0\t2650.0\t0.0\tKingston, Jamaica\t1.0\n271\tRetweeted Feargal McKay (@fmk_RoI):\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n272\t#top RT FrankDallasAgg: SpeakerRyan SenateMajLdr NancyPelosi SenSchumer VOTE OUT ALL INCUMBENTS! #DTS ELECT realDo https://t.co/14OmPwOf1I\t2973.0\t923.0\t5456.0\t0.0\tLondon, England\t1.0\n273\t#TrumpBecause Donald Trump is roasting all his opponents lmao and it seems to be working. #MakeAmericaGreatAgain \t277.0\t191.0\t570.0\t0.0\tJA  🇯🇲\t1.0\n274\t#ConventionsToAvoid The Passive Aggressive Convention...or do whatever you want.\t2564.0\t2641.0\t3744.0\t1.0\tCambridge, MA\t1.0\n275\tA fine idea.https://twitter.com/andrewkerr4/status/732582648204414976 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n276\tOne movement is honoring Dr. Martin Luther King, Jr. with the #MLKSitIn https://t.co/UCI4YpF3KI https://t.co/nn4nOC15yS\t2109.0\t2395.0\t9237.0\t1.0\tIndonesia\t1.0\n277\tAttorney pleads not guilty on behalf of prison escapee David Sweat\t111.0\t83.0\t67.0\t0.0\tDM for promotions!\t1.0\n278\tI want to have positive mind, flawless skin, and nice personality.\t67100.0\t225000.0\t0.0\t0.0\tSingapore\t1.0\n279\thttps://t.co/Hy4rhZ9jWs https://t.co/JP6nLaz9oo\t741.0\t745.0\t3076.0\t1.0\twestside mentor\t1.0\n280\tNewark homicide under investigation\t3966.0\t4173.0\t6774.0\t0.0\tOttawa, ON\t1.0\n281\tJust in time for the biggest performance of my life... NEW #GAGA MERCH TO CELEBRATE #SB51 https://t.co/Q5CJYN1ntr https://t.co/VtMJNbyVP9\t1207.0\t1072.0\t6546.0\t1.0\tB\u0027klyn, NYC, LA\t1.0\n282\tDrug dealer who testified against heroin kingpin sentenced to 76 months in federal prison: A drug dealer described by a judge ...  #crime\t5924.0\t7653.0\t6133.0\t0.0\tmaryland or DC\t1.0\n283\tForecast for Wednesday Night http://dlvr.it/LKvdxC\t0.0\t0.0\t0.0\t0.0\tHampstead, MD\t1.0\n284\tObituary: Karen Jane Heidebrecht: Karen (Peterson) Heidebrecht died peacefully surrounded by family in Boise,... http://bit.ly/1R6nhqO\t0.0\t0.0\t0.0\t0.0\tElizabeth City, NC\t1.0\n285\tBITCH, LISTEN. THE PREACHERS WIFE SOUNDTRACK STILL GOES. IM GETTING MY WHOLE LIFE RIGHT NOW.\t857.0\t784.0\t4460.0\t1.0\tEngland, United Kingdom\t1.0\n286\tThe Full D.C. Circuit Now Plans To Hear The Case Over The Clean Power Plan http://b4in.com/jaPT\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n287\tYou Voted Against Me: Angry Constituents Face California Congressman Who Voted for GOP Health Care Plan https://t.co/0aAPri8jOB https://t.co/97fzJpsNgx\t7857.0\t18817.0\t15040.0\t0.0\tNew Orleans | Baton Rouge\t1.0\n288\tStorm Julia may weaken into depression late Wednesday, NHC says  #environment\t8564.0\t12271.0\t29072.0\t0.0\tSwindon, England\t1.0\n289\tWhat effin planet does Chris Mathews from MSNBC  live on saying Castro was a Leader of Distinction #GetOutHere\t2016.0\t1710.0\t3185.0\t1.0\tEarth\t1.0\n290\t#GOP Tax reform bill will stop #IllegalAliens from collecting tax credits. THIS will save the government about $23.1 billion next decade!\t1645.0\t604.0\t141.0\t0.0\tBROOKLYN\t1.0\n291\tRT frankgaffney: At every turn, H.R. McMaster has been insubordinate to his Commander-in-Chief.\t1989.0\t828.0\t1102.0\t0.0\tUP Diliman\t1.0\n292\tRacism and discrimination is the result of many unfulfilled dreams. https://t.co/IPCLAKF0Lk\t2068.0\t1559.0\t387.0\t0.0\tDurham, England\t1.0\n293\tThe Flower Girls. pic.twitter.com/1nGewpNH4p\t0.0\t0.0\t6.0\t0.0\tdanielrocks • bedan\t1.0\n294\tEman Emoo is following me now on Twitter! Thanks ! https://t.co/FBtAOHNAof Ready for your #follow too\t548.0\t967.0\t4312.0\t1.0\tSnapchat  👻 Simongamer987\t1.0\n295\tInvestigators: Multiple ISIS plots being planned in Europe  #news\t3937.0\t20232.0\t25481.0\t0.0\tCarmel, IN\t1.0\n296\tBody Of Missing Atlantic City Teen Swimmer Found https://t.co/vjnkkMLGLR https://t.co/QZkIo7T18y\t7121.0\t16709.0\t18249.0\t0.0\tNY \u0026 DC\t1.0\n297\tCheck out LOUIS VUITTON Stephen Sprouse Roses KEEPALL 50 Travel Luggage Boston Hand Bag  http://www.ebay.com/itm/LOUIS-VUITTON-Stephen-Sprouse-Roses-KEEPALL-50-Travel-Luggage-Boston-Hand-Bag-/252391385243?roken\u003dcUgayN\u0026soutkn\u003djJf9xy … via @eBay\t27500.0\t25000.0\t0.0\t0.0\tKyoto,Tokyo,Osaka,Japan\t1.0\n298\tNot happy? We\u0027ll make it right! Just send us your contact info \u0026 Sheetz location. Thanks!https://twitter.com/messages/compose?recipient_id\u003d14813584 …\t0.0\t503000.0\t0.0\t1.0\tAltoona, PA\t1.0\n299\tVigil for couple slain outside Pomona market: Its just sad https://t.co/O71C2805Xl https://t.co/Lu1k6zqBuT\t7863.0\t18820.0\t14817.0\t0.0\tNowhere or Everywhere.\t1.0\n300\tIt costs 41 cents per year per American citizen for @NASAs entire Curiosity program https://t.co/vle42xebuL\t10023.0\t35212.0\t10404.0\t0.0\tTozeur Tunisia\t1.0\n301\tTax Relief lines - commercial https://t.co/8bMdm8ELL5 #nowplaying #dagr8fm\t812.0\t909.0\t3126.0\t1.0\tparty camp\t1.0\n302\tI can\u0027t have sex with you if I can\u0027t see me having potential accidental kids with you\t0.0\t44300.0\t897.0\t0.0\tin my lane\t1.0\n303\tI honor the veterans and first responders who paid the ultimate price for my freedom. #CarryTheLoadhttps://cards.twitter.com/cards/4jj7cg/1nao5 …\t0.0\t0.0\t0.0\t0.0\tTracy, CA\t1.0\n304\tguess who just was on my radiopic.twitter.com/WkJoIcolE7\t0.0\t13900.0\t0.0\t0.0\tnull\t0.0\n305\tTurkey to take \u0027necessary measures\u0027 on border security: PM Davutoglu  #news\t8222.0\t11791.0\t4841.0\t0.0\tvinny@sigaint.org\t1.0\n306\tWho is the Knick at the center of Biggie\u0027s \u0027I Got A Story To Tell\u0027? Fat Joe says Anthony Mason.: \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n307\tJoe Manchin will vote to confirm Neil Gorsuch to Supreme Court https://t.co/FZUd3qDQ9h\t4348.0\t3046.0\t20128.0\t0.0\tElizabeth City, NC\t1.0\n308\tOH MY GOOD LORD IN THE HOLY HEAVENS I AM IN NEED OF MEDICAL ATTENTION PLEASE HELP ME I CANNOT BREATHE I AM DYIGhttps://twitter.com/personinterest/status/732571708851429376 …\t0.0\t0.0\t2.0\t0.0\ts/h, +63\t1.0\n309\tVladimir Putin Says the U.S. Is Known for Cyber-Spying | PJ Media https://t.co/ssufMQqYab\t1501.0\t1911.0\t2165.0\t1.0\tFort Myers, FL\t1.0\n310\tI\u0027m a man with many, many titles. Artist. Entrepreneur. Visionary. Ordained Wedding Minister. Ufologist. Philanthropist. yeah, I do it all!\t0.0\t0.0\t0.0\t0.0\tAtlanta, GA\t1.0\n311\t5 Predictions On The Future Of Marketing, PR and Advertising Agencies http://upflow.co/l/IgDS pic.twitter.com/0XyH2XGvvK\t0.0\t0.0\t0.0\t0.0\tJakarta-Indonesia\t1.0\n312\tmood: @ all my old hoes and my exes.pic.twitter.com/WVPycRrxoA\t0.0\t0.0\t0.0\t0.0\tar ✈️ga ✈️tx\t1.0\n313\t2 arrested after teen shot in Walnut Hills https://t.co/HYfLffXdua https://t.co/25FmJ1IWOY\t6232.0\t16501.0\t8173.0\t0.0\tMiami\t1.0\n314\tIt\u0027s the everything else that\u0027s complicated. #PESummit #PXpic.twitter.com/Jsv6BAFQMl\t0.0\t11500.0\t0.0\t0.0\tChicago\t1.0\n315\tHappy #BlackHistoryMonth  https://t.co/uZubcYgKUL\t9844.0\t17803.0\t8043.0\t0.0\tUnited States\t1.0\n316\t\u0027@Canine_Rights wat?? Don\u0027t belive my eyes.\u0027\t67.0\t106.0\t265.0\t0.0\tBaton Rouge, LA\t1.0\n317\tomg yessss\t0.0\t0.0\t0.0\t1.0\tw astrid\t1.0\n318\t#TheFirst100DaysToDoList  3 days passed. Things done so far:  Rioters jailed Jobs coming back ISIS leader liquidated Obamacare replaced\t25367.0\t27524.0\t2588.0\t0.0\tDMV\t1.0\n319\t#Transgender Activist Beaten in Possible Hate Crime Plans Rally on 125th St @JournoGoose https://t.co/eZPT4qokRV https://t.co/2fi5drTgN4\t382.0\t207.0\t745.0\t1.0\tWhere I am - There I am.\t1.0\n320\tNCAA Warns Airlines Over Increase In Flight Cancellations http://www.occuworld.org/news/3191150\t0.0\t0.0\t0.0\t0.0\tEarth\t1.0\n321\t@dhanushkraja \u0026 #MegaAkash In #ENPT #EnaiNokkiPaayuThotta New Pic \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n322\t#ThingsYouShouldntAsk Is your wife available for stripograms?\t7045.0\t13052.0\t3153.0\t1.0\t704\t1.0\n323\tyeah I mean it only took 130 days since you want to be fake never snapchat back\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n324\tTitle: Trump eats the press today. https://t.co/kF8T8HSAHi\t1705.0\t1972.0\t3646.0\t1.0\t❤ D\u0027s Heart  ❤\t1.0\n325\tNevertheless may allah bless him for the things he inspire me to do.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n326\ti dont understand whats happening in the mv someone please explain\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n327\tAin\u0027t no cops out here throwing around little white girls as rag dolls. He wouldn\u0027t even dare.\t727.0\t321.0\t789.0\t1.0\tUnknown\t1.0\n328\tThe party bosses want to seize the power from our voters to decide whom our candidates are. Their motto is simple: “the voters be damned.”\t0.0\t71900.0\t359.0\t0.0\tOrlando, FL\t1.0\n329\tkeeping to myself  staying blessed  not giving a fuck  Ignoring negativity  living my life.\t88000.0\t116000.0\t85.0\t0.0\t*Parody Account to Inspire*\t1.0\n330\t#ToDoListBeforeChristmas 1.  Find out what kids want for Christmas. 2.  Find out what wife wants. 3.  Buy stuff for me. 4.  . . . wait. . .\t2870.0\t3472.0\t4679.0\t1.0\tPHI\t1.0\n331\tAfter a 6-0 sweep, ChiefsESC lead the series, 2-0. Can eXGamingLLC bounce back? Watch: http://callofduty.com/CWL pic.twitter.com/2W3F01O51q\t0.0\t0.0\t0.0\t0.0\tvinny@sigaint.org\t1.0\n332\t@Manish_goplani you are b fir bindas sirpic.twitter.com/MgNtzFLlTz\t0.0\t0.0\t10.0\t0.0\tnull\t0.0\n333\t@UrbanFoodFest @HSBC_Sport @WorldRugby7s we can do it England all the way love n hugs to all xx\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n334\tBill: No More Paid Speeches if Hill Wins via #TruthRevolt http://t.co/oFvNMOLG9t\t0.0\t152.0\t8599.0\t1.0\tBROOKLYN\t1.0\n335\tCome on Oregon voters.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n336\t\u0027@NickReeves45 @SFC_Morgan @andieiamwhoiam @WhiteHouse @CurlyCoyne @1bigbeer @LanceSilver1 @MsAvaArmstrong great picture!\u0027\t7733.0\t7575.0\t764.0\t0.0\tmaryland or DC\t1.0\n337\tMy 2016 GOP presidential Final Four:  https://t.co/wi3h7ResAh  And @TheBlazeLavern gives her picks: https://t.co/jOaSeai2l0\t64.0\t129.0\t2099.0\t1.0\tPacific County Washington\t1.0\n338\tKatikies Hotel Cave Pool, Greecepic.twitter.com/GbVQu3hxWu\t0.0\t6570000.0\t569.0\t0.0\tnull\t0.0\n339\tClearer skies expected after Wednesday morning thunderstorms in San Antonio https://t.co/HYpnt9tD0c https://t.co/mnTsZif8Qv\t6532.0\t19655.0\t14815.0\t0.0\ts/h, +63\t1.0\n340\tPolice search for men accused of robbing Athens drug stores https://t.co/0CEXXGVclM | https://t.co/1KPXto2HfW https://t.co/wlJdwEEeFf\t4919.0\t16134.0\t11407.0\t0.0\tDrummondville, Québec\t1.0\n341\tI feel I really missed out in that French exam...\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n342\tI\u0027m not too broken up about it. I wanted Hillary supporters to move on in 08, so now it\u0027s my turn.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n343\tMerry Christmas!! https://t.co/h9isBfIhoB\t253.0\t2623.0\t165098.0\t1.0\tworldwide\t1.0\n344\tHappy birthday\t0.0\t0.0\t0.0\t0.0\tOslo, Norway\t1.0\n345\tNortheast Ohio | Continental Cup International Youth Sports Festival: More than 3,000 young... http://t.co/fyW69NjwaU #Cleveland #sports\t4507.0\t7412.0\t5264.0\t0.0\tSouth Africa \u0026 The World  🌏\t1.0\n346\tJury picked for dad\u0027s retrial in scalding death https://t.co/4lioz2yLie https://t.co/veAEtj21x7\t6178.0\t16609.0\t11182.0\t0.0\tEngland\t1.0\n347\t#breadcrumbs #QAnon #FollowTheWhiteRabbit #SaudiPurge #Trump #DrainTheSwamp #Drainthepedos #DrainTheDeepState #TheStorm #TheStormIsUponUs #TheStormIsHere https://t.co/VVOqEa80Ur\t246.0\t2179.0\t146722.0\t1.0\tLlanelli, Wales\t1.0\n348\tThey don\u0027t see issues. They actually are total surface hounds. Sniffing at the groundhttps://twitter.com/YBNLLC/status/732587662549344256 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n349\t#RealLifeMagicSpells Happy hour - blacks you out 2 times faster\t14704.0\t21182.0\t13767.0\t0.0\tcapricorn ☉ virgo☽ leo⇡\t1.0\n350\t#jud Look What We Found Out About Trump-Hater Chelsea Handlers Past https://t.co/BCqaDqAM5g #jud https://t.co/YAmho8Nbla\t3398.0\t1768.0\t1570.0\t0.0\tPhiladelphia, PA\t1.0\n351\tHow did the grand jury not vote? Someone please explain? Tamir Rice https://t.co/MeevWbcU6T #TamirRice #BLM\t400.0\t2187.0\t9123.0\t1.0\tMetro Manila, Philippines\t1.0\n352\tI GET MY CAR BACK TODAY\t0.0\t0.0\t0.0\t0.0\tWeirton, West Virginia\t1.0\n353\tNew post: The Banned Look Is Coming Soon To The Air Jordan 1 Ultra High https://t.co/2ounh6Tbwn\t822.0\t903.0\t2364.0\t1.0\tCalifornia, USA\t1.0\n354\t@HWMag: HW Pick: Futures Blood On The Money (Video  Mature) https://t.co/a4NN5yJ2IK\t436.0\t749.0\t3939.0\t1.0\t🌞 🌍 🌙\t1.0\n355\tStephen, a Veteran, experienced homelessness off \u0026 on for the last 20 years, but now has an affordable home!pic.twitter.com/EgWNUK8Ni6\t0.0\t0.0\t37.0\t0.0\tCalifornia, USA\t1.0\n356\thttps://t.co/mfBjIJYL05 Rewind 08/2017 | VC Fund Managers Say Difficult To Find Attractive Investments In 2017 https://t.co/i0bDlNup0R\t2912.0\t1358.0\t7068.0\t0.0\tNorton, MA\t1.0\n357\tWith the same ol spirit bomb shit.\t529.0\t897.0\t2178.0\t1.0\tMapua University\t1.0\n358\tWho Dat don\u0027t know what a po-boy is? W. Va. Saints fans take NOLA test https://t.co/QvncpdhN5z\t13145.0\t27750.0\t44381.0\t0.0\tfl • ocrp\t1.0\n359\t$HTZ\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n361\tBack to School Mini Sessions Houston TX Child Photographer http://pinterest.com/pin/561753753502427726/ …\t0.0\t0.0\t0.0\t0.0\tDrummondville, Québec\t1.0\n362\t#TopNews Two people killed when circus tent collapses in New Hampshire during storm\t14515.0\t13257.0\t9759.0\t0.0\tEngland\t1.0\n363\tme and @arissedsnts were there in spirit pic.twitter.com/Ggq6QSjsX7\t0.0\t59700.0\t0.0\t0.0\tSF x MNL\t1.0\n364\tEnjoy this beautiful May Day!\t0.0\t0.0\t0.0\t1.0\tIllinois, USA\t1.0\n365\t@misslyndaleigh good afternoon lynda hope your well xxxx\t0.0\t0.0\t0.0\t0.0\tSwindon, England\t1.0\n366\tNew Orleans Thursday weather: Partly sunny, pleasant https://t.co/vo0rLuLPRG https://t.co/7zlpQIpPbB\t9408.0\t28735.0\t45295.0\t0.0\tbandung\t1.0\n367\t\u0027@nytimes just to be on the safe side\u0027\t3682.0\t24991.0\t3033.0\t0.0\tNairobi,Kenya\t1.0\n368\tEvery child has the right to dream \u0026 LIVE to be that dream. RIP #TrayvonMartin (died this day, February 26, 2012) https://t.co/AFZc7oMKzv\t1205.0\t329.0\t878.0\t1.0\tLondon, England\t1.0\n369\tFund individual research, Fund collaborative research: Toyota Foundation research grants 2… http://ift.tt/27vkfbA pic.twitter.com/zHfR414Sex\t0.0\t0.0\t0.0\t0.0\tParis, France\t1.0\n370\tPhotos: Obama grants Medal of Valor to 13 officers, says US must support police http://buff.ly/1XuXAI8 pic.twitter.com/fXqy6pK1jG\t0.0\t61400.0\t61.0\t0.0\tEverywhere\t1.0\n371\tNigerian Senate [@NGRSenate] Withdraws Anti-Social Media Bill http://bit.ly/1TXt7zn\t0.0\t46900.0\t0.0\t0.0\tAbuja, Nigeria\t1.0\n372\tTHIS BET IS THE BOMB!!! MAN UNITED WIN AT 10/1!! 󾭘󾭘󾭚󾭚\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n373\tRussia denies Putin phoned Elton John  #entertainment\t4568.0\t13157.0\t15413.0\t0.0\twestside mentor\t1.0\n374\tThis is why they hate us. Spread love! https://t.co/IPRGhuWAgs\t46936.0\t50612.0\t3448.0\t1.0\tSLAM\t1.0\n375\tPalestinians unveil 6-meter Nelson Mandela statue in Ramallah, a gift from South African people. http://sabahdai.ly/1YFe6X  HT/ @profsassy\t0.0\t0.0\t0.0\t0.0\tWestern Hemisphere\t1.0\n376\t#sports Bucks\u0027 Parker works toward training camp return\t3275.0\t13161.0\t15827.0\t0.0\tPERU|MIAMI| PATWIN land//UCD 📍\t1.0\n377\tIt all comes down to the person you wanna talk to most when you\u0027re having a bad day\t0.0\t0.0\t22.0\t0.0\tnull\t0.0\n378\t#WorldNews U.S. support for Israel at the U.N. is in jeopardy, White House says (The Philadelphia Inquirer) http://t.co/p7tVO4H6v3\t620.0\t60.0\t2021.0\t0.0\tSouth Texas\t1.0\n379\tPoliticsFairfax liammannix A Stranger In The House until Barnaby_Joyce does what he said others shld do step dow https://t.co/CQrJvo7N8p \t3904.0\t438.0\t2701.0\t0.0\tLimerick, Ireland\t1.0\n380\t\"Zhoumi and Woohyun congratulating Tiffany for her 1st solo win on \"\"The Show\"\" http://disq.us/9ocg28  #Tiffany1stWinpic.twitter.com/wz4j8LxSNv\"\t0.0\t459000.0\t0.0\t0.0\tWorldwide Trends\t1.0\n381\tWhat you wanna dohttps://twitter.com/profound_dreame/status/732566257304776705 …\t0.0\t0.0\t0.0\t0.0\tEVERY MAJOR PARTY SCENE\t1.0\n382\tOnly in Ukraine: \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n383\tToday in #ausvotes Shorten went for a run, Turnbull drank in a pub, Abbott could do both... Australia still a pariah with a crap economy.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n384\tArt and Design to Host 2017 Senior Show April 25  May 12 https://t.co/1kXuqte1N6 https://t.co/67QjPvlOEy\t8301.0\t19165.0\t8856.0\t0.0\tJakarta-Indonesia\t1.0\n385\tPassenger traffic forecast to be up at major Bay Area airports  #news\t3947.0\t13281.0\t19870.0\t0.0\tSingapore\t1.0\n386\tFuck. Kathryn\u0027s lurking in the window being evilllll #CruelIntentions\t15700.0\t18800.0\t0.0\t0.0\tPortland, OR\t1.0\n387\tThe results are in! Who do you think won? @LittleMix\u0027s #Hair or @FifthHarmony’s #WriteOnMe? http://www.maximumpop.co.uk/little-mix-hair-vs-fifth-harmony-write-on-me …pic.twitter.com/1ALt1l00KT\t0.0\t130000.0\t87.0\t0.0\tOrlando, FL\t1.0\n388\tfantastic thank youfor  the opportunity have retweeted\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n389\tbihhh I wish Charlie would even think about, she gettin straight chest shots\t0.0\t0.0\t0.0\t1.0\tW/ tinkerbell  🧚🏾‍♀️\t1.0\n390\tMissing: 16-year-old Dalton Trundle from Manhattan https://t.co/DjmIYR8UwI #news\t8345.0\t23298.0\t28955.0\t0.0\tThe Multiverse\t1.0\n391\tWhat a cool graphic for a great story. #ArtTherapy truly does amazing things for many.https://twitter.com/asccares/status/732584025206984704 …\t15600.0\t30600.0\t0.0\t0.0\tSeattle, WA\t1.0\n392\tStudy: How laptops in class affect students: Laptop use in the classroom may be a distraction for some studen... http://bit.ly/1YyWfOM\t0.0\t0.0\t0.0\t0.0\tSELL ON VHF JIRAYA\t1.0\n393\t#MustBeBanned: Drake\u0027s music\t915.0\t1047.0\t1490.0\t0.0\tLondon, UK\t1.0\n394\tThe ZAP Baseline scan: https://github.com/zaproxy/zaproxy/wiki/ZAP-Baseline-Scan … - run a quick passive scan against a target, only needs @docker installed - ideal for CI/CD\t0.0\t0.0\t30.0\t0.0\tnull\t0.0\n395\t#Brussels Are you trying to say that there were no terrorist attacks in Europe before refugees were let in? #IslamKills\t74.0\t57.0\t433.0\t0.0\tLucknow, India\t1.0\n396\t#sports Pirates place Marte on paternity list, call up Hanson\t4868.0\t17315.0\t30629.0\t0.0\tDMV\t1.0\n397\tYes... That\u0027s the point of Make America Great Again! https://t.co/L5d6Q9eRTI\t2157.0\t2213.0\t10970.0\t1.0\tWashington, D.C.\t1.0\n398\tdont you dare\t0.0\t0.0\t0.0\t1.0\tStafford, VA  ✈️ Charlotte, NC\t1.0\n399\t#EstatePlanning: The Marines encourage it. Islam REQUIRES it. #tcot #2A #NRA Video: https://t.co/NL1lSR4f6A\t1294.0\t618.0\t5454.0\t1.0\tNYC \u0026 Worldwide\t1.0\n400\tDuranguito back as preferred site for arena https://t.co/5Cwqizvcj0 https://t.co/zDDmki5xsY\t3387.0\t14660.0\t3779.0\t0.0\t*Parody Account to Inspire*\t1.0\n401\t.@united forced a female passenger to change seats because two Pakistani men wouldn\u0027t sit by a woman. RETWEET if this is disgraceful!\t2160.0\t2241.0\t9896.0\t1.0\tWorldwide Trends\t1.0\n402\tA cloudy Saturday before rain moves back in https://t.co/lDmNwlskky https://t.co/cbGUEj4Kyt\t5612.0\t25329.0\t48447.0\t0.0\tTexas\t1.0\n403\tI\u0027m so excited for everyone to hear this album! I know you girls put sO much hard work into it  @Cimorellibandpic.twitter.com/misvaO72Sb\t0.0\t0.0\t0.0\t0.0\tcolorado\t1.0\n404\tAre we still pretending the Civil War was about slavery? https://twitter.com/jenn_abrams/status/725005537960562688 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n405\ta christmas horror story  #ChristmasAHorrorMovie\t3533.0\t4775.0\t6493.0\t1.0\tEdinburgh, Scotland\t1.0\n406\tA rose without thorns is like love without heartbreak\t362.0\t132.0\t722.0\t0.0\tBuffalo, NY\t1.0\n407\thives everywhere.pic.twitter.com/pafaPYDUiB\t0.0\t0.0\t0.0\t0.0\tCarmel, IN\t1.0\n408\t4 Startling Forfeiture Abuse Stories http://t.co/o20Z42P85i\t1917.0\t861.0\t3331.0\t0.0\tCary, NC\t1.0\n409\tState Department contractors detail how Clinton and her team ignored security rules | https://t.co/JqUBcfdQUL\t1339.0\t1586.0\t2243.0\t1.0\tNairobi, Kenya\t1.0\n410\tMornin Robin, Ty for givin us @RippedCream LUV this protein coffee creamer, It\u0027s heathy \u0026 tastes amazing :) xopic.twitter.com/1pRoUNTCJ6\t0.0\t0.0\t0.0\t0.0\tMassachusetts, USA\t1.0\n411\t#Israeli city bans #NickiMinaj \u0027s \u0027Anaconda,\u0027 claiming it promotes \u0027rape culture\u0027  CURVES SPREAD LOVE  #NickiGMA http://t.co/TH7LkesD25\t6680.0\t28370.0\t5050.0\t0.0\tSac-Ra-Mento\t1.0\n412\tBibe who?\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n413\t\u0027@DRUDGE . Botox injection site? Everytime she goes MIA for a debate, her face has strangely been ironed. Doesn\u0027t last tho.\u0027\t1187.0\t1409.0\t4343.0\t1.0\tnew yawk\t1.0\n414\tConcealed Carry Mistakes, Donts, and Blunders #2A https://t.co/9DrJ9StDNy\t2913.0\t2179.0\t5117.0\t1.0\tsouth wales\t1.0\n415\t@ifamilia23 happy b-day bro\t0.0\t0.0\t0.0\t0.0\tWindsor Ontario\t1.0\n416\tthe baby deal pic.twitter.com/HAz0TdlAkr\t0.0\t28400.0\t0.0\t0.0\tnull\t0.0\n417\tWh..wh...what https://twitter.com/awkwardgoogle/status/732573436292239360 …\t0.0\t0.0\t0.0\t0.0\tIndonesia\t1.0\n418\tFilipino mayor draws huge crowd in show of force before vote  #politics\t4573.0\t14497.0\t14767.0\t0.0\tUP Diliman\t1.0\n419\thttp://bit.ly/1XM21MY   Insider #Information To Help You Ace Any #Interview #jobsearch\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n420\t#WhenIAmOnMyOwnI wonder if this world is worth saving\t3573.0\t3977.0\t2755.0\t1.0\tDMV\t1.0\n421\tWouldn\u0027t that be great! I\u0027m in! Who\u0027s writing the script?!  https://twitter.com/evilregal__/status/732541265821175808 …\t0.0\t745000.0\t0.0\t0.0\tB\u0027klyn, NYC, LA\t1.0\n422\tAt least 21 killed in attacks in Central African Republic capital  #world #news\t14437.0\t13237.0\t14128.0\t0.0\tWhere I am - There I am.\t1.0\n423\tThis can\u0027t be MORE true. Often times we shame our bodies until we THINK we have reached a happy… https://www.instagram.com/p/BFgq-6UEY2g/\t0.0\t0.0\t0.0\t0.0\tAtlanta GA\t1.0\n424\t#IfICouldntLie Id start a religion. Oh, waitI guess it doesn\u0027\u0027t work that way\t1479.0\t1211.0\t1626.0\t1.0\tterminal\t1.0\n425\t#PDP used good governance agenda to fool people, has \u0027secret pact\u0027 with RSS: JKPCC http://bit.ly/1TXrBxd pic.twitter.com/hQT7AwGC62\t0.0\t2010000.0\t0.0\t0.0\tMumbai, India\t1.0\n426\tim sosososoSO happy witj how those exams went oj my god\t0.0\t0.0\t0.0\t0.0\than\t1.0\n427\t...Emoji city. Okay. LOL https://t.co/7Awf2x608E\t514.0\t897.0\t9204.0\t1.0\tLondon\t1.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n429\tAlbuquerque police searching for 6 missing, endangered children https://t.co/McWCkYnQ5a https://t.co/92mlJPDz8W\t60.0\t10.0\t793.0\t0.0\tStafford, VA  ✈️ Charlotte, NC\t1.0\n430\tHer and Billy have already destroyed their lives.criminals,even her daughter.Webbs girl. Not Billy\u0027s .she\u0027s trash.All\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n431\twen u lose game one at homepic.twitter.com/wUnbJud3L3\t0.0\t10400.0\t0.0\t0.0\tOutbak  ✈️ CLE\t1.0\n432\tTime to crack open Macbeth cause thats much more likely to come up in my chemistry exam #gcsebiology\t0.0\t0.0\t22.0\t0.0\tLouisiana, USA\t1.0\n433\t#adee RT peaceandjoy101: I do. I do. I do, because of you.  Thank you realDonaldTrump. You have given us the chance to believe in the Ameri\t995.0\t319.0\t432.0\t0.0\tMarysville, Ohio\t1.0\n434\tPankkkkpic.twitter.com/znlAO3dHbC\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n435\tPolice: La. theater killer bought gun legally  #news\t194.0\t1070.0\t470.0\t0.0\tAjmer, India\t1.0\n436\tVIDEO : President Trump Receives a HEROES WELCOME in Louisiana!  https://t.co/WI3pIJ4bLG\t4974.0\t1303.0\t1874.0\t0.0\tPA\t1.0\n437\t#ChildrenThinkThat Lady GaGa is classic rock\t1898.0\t972.0\t1488.0\t0.0\tℓσeу\t1.0\n438\tHearing set for guard charged with assaulting cuffed inmate  #local\t4054.0\t6138.0\t6442.0\t0.0\tSF x MNL\t1.0\n439\tLocal newspaper https://t.co/TIsg4gYtlL\t253.0\t2603.0\t163900.0\t1.0\tSeattle, WA\t1.0\n440\tSilly me, expecting more from CNN\u0027s @jaketapper - Edits out Hillary Clinton\u0027s \u0027Bombings\u0027 Remark https://t.co/OgnBt7m4hD via @BreitbartNews\t1349.0\t2003.0\t5103.0\t1.0\tBowling Green, OH\t1.0\n441\tAs part of mental health week, read our guest blog written by Cheshire Police about their triage scheme http://ow.ly/V4oD300edIB  #MHAW16\t0.0\t0.0\t0.0\t0.0\tUK\t1.0\n442\t#np Alan Walker - Faded\t0.0\t0.0\t2.0\t0.0\tSanta Maria da Feira, Portugal\t1.0\n443\tBryan Adams refuses to play Mississippi over anti-LGBT law https://t.co/4QpDRqXaia\t5946.0\t24475.0\t33482.0\t0.0\tin my lane\t1.0\n444\tWatch @YoungMaMusic and the @LALeakers talk #HerStory, @50Cent, ghostwriting + more: https://t.co/nSzRWjASAK https://t.co/TTHmm6OPoe\t734.0\t777.0\t5050.0\t1.0\tSingapore\t1.0\n445\tRT khunyarose: StockMonsterUSA TheJusticeDept Comey admitted it himself at Senate hearing that he LEAKED C-info to https://t.co/2X3x7ZFzgo\t1731.0\t1150.0\t4417.0\t0.0\tWarwick, RI\t1.0\n446\t\"\"\"We May Have Unlocked the Mystery of Trump\u0027s Orange Skin\"\" https://t.co/pgzPVKgNWz\"\t547.0\t852.0\t2674.0\t1.0\tAlton, TX\t1.0\n447\t\u0027@MrNegroMilitant hello brother  miss you  https://t.co/BvOwyQhnG6\u0027\t850.0\t855.0\t4827.0\t1.0\tUSR\t1.0\n448\tKeep Sol in the cut he be scheming\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n449\tBlues chat: Jeremy Rutherford Live at 1 p.m. https://t.co/w8HTez0QKd\t5256.0\t8345.0\t16863.0\t0.0\tHouston,TX\t1.0\n450\tNEW VID IN ONE HOUR!!pic.twitter.com/Ge7GmZjLCA\t0.0\t23700.0\t5.0\t0.0\tVizeh@studio71creator.com\t1.0\n451\tPhotos of taetae arrived in norway give me a shock. Too hot. The black backpackers..\t0.0\t0.0\t0.0\t0.0\tIndonesia\t1.0\n452\t\u0027@NBCNews http://t.co/u2fHK2qF4J\u0027\t9282.0\t17982.0\t8675.0\t0.0\tin way too many fandoms\t1.0\n453\tROLLERBALL 1975 movie set in 2018 Energy Corporation a global corporate state controls all http://ow.ly/TuXL300aQ03 pic.twitter.com/FbHxINFwDP\t75300.0\t80000.0\t0.0\t0.0\tLisbon, Portugal\t1.0\n454\tLearning to have an open hand. If you\u0027re holding on too tight, nothing can get out, but nothing can get in either. #morningmeditation\t0.0\t0.0\t7.0\t0.0\tPHI\t1.0\n455\tPreach! If they didn\u0027t give up, let\u0027s hold hands n continue the journey with them #REBIR7Hof2NE1https://twitter.com/ling_2ne1/status/732549387147055104 …\t0.0\t0.0\t25.0\t0.0\tnull\t0.0\n456\tProve me wrong. With data. Or STFU https://t.co/ptm3C5RJFl\t934.0\t860.0\t1427.0\t1.0\teast atlanta\t1.0\n457\tU.N. warns of \u0027race against time\u0027 for 23 million drought-stricken African farmers  #environment\t8583.0\t12278.0\t26228.0\t0.0\tSouthampton, England\t1.0\n458\t#ToAvoidWorkI avoid doing what needs to be done until my mom can\u0027t take it anymore and does it for me.\t5845.0\t6367.0\t17684.0\t1.0\tLas Vegas\t1.0\n459\tnot rly in the mood im just lazy  https://twitter.com/hajarunner/status/732586845045841921 …\t0.0\t14200.0\t0.0\t0.0\tnull\t0.0\n460\tA bottle of water is like a gulp to me\t0.0\t38000.0\t0.0\t0.0\tnull\t0.0\n461\tLingard\u0027s still here?https://twitter.com/sport_witness/status/732294054193532929 …\t0.0\t0.0\t0.0\t0.0\tflat earth\t1.0\n462\t#instapundit  I BELIEVE PARENTS DEFER TO EXPERTS BECAUSE THEY FEEL GUILTY AT HOW LITTLE TIME MOST OF THEM https://t.co/Z7IPJc4n80 #PJNet\t1528.0\t1385.0\t2152.0\t1.0\tCambridge, MA\t1.0\n463\ti guess the winners are always so predictable this is how they keep the program exciting\t0.0\t0.0\t0.0\t1.0\tmy FA is in the threads ↓\t1.0\n464\t#local Fans, social media rave return of LeBron\u0027s headband\t2920.0\t6054.0\t2930.0\t0.0\twestside mentor\t1.0\n465\t@RobertoBlake: Testing a $2000 YouTube Live Setup... (Wirecast and DSLR) https://t.co/DoN2BLOVmb\t2235.0\t2538.0\t11483.0\t1.0\tVizeh@studio71creator.com\t1.0\n466\tAsaram Bapu Ji ENTRAPPED under fake case.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n467\tThe Amazing Nurse Clitterhouse #genderswapamovie\t136.0\t74.0\t842.0\t1.0\tlistening to day6 on repeat\t1.0\n468\tSource: Moran called up, set to join Astroshttp://mlb.com/r/article?ymd\u003d20160517\u0026content_id\u003d178612988\u0026vkey\u003dnews_hou\u0026c_id\u003dhou …\t0.0\t52900.0\t48.0\t0.0\tHouston, Texas\t1.0\n469\tOver A Thousand Gather To Support Howard Co. Becoming Sanctuary County https://t.co/2a36XV7XgE https://t.co/V8ay6lvDo1\t5228.0\t6409.0\t13207.0\t0.0\tSydney, Australia\t1.0\n470\tCash rules everything around me\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n471\tBashar al Assad: Donald Trump could be a \u0027natural ally\u0027 #Syria #USA   https://t.co/xa5muwq2GL\t1788.0\t1811.0\t3231.0\t1.0\tSandton, South Africa\t1.0\n472\tI did some more research \u0026amp; now I\u0027d have to say, frankly I don\u0027t know. There\u0027s many claims, I see. I think Rasta popularized @AustinParadise7\t2240.0\t2547.0\t11084.0\t1.0\tcredits on pics | fanacc\t1.0\n473\tJolly ranchers https://twitter.com/kxng_chavis/status/731590790531584001 …\t0.0\t0.0\t0.0\t0.0\tNonchalant asf\t1.0\n474\tThe Arizona Republic partners with Facebook group Living Chandler https://t.co/JvL4Dws51e https://t.co/FZDNFE9Ka7\t6168.0\t14857.0\t22294.0\t0.0\tHell aka cheetopuff land\t1.0\n475\twhat boobies?\t0.0\t0.0\t0.0\t0.0\tToronto, Ontario\t1.0\n476\t\u0027@DanteB4u Cannot police yourselves absolute power CORRUPTS ABSOLUTLY.....\u0027\t1964.0\t2420.0\t9255.0\t1.0\tWeirton, West Virginia\t1.0\n477\tVIDEO: Irma Already Flattening the Most Solid Buildings in the Caribbean  https://t.co/0FsQLM5uh6\t4883.0\t1784.0\t583.0\t0.0\t🇺🇸\t1.0\n478\tUS says 6 supplied money, equipment to overseas terrorists  #news\t0.0\t6.0\t2903.0\t0.0\tEngland, United Kingdom\t1.0\n479\tWhen you\u0027re acting cool in front of someone but there\u0027s your friend, secretly messing with you at the back.pic.twitter.com/7PR9Pbb4Ks\t0.0\t601000.0\t1365.0\t0.0\tcredits on pics | fanacc\t1.0\n480\tDid some complicated stays with this boypic.twitter.com/Z5x4l1aIsA\t0.0\t0.0\t0.0\t0.0\tBrooklyn, NY\t1.0\n481\tLmfao the most illiterate ass lil girls are always the ones saying they don\u0027t wanna be in school like they don\u0027t need it\t0.0\t0.0\t0.0\t0.0\tPERU|MIAMI| PATWIN land//UCD 📍\t1.0\n482\tCat brothers reunited after their owners match on Tinder. https://t.co/EAPSD8nM6Y https://t.co/AUAiRGZKhN\t1201.0\t1068.0\t7318.0\t1.0\t🇨🇺 🇲🇽\t1.0\n483\tHAPPY YOUNGBAE DAY OMGOMG\t0.0\t0.0\t0.0\t0.0\texo ifnt vixx nct bp twice 9%\t1.0\n484\t#Veterans join us Tuesday May 24th at our local office in Bethel CT from 9 am -3 pm for free dental care \u0026 a suit!pic.twitter.com/mir17kHnWW\t0.0\t0.0\t0.0\t0.0\tBethel, CT\t1.0\n485\tVIDEO: Hillary Dodges Questions on Re-Donating Dirty Weinstein Money https://t.co/XJqTME6JiG\t3450.0\t1637.0\t3595.0\t0.0\tAjmer, India\t1.0\n486\tMichigan cancer doctor gets 45 years in prison  #health\t96.0\t1069.0\t555.0\t0.0\t数学ナビ\t1.0\n487\tBrawl erupts in S. Africa parliament as opposition party ejected... http://fb.me/1gk1iTSRC\t0.0\t0.0\t0.0\t0.0\tMalaysia\t1.0\n488\tPolice Arrest Hemet Man Found With Deceased Girlfriend in Vehicle https://t.co/wolVf9sZ9s https://t.co/QMDcxcvU1N\t6331.0\t17869.0\t10257.0\t0.0\tCary, NC\t1.0\n489\tCincinnatian\u0027s pods a \u0027Shark Tank\u0027 winner https://t.co/eqcU7OYOvs https://t.co/v0XD95FrUF\t9031.0\t17058.0\t12441.0\t0.0\tUK\t1.0\n490\tI posted a new video to Facebook http://fb.me/4BWoNlfjO\t0.0\t0.0\t0.0\t0.0\tBenteng, Palopo\t1.0\n491\tRT stshaw0507: Lizdolan carrieksada KevinJacksonTBS TheBlackSphere I have found other alternatives to Starbucks.\t2444.0\t1081.0\t1101.0\t0.0\twestside mentor\t1.0\n492\tAfter Orlando, Congress Gears Up for Showdown on Gun Control  #politics\t885.0\t5807.0\t7811.0\t0.0\tKyoto,Tokyo,Osaka,Japan\t1.0\n493\tWhat was the top play by the Packers defense in the regular season?  #sports\t1713.0\t2173.0\t5310.0\t0.0\tmaster threadlist\t1.0\n494\t#Homs | Clashes between #SAA and #ISIS in the vicinity of Sukhnah. SAA and allies advance from the southern and eastern side of the town https://t.co/ZmlCjwvi4i\t0.0\t32232.0\t14285.0\t0.0\tOutbak  ✈️ CLE\t1.0\n495\tBill Cosby drops remainder of federal suit against accuser  #life\t8584.0\t12278.0\t26298.0\t0.0\tHavering\t1.0\n496\tBe positive, patient and persistent.\t56.0\t40.0\t377.0\t0.0\tLimerick, Ireland\t1.0\n497\tsecurity g shempre\t0.0\t0.0\t0.0\t0.0\tMapua University\t1.0\n498\tMike Leach #endorses @realDonaldTrump in #Spokane!!! Real people for #Trump2016! #AlwaysTrump https://t.co/ZCL0Yi7PTP\t12603.0\t11541.0\t1321.0\t0.0\tTozeur Tunisia\t1.0\n499\tJust posted a photo https://www.instagram.com/p/BFg07bqnVnBgCTdc098UR2AFfnxEO_sqxW4umM0/ …\t0.0\t0.0\t0.0\t0.0\tFlorianópolis, Brazil\t1.0\n500\tEmails depict growing concern as Mizzou crisis grew  #StLouis\t4372.0\t8160.0\t13703.0\t0.0\tPennsylvania\t1.0\n501\ti like mine alllllllllllllllllllllllllll about me \u0026 allllllllllllllllllllllllllllllllll over me\t0.0\t0.0\t631.0\t0.0\tLos Angeles, CA\t1.0\n502\t11:11 $$$$$$$$ and death\t0.0\t0.0\t0.0\t0.0\tsampaloc\t1.0\n503\tI ask the man above to send me a sign bt he been did I was just blind to it bt I got it now\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n504\tEdible #bouquet anyone? Stunning arrangements fit for any foodie #bride. #wedding http://www.thebridalguide.ca/2016/05/stunning-bouquets-fit-for-the-foodie-bride/ …pic.twitter.com/yL7IxYb8cQ\t12600.0\t18300.0\t0.0\t0.0\tOntario\t1.0\n505\tHelp spread the word, Royal British Legion is offering D-Day #veterans free-of-charge tours to Normandy #RBL  https://t.co/K9YFyKomua https://t.co/sJ6c5pTFLe\t2324.0\t2738.0\t29913.0\t1.0\tUn Provinciano en Capital.\t1.0\n506\tkwilli1046 And he\u0027s probably celebrating! Celebrating that the biggest losers in America support him. What a great celebration!\t0.0\t2.0\t873.0\t0.0\tMalaysia\t1.0\n507\t#DontTellAnyoneBut I have an extra chromosome\t3053.0\t1464.0\t2083.0\t1.0\tUK\t1.0\n508\t\"#ThingsIYellWhenICum \"\"ARE YOU FEELING IT NOW MR. KRABS?\"\"\"\t0.0\t10900.0\t0.0\t0.0\tFlorida\t1.0\n509\tWasn\u0027t really a fan  https://twitter.com/allaboutjas_/status/732415859566645250 …\t0.0\t0.0\t0.0\t0.0\tJA  🇯🇲\t1.0\n510\tMassive Gator Spotted in Nature Preserve in Florida https://t.co/HeQnns0DY7 https://t.co/8dBO0zWHO1\t5146.0\t18797.0\t15025.0\t0.0\tUn Provinciano en Capital.\t1.0\n511\tWhat does it feel like in a threesome? Two women\t3246.0\t3366.0\t4124.0\t0.0\t704\t1.0\n512\t*rts to drop the hint*  https://t.co/Gi36TNRD1Y\t411.0\t763.0\t5818.0\t1.0\tKraljevo\t1.0\n513\t\"@AEIeducation review of @WhatWorksED RCTs: \"\"we need a more nuanced and thoughtful approach to evaluating curricula\"\" https://goo.gl/I1Nhes\"\t0.0\t0.0\t0.0\t0.0\tDurham, England\t1.0\n514\t\u0027@BlackMoses2015 We gotta wake up before it\u0027s too late. \u0027\t857.0\t894.0\t1305.0\t1.0\tUSA\t1.0\n515\t#beai FLASHBACK : Remember When Obama Called Islamic Terror Workplace Violence? https://t.co/9UqpWSl99F #beas https://t.co/vOE4FQLQ23\t2854.0\t1040.0\t2164.0\t0.0\tHarlem, NY\t1.0\n516\tPD: Passenger thrown from car during chase, dies https://t.co/AcMAO35gxF https://t.co/OD4a64ad4W\t6231.0\t16502.0\t8223.0\t0.0\tbrunei\t1.0\n517\tlol i am!!\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n518\tI can\u0027t wait to be out of Friendswood, done with school, and move on from Bj\u0027s. It\u0027s just right around the corner\t0.0\t0.0\t2.0\t0.0\tnull\t0.0\n519\tKnockout Game In St. Louis: White Man Viciously Beaten For No ApparentReason https://t.co/dtAiQsNDh9 https://t.co/j9Jm7KkqfM\t1646.0\t1533.0\t2156.0\t1.0\tMumbai, India\t1.0\n520\tjust finding my bucket and spade!\t0.0\t19000.0\t0.0\t1.0\tCardiff\t1.0\n521\tEBay\u0027s StubHub to resell Yankees tickets from July  #tech\t8590.0\t12285.0\t24315.0\t0.0\trm 201\t1.0\n522\tArd I\u0027m done  #prom2k16pic.twitter.com/viC9TolBaf\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n523\t#StopTheGOP  #GOPDebate Italian gay rightsdebate prompts rethink of sacred family\t58.0\t61.0\t40.0\t0.0\tCambridge, MA\t1.0\n524\tLmao what did they put in her lunchables bruhpic.twitter.com/U1COKSIsjX\t0.0\t14800.0\t459.0\t0.0\tHell aka cheetopuff land\t1.0\n525\tInvestment firms representing $15 billion in assets want #Ohio to restore renewable + #EnergyEfficiency standards:http://www.bizjournals.com/dayton/news/2016/05/16/investment-firms-ask-kasich-clean-energy.html?ana\u003dRSS%26s\u003darticle_search …\t0.0\t0.0\t5.0\t0.0\tWashington, D.C.\t1.0\n526\tIt\u0027s official! Modest! Golf Management is a thing! Congratulations to @niallofficial and Modest! pic.twitter.com/Fd26UNTV95\t0.0\t0.0\t0.0\t0.0\tExo-Planet\t1.0\n527\t#laww Senior Congressional Leaders are Calling on Wasserman Schultz to STEP DOWN! https://t.co/2wDUAL5oxE #law https://t.co/8eiAaZM5m9\t2996.0\t620.0\t2156.0\t0.0\tlistening to day6 on repeat\t1.0\n528\ti\u0027m bored, anyone up for a Game?\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n529\t#breaking #LA Westbound 210 Freeway reopens in Pasadena after big-rig crash http://t.co/97VSxs3SoP\t343.0\t126.0\t770.0\t1.0\tNowhere or Everywhere.\t1.0\n530\tYou never know who you\u0027ll meet at the #Schulich Helpdesk. A true selfie honour to nab our #1 ambassador!pic.twitter.com/9P0o6BvqH1\t0.0\t0.0\t0.0\t0.0\tToronto, Canada\t1.0\n531\tDingell to truTV: I just need a damn number, people  #politics\t7637.0\t17161.0\t21174.0\t0.0\tIllinois, USA\t1.0\n532\tAverage home prices up year-over-year in Bay Area  #news\t4023.0\t13191.0\t19652.0\t0.0\t数学ナビ\t1.0\n533\tjenny\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n534\tU wakin up in cold sweats they just dreams You still apoligizin\u0027 analyzin, my size and your size and Realizin\u0027 a fist fight would be asinine\t450.0\t833.0\t5779.0\t1.0\tNew Delhi\t1.0\n535\tWho knows? Maybe while they\u0027re discovering new places in Japan ma discover din nila ang feelings nila sa isa\u0027t isa. CHAR  #HopiaNation\t0.0\t23000.0\t142.0\t0.0\tDe La Salle University-Manila\t1.0\n536\tThis clown .@stinchfield1776 demands conservatives OBEY \u0026 vote Trump, asking nothing, or we\u0027re unAMERICAN. .@FDRLST\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n537\t\u0027@CATS_PAWS @annaleclaire. You are so right!  Americans are so brainwashed on this.\u0027\t2718.0\t2146.0\t4415.0\t1.0\tUnited States\t1.0\n538\t#Miami Motorcyclist killed in Margate crash, police say  #local\t74.0\t158.0\t7464.0\t1.0\texo ifnt vixx nct bp twice 9%\t1.0\n539\tlittle tardy to the party, lol. It was awesome last night though.\t0.0\t0.0\t0.0\t1.0\tFort Myers, FL\t1.0\n540\tThe Clubs feature is way too exploitable via /r/thesims http://ift.tt/1R6nk5R\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n541\tTrump Was Right\u003d\u003e At Least Nine American Members of ISIS Were Immigrants to US https://shar.es/1dgRFv  via @gatewaypundit\t0.0\t140000.0\t87.0\t0.0\tSt. Louis, Missouri\t1.0\n542\tThe Corrupt Clinton Foundation Should be Shut Down! https://t.co/XXvpj0QwCT\t838.0\t1311.0\t4519.0\t1.0\tBuffalo, NY\t1.0\n543\tESU baseballs first game in MIAA Tournament postponed https://t.co/l1Ocbhy2RW https://t.co/ufFFDFG6d3\t4998.0\t25796.0\t49813.0\t0.0\tar ✈️ga ✈️tx\t1.0\n544\tChiefs win AFC West title with win over Chargers 37-27 https://t.co/I9Cj7Gyw7S https://t.co/a5ZBugumCC\t5379.0\t15507.0\t17897.0\t0.0\tArgentina\t1.0\n545\tHad a lot of fun with @Jcie__ \u003c3  looking forward to doing it again :Dpic.twitter.com/HZuK8S3W7b\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n546\tLmao men are gonna be crying about two hoes with this new dog filter\t0.0\t0.0\t0.0\t0.0\tSeattle, WA\t1.0\n547\tPennsylvania lawmakers work through weekend on state budget  #local\t6669.0\t12534.0\t10918.0\t0.0\tAnfield, Liverpool\t1.0\n548\t\"\"\"The Tainted Election\"\" California college teacher says Trump election victory an act of \"\"terrorism\"\"  It\u0027s shocking. MUST BE FIRED! https://t.co/rWw9mdSV1g\"\t28534.0\t28685.0\t2310.0\t0.0\tMost likely at some airport\t1.0\n549\tTurnout for Los Angeles County election expected at around 12 percent https://t.co/5lXbpiQP8q https://t.co/ZSlWaPqQ9N\t6306.0\t17901.0\t12095.0\t0.0\tterram fatali\t1.0\n550\t20 Things I’d Tell My Former Single Self Now That I’m Married http://ow.ly/bkNh300hFQb\t43700.0\t43900.0\t0.0\t0.0\tLagos, Nigeria\t1.0\n551\tAll I want is a #SST shirt got dammit. #SativaSportsTalk\t0.0\t0.0\t0.0\t0.0\tSac-Ra-Mento\t1.0\n552\tIf you want to know how much I love you, look into my eyes with your heart open.\t0.0\t0.0\t0.0\t0.0\tbandung\t1.0\n553\tEarly Christmas gift for skiers: big snowfall in Flagstaff https://t.co/KZxkfaEUWF https://t.co/oUSAoT20cW\t7585.0\t16261.0\t16386.0\t0.0\tUn Provinciano en Capital.\t1.0\n554\t#politics Governor Wolf seeks state authority over health insurance marketplace\t5918.0\t12275.0\t9164.0\t0.0\tmaryland or DC\t1.0\n555\t#SusanRice is just another Obama/Hillary loyalist who is behind the unmasking of Trump in NSA intel. Disgusting!!  https://t.co/pMNM8gXVOf https://t.co/eb3C2uEF0e\t3320.0\t3229.0\t2832.0\t1.0\tBarcelona\t1.0\n556\tDoug McDermott scores career-high 31 as Bulls fight past Grizzlies https://t.co/9yZFZCoR2c https://t.co/hMpVpP4BB8\t6938.0\t19799.0\t44392.0\t0.0\tSouth Texas\t1.0\n557\tBREAKING : Another NFL Player Refuses to Stand For National Anthem https://t.co/PghRAX3VzY https://t.co/MxMdxCGvdt\t0.0\t1.0\t342.0\t0.0\tSouth Texas\t1.0\n558\tGET THE HOOK UP ON A BOOGS MALONE HOOK AT https://t.co/HD2IWLWYvB Collaborate on my next track #Hiphopbeats\t597.0\t712.0\t3958.0\t1.0\tUnited States\t1.0\n559\tparents: why don\u0027t you come socialize with the family? me:*sits with family* me:*gets insulted by entire family* me:*goes back to bedroom*\t337.0\t23.0\t625.0\t0.0\tThe Snow Forest\t1.0\n560\tRosenstein Mueller \u0026amp; #CorruptCongress have NO credibility with #WeThePeople THEY THINK WE ARE STUPID  we reject y https://t.co/hzirUTVn5M\t1731.0\t1148.0\t4348.0\t0.0\tin way too many fandoms\t1.0\n561\tMe too https://twitter.com/_hechoset/status/732565422155829248 …\t0.0\t0.0\t0.0\t0.0\tUnited States\t1.0\n562\tBetter to be slapped by the truth than kissed with a lie.\t0.0\t163000.0\t366.0\t0.0\tWorldwide\t1.0\n563\tRT PoliticalShort: Important point by FoxNews reporter Doug McKelway. Where were the police in #Charolettesville?  https://t.co/NMquiSsJa1\t34.0\t6.0\t744.0\t0.0\tSpring Lake \u0026 Sea Girt, NJ\t1.0\n564\tNow Playing on Hip Hop \u0026 RnB T.I. - Private Show\t0.0\t0.0\t0.0\t0.0\tUnited States\t1.0\n565\t\u0027@Cernovich @PRyan This is sooo scary. We have enough problems of our own why bring these thugs here? https://t.co/TECE7STNcr\u0027\t833.0\t1463.0\t4225.0\t1.0\tUnited States\t1.0\n566\tAn opportunity to start new  businesses awaits @2xAwesome @Penzaarville @JolaSotubo @AfroVIIpic.twitter.com/Tvrd7Tslnu\t0.0\t0.0\t0.0\t0.0\tLagos, Nigeria\t1.0\n567\tMASAKI YODA -Think Your Heart- http://marsproject.dip.jp/mars_project6/mp3/free/masaki_yoda/Think_Your_Heart.htm … #Song #tune #música #ouvir #Japão #informação\t0.0\t40700.0\t0.0\t0.0\tJapan\t1.0\n568\tCrown Candy\u0027s Andy Karandzieff files for St. Louis mayor https://t.co/b0a7EFoidE https://t.co/bDIMxQ0NFR\t5204.0\t8294.0\t17990.0\t0.0\tUnited States\t1.0\n569\tSame here! but don\u0027t forget to POWER VOTE ADN hahaha! happy lang:))\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n571\tWhen you\u0027re riding shotgun and your friends are having fun in the backseatpic.twitter.com/UklpXsoT20\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n572\tThe season opener against @BadgerFootball on Sept. 3 will kickoff at 2:30 pm CT and air on ABC. #GeauxTigers\t0.0\t661000.0\t457.0\t0.0\tBaton Rouge, LA\t1.0\n573\tthanxxxxx @garti21 for the reply  looks like now her dream will come true @muskaanjain99  hope u come OL ASAP\t0.0\t0.0\t0.0\t1.0\tNew Delhi\t1.0\n574\twould be the ultimate hail chasing unit right here haha!!\t0.0\t0.0\t0.0\t1.0\tCanada\t1.0\n575\tCNN Just Told Kellyanne Conway To Go F*ck Herself In The BEST Way Possible(TWEETS) https://t.co/VV4malZBcd https://t.co/PlZQCTSFJ0\t1707.0\t1626.0\t3268.0\t1.0\tUnited States\t1.0\n576\tObama made secret deal w/Australia 2 TRADE legal Christian refugees here 4 Australias Muslim ILLEGAL immigrants https://t.co/1JFZjEUNQt\t1328.0\t1919.0\t6514.0\t1.0\tUnited States\t1.0\n577\tFor those wondering, yes, Andrew Luck is practicing normally. Let this be the merciful end of #AndrewLuckInjuryWatch.\t0.0\t32400.0\t0.0\t0.0\tnull\t0.0\n578\tPeople who love you, want you to be happy.  There are no exceptions.\t0.0\t0.0\t0.0\t0.0\tTwitter\t1.0\n579\tWITCH HUNTER Criminal MUELLER  DID BUSINESS WITH RUSSIA he delivered OUR uranium 2 Putin 4 Hillary who collecte https://t.co/veMHNvKRWO\t1731.0\t1185.0\t4745.0\t0.0\tflat earth\t1.0\n580\tThis graffiti artist\u0027s year-long battle with the council is pure poetry http://t.co/tPxYOZviN4 http://t.co/9BJPKwlQDu\t178.0\t102.0\t442.0\t1.0\tUnited States\t1.0\n581\tPeyton Manning has defeated Ron Rivera in a Super Bowl https://t.co/xbQ97bQQvY\t12470.0\t16019.0\t37048.0\t0.0\tUnited States\t1.0\n582\tTrump can\u0027t even find minorities to hold signs at rallies.  #WomenWhoVoteTrump https://t.co/Z8awbo6DOY\t903.0\t839.0\t1896.0\t1.0\tUnited States\t1.0\n583\t@Miaxoxo22 People who don\u0027t know shouldn\u0027t believe just anything\t0.0\t0.0\t0.0\t1.0\tThe here and now\t1.0\n584\tNot a #ThisFlag follower much but, Where are the real political analyst in Zim?Coz I\u0027m not sure what Tafadzwa is @RuvhenekoP @DougColtart\t0.0\t0.0\t0.0\t0.0\teverywhere #teamCHOCOLATE\t1.0\n585\tI see #SusanRice is trending... Could it have anything to do with this latest @adamhousley report?#ObamaGate https://t.co/ZO120jsYRL\t2657.0\t2171.0\t7517.0\t1.0\tUnited States\t1.0\n586\tWhat the Media Shows You vs. What Really Happened https://t.co/PYrbfJIcx0 #beeth https://t.co/l7f6UIEgLy\t0.0\t1.0\t720.0\t0.0\tUK\t1.0\n587\t@sueanna_dodd the highlight of dolce amore for tonight! Galing! Hands down...\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n588\tOnline predator pretended to be @Zoella to groom children, has been jailed for eight years http://trib.al/1zfjBIO\t0.0\t4920000.0\t1547.0\t0.0\tLondon, UK\t1.0\n589\t#BREAKING Crisis-hit Austria appoints new Chancellor Christian Kern\t0.0\t1560000.0\t36.0\t0.0\tFrance\t1.0\n590\tLord. https://twitter.com/onlyonedasia_/status/731866943641288704 …\t0.0\t0.0\t0.0\t0.0\t🌙\t1.0\n591\t\u0026amp; now you know why I fucking love England sooooo much !!!!!! London was un-fucking-believable \u0026amp; https://t.co/UxGTkltjG1\t698.0\t702.0\t3113.0\t1.0\tUnited States\t1.0\n592\tVIDEO : Foul-Mouthed DNC Chair Tom Perez Continues to CURSE at Events https://t.co/K4J0b1NCeS https://t.co/nOpV2ob04E\t4293.0\t3016.0\t23635.0\t0.0\tDurham, England\t1.0\n593\tof #NerveDJs #Spinning @DJHiVolume - The Hi Volume Mixshow V55 on @NerveDJsRadio Get Rotation https://t.co/yAotc1fTnI\t833.0\t927.0\t7769.0\t1.0\tUnited States\t1.0\n594\tI\u0027ll match that for every RT and double it.  https://t.co/SPMeNzOvi3\t538.0\t186.0\t710.0\t1.0\tUnited States\t1.0\n595\tAmazon’s New Online Video Platform  Doesn\u0027t Need To Beat YouTube To Win http://buff.ly/1Xp9LpD\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n596\t\"\"\"Of course we want all women to have #equalpay\"\" @mercedesschlapp. #womenLEAD\"\t68.0\t141.0\t2669.0\t1.0\tUnited States\t1.0\n597\tThe #OgdenRiver below Pineview at 375 cfs, a drop of about 75 cfs from yesterday.\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n598\tWith a starting price of $130,000, they\u0027re not for hobbyists. \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n599\tokay whose dog and what kind? Sorry, not at all related to the finale.... but.. dogs...\t0.0\t0.0\t0.0\t1.0\tUSA\t1.0\n600\tRT JuliannAssange: ChelseaClinton Why don\u0027t you return the $3 million that you pilfered from the Haitian relief fu https://t.co/foFv2rt87x\t1735.0\t1072.0\t4010.0\t0.0\tLimerick, Ireland\t1.0\n601\tVIDEO: ONE Steelers Player Left the Locker Room to STAND FOR THE ANTHEM https://t.co/TWViuc37FO\t4769.0\t1427.0\t1322.0\t0.0\tWhere I am - There I am.\t1.0\n602\tI wonder if @charleshamilton is still jacking producers for their beats like he did my brother.\t920.0\t815.0\t3086.0\t1.0\tUnited States\t1.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n604\tCarol Santalucia\u0027s accountability talk!!  #PESummit @TruthPointPXpic.twitter.com/olIIFubFIA\t0.0\t0.0\t0.0\t0.0\tNorthEast\t1.0\n605\thell yeah https://twitter.com/sexualgif/status/732527857738649600 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n606\tReal places that inspired scenes in Oscar-nominated films https://t.co/fuSkI71WwC\t6315.0\t19045.0\t32840.0\t0.0\tUnited States\t1.0\n607\twth did you do?\t0.0\t0.0\t0.0\t1.0\tParts Unknown\t1.0\n608\tJoin #HCFVEDCHAT on Thurs May 19 at 8pm for a conversation on mastery based learning.pic.twitter.com/J8BqQ96iHo\t0.0\t0.0\t0.0\t0.0\tConnecticut, USA\t1.0\n609\t\u0027@BlakeDontCrack we should be able to protect ourselves!\u0027\t4640.0\t1382.0\t759.0\t0.0\tUnited States\t1.0\n610\tr u being cyber bullied :D\t0.0\t0.0\t0.0\t0.0\tMoscow, Russia\t1.0\n611\tAmen and all American citizens. Something Barry the con man said he would do but never did it. Didnt support blacks as he promised either. https://t.co/20isszhFil\t1042.0\t768.0\t5139.0\t1.0\tUnited States\t1.0\n612\tFuck the bitch I got her mad\t0.0\t0.0\t0.0\t0.0\tChicago, IL\t1.0\n613\tY\u0027all relationship ain\u0027t real if y\u0027all can\u0027t share old hoe stories..\t0.0\t0.0\t665.0\t0.0\tSouth.\t1.0\n614\t\u0027@MittRomney COMPANIES had 110 TIMES MORE BK\u0027s than @realDonaldTrump @DRUDGE_REPORT  https://t.co/hkndeh76AK\u0027\t373.0\t683.0\t1869.0\t1.0\tUnited States\t1.0\n615\tfeel so real\t0.0\t0.0\t0.0\t0.0\tℓσeу\t1.0\n616\tduh? https://t.co/sqVka9PQwn\t4124.0\t8006.0\t9805.0\t1.0\tUnited States\t1.0\n617\tVitamin C: the breakfast of champions...\t1566.0\t1387.0\t1449.0\t1.0\tUnited States\t1.0\n618\tTeacher arrested for alleged child annoyance https://t.co/P20e9LLgK1 https://t.co/B4XVjz5usg\t6528.0\t17544.0\t40357.0\t0.0\tUnited States\t1.0\n619\t#IBurstThroughTheDoorAnd as I left for the hospital, I asked what they use to clean that glass. So clear... https://t.co/w1vHLkrg6b\t1183.0\t2000.0\t950.0\t1.0\tUnited States\t1.0\n620\t#top RT Gregoriodownlow: Enforce MCCARRON WALTERS Act, \u0026amp; updated  Immigration Act  Laws with teeth already on the  https://t.co/KbAx80CcMo\t3940.0\t1028.0\t7003.0\t0.0\tHell aka cheetopuff land\t1.0\n621\tAsking for help isn\u0027t a sign of weakness, ask Prof Nazira Karodia #AndAScientist #PhdAdvice http://ow.ly/eS2k300hRMK pic.twitter.com/3ScCo3WHCU\t0.0\t230000.0\t0.0\t0.0\tLondon, UK\t1.0\n622\t\"#TopVideo Board Chair: Violent arrest of student \"\"unforgivable\"\" https://t.co/gmlY8X1TDH\"\t10341.0\t11442.0\t12493.0\t0.0\tUnited States\t1.0\n623\tas my ignored tweet gently weeps...\t2018.0\t2363.0\t2632.0\t1.0\tUnited States\t1.0\n624\tSteve Scalise shooting won\u0027t stop Congress baseball tradition https://t.co/dw2cOz7ulv\t0.0\t14.0\t1000.0\t0.0\t$$$$$\t1.0\n625\tIt is demonic to say children do not need mothers and fathers -@Card_R_Sarah @NatCathPrBrkfst #NCPB\t0.0\t0.0\t55.0\t0.0\tWashington, DC\t1.0\n626\tThe universal symbol for a menstrual cycle should be a silhouette of a woman just screaming at an apple.   Which is irrational.   So yeah\t913.0\t1090.0\t1551.0\t1.0\tUnited States\t1.0\n627\tPowerful analysis by @RichardAEpstein: The deal will increase the risk of war and terrorism in the Middle East.  http://t.co/nEXS4d2Mfs\t65.0\t130.0\t10393.0\t1.0\tUnited States\t1.0\n628\tWATCH: Here is a typical #BlackLivesMatter protester:  \u0027I hope I kill all white babes!\u0027 #BatonRouge https://t.co/X1HRCknqVi\t19482.0\t19916.0\t2217.0\t0.0\tUnited States\t1.0\n629\t2 Kansas administrators charged with failing to report abuse https://t.co/Dc6UBrq7tV https://t.co/KCNLIsHOvv\t4255.0\t25237.0\t47158.0\t0.0\tUnited States\t1.0\n630\tI was happy for a minutepic.twitter.com/Z1grPbR6eO\t0.0\t0.0\t0.0\t0.0\tNairobi\t1.0\n631\tHappy B-day @Realtaeyang pic.twitter.com/9uw18IvVkh\t0.0\t0.0\t0.0\t0.0\tExo-Planet\t1.0\n632\t@playbingobash Gems are sparkling everywhere! in #BingoBash!!! http://bash.gg/1Y35AQ0\t0.0\t0.0\t0.0\t0.0\tbrunei\t1.0\n633\tClaim your girl, love your girl, do your girl, spoil your girl, be faithful to your girl, trust your girl, \u0026 she will stay your girl.\t64800.0\t79400.0\t123.0\t0.0\t*Parody Account to Inspire*\t1.0\n634\tGirl called in the radio station and said she used to cut heroin, got caught \u0026 her BF took the charge for her so she could finish college.\t0.0\t14200.0\t403.0\t0.0\teast atlanta\t1.0\n635\tI posted a new photo to Facebook http://fb.me/7Ooh9uXHT\t0.0\t0.0\t0.0\t0.0\tUP Diliman\t1.0\n636\tIM WHEEing\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n637\tShe may be The Queen  on #OUAT but she\u0027s A REAL QUEEN  in real life. #LifeIsBeautifulpic.twitter.com/w6Mx9N6UCU\t0.0\t0.0\t6.0\t0.0\tnull\t0.0\n638\tthanks so pls make my life easier by not sitting at the side of the lecture before I come in\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n639\tyou can be so pretty, so educated, so rich etc.. but some men will still fuck the hoe that looks like an alien on meth. that\u0027s life.\t0.0\t0.0\t0.0\t0.0\t🇺🇸\t1.0\n640\tReally? Car seats stolen from car at hospital https://t.co/Cps7iNH4hZ\t5442.0\t14944.0\t18830.0\t0.0\tUnited States\t1.0\n641\tAnti-austerity alliance captures vote of Spain\u0027s crisis-hit poor: BARCELONA, June 1 (Reuters)... https://t.co/GCg7zgZ7W0 via @josephjett\t508.0\t400.0\t1089.0\t1.0\tUnited States\t1.0\n642\tyou mean this guy?! @EVEGunjackpic.twitter.com/OPTQetKvou\t0.0\t0.0\t0.0\t1.0\tNowhere or Everywhere.\t1.0\n643\tYOU\u0027RE A FUCKING WEABOO\t0.0\t0.0\t0.0\t1.0\tPhiladelphia, PA\t1.0\n644\tFrom the Archives: Don Rickles on Live at Five https://t.co/2PVibNe7RY https://t.co/u1T1N0NbWn\t13077.0\t61651.0\t50848.0\t0.0\tUnited States\t1.0\n645\t\u0027@mashable @theretronaut seems easy\u0027\t8728.0\t28796.0\t5247.0\t0.0\tUnited States\t1.0\n646\tThings to do but lacking willpower to work on them.\t0.0\t0.0\t0.0\t0.0\tSlowtown\t1.0\n647\t\"Klopp: \"\"Both teams took this tournament as really important. Now we are in the final. It\u0027s well deserved.\"\"\"\t378000.0\t1.12E7\t795.0\t0.0\tAnfield, Liverpool\t1.0\n648\tHow come they don\u0027t call it Chestma? #asthma #health\t68.0\t54.0\t7.0\t0.0\tUnited States\t1.0\n649\tToo bad we\u0027re all not valedictorians\t0.0\t0.0\t23.0\t0.0\tnull\t0.0\n650\tlol you\u0027re like a walking random facts booklet... Wait how gelatin have animal bones ?\t0.0\t0.0\t0.0\t0.0\tLexington,Kentucky\t1.0\n651\tThe Lion, the Witch and the Wardrobe Malfunction #MistakeAMovie http://t.co/elk0wOKy34\t108.0\t211.0\t1003.0\t1.0\tUnited States\t1.0\n652\tI may be smiling, but deep down inside I\u0027m hurting a lot .\t0.0\t0.0\t257.0\t0.0\tnull\t0.0\n653\tClif Bar recalls trail mix, energy bars on Listeria concerns https://t.co/1jRWjzkzCf #news\t8556.0\t24878.0\t37126.0\t0.0\tUnited States\t1.0\n654\t@GaryBarlow @Bekijo1 #GetGaryToBekiandPhils40th hope it\u0027s on your calendar Gary!! Please say yes!!! RSVP please xxxpic.twitter.com/SYI0i34m4B\t0.0\t0.0\t0.0\t0.0\tsouth wales\t1.0\n655\t\"One person close to Trump transition, noting all the military folks, said, \"\"It\u0027s beginning to look like Seven Days in May\"\"\"\t806.0\t903.0\t2891.0\t1.0\tUnited States\t1.0\n656\tI LEGIT SCREAMED\t0.0\t0.0\t0.0\t0.0\tですpacito\t1.0\n657\tRemember the ending of 2001: A Space Odyssey when David Bowman meets older versions of himself? https://t.co/iyQ30NnWqH\t693.0\t767.0\t8212.0\t1.0\tUnited States\t1.0\n658\tI think it\u0027s probably necessary to assault that police officer. See how necessary my court is immediately following. https://t.co/q4ujCTLV15\t245.0\t235.0\t838.0\t1.0\tUnited States\t1.0\n659\t\u0027@chicagotribune isn\u0027t it too dangerous?\u0027\t13068.0\t15083.0\t2896.0\t0.0\tUnited States\t1.0\n660\tActivists take fracking fight to feds\u0027 homes http://washex.am/1smwJSj  via @DCExaminer\t19400.0\t17600.0\t0.0\t0.0\tSpringfield Tn\t1.0\n661\tAlliant to spend $620 million to close, clean up coal fired plants  #business\t96.0\t1064.0\t664.0\t0.0\tUnited States\t1.0\n662\tPilot killed in Georgia plane crash https://t.co/Gs2iugEtoN\t7095.0\t17392.0\t5826.0\t0.0\tUnited States\t1.0\n663\tLiberal Violence Forces a Pro-Trump Rally to be CANCELED https://t.co/173BNeUHRH https://t.co/i7J1GImlVS\t0.0\t0.0\t99.0\t0.0\tUnited States\t1.0\n664\tGOP lawmaker town halls face liberal discontent https://t.co/vJzq9BtuNO https://t.co/4pEXHKXzFK\t7441.0\t18899.0\t21331.0\t0.0\tUnited States\t1.0\n665\tI know and some big time free agents lol\t0.0\t0.0\t0.0\t0.0\tAlton, TX\t1.0\n666\tThis baby ain\u0027t even 5 yet and she\u0027s already cooler than mepic.twitter.com/xYimSqVkF5\t0.0\t124000.0\t305.0\t0.0\tnull\t0.0\n667\tit\u0027s never enough\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n668\tit\u0027s gon be lit dm for more info  https://t.co/mlYuEejfk5\t729.0\t791.0\t6294.0\t1.0\tUnited States\t1.0\n669\tI\u0027m back home @ConcordBrooklyn and @RevEmmaJ is preaching today!!!  Church bout to be  https://t.co/fUIpj4ZUiF\t730.0\t605.0\t1369.0\t1.0\tUnited States\t1.0\n670\t#aankhodekhitoday #India rejects Pakistan objections to map regulation bill: Islamabad said… http://goo.gl/fb/KUHBdE\t0.0\t0.0\t0.0\t0.0\tAhmadabad City, India\t1.0\n671\tWeird how people who complain that Walmart mistreats their workers are just dying to trade with Castro.\t2167.0\t2238.0\t9018.0\t1.0\tUnited States\t1.0\n672\t#abi Fake News Media Completely Ignores Trumps BOOMING Economy https://t.co/THPfahSol7 #ABISS https://t.co/KwSXNQCB8H\t975.0\t611.0\t21.0\t0.0\tUnited States\t1.0\n673\t15 Quotes From People Who Knew the Young Bernie Sanders http://www.dailykos.com/story/2015/12/11/1459243/-15-Quotes-From-People-Who-Knew-the-Young-Bernie-Sanders …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n674\t#StopIslam #IslamKills #Bruxelles #PrayForBrussels ...\t1656.0\t1131.0\t1314.0\t0.0\tUnited States\t1.0\n675\tWhite House advisor says U.S. activity in South China Sea will continue  #world #news\t14402.0\t13234.0\t17587.0\t0.0\tUnited States\t1.0\n676\tSpecial ed teacher allegedly had sex with several students https://t.co/aYmmHryLjb https://t.co/Nk0w5V60d4\t9726.0\t61699.0\t58945.0\t0.0\tUnited States\t1.0\n677\t#US declares readiness to abandon support for Nur al-Din Al-Zanki, if claims are proved   https://t.co/1n7wG5F3MK https://t.co/55g3gFYKMq\t5937.0\t20348.0\t6926.0\t0.0\tUnited Kingdom\t1.0\n678\tsometimes I forget what I look like without glasses and it freaks me out...\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n679\tbefore I saw this I said the same thing. #SticksandStones\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n680\tyou dated my hg so we friends :) plus you never answer when im around\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n681\tIs it pronounced as yougurt? Yogurt?\t0.0\t0.0\t0.0\t0.0\tfl • ocrp\t1.0\n682\tFirefighter captain charged after fatally shooting 16-year-old https://t.co/8EdsZGsaTJ https://t.co/XT3Kox3o4u\t5982.0\t60798.0\t43603.0\t0.0\tUnited States\t1.0\n683\tHere comes the bride....https://twitter.com/michaelausiello/status/732313547796054018 …\t0.0\t229000.0\t0.0\t0.0\tnull\t0.0\n684\tI WONDERED WHAT HAD HAPPENED w/ MY PIC! .IT GOT AWAY PREMATURELY! THIS PIC SHOWS MORE #PLAGIARISTS #INFRINGERS OF MY WORK ABT #OBAMA. -me\t0.0\t0.0\t0.0\t0.0\tWhere I am - There I am.\t1.0\n685\tChoose someone who chooses you.\t0.0\t41100.0\t0.0\t0.0\tA place I\u0027m happy to be\t1.0\n686\tnew girl https://twitter.com/sebuckstians/status/732305831027482624 …\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n687\tshouts to pretty emo bitch @j3s_journal y\u0027all show him some love his music will heal that void in your soul\t0.0\t0.0\t0.0\t0.0\t$$$$$\t1.0\n688\tNeitherhttps://twitter.com/lillexie_19/status/732581588362387462 …\t0.0\t0.0\t0.0\t0.0\tHouston, TX\t1.0\n689\t#ToDoListBeforeChristmas Buy Christmas cards that I forget to send Every year\t14688.0\t21927.0\t14091.0\t1.0\tUnited States\t1.0\n690\t99tf rosalie_lane RealJamesWoods You are so silly HRC really used super glue on those blinders -We would already https://t.co/0I7KI3Z80W\t2948.0\t540.0\t1589.0\t0.0\t数学ナビ\t1.0\n691\tRestocked and limited. The perfect gift: new handmade Medicine Bags by Nathalie Waldman. \u003e\u003e http://shop.beyondbuckskin.com/category/new pic.twitter.com/jD97kwUUGc\t0.0\t0.0\t7.0\t0.0\tnull\t0.0\n692\t\u0027@christwords199 Trump is always on the wrong side of the argument smh\u0027\t1979.0\t1206.0\t4352.0\t0.0\tUnited States\t1.0\n693\tYou don\u0027t even have a profile pic so you wouldn\u0027t won anyhow #unknown\t0.0\t66000.0\t0.0\t0.0\t▼ Watch My Videos\t1.0\n694\tThank you. What a great day it was ! https://twitter.com/JaymeMcKenna/status/732565365050478592 …\t0.0\t0.0\t0.0\t0.0\tNederland\t1.0\n695\tVIDEO: AWKWARD! Trump Meets San Juan Mayor Face to Face! https://t.co/dIvDxYVd8x\t4889.0\t1814.0\t4821.0\t0.0\tSolana Beach, CA\t1.0\n696\tWhen I choose to do something, it\u0027s because I\u0027m passionate about it. I no longer dedicate my time to things that don\u0027t move me\t2523.0\t2986.0\t4600.0\t1.0\tUnited States\t1.0\n697\tHashtag Roundup-Thursday HAPPY THANKSGIVING   App available iOS/Android: https://t.co/ksALqMcxr4 https://t.co/43fuy8tV8M\t2548.0\t2306.0\t2527.0\t1.0\tUnited States\t1.0\n698\tIn who? https://twitter.com/jaaaaaymomma/status/732583632515309568 …\t0.0\t0.0\t9.0\t0.0\tAtlanta fucking Georgia\t1.0\n699\t17 charges filed against suspect in Puyallup rampage  #local\t14072.0\t12842.0\t10148.0\t0.0\tUnited States\t1.0\n700\tTurkey nationalists reject minority government in blow to Erdogan  #world #news\t14498.0\t13266.0\t10601.0\t0.0\tUnited States\t1.0\n701\tI guess that how it goes when you stay back home and never leave\t0.0\t0.0\t0.0\t0.0\tLouisiana, USA\t1.0\n702\tWhen I say Unk and them was wild\u0027n earlier I tell you no chill was in existent \t450.0\t809.0\t5158.0\t1.0\tUnited States\t1.0\n703\tRepublicans close the digital gap as web gurus go head-to-head  #tech\t64.0\t157.0\t3116.0\t1.0\tUnited States\t1.0\n704\tJK Rowling defends Donald Trump\u0027s right to be offensivehttp://ti.me/201uuig\t0.0\t1.59E7\t150.0\t0.0\tnull\t0.0\n705\tRookie docs can work 24-hour shifts under new rules https://t.co/i9hPHeyTZ7 https://t.co/jD4RRqJdBR\t9529.0\t19240.0\t21776.0\t0.0\tUnited States\t1.0\n706\t#BeingBlackIs Strong and beautiful  \t397.0\t205.0\t864.0\t1.0\tUnited States\t1.0\n707\tTake your pick: American Elite Telecaster vs. American Elite #Telecaster Thinline http://shop.fender.com/en-US/elite-series …pic.twitter.com/kh6VE0KUts\t12000.0\t644000.0\t285.0\t0.0\twww.instagram.com/fender\t1.0\n708\tDemocratic lawmakers pushing for minimum wage increase https://t.co/5P5T1bRsDT https://t.co/Tg9IAYogyE\t61.0\t13.0\t1508.0\t0.0\tWilliamsville, NY/Buffalo, NY\t1.0\n709\tThe Guardian Kenyan police launch inquiry after officers filmed beating protester The Guardian A Kenyan riot… http://dlvr.it/LKt31l\t0.0\t0.0\t0.0\t0.0\tLondon [United Kingdom]\t1.0\n710\tTom Bradys Super Bowl jersey recovered in Mexico https://t.co/l1Mwg9xbHt https://t.co/T0O7qEqz35\t5932.0\t16917.0\t38447.0\t0.0\tUnited States\t1.0\n711\thttps://twitter.com/LetsCreateAfr/status/732562643811176449 … May 17, 2016 at 04:25PM\t0.0\t0.0\t0.0\t0.0\tNairobi,Kenya\t1.0\n712\tI am getting this the moment it hits the shelves  https://t.co/8hg5Kko1UM\t923.0\t1039.0\t7728.0\t0.0\tUnited States\t1.0\n713\t420Media have no dare to show Fact news, always showing fake news against Bapuji #WhyMediaHidesFactspic.twitter.com/as4N7SG5Cs\t0.0\t0.0\t0.0\t1.0\tnull\t0.0\n714\t\".@jimgeraghty great point in the Jolt today about how Priebus fought thos of us trying to prevent the Trump disaster \"\"tooth and nail\"\".\"\t1763.0\t2096.0\t3282.0\t1.0\tUnited States\t1.0\n715\tHow @TrackManGolf can help you feel your swing more and think less, from @thirteenunder http://www.golfwrx.com/374872/how-trackman-can-help-you-feel-more-and-think-less/ …pic.twitter.com/9oqcOU4bIi\t0.0\t71800.0\t15.0\t0.0\tnull\t0.0\n716\tHonored to receive an offer from The Citadel! #FireThoseCannonspic.twitter.com/OJbDDUzMqN\t0.0\t0.0\t75.0\t0.0\tWest Point, NY\t1.0\n717\tYes amenhttps://twitter.com/pamxvi/status/732580409297403905 …\t0.0\t0.0\t8.0\t0.0\tnull\t0.0\n718\t#sports Conor McGregor\u0027s manager says he\u0027d fight Floyd Mayweather, but only for equal pay\t11954.0\t13223.0\t20407.0\t0.0\tUnited States\t1.0\n719\tThat\u0027s non of their business where will the family spend the money! https://t.co/qySeDv9OfJ\t628.0\t341.0\t951.0\t1.0\tUnited States\t1.0\n720\tThis shit wicked\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n721\tWhat is going on with @FrontierCorp Internet service in Tampa? I heard it was our south of Bay To Bay. Ours went out last night, still down.\t0.0\t0.0\t5.0\t0.0\tTampa, Florida\t1.0\n722\tAnne Gould Hauberg, 98, dies; arts philanthropist, co-founder of Pilchuck Glass School  #local\t5232.0\t15670.0\t22015.0\t0.0\tUnited States\t1.0\n723\tEndless #RoadToRio prep cont\u0027s,jst found long,lost sister! @MayaDiRado pizza,#WestWing,#ParksAndRec AND teach smrt $ habits to HS #DefAKinas\t0.0\t0.0\t0.0\t0.0\tChapel Hill, NC\t1.0\n724\tData. B1tches! @defiance_lady @mcspocky @TheDailyEdge  #p2 #tcot http://t.co/Fqgfd8cDGH\t68.0\t138.0\t3937.0\t1.0\tUnited States\t1.0\n725\tBaidu says completed around $155 million fundraising for new video business subsidiary  #tech\t8620.0\t12289.0\t20115.0\t0.0\tUnited States\t1.0\n726\tThe real desi toppers of UP board exam 2016, Sakshi..Pratima class 12th and Nisha Sahu 10th topper. Proud daugterspic.twitter.com/FqN5eyDyrV\t0.0\t95100.0\t0.0\t0.0\tLucknow, India\t1.0\n727\tWelcomed with pageantry and protests, China\u0027s Xi hails \u0027bright\u0027 ties with Britain  #world #news\t14415.0\t13231.0\t16285.0\t0.0\tUnited States\t1.0\n728\tRise \u0026 shine #Ottawa!\t0.0\t0.0\t0.0\t0.0\tOttawa, ON\t1.0\n729\tthe most entertaining people-watching happens in Las Vegas after midnight\t16400.0\t8070000.0\t0.0\t0.0\t🇨🇺 🇲🇽\t1.0\n730\tU.S. consumer prices post largest gain in three years; housing starts up http://reut.rs/1TkKsn7 pic.twitter.com/D7CwNtsuhR\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n731\tWe\u0027re looking forward to welcoming the Afro-Latino Festival here to the Schomburg on July 8! RSVP requiredhttps://twitter.com/FestivalAfrolat/status/732320477142765568 …\t0.0\t41000.0\t19.0\t0.0\tHarlem, NY\t1.0\n732\t19,444 gallons of water in the desert: how volunteers save lives at the US border https://t.co/SkZSfUuiZR https://t.co/o5HvWxcpq8\t4381.0\t3415.0\t13932.0\t0.0\tLucknow, India\t1.0\n733\t@femigurl: Why the actual FUCK do we still have Father\u0027s Day? Don\u0027t men get ENOUGH recognition in life?  http://t.co/oWYFlLEYRl\t74.0\t81.0\t702.0\t1.0\tUnited States\t1.0\n734\t#emel You Wont Believe What Comey Did to Obstruct the Awan Investigation https://t.co/VhSgYe8QBz #eme https://t.co/wFYLCmaxqZ\t1986.0\t1164.0\t241.0\t0.0\tWeirton, West Virginia\t1.0\n735\tHey Daz, sorry to hear you feel this way. Could you expand on what\u0027s happened for me? LB\t0.0\t269000.0\t0.0\t0.0\tnull\t0.0\n736\t#TrumpBecause if he is a president there wont be another cold war \t277.0\t187.0\t809.0\t0.0\tUnited States\t1.0\n737\t【Almost Is Never Enough】Maybe we just weren\u0027t right, but that\u0027s a lie, that\u0027s a lie #Taylor #ArianaGrande #Justin #music\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n738\tThank God for @realDonaldTrump U tell the truth about Sweden! Everyone here knows that but The lying media and corrupt government dont agree\t1948.0\t1880.0\t2729.0\t1.0\tUnited States\t1.0\n739\t#AddCartoonsToHistory @midnight Battle of WaterLooney Tunes https://t.co/XYiSeVwfZ8\t5478.0\t7069.0\t6782.0\t0.0\tUnited States\t1.0\n740\t#NewRelease #Christian Romance https://t.co/KkiMAJdwtT #CR4U https://t.co/H4F0zbygpY\t2579.0\t2254.0\t14364.0\t1.0\tUnited States\t1.0\n741\tFirst #sunwing flight takes off from BNIA http://t.co/fpXLaP7bR9\t68.0\t150.0\t5558.0\t1.0\tUnited States\t1.0\n742\t.\u0026 they are bring this hatred to our country.What the bloody hell are the remain campaign thinking of? Don\u0027t want this scum. LEAVE\t0.0\t0.0\t0.0\t0.0\tEngland\t1.0\n743\tThe retiring prof donated a behemoth of an aloe plant to my sun corner.pic.twitter.com/WEcR5MHz29\t0.0\t0.0\t0.0\t0.0\tVermont, USA\t1.0\n744\tno, much older than that...\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n745\t.@WOWvTaiji Chinese Government: STOP living animals keychain/lucky charm in China - Sign the Petition! https://www.change.org/p/chinese-government-stop-living-animals-keychain-lucky-charm-in-china?recruiter\u003d41676621\u0026utm_source\u003dshare_petition\u0026utm_medium\u003dtwitter\u0026utm_campaign\u003dshare_twitter_responsive … via @Change\t0.0\t0.0\t0.0\t0.0\tSandton, South Africa\t1.0\n746\tPick me please  @CloseupPH #CloseupForeverSummer #NowOrNever \t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\nnull\tnull\t0.0\t0.0\t0.0\t0.0\tnull\t0.0\n747\t\u0027@taftaftaft I have never started a poem yet whose end I knew. Writing a poem is discovering.Robert Frost\u0027\t419.0\t52.0\t544.0\t0.0\tATL | LA\t1.0\n748\tI become good friends with my neighbors once they move away and we wave middle fingers when we drive past each other.\t1447.0\t1862.0\t1851.0\t1.0\tUnited States\t1.0\n749\tOur Client Dalia Davi-Ruiz - ACTRESS - SINGER - WRITER - Acting Reel https://www.youtube.com/watch?v\u003dqlIuE64qQeo …... http://fb.me/7YPIAU5Xm\t0.0\t0.0\t0.0\t0.0\tWorldwide\t1.0\n750\tStage 10 of the @giroditalia is underway. @ryder_hesjedal towards the front of the peloton with 46-km to-gopic.twitter.com/25yjvTjXBp\t0.0\t0.0\t0.0\t0.0\tToronto, Canada\t1.0\n751\t@mhudders I know you like a good walking animation, even got a head bob!!https://twitter.com/pietepiet/status/732200598280544256 …\t0.0\t0.0\t0.0\t0.0\tThe Multiverse\t1.0\n752\tJust remembered my dream that I was back in Malaysia.\t0.0\t0.0\t0.0\t0.0\tmaryland or DC\t1.0\n753\tWe are happy to connect you with our Raj Soin College of Business, :) call us at 937-775-4830, or email transfer@wright.edu\t0.0\t0.0\t0.0\t0.0\t138 Student Union\t1.0\n754\tStop President Obama\u0027s internet giveaway: https://t.co/nJUL6vtXMZ   https://t.co/f5VEx7YHG6 https://t.co/7cy5IyDjFv\t1701.0\t2019.0\t5281.0\t1.0\tUnited States\t1.0\n755\tRockies trade RHP Eddie Butler to Cubs for relief prospect James Farris https://t.co/Vd7ot3Cou2 https://t.co/qiF59aizq6\t51.0\t8.0\t1284.0\t0.0\tBoston and Harlem\t1.0\n756\tThis \u0027Alice In Wonderland\u0027 Film Is Much More Unsettling Than The Cartoon We All Love  https://t.co/yOJbOfvhNE\t4943.0\t1653.0\t4060.0\t0.0\tAlton, TX\t1.0\n757\tJust be strong, you\u0027ll get over it soon.\t0.0\t59600.0\t13.0\t0.0\tRepublic of the Philippines\t1.0\n758\tWe\u0027re not crying. You\u0027re crying.pic.twitter.com/7j3ColS5X5\t0.0\t1840000.0\t0.0\t0.0\tPittsburgh, PA\t1.0\n759\tMove bitch\t0.0\t0.0\t0.0\t0.0\tKraljevo\t1.0\n760\tyou\u0027re a parrot lmao\t0.0\t0.0\t0.0\t1.0\twestside mentor\t1.0\n761\tMan tries to rape two Brooklyn women in their apartment buildings https://t.co/s02ZJ3bBWC https://t.co/V5WeRZc6sc\t9433.0\t61641.0\t57262.0\t0.0\tUnited States\t1.0\n762\tThe King draws hundreds to hometown for public memorial service https://t.co/2o6FtSR6c6\t6355.0\t18937.0\t31764.0\t0.0\tUnited States\t1.0\n763\t\"#My2017Resolution  I read some where  \"\"don\u0027t expect 2 much if you don\u0027t want 2 be disappointed\"\" So i don\u0027t want to be disappointed by myself\"\t3210.0\t3914.0\t5141.0\t1.0\tUnited States\t1.0\n764\tRonan Parke Daily is out! http://paper.li/NOSHLEVI/1342559153?edition_id\u003de1b77480-1c40-11e6-89fe-002590a5ba2d …\t0.0\t0.0\t0.0\t0.0\tMiami\t1.0"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 102400 bytes. Learn more about \u003cstrong\u003eZEPPELIN_INTERPRETER_OUTPUT_LIMIT\u003c/strong\u003e\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440499_954943724",
+      "id": "20190701-223513_628683752",
+      "dateCreated": "2019-07-04 22:30:40.499",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val testing_predictions \u003d cvModel.transform(testingDF)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.501",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "testing_predictions: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 13 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440501_318345979",
+      "id": "20190701-223828_2068138373",
+      "dateCreated": "2019-07-04 22:30:40.501",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "testing_predictions.show(10)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.502",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n| Id|               Tweet|following|followers|actions|is_retweet|            location|has_location|         text_tokens|       text_filtered|       text_features|            features|       rawPrediction|         probability|prediction|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n|  0|Cops shoot blacks...|   5509.0|   5977.0| 8062.0|       1.0|            ですpacito|         1.0|[cops, shoot, bla...|[cops, shoot, bla...|(10,[0,1,3,5,6,7,...|[5509.0,5977.0,80...|[21.9900643381932...|[0.99999996902176...|       0.0|\n|  1|#HAPPYTAEYANGDAY ...|      0.0|      0.0|    0.0|       0.0|                null|         0.0|[#happytaeyangday...|[#happytaeyangday...|(10,[2,3,5,6,8],[...|(15,[7,8,10,11,13...|[7.12265343191284...|[9.79731737814390...|       1.0|\n|  2|RT @HoneyBadger10...|    471.0|    229.0|  747.0|       0.0|     B\u0027klyn, NYC, LA|         1.0|[rt, @honeybadger...|[rt, @honeybadger...|(10,[0,3,6,7,8,9]...|[471.0,229.0,747....|[13.1181864396447...|[0.44816088703539...|       1.0|\n|  3|Sorry my Twitter ...|      0.0|  79800.0|   48.0|       0.0|                null|         0.0|[sorry, my, twitt...|[sorry, twitter, ...|(10,[0,1,2,8,9],[...|(15,[1,2,5,6,7,13...|[6.88770171618002...|[7.81952704095333...|       1.0|\n|  4|Heart attack caus...|    902.0|   5797.0| 4270.0|       0.0|             Chicago|         1.0|[heart, attack, c...|[heart, attack, c...|(10,[0,2,5,6,8,9]...|[902.0,5797.0,427...|[16.9673222354663...|[0.99948837603696...|       0.0|\n|  5|don\u0027t facetime me...|    144.0|      8.0|  575.0|       0.0|            new yawk|         1.0|[don\u0027t, facetime,...|[facetime, ask, s...|(10,[0,1,2,3,4,5,...|[144.0,8.0,575.0,...|[13.1423366732736...|[0.47229442777845...|       1.0|\n|  6|it is the one rea...|      0.0|      0.0|    0.0|       0.0|England, United K...|         1.0|[it, is, the, one...|[one, reason, act...|(10,[0,1,2,4,5,6,...|[0.0,0.0,0.0,0.0,...|[12.5341923192008...|[0.19400159707728...|       1.0|\n|  7|Our Latino Olympi...|   2226.0|   2737.0| 1654.0|       1.0|everywhere #teamC...|         1.0|[our, latino, oly...|[latino, olympian...|(10,[0,1,2,3,5,6,...|[2226.0,2737.0,16...|[14.8677018318176...|[0.97251259751534...|       0.0|\n|  8|GBI: Man dies aft...|   8550.0|  17694.0| 7358.0|       0.0|      Москва, Россия|         1.0|[gbi:, man, dies,...|[gbi:, man, dies,...|(10,[0,3,4,5,7,8,...|[8550.0,17694.0,7...|[20.4248646619769...|[0.99999943758985...|       0.0|\n|  9|RT bocavista2016:...|     22.0|      7.0|  964.0|       0.0|in way too many f...|         1.0|[rt, bocavista201...|[rt, bocavista201...|(10,[2,3,4,5,6,7,...|[22.0,7.0,964.0,0...|[14.1684745610586...|[0.81582315680372...|       0.0|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\nonly showing top 10 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440501_-2129140740",
+      "id": "20190701-223910_1873246941",
+      "dateCreated": "2019-07-04 22:30:40.501",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val submission \u003d testing_predictions.select($\"Id\", when($\"prediction\" \u003d\u003d\u003d 0.0, \"Spam\").otherwise(\"Quality\").alias(\"Type\")).where(\"Id !\u003d 0\")\nval submission_0 \u003d testing_predictions.select($\"Id\", when($\"prediction\" \u003d\u003d\u003d 0.0, \"Spam\").otherwise(\"Quality\").alias(\"Type\")).where(\"Id \u003d 0\")\nsubmission.show(10)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.502",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-------+\n| Id|   Type|\n+---+-------+\n|  1|Quality|\n|  2|Quality|\n|  3|Quality|\n|  4|   Spam|\n|  5|Quality|\n|  6|Quality|\n|  7|   Spam|\n|  8|   Spam|\n|  9|   Spam|\n| 10|Quality|\n+---+-------+\nonly showing top 10 rows\n\nsubmission: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [Id: bigint, Type: string]\nsubmission_0: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [Id: bigint, Type: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440502_128804612",
+      "id": "20190701-224217_1908767990",
+      "dateCreated": "2019-07-04 22:30:40.502",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "submission.write.mode(\"overwrite\").option(\"header\", true).csv(tweetsPath + \"/submission\")\nsubmission_0.write.mode(\"overwrite\").option(\"header\", true).csv(tweetsPath + \"/submission_0\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.503",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440503_-487976196",
+      "id": "20190701-224630_1129659402",
+      "dateCreated": "2019-07-04 22:30:40.503",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "cvModel.write.overwrite().save(basePath + \"/models/spark/tweet-spam-assassin/\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.503",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440503_-755432398",
+      "id": "20190701-235026_565311171",
+      "dateCreated": "2019-07-04 22:30:40.503",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n\nimport pandas as pd\n\nbasePath \u003d \"/zeppelin/datasets\"\ntweetsPath \u003d basePath + \"/twitter-spam\"\n\nsubmission \u003d pd.read_csv(tweetsPath + \"/submission/submission.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.504",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m\u001b[0m\n\u001b[0;31mIOError\u001b[0mTraceback (most recent call last)\n\u001b[0;32m\u003cipython-input-2-b91f899e3264\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m()\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mtweetsPath\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mbasePath\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m\"/twitter-spam\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 6\u001b[0;31m \u001b[0msubmission\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtweetsPath\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m\"/submission/submission.csv\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36mparser_f\u001b[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, escapechar, comment, encoding, dialect, tupleize_cols, error_bad_lines, warn_bad_lines, skipfooter, skip_footer, doublequote, delim_whitespace, as_recarray, compact_ints, use_unsigned, low_memory, buffer_lines, memory_map, float_precision)\u001b[0m\n\u001b[1;32m    707\u001b[0m                     skip_blank_lines\u003dskip_blank_lines)\n\u001b[1;32m    708\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 709\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0m_read\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilepath_or_buffer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    710\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    711\u001b[0m     \u001b[0mparser_f\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__name__\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mname\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m_read\u001b[0;34m(filepath_or_buffer, kwds)\u001b[0m\n\u001b[1;32m    447\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    448\u001b[0m     \u001b[0;31m# Create the parser.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 449\u001b[0;31m     \u001b[0mparser\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mTextFileReader\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilepath_or_buffer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    450\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    451\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0mchunksize\u001b[0m \u001b[0;32mor\u001b[0m \u001b[0miterator\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, f, engine, **kwds)\u001b[0m\n\u001b[1;32m    816\u001b[0m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moptions\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027has_index_names\u0027\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mkwds\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027has_index_names\u0027\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    817\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 818\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_make_engine\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mengine\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    819\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    820\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m_make_engine\u001b[0;34m(self, engine)\u001b[0m\n\u001b[1;32m   1047\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0m_make_engine\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mengine\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;34m\u0027c\u0027\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1048\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mengine\u001b[0m \u001b[0;34m\u003d\u003d\u001b[0m \u001b[0;34m\u0027c\u0027\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-\u003e 1049\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_engine\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mCParserWrapper\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mf\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moptions\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1050\u001b[0m         \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1051\u001b[0m             \u001b[0;32mif\u001b[0m \u001b[0mengine\u001b[0m \u001b[0;34m\u003d\u003d\u001b[0m \u001b[0;34m\u0027python\u0027\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, src, **kwds)\u001b[0m\n\u001b[1;32m   1693\u001b[0m         \u001b[0mkwds\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027allow_leading_cols\u0027\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mindex_col\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0mFalse\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1694\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-\u003e 1695\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_reader\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mparsers\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mTextReader\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0msrc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1696\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1697\u001b[0m         \u001b[0;31m# XXX\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32mpandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader.__cinit__\u001b[0;34m()\u001b[0m\n\n\u001b[0;32mpandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader._setup_parser_source\u001b[0;34m()\u001b[0m\n\n\u001b[0;31mIOError\u001b[0m: File /zeppelin/datasets/twitter-spam/submission/submission.csv does not exist"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440503_-733369703",
+      "id": "20190701-230056_1376352671",
+      "dateCreated": "2019-07-04 22:30:40.503",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n\nsubmission.head()",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.504",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "   Id Category\n0   0     Spam\n1   1  Quality\n2   2  Quality\n3   3  Quality\n4   4     Spam"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440504_-1621598737",
+      "id": "20190701-234233_275654185",
+      "dateCreated": "2019-07-04 22:30:40.504",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n\nimport csv\n\nsubmission.to_csv(tweetsPath + \"/pandas_submission.csv\", header\u003dTrue, index\u003dFalse, quoting\u003dcsv.QUOTE_NONNUMERIC)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.504",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440504_-1503349154",
+      "id": "20190701-234326_1490699859",
+      "dateCreated": "2019-07-04 22:30:40.504",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 22:30:40.505",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1562279440505_2002416683",
+      "id": "20190701-234543_1129336189",
+      "dateCreated": "2019-07-04 22:30:40.505",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/zeppelin/tweets-spam-ham-livy",
+  "id": "2EEPNXQ7R",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "python:shared_process": [],
+    "spark:shared_process": [],
+    "livy:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

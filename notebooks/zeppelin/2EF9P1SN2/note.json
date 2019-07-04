@@ -3,7 +3,7 @@
     {
       "text": "%md\n# Tweets Spam-Ham Classifier\n## Author: Luis Eduardo Ferro Diez \u003ca href\u003d\u0027mailto:luis.ferro1@correo.icesi.edu.co\u0027\u003eluis.ferro1@correo.icesi.edu.co\u003c/a\u003e\n\nThis notebook contains the steps taken to train a model to classify spam-ham tweets in Scala-Spark for later usage in the Where to Sell Products project.\n\n## Dataset\n* https://www.kaggle.com/c/twitter-spam/data\n\n## Resources\n* https://www.kaggle.com/c/twitter-spam/overview\n* https://github.com/ageron/handson-ml/blob/master/03_classification.ipynb",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:21:40.580",
+      "dateUpdated": "2019-07-04 16:51:16.083",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -36,15 +36,15 @@
       "jobName": "paragraph_1561997934880_15140530",
       "id": "20190701-161854_1209539658",
       "dateCreated": "2019-07-01 16:18:54.881",
-      "dateStarted": "2019-07-01 21:21:40.594",
-      "dateFinished": "2019-07-01 21:21:42.979",
+      "dateStarted": "2019-07-04 16:51:16.260",
+      "dateFinished": "2019-07-04 16:51:17.991",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:15:04.401",
+      "dateUpdated": "2019-07-04 21:58:45.800",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -75,15 +75,15 @@
       "jobName": "paragraph_1561998117536_1272361701",
       "id": "20190701-162157_1845555219",
       "dateCreated": "2019-07-01 16:21:57.536",
-      "dateStarted": "2019-07-03 21:15:04.442",
-      "dateFinished": "2019-07-03 21:15:17.570",
+      "dateStarted": "2019-07-04 21:58:46.245",
+      "dateFinished": "2019-07-04 21:59:03.310",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/twitter-spam\"\nval training \u003d tweetsPath + \"/train.csv\"\nval testing \u003d tweetsPath + \"/test.csv\"",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:15:19.674",
+      "dateUpdated": "2019-07-04 21:59:07.415",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -114,15 +114,15 @@
       "jobName": "paragraph_1561998167851_-893590518",
       "id": "20190701-162247_1075318024",
       "dateCreated": "2019-07-01 16:22:47.852",
-      "dateStarted": "2019-07-03 21:15:19.713",
-      "dateFinished": "2019-07-03 21:15:19.948",
+      "dateStarted": "2019-07-04 21:59:07.560",
+      "dateFinished": "2019-07-04 21:59:07.755",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\nLet\u0027s load and explore the testing set",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:21:53.632",
+      "dateUpdated": "2019-07-04 16:51:35.402",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -155,15 +155,15 @@
       "jobName": "paragraph_1561998286993_-1173541372",
       "id": "20190701-162446_1006428036",
       "dateCreated": "2019-07-01 16:24:46.994",
-      "dateStarted": "2019-07-01 21:21:53.650",
-      "dateFinished": "2019-07-01 21:21:53.656",
+      "dateStarted": "2019-07-04 16:51:35.713",
+      "dateFinished": "2019-07-04 16:51:35.739",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  .add(\"Type\", StringType, false)\n  \nval trainingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(training)\n    .select($\"Id\", \n        $\"Tweet\", \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"),\n        $\"Type\").where(\"Type is not null\")\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:15:22.863",
+      "dateUpdated": "2019-07-04 21:59:09.928",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -373,15 +373,15 @@
       "jobName": "paragraph_1561998307565_-1681631936",
       "id": "20190701-162507_992250565",
       "dateCreated": "2019-07-01 16:25:07.565",
-      "dateStarted": "2019-07-03 21:15:22.923",
-      "dateFinished": "2019-07-03 21:15:28.876",
+      "dateStarted": "2019-07-04 21:59:10.163",
+      "dateFinished": "2019-07-04 21:59:17.995",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "trainingDF.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:15:32.888",
+      "dateUpdated": "2019-07-04 21:59:23.040",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -412,15 +412,15 @@
       "jobName": "paragraph_1562005124311_1055963192",
       "id": "20190701-181844_1465805024",
       "dateCreated": "2019-07-01 18:18:44.316",
-      "dateStarted": "2019-07-03 21:15:32.924",
-      "dateFinished": "2019-07-03 21:15:33.137",
+      "dateStarted": "2019-07-04 21:59:23.147",
+      "dateFinished": "2019-07-04 21:59:23.450",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\nWe can observe the \u0027Type\u0027 field corresponds to a binary class: \"Spam\" for spam tweets and \"Quality\" for genuine tweets.\n\nWe also observe that as features we can use:\n\n* Tweet: The tweet text\n* following: The amount of accounts the author of this particular tweet is following\n* followers: The amount of followers the author of this particalr tweet has\n* actions: The total amount of favourites, retweets and replies this particular tweet has\n* is_reweet: Binary where 0 means the tweet is not a retweet and 1 that it is a retweet.\n* location: The user provided location for the account.\n\nFor the non-text attributes we could train a simple classification model. However, since we are dealing with text, we need to incorporate some NLP techniques to create a feature vector out of the tweet text.\n\nWe have two options: we can either implement a stemming + wordcount algorithm, probably removing the stop words to build the feature vector. Or, we can train a LDA to discover topics among the text corpora and associate them with the target class.\n\nLet\u0027s first create a feature vector with the non-text attributes. We will create a spark pipeline for this",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 21:21:58.400",
+      "dateUpdated": "2019-07-04 16:51:43.451",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -453,15 +453,15 @@
       "jobName": "paragraph_1561998412269_-864252132",
       "id": "20190701-162652_1335683813",
       "dateCreated": "2019-07-01 16:26:52.269",
-      "dateStarted": "2019-07-01 21:21:58.434",
-      "dateFinished": "2019-07-01 21:21:58.518",
+      "dateStarted": "2019-07-04 16:51:43.648",
+      "dateFinished": "2019-07-04 16:51:43.710",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"Type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"Tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval pipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval predictions \u003d pipeline.fit(trainingDF).transform(trainingDF)\nz.show(predictions)\n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:15:37.567",
+      "dateUpdated": "2019-07-04 21:59:27.602",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -664,15 +664,15 @@
       "jobName": "paragraph_1561998364882_-1650240881",
       "id": "20190701-162604_51293922",
       "dateCreated": "2019-07-01 16:26:04.884",
-      "dateStarted": "2019-07-03 21:15:37.630",
-      "dateFinished": "2019-07-03 21:15:56.638",
+      "dateStarted": "2019-07-04 21:59:27.717",
+      "dateFinished": "2019-07-04 21:59:51.581",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area Under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:16:00.702",
+      "dateUpdated": "2019-07-04 21:59:30.980",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -695,7 +695,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_2a715b358ecb\nroc: Double \u003d 0.9898635053827866\n"
+            "data": "Area Under ROC 0.9898635053827866\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nevaluator: org.apache.spark.ml.evaluation.BinaryClassificationEvaluator \u003d binEval_f72b18ad2e9c\nroc: Double \u003d 0.9898635053827866\n"
           }
         ]
       },
@@ -717,15 +717,15 @@
       "jobName": "paragraph_1562009777622_-1671370548",
       "id": "20190701-193617_28467861",
       "dateCreated": "2019-07-01 19:36:17.625",
-      "dateStarted": "2019-07-03 21:16:00.745",
-      "dateFinished": "2019-07-03 21:16:02.603",
+      "dateStarted": "2019-07-04 21:59:31.275",
+      "dateFinished": "2019-07-04 21:59:54.289",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md \nWe got a model capable of predicting 98% of the classes in the training set. To ensure we are not overfitting, let\u0027s do cross validation before going with the testing set.",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:16:24.763",
+      "dateUpdated": "2019-07-04 16:52:05.621",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -758,15 +758,15 @@
       "jobName": "paragraph_1562019154634_391248324",
       "id": "20190701-221234_1178786141",
       "dateCreated": "2019-07-01 22:12:34.634",
-      "dateStarted": "2019-07-01 22:16:24.766",
-      "dateFinished": "2019-07-01 22:16:27.216",
+      "dateStarted": "2019-07-04 16:52:05.809",
+      "dateFinished": "2019-07-04 16:52:05.860",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\n\nval paramGrid \u003d new ParamGridBuilder()\n  .addGrid(hashingTF.numFeatures, Array(10, 100, 1000))\n  .addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  .addGrid(lr.maxIter, Array(10, 50, 100))\n  .build()\n  \nval cv \u003d new CrossValidator()\n  .setEstimator(pipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(paramGrid)\n  .setNumFolds(3)\n  //.setParallelism(2) In spark 2.4.3\n  \n val cvModel \u003d cv.fit(trainingDF)",
+      "text": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\n\nval paramGrid \u003d new ParamGridBuilder()\n  .addGrid(hashingTF.numFeatures, Array(10, 25, 50))\n  .addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  .addGrid(lr.maxIter, Array(10, 50, 100))\n  .build()\n  \nval cv \u003d new CrossValidator()\n  .setEstimator(pipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(paramGrid)\n  .setNumFolds(3)\n  //.setParallelism(2) In spark 2.4.3\n  \n val cvModel \u003d cv.fit(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-03 21:16:15.276",
+      "dateUpdated": "2019-07-04 22:00:11.190",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -789,7 +789,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_7f90022d64e4-maxIter: 10,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 50,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 100,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.1\n}, {\n\tlogreg_7f90022d64e4-maxIter: 10,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.01\n}, {\n\tlogreg_7f90022d64e4-maxIter: 50,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f90022d64e4-regParam: 0.01\n}, {\n\tlogreg_7f90022d64e4-maxIter: 100,\n\thashingTF_26fc65fc2358-numFeatures: 10,\n\tlogreg_7f9..."
+            "data": "import org.apache.spark.ml.tuning.{CrossValidator, ParamGridBuilder}\nparamGrid: Array[org.apache.spark.ml.param.ParamMap] \u003d\nArray({\n\tlogreg_392f50f00909-maxIter: 10,\n\thashingTF_9dc22273d9b4-numFeatures: 10,\n\tlogreg_392f50f00909-regParam: 0.1\n}, {\n\tlogreg_392f50f00909-maxIter: 10,\n\thashingTF_9dc22273d9b4-numFeatures: 25,\n\tlogreg_392f50f00909-regParam: 0.1\n}, {\n\tlogreg_392f50f00909-maxIter: 10,\n\thashingTF_9dc22273d9b4-numFeatures: 50,\n\tlogreg_392f50f00909-regParam: 0.1\n}, {\n\tlogreg_392f50f00909-maxIter: 50,\n\thashingTF_9dc22273d9b4-numFeatures: 10,\n\tlogreg_392f50f00909-regParam: 0.1\n}, {\n\tlogreg_392f50f00909-maxIter: 50,\n\thashingTF_9dc22273d9b4-numFeatures: 25,\n\tlogreg_392f50f00909-regParam: 0.1\n}, {\n\tlogreg_392f50f00909-maxIter: 50,\n\thashingTF_9dc22273d9b4-numFeatures: 50,\n\tlogreg_392f50f..."
           }
         ]
       },
@@ -3590,90 +3590,7 @@
             "http://172.17.0.2:4040/jobs/job?id\u003d2904",
             "http://172.17.0.2:4040/jobs/job?id\u003d2905",
             "http://172.17.0.2:4040/jobs/job?id\u003d2906",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2907",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2908",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2909",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2910",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2911",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2912",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2913",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2914",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2915",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2916",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2917",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2918",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2919",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2920",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2921",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2922",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2923",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2924",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2925",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2926",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2927",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2928",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2929",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2930",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2931",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2932",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2933",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2934",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2935",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2936",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2937",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2938",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2939",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2940",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2941",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2942",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2943",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2944",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2945",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2946",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2947",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2948",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2949",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2950",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2951",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2952",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2953",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2954",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2955",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2956",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2957",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2958",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2959",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2960",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2961",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2962",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2963",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2964",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2965",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2966",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2967",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2968",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2969",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2970",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2971",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2972",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2973",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2974",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2975",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2976",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2977",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2978",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2979",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2980",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2981",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2982",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2983",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2984",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2985",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2986",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2987",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2988",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2989",
-            "http://172.17.0.2:4040/jobs/job?id\u003d2990"
+            "http://172.17.0.2:4040/jobs/job?id\u003d2907"
           ],
           "interpreterSettingId": "spark"
         }
@@ -3682,15 +3599,15 @@
       "jobName": "paragraph_1562019384714_327314747",
       "id": "20190701-221624_1043106137",
       "dateCreated": "2019-07-01 22:16:24.715",
-      "dateStarted": "2019-07-03 21:16:15.322",
-      "dateFinished": "2019-07-03 21:18:37.779",
+      "dateStarted": "2019-07-04 22:00:11.289",
+      "dateFinished": "2019-07-04 22:02:34.552",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val predictions \u003d cvModel.transform(trainingDF)\nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-02 21:45:28.005",
+      "dateUpdated": "2019-07-04 16:54:54.844",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3713,24 +3630,23 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area under ROC 0.9765533838079409\npredictions: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 15 more fields]\nroc: Double \u003d 0.9765533838079409\n"
+            "data": "Area under ROC 0.9843235787260022\npredictions: org.apache.spark.sql.DataFrame \u003d [Id: bigint, Tweet: string ... 15 more fields]\nroc: Double \u003d 0.9843235787260022\n"
           }
         ]
       },
-      "runtimeInfos": {},
       "apps": [],
       "jobName": "paragraph_1562019981104_-924602663",
       "id": "20190701-222621_761565090",
       "dateCreated": "2019-07-01 22:26:21.104",
-      "dateStarted": "2019-07-02 21:45:28.049",
-      "dateFinished": "2019-07-02 21:45:29.449",
+      "dateStarted": "2019-07-04 16:54:56.078",
+      "dateFinished": "2019-07-04 16:54:57.544",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\nWe got 97% in the evaluation which confirms that this model is excellent. Now, let\u0027s transform the training set (and make a submission to the kaggle competition!)",
+      "text": "%md\nWe got 97% in the evaluation which confirms that this model is excellent.\n\nLet\u0027s explore the model best parameters.",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:35:13.178",
+      "dateUpdated": "2019-07-04 16:54:57.584",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3755,7 +3671,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe got 97% in the evaluation which confirms that this model is excellent. Now, let\u0026rsquo;s transform the training set (and make a submission to the kaggle competition!)\u003c/p\u003e\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eWe got 97% in the evaluation which confirms that this model is excellent.\u003c/p\u003e\n\u003cp\u003eLet\u0026rsquo;s explore the model best parameters.\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
@@ -3763,15 +3679,95 @@
       "jobName": "paragraph_1562020401555_-2058537766",
       "id": "20190701-223321_993045122",
       "dateCreated": "2019-07-01 22:33:21.555",
-      "dateStarted": "2019-07-01 22:35:13.178",
-      "dateFinished": "2019-07-01 22:35:13.199",
+      "dateStarted": "2019-07-04 16:54:57.680",
+      "dateFinished": "2019-07-04 16:54:57.686",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.PipelineModel\nimport org.apache.spark.ml.classification.LogisticRegressionModel\n\n//Average metrics per param grid\nval avgMetricsParamGrid \u003d cvModel.avgMetrics\n\n//Combibe with param grid to see how they affect the overall metrics\nval combined \u003d paramGrid.zip(avgMetricsParamGrid)\n\nval bestModel \u003d cvModel.bestModel.asInstanceOf[PipelineModel]\n\n//Explain params for each stage\nval bestHashingTFNumFeatures \u003d bestModel.stages(3).asInstanceOf[HashingTF].explainParams\nval bestLRParams \u003d bestModel.stages(5).asInstanceOf[LogisticRegressionModel].explainParams\n\nprintln(\"#\" * 10)\nprintln(s\"The best HashingTF number of features are: \")\nprintln(bestHashingTFNumFeatures)\nprintln(\"#\" * 10)\nprintln(s\"The best logistic regression parameters are:\")\nprintln(bestLRParams)\nprintln(\"#\" * 10)",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 16:54:57.779",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "##########\nThe best HashingTF number of features are: \nbinary: If true, all non zero counts are set to 1. This is useful for discrete probabilistic models that model binary events rather than integer counts (default: false)\ninputCol: input column name (current: text_filtered)\nnumFeatures: number of features (\u003e 0) (default: 262144, current: 10)\noutputCol: output column name (default: hashingTF_15f567b916c1__output, current: text_features)\n##########\nThe best logistic regression parameters are:\naggregationDepth: suggested depth for treeAggregate (\u003e\u003d 2) (default: 2)\nelasticNetParam: the ElasticNet mixing parameter, in range [0, 1]. For alpha \u003d 0, the penalty is an L2 penalty. For alpha \u003d 1, it is an L1 penalty (default: 0.0)\nfamily: The name of family which is a description of the label distribution to be used in the model. Supported options: auto, binomial, multinomial. (default: auto)\nfeaturesCol: features column name (default: features)\nfitIntercept: whether to fit an intercept term (default: true)\nlabelCol: label column name (default: label)\nlowerBoundsOnCoefficients: The lower bounds on coefficients if fitting under bound constrained optimization. (undefined)\nlowerBoundsOnIntercepts: The lower bounds on intercepts if fitting under bound constrained optimization. (undefined)\nmaxIter: maximum number of iterations (\u003e\u003d 0) (default: 100, current: 100)\npredictionCol: prediction column name (default: prediction)\nprobabilityCol: Column name for predicted class conditional probabilities. Note: Not all models output well-calibrated probability estimates! These probabilities should be treated as confidences, not precise probabilities (default: probability)\nrawPredictionCol: raw prediction (a.k.a. confidence) column name (default: rawPrediction)\nregParam: regularization parameter (\u003e\u003d 0) (default: 0.0, current: 1.0E-4)\nstandardization: whether to standardize the training features before fitting the model (default: true)\nthreshold: threshold in binary classification prediction, in range [0, 1] (default: 0.5)\nthresholds: Thresholds in multi-class classification to adjust the probability of predicting each class. Array must have length equal to the number of classes, with values \u003e 0 excepting that at most one value may be 0. The class with largest value p/t is predicted, where p is the original probability of that class and t is the class\u0027s threshold (undefined)\ntol: the convergence tolerance for iterative algorithms (\u003e\u003d 0) (default: 1.0E-6)\nupperBoundsOnCoefficients: The upper bounds on coefficients if fitting under bound constrained optimization. (undefined)\nupperBoundsOnIntercepts: The upper bounds on intercepts if fitting under bound constrained optimization. (undefined)\nweightCol: weight column name. If this is not set or empty, we treat all instance weights as 1.0 (undefined)\n##########\nimport org.apache.spark.ml.PipelineModel\nimport org.apache.spark.ml.classification.LogisticRegressionModel\navgMetricsParamGrid: Array[Double] \u003d Array(0.9432247963963116, 0.9431460092638515, 0.9433657177578398, 0.9693003181063753, 0.9688242420936162, 0.9686266408330138, 0.9863426128308134, 0.9858350488610009, 0.9853088293985587, 0.9432247963963116, 0.9431460092638515, 0.9433657177578398, 0.9693003181063753, 0.9688242420936162, 0.9686266408330138, 0.9863426128308134, 0.9858350488610009, 0.9853088293985587, 0.9432247963963116, 0.9431460092638515, 0.9433657177578398, 0.9693003181063753, 0.9688242420936162, 0.9686266408330138, 0.9863426128308134, 0.9858350488610009, 0.9853088293985587)\ncombined: Array[(org.apache.spark.ml.param.ParamMap, Double)] \u003d\nArray(({\n\tlogreg_94dc233f6c42-maxIter: 100,..."
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562255805975_-338735931",
+      "id": "20190704-155645_1713657517",
+      "dateCreated": "2019-07-04 15:56:45.976",
+      "dateStarted": "2019-07-04 16:54:57.835",
+      "dateFinished": "2019-07-04 16:54:58.882",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nSo, the best parameters are:\n\n* For the Hashing TF: 10 number of features\n* For the LogisticRegression: 100 iterations and 0.001 for the regularization parameter",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-04 16:54:58.944",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eSo, the best parameters are:\u003c/p\u003e\n\u003cul\u003e\n  \u003cli\u003eFor the Hashing TF: 10 number of features\u003c/li\u003e\n  \u003cli\u003eFor the LogisticRegression: 100 iterations and 0.001 for the regularization parameter\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1562257521244_1300019461",
+      "id": "20190704-162521_1163038300",
+      "dateCreated": "2019-07-04 16:25:21.244",
+      "dateStarted": "2019-07-04 16:54:59.184",
+      "dateFinished": "2019-07-04 16:54:59.252",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  \nval testingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(testing)\n    .select($\"Id\", \n        $\"Tweet\", \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"))\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(testingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:38:31.172",
+      "dateUpdated": "2019-07-04 16:54:59.354",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3841,15 +3837,15 @@
       "jobName": "paragraph_1562020513135_-2083533107",
       "id": "20190701-223513_628683752",
       "dateCreated": "2019-07-01 22:35:13.136",
-      "dateStarted": "2019-07-01 22:38:28.365",
-      "dateFinished": "2019-07-01 22:38:28.953",
+      "dateStarted": "2019-07-04 16:54:59.498",
+      "dateFinished": "2019-07-04 16:55:00.459",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val testing_predictions \u003d cvModel.transform(testingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:42:01.797",
+      "dateUpdated": "2019-07-04 16:55:00.504",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3880,15 +3876,15 @@
       "jobName": "paragraph_1562020708322_-244644558",
       "id": "20190701-223828_2068138373",
       "dateCreated": "2019-07-01 22:38:28.323",
-      "dateStarted": "2019-07-01 22:42:01.819",
-      "dateFinished": "2019-07-01 22:42:02.072",
+      "dateStarted": "2019-07-04 16:55:00.709",
+      "dateFinished": "2019-07-04 16:55:01.473",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "testing_predictions.show(10)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 22:43:59.611",
+      "dateUpdated": "2019-07-04 16:55:01.522",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3911,7 +3907,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n| Id|               Tweet|following|followers|actions|is_retweet|            location|has_location|         text_tokens|       text_filtered|       text_features|            features|       rawPrediction|         probability|prediction|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n|  0|Cops shoot blacks...|   5509.0|   5977.0| 8062.0|       1.0|            ですpacito|         1.0|[cops, shoot, bla...|[cops, shoot, bla...|(10,[0,1,3,5,6,7,...|[5509.0,5977.0,80...|[18.9599712133109...|[0.99935207033949...|       0.0|\n|  1|#HAPPYTAEYANGDAY ...|      0.0|      0.0|    0.0|       0.0|                null|         0.0|[#happytaeyangday...|[#happytaeyangday...|(10,[2,3,5,6,8],[...|(15,[7,8,10,11,13...|[12.2425565318859...|[0.00258100212182...|       1.0|\n|  2|RT @HoneyBadger10...|    471.0|    229.0|  747.0|       0.0|     B\u0027klyn, NYC, LA|         1.0|[rt, @honeybadger...|[rt, @honeybadger...|(10,[0,3,6,7,8,9]...|[471.0,229.0,747....|[14.8634631672301...|[0.31988297936079...|       1.0|\n|  3|Sorry my Twitter ...|      0.0|  79800.0|   48.0|       0.0|                null|         0.0|[sorry, my, twitt...|[sorry, twitter, ...|(10,[0,1,2,8,9],[...|(15,[1,2,5,6,7,13...|[12.1391041411477...|[0.00208538766696...|       1.0|\n|  4|Heart attack caus...|    902.0|   5797.0| 4270.0|       0.0|             Chicago|         1.0|[heart, attack, c...|[heart, attack, c...|(10,[0,2,5,6,8,9]...|[902.0,5797.0,427...|[16.2642334340746...|[0.88572441883446...|       0.0|\n|  5|don\u0027t facetime me...|    144.0|      8.0|  575.0|       0.0|            new yawk|         1.0|[don\u0027t, facetime,...|[facetime, ask, s...|(10,[0,1,2,3,4,5,...|[144.0,8.0,575.0,...|[15.0739331174977...|[0.41097577280221...|       1.0|\n|  6|it is the one rea...|      0.0|      0.0|    0.0|       0.0|England, United K...|         1.0|[it, is, the, one...|[one, reason, act...|(10,[0,1,2,4,5,6,...|[0.0,0.0,0.0,0.0,...|[14.7850341011266...|[0.28394296374013...|       1.0|\n|  7|Our Latino Olympi...|   2226.0|   2737.0| 1654.0|       1.0|everywhere #teamC...|         1.0|[our, latino, oly...|[latino, olympian...|(10,[0,1,2,3,5,6,...|[2226.0,2737.0,16...|[16.4298738932002...|[0.90777045327103...|       0.0|\n|  8|GBI: Man dies aft...|   8550.0|  17694.0| 7358.0|       0.0|      Москва, Россия|         1.0|[gbi:, man, dies,...|[gbi:, man, dies,...|(10,[0,3,4,5,7,8,...|[8550.0,17694.0,7...|[17.5791219615905...|[0.99071859908300...|       0.0|\n|  9|RT bocavista2016:...|     22.0|      7.0|  964.0|       0.0|in way too many f...|         1.0|[rt, bocavista201...|[rt, bocavista201...|(10,[2,3,4,5,6,7,...|[22.0,7.0,964.0,0...|[15.6166461523515...|[0.67659108867449...|       0.0|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\nonly showing top 10 rows\n\n"
+            "data": "+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n| Id|               Tweet|following|followers|actions|is_retweet|            location|has_location|         text_tokens|       text_filtered|       text_features|            features|       rawPrediction|         probability|prediction|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\n|  0|Cops shoot blacks...|   5509.0|   5977.0| 8062.0|       1.0|            ですpacito|         1.0|[cops, shoot, bla...|[cops, shoot, bla...|(10,[0,1,3,5,6,7,...|[5509.0,5977.0,80...|[21.9900643381932...|[0.99999996902176...|       0.0|\n|  1|#HAPPYTAEYANGDAY ...|      0.0|      0.0|    0.0|       0.0|                null|         0.0|[#happytaeyangday...|[#happytaeyangday...|(10,[2,3,5,6,8],[...|(15,[7,8,10,11,13...|[7.12265343191284...|[9.79731737814390...|       1.0|\n|  2|RT @HoneyBadger10...|    471.0|    229.0|  747.0|       0.0|     B\u0027klyn, NYC, LA|         1.0|[rt, @honeybadger...|[rt, @honeybadger...|(10,[0,3,6,7,8,9]...|[471.0,229.0,747....|[13.1181864396447...|[0.44816088703539...|       1.0|\n|  3|Sorry my Twitter ...|      0.0|  79800.0|   48.0|       0.0|                null|         0.0|[sorry, my, twitt...|[sorry, twitter, ...|(10,[0,1,2,8,9],[...|(15,[1,2,5,6,7,13...|[6.88770171618002...|[7.81952704095333...|       1.0|\n|  4|Heart attack caus...|    902.0|   5797.0| 4270.0|       0.0|             Chicago|         1.0|[heart, attack, c...|[heart, attack, c...|(10,[0,2,5,6,8,9]...|[902.0,5797.0,427...|[16.9673222354663...|[0.99948837603696...|       0.0|\n|  5|don\u0027t facetime me...|    144.0|      8.0|  575.0|       0.0|            new yawk|         1.0|[don\u0027t, facetime,...|[facetime, ask, s...|(10,[0,1,2,3,4,5,...|[144.0,8.0,575.0,...|[13.1423366732736...|[0.47229442777845...|       1.0|\n|  6|it is the one rea...|      0.0|      0.0|    0.0|       0.0|England, United K...|         1.0|[it, is, the, one...|[one, reason, act...|(10,[0,1,2,4,5,6,...|[0.0,0.0,0.0,0.0,...|[12.5341923192008...|[0.19400159707728...|       1.0|\n|  7|Our Latino Olympi...|   2226.0|   2737.0| 1654.0|       1.0|everywhere #teamC...|         1.0|[our, latino, oly...|[latino, olympian...|(10,[0,1,2,3,5,6,...|[2226.0,2737.0,16...|[14.8677018318176...|[0.97251259751534...|       0.0|\n|  8|GBI: Man dies aft...|   8550.0|  17694.0| 7358.0|       0.0|      Москва, Россия|         1.0|[gbi:, man, dies,...|[gbi:, man, dies,...|(10,[0,3,4,5,7,8,...|[8550.0,17694.0,7...|[20.4248646619769...|[0.99999943758985...|       0.0|\n|  9|RT bocavista2016:...|     22.0|      7.0|  964.0|       0.0|in way too many f...|         1.0|[rt, bocavista201...|[rt, bocavista201...|(10,[2,3,4,5,6,7,...|[22.0,7.0,964.0,0...|[14.1684745610586...|[0.81582315680372...|       0.0|\n+---+--------------------+---------+---------+-------+----------+--------------------+------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+----------+\nonly showing top 10 rows\n\n"
           }
         ]
       },
@@ -3919,15 +3915,15 @@
       "jobName": "paragraph_1562020750193_1235581531",
       "id": "20190701-223910_1873246941",
       "dateCreated": "2019-07-01 22:39:10.193",
-      "dateStarted": "2019-07-01 22:43:59.660",
-      "dateFinished": "2019-07-01 22:43:59.892",
+      "dateStarted": "2019-07-04 16:55:01.713",
+      "dateFinished": "2019-07-04 16:55:02.550",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "val submission \u003d testing_predictions.select($\"Id\", when($\"prediction\" \u003d\u003d\u003d 0.0, \"Spam\").otherwise(\"Quality\").alias(\"Type\")).where(\"Id !\u003d 0\")\nval submission_0 \u003d testing_predictions.select($\"Id\", when($\"prediction\" \u003d\u003d\u003d 0.0, \"Spam\").otherwise(\"Quality\").alias(\"Type\")).where(\"Id \u003d 0\")\nsubmission.show(10)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 23:13:02.254",
+      "dateUpdated": "2019-07-04 16:55:02.618",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3958,15 +3954,15 @@
       "jobName": "paragraph_1562020937262_283917060",
       "id": "20190701-224217_1908767990",
       "dateCreated": "2019-07-01 22:42:17.262",
-      "dateStarted": "2019-07-01 23:13:02.301",
-      "dateFinished": "2019-07-01 23:13:02.554",
+      "dateStarted": "2019-07-04 16:55:02.833",
+      "dateFinished": "2019-07-04 16:55:03.993",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "submission.write.mode(\"overwrite\").option(\"header\", true).csv(tweetsPath + \"/submission\")\nsubmission_0.write.mode(\"overwrite\").option(\"header\", true).csv(tweetsPath + \"/submission_0\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 23:33:18.054",
+      "dateUpdated": "2019-07-04 16:55:04.018",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -3992,15 +3988,15 @@
       "jobName": "paragraph_1562021190753_-1648635580",
       "id": "20190701-224630_1129659402",
       "dateCreated": "2019-07-01 22:46:30.753",
-      "dateStarted": "2019-07-01 23:33:18.109",
-      "dateFinished": "2019-07-01 23:33:18.437",
+      "dateStarted": "2019-07-04 16:55:04.162",
+      "dateFinished": "2019-07-04 16:55:05.783",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "cvModel.write.overwrite().save(basePath + \"/models/spark/tweet-spam-assassin/\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 23:51:55.375",
+      "dateUpdated": "2019-07-04 16:55:05.789",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -4026,15 +4022,15 @@
       "jobName": "paragraph_1562025026906_-1933521662",
       "id": "20190701-235026_565311171",
       "dateCreated": "2019-07-01 23:50:26.906",
-      "dateStarted": "2019-07-01 23:51:55.434",
-      "dateFinished": "2019-07-01 23:51:56.714",
+      "dateStarted": "2019-07-04 16:55:06.066",
+      "dateFinished": "2019-07-04 16:55:10.796",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%python\n\nimport pandas as pd\n\nbasePath \u003d \"/zeppelin/datasets\"\ntweetsPath \u003d basePath + \"/twitter-spam\"\n\nsubmission \u003d pd.read_csv(tweetsPath + \"/submission/submission.csv\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-01 23:43:15.635",
+      "dateUpdated": "2019-07-04 16:55:10.870",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -4053,16 +4049,21 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
-        "msg": []
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m\u001b[0m\n\u001b[0;31mIOError\u001b[0mTraceback (most recent call last)\n\u001b[0;32m\u003cipython-input-2-b91f899e3264\u003e\u001b[0m in \u001b[0;36m\u003cmodule\u003e\u001b[0;34m()\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mtweetsPath\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mbasePath\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m\"/twitter-spam\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----\u003e 6\u001b[0;31m \u001b[0msubmission\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mpd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mread_csv\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtweetsPath\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0;34m\"/submission/submission.csv\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36mparser_f\u001b[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, escapechar, comment, encoding, dialect, tupleize_cols, error_bad_lines, warn_bad_lines, skipfooter, skip_footer, doublequote, delim_whitespace, as_recarray, compact_ints, use_unsigned, low_memory, buffer_lines, memory_map, float_precision)\u001b[0m\n\u001b[1;32m    707\u001b[0m                     skip_blank_lines\u003dskip_blank_lines)\n\u001b[1;32m    708\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 709\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0m_read\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilepath_or_buffer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    710\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    711\u001b[0m     \u001b[0mparser_f\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__name__\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mname\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m_read\u001b[0;34m(filepath_or_buffer, kwds)\u001b[0m\n\u001b[1;32m    447\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    448\u001b[0m     \u001b[0;31m# Create the parser.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 449\u001b[0;31m     \u001b[0mparser\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mTextFileReader\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilepath_or_buffer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    450\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    451\u001b[0m     \u001b[0;32mif\u001b[0m \u001b[0mchunksize\u001b[0m \u001b[0;32mor\u001b[0m \u001b[0miterator\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, f, engine, **kwds)\u001b[0m\n\u001b[1;32m    816\u001b[0m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moptions\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027has_index_names\u0027\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mkwds\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027has_index_names\u0027\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    817\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--\u003e 818\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_make_engine\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mengine\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    819\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    820\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m_make_engine\u001b[0;34m(self, engine)\u001b[0m\n\u001b[1;32m   1047\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0m_make_engine\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mengine\u001b[0m\u001b[0;34m\u003d\u001b[0m\u001b[0;34m\u0027c\u0027\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1048\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mengine\u001b[0m \u001b[0;34m\u003d\u003d\u001b[0m \u001b[0;34m\u0027c\u0027\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-\u003e 1049\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_engine\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mCParserWrapper\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mf\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0moptions\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1050\u001b[0m         \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1051\u001b[0m             \u001b[0;32mif\u001b[0m \u001b[0mengine\u001b[0m \u001b[0;34m\u003d\u003d\u001b[0m \u001b[0;34m\u0027python\u0027\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32m/opt/conda/lib/python2.7/site-packages/pandas/io/parsers.pyc\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, src, **kwds)\u001b[0m\n\u001b[1;32m   1693\u001b[0m         \u001b[0mkwds\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\u0027allow_leading_cols\u0027\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mindex_col\u001b[0m \u001b[0;32mis\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0mFalse\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1694\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-\u003e 1695\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_reader\u001b[0m \u001b[0;34m\u003d\u001b[0m \u001b[0mparsers\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mTextReader\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0msrc\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwds\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1696\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1697\u001b[0m         \u001b[0;31m# XXX\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\n\u001b[0;32mpandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader.__cinit__\u001b[0;34m()\u001b[0m\n\n\u001b[0;32mpandas/_libs/parsers.pyx\u001b[0m in \u001b[0;36mpandas._libs.parsers.TextReader._setup_parser_source\u001b[0;34m()\u001b[0m\n\n\u001b[0;31mIOError\u001b[0m: File /zeppelin/datasets/twitter-spam/submission/submission.csv does not exist"
+          }
+        ]
       },
       "apps": [],
       "jobName": "paragraph_1562022056313_2103105210",
       "id": "20190701-230056_1376352671",
       "dateCreated": "2019-07-01 23:00:56.314",
-      "dateStarted": "2019-07-01 23:43:15.693",
-      "dateFinished": "2019-07-01 23:43:15.719",
-      "status": "FINISHED",
+      "dateStarted": "2019-07-04 16:55:10.970",
+      "dateFinished": "2019-07-04 16:55:18.699",
+      "status": "ERROR",
       "progressUpdateIntervalMs": 500
     },
     {
