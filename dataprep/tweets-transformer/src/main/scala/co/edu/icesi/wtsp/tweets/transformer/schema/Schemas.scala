@@ -29,18 +29,19 @@ object Schemas{
     new Column("id"),
     new Column("text").as("tweet"),
     nanvl(new Column("favorite_count"), lit(0.0)).as("favorite_count"),
-    nanvl(new Column("reply_count"), lit(0.0)).as("reply_count"),
+    //This is only available using premium and Enterprise tier of Twitter - nanvl(new Column("reply_count"), lit(0.0)).as("reply_count"),
     nanvl(new Column("retweet_count"), lit(0.0)).as("retweet_count"),
+    when(new Column("retweeted_status").isNotNull, 1.0).otherwise(0.0).as("is_retweet"),
     new Column("user.id").alias("user_id"),
     new Column("user.screen_name").alias("user_name"),
     nanvl(new Column("user.followers_count"), lit(0.0)).as("user_followers_count"),
     nanvl(new Column("user.friends_count"), lit(0.0)).as("user_following_count"),
     new Column("user.location").as("user_location"),
     to_timestamp(new Column("created_at"), datePattern).as("created_timestamp"),
-    year(new Column("created_timestamp")).as("year"),
-    month(new Column("created_timestamp")).as("month"),
-    dayofmonth(new Column("created_timestamp")).as("day"),
-    hour(new Column("created_timestamp")).as("hour"),
+    year(to_timestamp(new Column("created_at"), datePattern)).as("year"),
+    month(to_timestamp(new Column("created_at"), datePattern)).as("month"),
+    dayofmonth(to_timestamp(new Column("created_at"), datePattern)).as("day"),
+    hour(to_timestamp(new Column("created_at"), datePattern)).as("hour"),
     concat_ws(";", new Column("entities.hashtags.text")).as("hashtags"),
     concat_ws(";", new Column("entities.user_mentions.screen_name")).as("user_mentions"),
     concat_ws(";", new Column("entities.user_mentions.id")).as("user_id_mentions"),
@@ -65,15 +66,16 @@ object Schemas{
     */
   val tweetSpamObject: Seq[Column] = Seq(
     new Column("id").alias("Id"),
-    new Column("text").alias("Tweet"),
+    new Column("tweet").alias("Tweet"),
+    new Column("is_retweet"),
     new Column("user_followers_count").alias("followers"),
     new Column("user_following_count").alias("following"),
     coalesce(new Column("retweet_count"), lit(0))
       .+(coalesce(new Column("favorite_count"), lit(0)))
-      .+(coalesce(new Column("reply_count"), lit(0)))
+      // reply_count is avail for premium and enterprise twitter api .+(coalesce(new Column("reply_count"), lit(0)))
       .alias("actions"),
     new Column("user_location").alias("location"),
-    when(new Column("location").isNull, 0.0)
+    when(new Column("user_location").isNull, 0.0)
       .otherwise(1.0)
       .alias("has_location")
   )

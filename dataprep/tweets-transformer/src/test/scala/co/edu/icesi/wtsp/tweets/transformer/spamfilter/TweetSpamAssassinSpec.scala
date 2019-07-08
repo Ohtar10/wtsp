@@ -1,5 +1,8 @@
 package co.edu.icesi.wtsp.tweets.transformer.spamfilter
 
+import co.edu.icesi.wtsp.tweets.transformer.SpecCommon
+import co.edu.icesi.wtsp.tweets.transformer.dataprep.TweetTransformerBuilder
+import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.ml.feature.{HashingTF, Word2VecModel}
@@ -19,13 +22,8 @@ import org.scalatest.{FlatSpec, Matchers}
 class TweetSpamAssassinSpec extends FlatSpec
   with MockitoSugar
   with Matchers
-  with DataFrameSuiteBase{
-
-  private[spamfilter] val basePath = "src/test/resources/models/"
-  private[spamfilter] val tfPipeline = s"${basePath}spark/tweet-spam-assassin-tf"
-  private[spamfilter] val w2vPipeline = s"${basePath}spark/tweet-spam-assassin-w2v"
-  private[spamfilter] val tweetsPath = "src/test/resources/models/tweets/test.csv"
-  private[spamfilter] val rawTweetsPath = "src/test/resources/tweets/*/"
+  with DataFrameSuiteBase
+  with SpecCommon{
 
   "The spark spam filter pipeline" should "be able to load as a tf based pipeline model" in {
     val pipeline = PipelineModel.load(tfPipeline)
@@ -74,18 +72,34 @@ class TweetSpamAssassinSpec extends FlatSpec
     val tweetSpamAssassin = TweetSpamAssassinPipeline(tfPipeline)
     val rawTweets = spark.read.json(rawTweetsPath)
 
-    val transformed = tweetSpamAssassin.transform(rawTweets)
+    val dataPrepTransformer = TweetTransformerBuilder()
+      .withCols(Schemas.tweetObject:_*)
+      .build()
+
+    val preparedTweets = dataPrepTransformer.transform(rawTweets)
+
+    val transformed = tweetSpamAssassin.transform(preparedTweets)
 
     rawTweets.count() should be > transformed.count()
+    transformed.count() should be > 0L
+    transformed.columns should contain("is_spam")
   }
 
   it should "be able to transform from raw tweets with word2vec pipeline" in {
     val tweetSpamAssassin = TweetSpamAssassinPipeline(w2vPipeline)
     val rawTweets = spark.read.json(rawTweetsPath)
 
-    val transformed = tweetSpamAssassin.transform(rawTweets)
+    val dataPrepTransformer = TweetTransformerBuilder()
+      .withCols(Schemas.tweetObject:_*)
+      .build()
+
+    val preparedTweets = dataPrepTransformer.transform(rawTweets)
+
+    val transformed = tweetSpamAssassin.transform(preparedTweets)
 
     rawTweets.count() should be > transformed.count()
+    transformed.count() should be > 0L
+    transformed.columns should contain("is_spam")
   }
 
 }

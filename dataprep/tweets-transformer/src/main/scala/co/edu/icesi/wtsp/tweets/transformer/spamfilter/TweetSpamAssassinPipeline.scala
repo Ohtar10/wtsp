@@ -1,11 +1,13 @@
 package co.edu.icesi.wtsp.tweets.transformer.spamfilter
 
-import org.apache.spark.ml.{PipelineModel, Transformer}
+import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
-import org.apache.spark.sql.{Column, DataFrame, Dataset, SparkSession}
+import org.apache.spark.ml.{PipelineModel, Transformer}
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{Column, DataFrame, Dataset}
+
 /**
   * Tweet Spam Assassin Pipeline
   *
@@ -20,28 +22,16 @@ import org.apache.spark.sql.functions._
   */
 class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer{
 
-  val fromFields: Array[Column] = Array(
-    new Column("id").alias("Id"),
-    new Column("text").alias("Tweet"),
-    new Column("user.followers_count").alias("followers"),
-    new Column("user.friends_count").alias("following"),
-    coalesce(new Column("retweet_count"), lit(0))
-      .+(coalesce(new Column("favorite_count"), lit(0)))
-      .+(coalesce(new Column("reply_count"), lit(0)))
-      .alias("actions"),
-    new Column("user.location").alias("location"),
-    when(new Column("location").isNull, 0.0)
-      .otherwise(1.0)
-      .alias("has_location")
-  )
+  val fromFields: Seq[Column] = Schemas.tweetSpamObject
 
   override def transform(dataset: Dataset[_]): DataFrame = {
-    val originalColumns = dataset.columns
 
-    val predictions = pipeline.transform(
-      dataset.select(fromFields:_*)
-    )
-    dataset.join(predictions, dataset("id") === predictions("Id"))
+    val predictions = pipeline.transform(dataset.select(fromFields:_*))
+      .withColumn("is_spam", when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
+      .withColumnRenamed("Id", "id")
+      .select("id", "is_spam")
+
+    dataset.join(predictions, Seq("id"))
   }
 
   override def copy(extra: ParamMap): Transformer = ???
