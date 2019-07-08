@@ -11,7 +11,7 @@ class TweetFlattenerSpec extends FlatSpec
   with DataFrameSuiteBase
   with SpecCommon {
 
-  "The tweet flattener" should "transform raw tweets according to given fields" in {
+  "The tweet flattener" should "transform raw tweets into the common schema" in {
     val rawTweets = spark.read.json(rawTweetsPath)
 
     val flattenedTweets = TweetFlanner()
@@ -19,6 +19,7 @@ class TweetFlattenerSpec extends FlatSpec
       .flatten(rawTweets)
 
     flattenedTweets.count() shouldBe rawTweets.count()
+
 
   }
 

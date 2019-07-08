@@ -2,7 +2,7 @@ package co.edu.icesi.wtsp.tweets.transformer
 
 import java.io.File
 
-import co.edu.icesi.wtsp.util.UDF
+import co.edu.icesi.wtsp.util.GeoUDF
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.scalatest.FunSuite
 
@@ -95,7 +95,7 @@ class TwitterFilteringSpec extends FunSuite with DataFrameSuiteBase{
     val result = tweetsDF.select(to_json($"place.bounding_box").alias("bounding_box")).where("place is not null").collect()
     assert(result.length == 195)
 
-    val wkt = result.map(r => {r.getAs[String]("bounding_box")}).map(s => UDF.wktFromGeoJson(s))
+    val wkt = result.map(r => {r.getAs[String]("bounding_box")}).map(s => GeoUDF.wktFromGeoJson(s))
     assert(wkt.exists(_.isEmpty))
   }
 
