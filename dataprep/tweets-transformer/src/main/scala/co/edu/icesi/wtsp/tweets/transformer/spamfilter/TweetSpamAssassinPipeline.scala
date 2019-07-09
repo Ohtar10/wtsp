@@ -27,7 +27,8 @@ class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer
   override def transform(dataset: Dataset[_]): DataFrame = {
 
     val predictions = pipeline.transform(dataset.select(fromFields:_*))
-      .withColumn("is_spam", when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
+      .withColumn("is_spam",
+        when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
       .withColumnRenamed("Id", "id")
       .select("id", "is_spam")
 
