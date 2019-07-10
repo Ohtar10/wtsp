@@ -28,6 +28,7 @@ object Schemas{
   val tweetObject: Seq[Column] = Seq(
     new Column("id"),
     new Column("text").as("tweet"),
+    new Column("lang"),
     nanvl(new Column("favorite_count"), lit(0.0)).as("favorite_count"),
     //This is only available using premium and Enterprise tier of Twitter - nanvl(new Column("reply_count"), lit(0.0)).as("reply_count"),
     nanvl(new Column("retweet_count"), lit(0.0)).as("retweet_count"),

@@ -1,5 +1,7 @@
 package co.edu.icesi.wtsp.tweets.transformer
 
+import java.io.File
+
 /**
   * Contain common variables and utility methods
   * shared accross all the test suites.
@@ -33,5 +35,28 @@ trait SpecCommon {
     * the Twitter API
     */
   val rawTweetsPath = "src/test/resources/tweets/*/"
+
+  /**
+    * The output path for the spark related
+    * operations.
+    */
+  val testOutputPath = "src/test/resources/output/"
+
+  /**
+    * Deletes recursively the files specified
+    * at the given File object.
+    *
+    * @param file the path to delete recursively
+    */
+  def deleteRecursively(file: File): Unit = {
+    if (file.isDirectory)
+    {
+      file.listFiles().foreach(deleteRecursively)
+    }
+    if (file.exists && !file.delete)
+    {
+      throw new Exception(s"Unable to delete file: ${file.getAbsolutePath}")
+    }
+  }
 
 }

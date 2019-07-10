@@ -1,6 +1,8 @@
 // give the user a nice default project!
 
-lazy val root = (project in file(".")).
+val circeVersion = "0.11.1"
+
+lazy val app = (project in file(".")).
 
   settings(
     inThisBuild(List(
@@ -32,7 +34,14 @@ lazy val root = (project in file(".")).
       "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test",
       "org.mockito" %% "mockito-scala" % "0.4.5" % "test",
 
-      "com.esri.geometry" % "esri-geometry-api" % "2.2.2"
+      "com.esri.geometry" % "esri-geometry-api" % "2.2.2",
+
+      Seq(
+        "io.circe" %% "circe-core",
+        "io.circe" %% "circe-generic",
+        "io.circe" %% "circe-parser"
+      ).map(_ % circeVersion)
+
     ),
 
     // uses compile classpath for the run task, including "provided" jar (cf http://stackoverflow.com/a/21803413/3827)

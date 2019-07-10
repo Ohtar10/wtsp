@@ -6,7 +6,10 @@ import co.edu.icesi.wtsp.util.GeoUDF
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.scalatest.FunSuite
 
-class TwitterFilteringSpec extends FunSuite with DataFrameSuiteBase{
+class TwitterFilteringSpec extends
+  FunSuite
+  with DataFrameSuiteBase
+  with SpecCommon {
 
   private val additionalFields = Set("created_timestamp", "year", "month", "day", "hour")
 
@@ -100,14 +103,5 @@ class TwitterFilteringSpec extends FunSuite with DataFrameSuiteBase{
   }
 
 
-  def deleteRecursively(file: File): Unit = {
-    if (file.isDirectory)
-    {
-      file.listFiles().foreach(deleteRecursively)
-    }
-    if (file.exists && !file.delete)
-    {
-      throw new Exception(s"Unable to delete file: ${file.getAbsolutePath}")
-    }
-  }
+
 }
