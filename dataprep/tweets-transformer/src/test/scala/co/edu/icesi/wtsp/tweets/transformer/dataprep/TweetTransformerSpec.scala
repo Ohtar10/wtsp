@@ -16,6 +16,7 @@ class TweetTransformerSpec extends FlatSpec
   val commonSchema = new StructType()
     .add("id", LongType, nullable = true)
     .add("tweet", StringType, nullable = true)
+    .add("lang", StringType, nullable = true)
     .add("favorite_count", DoubleType, nullable = true)
     .add("retweet_count", DoubleType, nullable = true)
     .add("is_retweet", DoubleType, nullable = false)

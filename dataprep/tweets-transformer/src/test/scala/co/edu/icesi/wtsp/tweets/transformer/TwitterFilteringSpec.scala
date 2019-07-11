@@ -4,8 +4,10 @@ import java.io.File
 
 import co.edu.icesi.wtsp.util.GeoUDF
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Ignore}
 
+//Obsolete suite, being replaced for separated ones
+@Ignore
 class TwitterFilteringSpec extends
   FunSuite
   with DataFrameSuiteBase

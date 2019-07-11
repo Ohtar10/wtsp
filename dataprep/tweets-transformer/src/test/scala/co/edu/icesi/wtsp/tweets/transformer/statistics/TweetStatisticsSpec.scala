@@ -6,7 +6,6 @@ import java.nio.file.{Files, Paths}
 import co.edu.icesi.wtsp.tweets.transformer.SpecCommon
 import co.edu.icesi.wtsp.tweets.transformer.dataprep.TweetTransformerBuilder
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import io.circe.syntax._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.{FlatSpec, Matchers}

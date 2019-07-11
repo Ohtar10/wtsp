@@ -34,13 +34,7 @@ lazy val app = (project in file(".")).
       "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test",
       "org.mockito" %% "mockito-scala" % "0.4.5" % "test",
 
-      "com.esri.geometry" % "esri-geometry-api" % "2.2.2",
-
-      Seq(
-        "io.circe" %% "circe-core",
-        "io.circe" %% "circe-generic",
-        "io.circe" %% "circe-parser"
-      ).map(_ % circeVersion)
+      "com.esri.geometry" % "esri-geometry-api" % "2.2.2"
 
     ),
 
