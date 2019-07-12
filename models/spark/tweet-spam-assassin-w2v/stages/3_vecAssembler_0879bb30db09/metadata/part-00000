@@ -1,1 +1,0 @@
-{"class":"org.apache.spark.ml.feature.VectorAssembler","timestamp":1562339241538,"sparkVersion":"2.2.1","uid":"vecAssembler_0879bb30db09","paramMap":{"outputCol":"features","inputCols":["following","followers","actions","is_retweet","has_location","text_features"]}}
