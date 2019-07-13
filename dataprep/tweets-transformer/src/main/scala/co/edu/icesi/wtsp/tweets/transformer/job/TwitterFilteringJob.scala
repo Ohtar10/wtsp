@@ -35,7 +35,9 @@ class TwitterFilteringJob(input: String,
     calculateStatistics(hamTweets, "final_stats")
 
     //Persist the final data frame to the provided output path
-    hamTweets.write.mode("overwrite").parquet(s"$output/tweets")
+    hamTweets.write.mode("append")
+      .partitionBy("year", "month", "day", "hour")
+      .parquet(s"$output/tweets")
   }
 
   /**
