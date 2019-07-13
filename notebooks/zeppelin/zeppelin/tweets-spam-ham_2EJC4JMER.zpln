@@ -42,22 +42,24 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:24:55.532",
+      "dateUpdated": "2019-07-13 17:11:10.636",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -68,7 +70,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 2.4.3\n"
+            "data": "\u001b[1m\u001b[34mres8\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 2.4.3\n"
           }
         ]
       },
@@ -77,29 +79,31 @@
       "jobName": "paragraph_1562959485334_-404175317",
       "id": "20190701-162157_1845555219",
       "dateCreated": "2019-07-12 19:24:45.334",
-      "dateStarted": "2019-07-12 19:24:55.625",
-      "dateFinished": "2019-07-12 19:25:18.638",
+      "dateStarted": "2019-07-13 17:11:07.253",
+      "dateFinished": "2019-07-13 17:11:07.416",
       "status": "FINISHED"
     },
     {
       "text": "val basePath \u003d \"/zeppelin/datasets\"\nval tweetsPath \u003d basePath + \"/twitter-spam\"\nval training \u003d tweetsPath + \"/train.csv\"\nval testing \u003d tweetsPath + \"/test.csv\"",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:25:20.690",
+      "dateUpdated": "2019-07-13 17:11:13.410",
       "config": {
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
         "results": {},
         "enabled": true,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "editorHide": true,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -119,8 +123,8 @@
       "jobName": "paragraph_1562959485342_-256914774",
       "id": "20190701-162247_1075318024",
       "dateCreated": "2019-07-12 19:24:45.342",
-      "dateStarted": "2019-07-12 19:25:20.729",
-      "dateFinished": "2019-07-12 19:25:21.055",
+      "dateStarted": "2019-07-13 17:11:13.410",
+      "dateFinished": "2019-07-13 17:11:13.618",
       "status": "FINISHED"
     },
     {
@@ -165,17 +169,19 @@
     {
       "text": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\n\nval schema \u003d new StructType()\n  .add(\"Id\", LongType, false)\n  .add(\"Tweet\",StringType, false)\n  .add(\"following\",DoubleType, true)\n  .add(\"followers\",DoubleType, true)\n  .add(\"actions\", DoubleType, true)\n  .add(\"is_retweet\", DoubleType, true)\n  .add(\"location\", StringType, true)\n  .add(\"Type\", StringType, false)\n  \nval trainingDF \u003d spark.read\n    .option(\"header\", true)\n    .schema(schema)\n    .csv(training)\n    .select($\"Id\".as(\"id\"), \n        $\"Tweet\".as(\"tweet\"), \n        $\"following\", \n        $\"followers\", \n        $\"actions\", \n        $\"is_retweet\", \n        $\"location\",\n        when($\"location\".isNull, 0.0).otherwise(1.0).alias(\"has_location\"),\n        $\"Type\".as(\"type\")).where(\"Type is not null\")\n    .na.fill(0.0, Seq(\"following\", \"followers\", \"actions\", \"is_retweet\"))\n    \nz.show(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:26:34.019",
+      "dateUpdated": "2019-07-13 17:11:22.998",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
         "checkEmpty": true,
@@ -367,29 +373,31 @@
       "jobName": "paragraph_1562959485343_-118261947",
       "id": "20190701-162507_992250565",
       "dateCreated": "2019-07-12 19:24:45.343",
-      "dateStarted": "2019-07-12 19:26:30.229",
-      "dateFinished": "2019-07-12 19:26:32.702",
+      "dateStarted": "2019-07-13 17:11:18.880",
+      "dateFinished": "2019-07-13 17:11:20.721",
       "status": "FINISHED"
     },
     {
       "text": "trainingDF.printSchema()",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:26:37.593",
+      "dateUpdated": "2019-07-13 17:11:37.835",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -409,8 +417,8 @@
       "jobName": "paragraph_1562959485345_-2031802932",
       "id": "20190701-181844_1465805024",
       "dateCreated": "2019-07-12 19:24:45.345",
-      "dateStarted": "2019-07-12 19:26:37.637",
-      "dateFinished": "2019-07-12 19:26:37.958",
+      "dateStarted": "2019-07-13 17:11:33.047",
+      "dateFinished": "2019-07-13 17:11:33.255",
       "status": "FINISHED"
     },
     {
@@ -453,19 +461,21 @@
       "status": "READY"
     },
     {
-      "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n    .setLocale(\"en\")\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval hashingTFPipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval predictions \u003d hashingTFPipeline.fit(trainingDF).transform(trainingDF)\nz.show(predictions.limit(100))\n    ",
+      "text": "import org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.{StringIndexer, Tokenizer, StopWordsRemover, HashingTF, VectorAssembler}\nimport org.apache.spark.ml.classification.LogisticRegression\n\n//To transform the string classes to a binary-numerical representation\nval classIndexer \u003d new StringIndexer()\n    .setInputCol(\"type\")\n    .setOutputCol(\"label\")\n    //.setStringOrderType(\"alphabetDesc\") //Asign 1 to Quality and 0 to Spam (Alphabetical order) NOTE: This is not supported in spark 2.2.1\n\n//To transform the text of the tweets into tokens (array of words)    \nval tokenizer \u003d new Tokenizer()\n    .setInputCol(\"tweet\")\n    .setOutputCol(\"text_tokens\")\n\n//To remove stop words like pronouns and topic marking particles from the text    \nval stopWordsRemover \u003d new StopWordsRemover()\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_filtered\")\n    .setLocale(\"en_US\") // Because most of the english tweets comes from US\n\n//To calculate the term frequencies    \nval hashingTF \u003d new HashingTF()\n    .setNumFeatures(1000)\n    .setInputCol(\"text_filtered\")\n    .setOutputCol(\"text_features\")\n    \n//To assemble all the features into a single feature vector\nval vectorAssembler \u003d new VectorAssembler()\n    .setInputCols(Array(\"following\", \"followers\", \"actions\", \"is_retweet\", \"has_location\", \"text_features\"))\n    .setOutputCol(\"features\")\n\n//To train the binary classifier for spam-vs-ham tweets    \nval lr \u003d new LogisticRegression()\n    .setMaxIter(100)\n    .setRegParam(0.001)\n    \nval hashingTFPipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            stopWordsRemover, \n            hashingTF,\n            vectorAssembler,\n            lr\n            ))\n    \nval predictions \u003d hashingTFPipeline.fit(trainingDF).transform(trainingDF)\nz.show(predictions.limit(100))\n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:39:05.287",
+      "dateUpdated": "2019-07-13 17:12:08.126",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
         "checkEmpty": true,
@@ -538,29 +548,31 @@
       "jobName": "paragraph_1562959485345_-199005871",
       "id": "20190701-162604_51293922",
       "dateCreated": "2019-07-12 19:24:45.345",
-      "dateStarted": "2019-07-12 19:39:05.370",
-      "dateFinished": "2019-07-12 19:39:23.353",
+      "dateStarted": "2019-07-13 17:12:05.572",
+      "dateFinished": "2019-07-13 17:12:21.079",
       "status": "FINISHED"
     },
     {
       "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area Under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:43:55.849",
+      "dateUpdated": "2019-07-13 17:12:31.099",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -571,7 +583,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area Under ROC 0.9902136603802713\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\u001b[1m\u001b[34mevaluator\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.evaluation.BinaryClassificationEvaluator\u001b[0m \u003d binEval_439c277b2f85\n\u001b[1m\u001b[34mroc\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m \u003d 0.9902136603802713\n"
+            "data": "Area Under ROC 0.9902136603802713\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\u001b[1m\u001b[34mevaluator\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.evaluation.BinaryClassificationEvaluator\u001b[0m \u003d binEval_dc11ac14638c\n\u001b[1m\u001b[34mroc\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m \u003d 0.9902136603802713\n"
           }
         ]
       },
@@ -580,8 +592,8 @@
       "jobName": "paragraph_1562959485346_284737594",
       "id": "20190701-193617_28467861",
       "dateCreated": "2019-07-12 19:24:45.346",
-      "dateStarted": "2019-07-12 19:43:55.904",
-      "dateFinished": "2019-07-12 19:43:58.727",
+      "dateStarted": "2019-07-13 17:12:28.221",
+      "dateFinished": "2019-07-13 17:12:29.776",
       "status": "FINISHED"
     },
     {
@@ -626,17 +638,19 @@
     {
       "text": "import org.apache.spark.ml.feature.Word2Vec\n\nval word2Vec \u003d new Word2Vec()\n    .setVectorSize(20)\n    .setMinCount(0)\n    .setInputCol(\"text_tokens\")\n    .setOutputCol(\"text_features\")\n    \nval word2VecPipeline \u003d new Pipeline()\n    .setStages(\n        Array(\n            classIndexer, \n            tokenizer, \n            //stopWordsRemover, \n            word2Vec,\n            vectorAssembler,\n            lr\n            ))\n    \nval predictions \u003d word2VecPipeline.fit(trainingDF).transform(trainingDF)\nz.show(predictions.limit(100))\n    ",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:44:46.494",
+      "dateUpdated": "2019-07-13 17:12:43.312",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
         "checkEmpty": true,
@@ -708,29 +722,31 @@
       "jobName": "paragraph_1562959485346_-1679515415",
       "id": "20190705-132120_1045908727",
       "dateCreated": "2019-07-12 19:24:45.346",
-      "dateStarted": "2019-07-12 19:44:46.538",
-      "dateFinished": "2019-07-12 19:45:04.894",
+      "dateStarted": "2019-07-13 17:12:40.466",
+      "dateFinished": "2019-07-13 17:13:00.353",
       "status": "FINISHED"
     },
     {
       "text": "import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\nval evaluator \u003d new BinaryClassificationEvaluator()\n    .setMetricName(\"areaUnderROC\")\n    \nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area Under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:46:46.251",
+      "dateUpdated": "2019-07-13 17:14:18.233",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -741,7 +757,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "Area Under ROC 0.959969816693628\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\u001b[1m\u001b[34mevaluator\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.evaluation.BinaryClassificationEvaluator\u001b[0m \u003d binEval_9d2fae1e000b\n\u001b[1m\u001b[34mroc\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m \u003d 0.959969816693628\n"
+            "data": "Area Under ROC 0.959969816693628\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\n\u001b[1m\u001b[34mevaluator\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.evaluation.BinaryClassificationEvaluator\u001b[0m \u003d binEval_d0472832a989\n\u001b[1m\u001b[34mroc\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m \u003d 0.959969816693628\n"
           }
         ]
       },
@@ -750,8 +766,8 @@
       "jobName": "paragraph_1562959485348_322593420",
       "id": "20190705-133043_2030204882",
       "dateCreated": "2019-07-12 19:24:45.348",
-      "dateStarted": "2019-07-12 19:46:46.280",
-      "dateFinished": "2019-07-12 19:46:47.748",
+      "dateStarted": "2019-07-13 17:14:00.998",
+      "dateFinished": "2019-07-13 17:14:02.066",
       "status": "FINISHED"
     },
     {
@@ -796,22 +812,24 @@
     {
       "text": "import org.apache.spark.ml.tuning.ParamGridBuilder\n\nval hashingTFParamGrid \u003d new ParamGridBuilder()\n  //.addGrid(hashingTF.numFeatures, Array(10, 25, 50))\n  //.addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  //.addGrid(lr.maxIter, Array(10, 50, 100))\n  .addGrid(hashingTF.numFeatures, Array(10))\n  .addGrid(lr.regParam, Array(0.001))\n  .addGrid(lr.maxIter, Array(100))\n  .build()\n\nval word2VecParamGrid \u003d new ParamGridBuilder()\n  //.addGrid(word2Vec.vectorSize, Array(10, 25, 50))\n  //.addGrid(lr.regParam, Array(0.1, 0.01, 0.001))\n  //.addGrid(lr.maxIter, Array(10, 50, 100))\n  .addGrid(word2Vec.vectorSize, Array(20))\n  .addGrid(lr.regParam, Array(0.001))\n  .addGrid(lr.maxIter, Array(100))\n  .build()",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:47:11.434",
+      "dateUpdated": "2019-07-13 17:14:30.404",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -822,7 +840,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.tuning.ParamGridBuilder\n\u001b[1m\u001b[34mhashingTFParamGrid\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.param.ParamMap]\u001b[0m \u003d\nArray({\n\tlogreg_02e2018beb40-maxIter: 100,\n\thashingTF_c94ca1ba7e1a-numFeatures: 10,\n\tlogreg_02e2018beb40-regParam: 0.001\n})\n\u001b[1m\u001b[34mword2VecParamGrid\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.param.ParamMap]\u001b[0m \u003d\nArray({\n\tlogreg_02e2018beb40-maxIter: 100,\n\tlogreg_02e2018beb40-regParam: 0.001,\n\tw2v_2f41b33bf003-vectorSize: 20\n})\n"
+            "data": "import org.apache.spark.ml.tuning.ParamGridBuilder\n\u001b[1m\u001b[34mhashingTFParamGrid\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.param.ParamMap]\u001b[0m \u003d\nArray({\n\tlogreg_3cee6a8ec2cf-maxIter: 100,\n\thashingTF_e6c2c9f1c885-numFeatures: 10,\n\tlogreg_3cee6a8ec2cf-regParam: 0.001\n})\n\u001b[1m\u001b[34mword2VecParamGrid\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.param.ParamMap]\u001b[0m \u003d\nArray({\n\tlogreg_3cee6a8ec2cf-maxIter: 100,\n\tlogreg_3cee6a8ec2cf-regParam: 0.001,\n\tw2v_e979e50b476a-vectorSize: 20\n})\n"
           }
         ]
       },
@@ -831,29 +849,31 @@
       "jobName": "paragraph_1562959485348_1997109615",
       "id": "20190705-133722_1933547096",
       "dateCreated": "2019-07-12 19:24:45.348",
-      "dateStarted": "2019-07-12 19:47:11.464",
-      "dateFinished": "2019-07-12 19:47:12.102",
+      "dateStarted": "2019-07-13 17:14:27.383",
+      "dateFinished": "2019-07-13 17:14:27.726",
       "status": "FINISHED"
     },
     {
       "text": "import org.apache.spark.ml.tuning.CrossValidator\n\n//First the hashingTFpipeline\nval hashingTFCV \u003d new CrossValidator()\n  .setEstimator(hashingTFPipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(hashingTFParamGrid)\n  .setNumFolds(5)\n  .setParallelism(2)\n  \nval hashingTFCVModel \u003d hashingTFCV.fit(trainingDF)",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:47:33.549",
+      "dateUpdated": "2019-07-13 17:17:42.219",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -864,7 +884,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.tuning.CrossValidator\n\u001b[1m\u001b[34mhashingTFCV\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidator\u001b[0m \u003d cv_b8c4377fce11\n\u001b[1m\u001b[34mhashingTFCVModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidatorModel\u001b[0m \u003d cv_b8c4377fce11\n"
+            "data": "import org.apache.spark.ml.tuning.CrossValidator\n\u001b[1m\u001b[34mhashingTFCV\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidator\u001b[0m \u003d cv_6cff8880fb87\n\u001b[1m\u001b[34mhashingTFCVModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidatorModel\u001b[0m \u003d cv_6cff8880fb87\n"
           }
         ]
       },
@@ -873,29 +893,31 @@
       "jobName": "paragraph_1562959485349_-1686123624",
       "id": "20190701-221624_1043106137",
       "dateCreated": "2019-07-12 19:24:45.349",
-      "dateStarted": "2019-07-12 19:47:33.599",
-      "dateFinished": "2019-07-12 19:48:03.716",
+      "dateStarted": "2019-07-13 17:14:38.762",
+      "dateFinished": "2019-07-13 17:14:59.719",
       "status": "FINISHED"
     },
     {
       "text": "val predictions \u003d hashingTFCVModel.transform(trainingDF)\nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:53:16.731",
+      "dateUpdated": "2019-07-13 17:18:14.364",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -915,8 +937,8 @@
       "jobName": "paragraph_1562959485349_98717127",
       "id": "20190701-222621_761565090",
       "dateCreated": "2019-07-12 19:24:45.349",
-      "dateStarted": "2019-07-12 19:53:16.765",
-      "dateFinished": "2019-07-12 19:53:18.032",
+      "dateStarted": "2019-07-13 17:17:51.530",
+      "dateFinished": "2019-07-13 17:17:52.529",
       "status": "FINISHED"
     },
     {
@@ -961,22 +983,24 @@
     {
       "text": "\n//Then the word 2 vec pipeline\nval word2vecCV \u003d new CrossValidator()\n  .setEstimator(word2VecPipeline)\n  .setEvaluator(evaluator)\n  .setEstimatorParamMaps(word2VecParamGrid)\n  .setNumFolds(5)\n  .setParallelism(2)\n  \nval word2VecCVModel \u003d word2vecCV.fit(trainingDF)\n",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:53:30.997",
+      "dateUpdated": "2019-07-13 17:18:29.770",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -987,7 +1011,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mword2vecCV\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidator\u001b[0m \u003d cv_67bcf93bfd05\n\u001b[1m\u001b[34mword2VecCVModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidatorModel\u001b[0m \u003d cv_67bcf93bfd05\n"
+            "data": "\u001b[1m\u001b[34mword2vecCV\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidator\u001b[0m \u003d cv_2b94f971a064\n\u001b[1m\u001b[34mword2VecCVModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidatorModel\u001b[0m \u003d cv_2b94f971a064\n"
           }
         ]
       },
@@ -996,29 +1020,31 @@
       "jobName": "paragraph_1562959485349_1163933874",
       "id": "20190705-142205_371191419",
       "dateCreated": "2019-07-12 19:24:45.350",
-      "dateStarted": "2019-07-12 19:53:31.035",
-      "dateFinished": "2019-07-12 19:54:40.059",
+      "dateStarted": "2019-07-13 17:18:27.362",
+      "dateFinished": "2019-07-13 17:19:12.258",
       "status": "FINISHED"
     },
     {
       "text": "val predictions \u003d word2VecCVModel.transform(trainingDF)\nval roc \u003d evaluator.evaluate(predictions)\nprintln(s\"Area under ROC ${roc}\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 20:00:39.420",
+      "dateUpdated": "2019-07-13 17:29:14.173",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -1038,8 +1064,8 @@
       "jobName": "paragraph_1562959485350_-1805897317",
       "id": "20190705-142255_1185049141",
       "dateCreated": "2019-07-12 19:24:45.350",
-      "dateStarted": "2019-07-12 20:00:39.507",
-      "dateFinished": "2019-07-12 20:00:42.291",
+      "dateStarted": "2019-07-13 17:28:59.714",
+      "dateFinished": "2019-07-13 17:29:01.006",
       "status": "FINISHED"
     },
     {
@@ -1160,22 +1186,24 @@
     {
       "text": "import org.apache.spark.ml.PipelineModel\n\nval bestHashingTFPipeline \u003d hashingTFCVModel.bestModel.asInstanceOf[PipelineModel]\nval bestword2VecPipeline \u003d word2VecCVModel.bestModel.asInstanceOf[PipelineModel]\n\nbestHashingTFPipeline.write.overwrite().save(\"/zeppelin/models/spark/tweet-spam-assassin-tf\")\nbestword2VecPipeline.write.overwrite().save(\"/zeppelin/models/spark/tweet-spam-assassin-w2v\")",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 20:01:48.989",
+      "dateUpdated": "2019-07-13 17:29:26.818",
       "config": {
+        "tableHide": false,
         "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
           "completionKey": "TAB",
-          "completionSupport": true
+          "completionSupport": false
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
+        "editorMode": "ace/mode/markdown",
         "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
+        "editorHide": false,
         "runOnSelectionChange": true,
         "title": false,
-        "checkEmpty": true
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -1186,7 +1214,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.ml.PipelineModel\n\u001b[1m\u001b[34mbestHashingTFPipeline\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.PipelineModel\u001b[0m \u003d pipeline_81669c26a1b5\n\u001b[1m\u001b[34mbestword2VecPipeline\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.PipelineModel\u001b[0m \u003d pipeline_2e068c58b6f6\n"
+            "data": "import org.apache.spark.ml.PipelineModel\n\u001b[1m\u001b[34mbestHashingTFPipeline\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.PipelineModel\u001b[0m \u003d pipeline_cc0a616522ad\n\u001b[1m\u001b[34mbestword2VecPipeline\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.PipelineModel\u001b[0m \u003d pipeline_d46427bbb996\n"
           }
         ]
       },
@@ -1195,8 +1223,8 @@
       "jobName": "paragraph_1562959485350_-1993828904",
       "id": "20190701-234543_1129336189",
       "dateCreated": "2019-07-12 19:24:45.350",
-      "dateStarted": "2019-07-12 20:01:49.026",
-      "dateFinished": "2019-07-12 20:01:59.482",
+      "dateStarted": "2019-07-13 17:29:23.859",
+      "dateFinished": "2019-07-13 17:29:27.469",
       "status": "FINISHED"
     },
     {

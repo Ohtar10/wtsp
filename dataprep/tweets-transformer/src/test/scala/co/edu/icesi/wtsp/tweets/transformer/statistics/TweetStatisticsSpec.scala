@@ -46,7 +46,7 @@ class TweetStatisticsSpec extends FlatSpec
     tf.statistics.tweetCountByLanguage shouldBe tf.testStatistics.tweetCountByLanguage
     tf.statistics.tweetCountByCountry shouldBe tf.testStatistics.tweetCountByCountry
   }
-  it can "be converted to persist as a json file" in {
+  it can "be persisted as a json file" in {
     val tf = tweetsFixture
     val output = testOutputPath + "statistics"
     tf.statistics.saveResults(output)

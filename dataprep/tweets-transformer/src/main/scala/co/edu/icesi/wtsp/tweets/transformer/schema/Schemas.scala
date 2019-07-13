@@ -66,8 +66,8 @@ object Schemas{
     * with the tweetObject general schema.
     */
   val tweetSpamObject: Seq[Column] = Seq(
-    new Column("id").alias("Id"),
-    new Column("tweet").alias("Tweet"),
+    new Column("id"),
+    new Column("tweet"),
     new Column("is_retweet"),
     new Column("user_followers_count").alias("followers"),
     new Column("user_following_count").alias("following"),

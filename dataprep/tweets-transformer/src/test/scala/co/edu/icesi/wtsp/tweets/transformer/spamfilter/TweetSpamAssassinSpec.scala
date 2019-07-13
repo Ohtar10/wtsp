@@ -119,8 +119,8 @@ private object TweetsUtil{
 
   def prepareTweets(spark: SparkSession, path: String): DataFrame = {
     val schema = new StructType()
-      .add("Id", LongType, false)
-      .add("Tweet",StringType, false)
+      .add("id", LongType, false)
+      .add("tweet",StringType, false)
       .add("following",DoubleType, true)
       .add("followers",DoubleType, true)
       .add("actions", DoubleType, true)
@@ -133,15 +133,15 @@ private object TweetsUtil{
     spark.read.option("header", true)
       .schema(schema)
       .csv(path)
-      .select($"Id",
-      $"Tweet",
+      .select($"id",
+      $"tweet",
       $"following",
       $"followers",
       $"actions",
       $"is_retweet",
       $"location",
       when($"location".isNull, 0.0).otherwise(1.0).alias("has_location"))
-      .where("Tweet is not null")
+      .where("tweet is not null")
       .na.fill(0.0, Seq("following", "followers", "actions", "is_retweet"))
   }
 }
