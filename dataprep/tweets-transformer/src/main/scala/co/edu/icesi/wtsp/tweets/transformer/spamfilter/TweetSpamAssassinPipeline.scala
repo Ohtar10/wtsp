@@ -29,7 +29,6 @@ class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer
     val predictions = pipeline.transform(dataset.select(fromFields:_*))
       .withColumn("is_spam",
         when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
-      .withColumnRenamed("Id", "id")
       .select("id", "is_spam")
 
     dataset.join(predictions, Seq("id"))
