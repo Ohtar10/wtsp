@@ -35,7 +35,7 @@ __pycache__/
 # Distribution / packaging
 .env
 .Python
-env/
+#env/
 #bin/
 build/*.jar
 develop-eggs/
@@ -98,7 +98,7 @@ __pycache__/
 # Distribution / packaging
 .env
 .Python
-env/
+#env/
 #bin/
 build/
 develop-eggs/
