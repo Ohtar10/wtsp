@@ -15,7 +15,7 @@ class TwitterFilteringJobSpec extends FlatSpec
   "The twitter filtering job" should "process raw tweets and take only those with location" in {
     val output = testOutputPath + "/full_test"
 
-    val job = TwitterFilteringJob(rawTweetsPath, output, tfPipeline)
+    val job = TwitterFilteringJob(Option(spark), rawTweetsPath, output, tfPipeline)
     job.execute()
 
     Files.exists(Paths.get(s"$output/statistics/full_stats")) shouldBe true

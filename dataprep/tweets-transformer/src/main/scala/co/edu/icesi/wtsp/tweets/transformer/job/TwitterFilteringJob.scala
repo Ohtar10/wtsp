@@ -6,18 +6,20 @@ import co.edu.icesi.wtsp.tweets.transformer.spamfilter.TweetSpamAssassinPipeline
 import co.edu.icesi.wtsp.tweets.transformer.statistics.TweetStatisticsCalculator
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class TwitterFilteringJob(input: String,
+class TwitterFilteringJob(spark: Option[SparkSession], input: String,
                           output: String,
                           spamPipelineModel: String,
                           filterExpression: String)
   extends Job {
 
   override def execute(): Unit = {
-    val spark = SparkSession.builder().getOrCreate()
+
+    val sparkSession = spark.getOrElse(SparkSession.builder().getOrCreate())
+
     val tweets = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
       .build()
-      .transform(spark.read.json(input))
+      .transform(sparkSession.read.json(input))
 
     //General statistics
     calculateStatistics(tweets, "full_stats")
@@ -70,11 +72,12 @@ class TwitterFilteringJob(input: String,
   */
 object TwitterFilteringJob{
 
-  def apply(input: String,
+  def apply(spark: Option[SparkSession] = None,
+            input: String,
             output: String,
             spamPipelineModel: String,
             filterExpression: String = "place is not null and lang = 'en'"
             ): TwitterFilteringJob =
-    new TwitterFilteringJob(input, output, spamPipelineModel, filterExpression)
+    new TwitterFilteringJob(spark, input, output, spamPipelineModel, filterExpression)
 
 }

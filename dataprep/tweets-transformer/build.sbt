@@ -20,7 +20,7 @@ lazy val app = (project in file(".")).
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     parallelExecution in Test := false,
     fork := true,
-    assemblyJarName in assembly := s"tweets-transformer-with-deps-${version}",
+    assemblyJarName in assembly := s"tweets-transformer-with-deps-${version.value}.jar",
 
     coverageHighlighting := true,
 
@@ -34,7 +34,8 @@ lazy val app = (project in file(".")).
       "com.holdenkarau" %% "spark-testing-base" % "2.4.3_0.12.0" % "test",
       "org.mockito" %% "mockito-scala" % "0.4.5" % "test",
 
-      "com.esri.geometry" % "esri-geometry-api" % "2.2.2"
+      "com.esri.geometry" % "esri-geometry-api" % "2.2.2",
+      "com.github.scopt" %% "scopt" % "3.7.1"
 
     ),
 
