@@ -3,6 +3,7 @@ package co.edu.icesi.wtsp.tweets.transformer.schema
 import co.edu.icesi.wtsp.util.GeoUDF
 import org.apache.spark.sql.Column
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
 
 
 /**
@@ -18,6 +19,53 @@ import org.apache.spark.sql.functions._
 object Schemas{
 
   private val datePattern: String = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"
+
+  val placeStruct = StructType(List(
+    StructField("id", StringType, nullable = false),
+    StructField("name", StringType, nullable = false),
+    StructField("country", StringType, nullable = true),
+    StructField("country_code", StringType, nullable = true),
+    StructField("full_name", StringType, nullable = true),
+    StructField("place_type", StringType, nullable = true),
+    StructField("url", StringType, nullable = true),
+    StructField("bounding_box", StringType, nullable = true)
+  ))
+
+  val userStruct = StructType(List(
+    StructField("id", LongType, nullable = false),
+    StructField("screen_name", StringType, nullable = false),
+    StructField("followers_count", LongType, nullable = false),
+    StructField("friends_count", LongType, nullable = false),
+    StructField("location", StringType, nullable = false)
+  ))
+
+  val entitiesStruct = StructType(List(
+    StructField("hashtags", ArrayType(StructType(List(StructField("text", StringType, nullable = true)))), nullable = true),
+    StructField("user_mentions", ArrayType(
+      StructType(List(
+        StructField("screen_name", StringType, nullable = true),
+        StructField("id", LongType, nullable = true)
+      ))
+    )),
+    StructField("urls", ArrayType(StructType(List(StructField("expanded_url", StringType, nullable = true)))), nullable = true)
+  ))
+
+  /**
+    * The original source schema with the fields
+    * of interest for this project.
+    */
+  val sourceSchema: StructType = new StructType()
+    .add("id", LongType, nullable = false)
+    .add("text", StringType, nullable = true)
+    .add("lang", StringType, nullable = true)
+    .add("favorite_count", LongType, nullable = true)
+    .add("retweet_count", LongType, nullable = true)
+    .add("retweeted_status", LongType, nullable = true)
+    .add("place", placeStruct, nullable = true)
+    .add("coordinates", StringType, true)
+    .add("user", userStruct, nullable = false)
+    .add("entities", entitiesStruct, nullable = false)
+    .add("created_at", StringType, nullable = false)
 
   /**
     * The general tweet object schema.
@@ -47,8 +95,8 @@ object Schemas{
     concat_ws(";", new Column("entities.user_mentions.screen_name")).as("user_mentions"),
     concat_ws(";", new Column("entities.user_mentions.id")).as("user_id_mentions"),
     concat_ws(";", new Column("entities.urls.expanded_url")).as("expanded_urls"),
-    GeoUDF.stWKTFromGeoJson(to_json(new Column("coordinates"))).as("location_geometry"),
-    GeoUDF.stWKTFromGeoJson(to_json(new Column("place.bounding_box"))).as("place_geometry"),
+    GeoUDF.stWKTFromGeoJson(new Column("coordinates")).as("location_geometry"),
+    GeoUDF.stWKTFromGeoJson(new Column("place.bounding_box")).as("place_geometry"),
     new Column("place.id").as("place_id"),
     new Column("place.name").as("place_name"),
     new Column("place.full_name").as("place_full_name"),

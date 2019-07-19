@@ -70,7 +70,7 @@ class TweetSpamAssassinSpec extends FlatSpec
 
   "The spam filter transformer" should "be able to transform from raw tweets with tf pipeline" in {
     val tweetSpamAssassin = TweetSpamAssassinPipeline(tfPipeline)
-    val rawTweets = spark.read.json(rawTweetsPath)
+    val rawTweets = spark.read.schema(Schemas.sourceSchema).json(rawTweetsPath)
 
     val dataPrepTransformer = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
@@ -87,7 +87,7 @@ class TweetSpamAssassinSpec extends FlatSpec
 
   it should "be able to transform from raw tweets with word2vec pipeline" in {
     val tweetSpamAssassin = TweetSpamAssassinPipeline(w2vPipeline)
-    val rawTweets = spark.read.json(rawTweetsPath)
+    val rawTweets = spark.read.schema(Schemas.sourceSchema).json(rawTweetsPath)
 
     val dataPrepTransformer = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)

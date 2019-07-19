@@ -5,6 +5,7 @@ import java.nio.file.{Files, Paths}
 
 import co.edu.icesi.wtsp.tweets.transformer.SpecCommon
 import co.edu.icesi.wtsp.tweets.transformer.dataprep.TweetTransformerBuilder
+import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
@@ -19,7 +20,7 @@ class TweetStatisticsSpec extends FlatSpec
     import spark.implicits._
     val datePattern = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"
 
-    val tweets = spark.read.json(rawTweetsPath)
+    val tweets = spark.read.schema(Schemas.sourceSchema).json(rawTweetsPath)
       .withColumn("created_timestamp", to_timestamp($"created_at", datePattern))
       .withColumn("year", year($"created_timestamp"))
       .withColumn("month", month($"created_timestamp"))

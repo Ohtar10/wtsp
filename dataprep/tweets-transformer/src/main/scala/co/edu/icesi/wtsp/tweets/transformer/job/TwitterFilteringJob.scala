@@ -19,7 +19,7 @@ class TwitterFilteringJob(spark: Option[SparkSession], input: String,
     val tweets = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
       .build()
-      .transform(sparkSession.read.json(input))
+      .transform(sparkSession.read.schema(Schemas.sourceSchema).json(input))
 
     //General statistics
     calculateStatistics(tweets, "full_stats")

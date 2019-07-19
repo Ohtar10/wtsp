@@ -45,7 +45,7 @@ class TweetTransformerSpec extends FlatSpec
     .add("place_url", StringType ,nullable = true)
 
   "The tweet transformer" should "transform raw tweets into the common schema" in {
-    val rawTweets = spark.read.json(rawTweetsPath)
+    val rawTweets = spark.read.schema(Schemas.sourceSchema).json(rawTweetsPath)
 
     val transformer = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
@@ -57,7 +57,7 @@ class TweetTransformerSpec extends FlatSpec
     transformedTweets.schema shouldBe commonSchema
   }
   it should "transform raw tweets and apply a filter to get only desired rows" in {
-    val rawTweets = spark.read.json(rawTweetsPath)
+    val rawTweets = spark.read.schema(Schemas.sourceSchema).json(rawTweetsPath)
     val condition = "place is not null"
     val filtered = rawTweets.select("*").where(condition)
 
