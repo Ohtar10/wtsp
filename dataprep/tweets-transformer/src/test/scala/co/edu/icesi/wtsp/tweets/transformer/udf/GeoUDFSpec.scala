@@ -1,9 +1,12 @@
 package co.edu.icesi.wtsp.tweets.transformer.udf
 
 import org.scalatest.{FlatSpec, Matchers}
-import co.edu.icesi.wtsp.util.GeoUDF
+import co.edu.icesi.wtsp.util.{EsriOperable, GeoUDF}
+import com.esri.core.geometry.GeometryException
+import org.mockito.MockitoSugar
 
 class GeoUDFSpec extends FlatSpec
+    with MockitoSugar
     with Matchers{
 
   "The wktFromGeoJson function" should "convert a point in geoJson into wkt" in {
@@ -26,10 +29,21 @@ class GeoUDFSpec extends FlatSpec
     )
 
     geoJsonExamples.foreach{ geometry =>
-      GeoUDF.wktFromGeoJson(geometry._2) shouldBe geometry._1
+     new GeoUDF().wktFromGeoJson(geometry._2) shouldBe geometry._1
     }
   }
   it should "return null when a null geojson is given" in {
-    GeoUDF.wktFromGeoJson(null) shouldBe null
+    new GeoUDF().wktFromGeoJson(null) shouldBe null
+  }
+  it should "return null when there is a parsing error" in {
+    new GeoUDF().wktFromGeoJson("{\"fake\": \"geojson\"}") shouldBe null
+  }
+  it should "return null when the geometry is corrupted" in {
+
+    val geoUDF = new GeoUDF() with EsriOperable {
+      override def fromGeoJson(json: String): String = throw new GeometryException("corrupted geometry")
+    }
+
+    geoUDF.wktFromGeoJson("{\"type\": \"Polygon\"}") shouldBe null
   }
 }

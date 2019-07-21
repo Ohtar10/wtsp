@@ -32,7 +32,7 @@ private object AppUtils {
   }
 
   def createSparkSession(name: String = "Twitter Filtering App",
-                         master: String = "local",
+                         master: String = "local[*]",
                          hiveSupport: Boolean = false): SparkSession = {
     if (hiveSupport) {
       SparkSession.builder()

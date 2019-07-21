@@ -1,6 +1,7 @@
 package co.edu.icesi.wtsp.tweets.transformer.spamfilter
 
 import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
+import org.apache.spark.internal.Logging
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
 import org.apache.spark.ml.{PipelineModel, Transformer}
@@ -20,17 +21,19 @@ import org.apache.spark.sql.{Column, DataFrame, Dataset}
   *
   * @param pipeline the spam pipeline to apply
   */
-class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer{
+class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer with Logging{
 
   val fromFields: Seq[Column] = Schemas.tweetSpamObject
 
   override def transform(dataset: Dataset[_]): DataFrame = {
 
+    logInfo("Transforming and predicting spam vs ham tweets...")
     val predictions = pipeline.transform(dataset.select(fromFields:_*))
       .withColumn("is_spam",
         when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
       .select("id", "is_spam")
 
+    logInfo("Preparing spam vs ham results...")
     dataset.join(predictions, Seq("id"))
   }
 

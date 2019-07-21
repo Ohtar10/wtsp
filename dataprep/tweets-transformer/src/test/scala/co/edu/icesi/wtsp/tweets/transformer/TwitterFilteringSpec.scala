@@ -100,7 +100,7 @@ class TwitterFilteringSpec extends
     val result = tweetsDF.select(to_json($"place.bounding_box").alias("bounding_box")).where("place is not null").collect()
     assert(result.length == 195)
 
-    val wkt = result.map(r => {r.getAs[String]("bounding_box")}).map(s => GeoUDF.wktFromGeoJson(s))
+    val wkt = result.map(r => {r.getAs[String]("bounding_box")}).map(s => new GeoUDF().wktFromGeoJson(s))
     assert(wkt.exists(_.isEmpty))
   }
 

@@ -4,39 +4,47 @@ import co.edu.icesi.wtsp.tweets.transformer.dataprep.TweetTransformerBuilder
 import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
 import co.edu.icesi.wtsp.tweets.transformer.spamfilter.TweetSpamAssassinPipeline
 import co.edu.icesi.wtsp.tweets.transformer.statistics.TweetStatisticsCalculator
+import org.apache.spark.internal.Logging
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class TwitterFilteringJob(spark: Option[SparkSession], input: String,
                           output: String,
                           spamPipelineModel: String,
                           filterExpression: String)
-  extends Job {
+  extends Job with Logging{
 
   override def execute(): Unit = {
 
     val sparkSession = spark.getOrElse(SparkSession.builder().getOrCreate())
 
+    logInfo("Reading all the tweets")
     val tweets = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
       .build()
       .transform(sparkSession.read.schema(Schemas.sourceSchema).json(input))
 
+    logInfo("Calculating full statistics...")
     //General statistics
     calculateStatistics(tweets, "full_stats")
 
+    logInfo(s"Filtering with expression: $filterExpression")
     //Filter by those satisfying the given condition
     val tweetsWithCondition = tweets.where(filterExpression).cache()
 
     //Filtered statistics
+    logInfo("Calculating statistics after filtering...")
     calculateStatistics(tweetsWithCondition, "condition_stats")
 
     //Predict if they are spam or ham
+    logInfo("Classifying tweets if they are spam or ham...")
     val hamTweets = filterSpamTweets(tweetsWithCondition)
 
     //Ham statistics
+    logInfo("Calculating statistics after getting rid of the spam tweets...")
     calculateStatistics(hamTweets, "final_stats")
 
     //Persist the final data frame to the provided output path
+    logInfo("Persisting final results in parquet files...")
     hamTweets.write.mode("append")
       .partitionBy("year", "month", "day", "hour")
       .parquet(s"$output/tweets")

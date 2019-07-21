@@ -28,6 +28,7 @@ lazy val app = (project in file(".")).
       "org.apache.spark" %% "spark-streaming" % "2.4.3" % "provided",
       "org.apache.spark" %% "spark-sql" % "2.4.3" % "provided",
       "org.apache.spark" %% "spark-mllib" % "2.4.3" % "provided",
+      "log4j" % "log4j" % "1.2.17" % "provided",
 
       "org.scalatest" %% "scalatest" % "3.0.1" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
