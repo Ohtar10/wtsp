@@ -1,6 +1,6 @@
 package co.edu.icesi.wtsp.tweets.transformer.statistics
 
-import org.apache.spark.internal.Logging
+import co.edu.icesi.wtsp.util.JobLogging
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
@@ -29,28 +29,28 @@ case class TweetStatistics(tweetCount: Long,
   * the basic statistics from it.
   *
   */
-object TweetStatisticsCalculator extends Logging{
+object TweetStatisticsCalculator extends JobLogging{
 
-  def calculateStatistics(tweets: DataFrame): TweetStatistics = {
+  def calculateStatistics(tweets: DataFrame, name: String = ""): TweetStatistics = {
     val spark = SparkSession.builder().getOrCreate()
     import spark.implicits._
 
-    logInfo("Counting tweets...")
+    logInfo(spark, "Counting tweets...", Option(name))
     val tweetCount = tweets.count()
-    logInfo("Counting the different users...")
+    logInfo(spark, "Counting the different users...", Option(name))
     val userCount = tweets.select("user_id").distinct().count()
 
-    logInfo("Calculating the average tweets per month")
+    logInfo(spark, "Calculating the average tweets per month", Option(name))
     val avgTweetsPerMonth = tweets.withColumn("created_month",
           date_format($"created_timestamp", "yyyy-MM"))
       .groupBy($"created_month")
       .agg(count(lit(1)).as("tweets_per_month"))
       .agg(avg($"tweets_per_month")).first().getDouble(0)
 
-    logInfo("Counting the different locations...")
+    logInfo(spark, "Counting the different locations...", Option(name))
     val locationCount = tweets.select("place_name").distinct().count()
 
-    logInfo("Counting the tweets grouped by place type...")
+    logInfo(spark, "Counting the tweets grouped by place type...", Option(name))
     val tweetCountByLocationType = tweets.groupBy("place_type")
       .agg(count(lit(1)).as("count"))
       .select(
@@ -58,7 +58,7 @@ object TweetStatisticsCalculator extends Logging{
         $"count")
       .collect().map( r => (r.getString(0), r.getLong(1))).toMap
 
-    logInfo("Counting the tweets by language...")
+    logInfo(spark, "Counting the tweets by language...", Option(name))
     val tweetCountByLanguage = tweets.groupBy("lang")
       .agg(count(lit(1)).as("count"))
       .select(
@@ -66,7 +66,7 @@ object TweetStatisticsCalculator extends Logging{
         $"count")
       .collect().map( r => (r.getString(0), r.getLong(1))).toMap
 
-    logInfo("Counting the tweets by country...")
+    logInfo(spark, "Counting the tweets by country...", Option(name))
     val tweetCountByCountry = tweets.groupBy("country")
         .agg(count(lit(1)).as("count"))
         .select(

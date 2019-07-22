@@ -2,7 +2,7 @@ package co.edu.icesi.wtsp.tweets.transformer.dataprep
 
 import co.edu.icesi.wtsp.tweets.transformer.common.TransformAttributes
 import co.edu.icesi.wtsp.tweets.transformer.schema.Schemas
-import org.apache.spark.internal.Logging
+import co.edu.icesi.wtsp.util.JobLogging
 import org.apache.spark.ml.Transformer
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
@@ -82,10 +82,10 @@ class TweetTransformer(
                     cols: Seq[Column],
                     filter: String
                     ) extends Transformer
-                      with Logging{
+                      with JobLogging{
 
   override def transform(dataset: Dataset[_]): DataFrame = {
-    logInfo(s"Transforming tweets with columns: $cols and filter expression: $filter")
+    logInfo(dataset.sparkSession, "Transforming tweets with columns: $cols and filter expression: $filter", Option("tweet-transformer"))
     if (filter.nonEmpty)
       dataset.select(cols:_*).where(filter)
     else

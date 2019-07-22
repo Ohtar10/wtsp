@@ -36,7 +36,7 @@ class TwitterFilteringJobSpec extends FlatSpec
 
 
     fullStats.getLong(0) shouldBe 15585 //total tweets
-    fullStats.getLong(1) shouldBe 13641 //total users
+    fullStats.getLong(1) shouldBe 10909 //total users
     fullStats.getLong(2) shouldBe 184 //total locations
 
     conditionStats.getLong(0) shouldBe 87 //total tweets
