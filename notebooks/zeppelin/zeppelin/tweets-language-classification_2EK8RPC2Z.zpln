@@ -1,0 +1,119 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Tweets language classifier\n\n## Author: Luis Eduardo Ferro Diez \u003ca href\u003d\"mailto:luis.ferro1@correo.icesi.edu.co\"\u003eluis.ferro1@correo.icesi.edu.co\u003c/a\u003e\nThis notebook contains the steps taken to train a model to classify the languages of the tweets based on the text and some additional attributes.\n\n## Dataset\nTweets from 2012 to 2013\n## Resources\n* https://towardsdatascience.com/deep-learning-with-apache-spark-part-1-6d397c16abd\n* https://towardsdatascience.com/deep-learning-with-apache-spark-part-2-2a2938a36d35\n* https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/5669198905533692/3647723071348946/3983381308530741/latest.html?source\u003dpost_page---------------------------\n* https://machinelearningmastery.com/best-practices-document-classification-deep-learning/\n\n## Requirements\n* Databricks spark-deep-learning library https://github.com/databricks/spark-deep-learning?source\u003dpost_page---------------------------\n* Keras",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-23 16:21:37.538",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eTweets language classifier\u003c/h1\u003e\n\u003ch2\u003eAuthor: Luis Eduardo Ferro Diez \u003ca href\u003d\"mailto:luis.ferro1@correo.icesi.edu.co\"\u003e\u003ca href\u003d\"mailto:\u0026#108;\u0026#x75;\u0026#x69;\u0026#115;\u0026#46;\u0026#102;\u0026#101;\u0026#114;\u0026#x72;\u0026#x6f;\u0026#49;\u0026#64;\u0026#99;\u0026#111;\u0026#x72;\u0026#114;\u0026#101;\u0026#111;\u0026#x2e;\u0026#105;\u0026#99;\u0026#x65;\u0026#115;\u0026#x69;\u0026#x2e;\u0026#x65;\u0026#x64;\u0026#117;\u0026#x2e;\u0026#99;\u0026#111;\"\u003e\u0026#108;\u0026#x75;\u0026#x69;\u0026#115;\u0026#46;\u0026#102;\u0026#101;\u0026#114;\u0026#x72;\u0026#x6f;\u0026#49;\u0026#64;\u0026#99;\u0026#111;\u0026#x72;\u0026#114;\u0026#101;\u0026#111;\u0026#x2e;\u0026#105;\u0026#99;\u0026#x65;\u0026#115;\u0026#x69;\u0026#x2e;\u0026#x65;\u0026#x64;\u0026#117;\u0026#x2e;\u0026#99;\u0026#111;\u003c/a\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003cp\u003eThis notebook contains the steps taken to train a model to classify the languages of the tweets based on the text and some additional attributes.\u003c/p\u003e\n\u003ch2\u003eDataset\u003c/h2\u003e\n\u003cp\u003eTweets from 2012 to 2013\u003c/p\u003e\n\u003ch2\u003eResources\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://towardsdatascience.com/deep-learning-with-apache-spark-part-1-6d397c16abd\"\u003ehttps://towardsdatascience.com/deep-learning-with-apache-spark-part-1-6d397c16abd\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://towardsdatascience.com/deep-learning-with-apache-spark-part-2-2a2938a36d35\"\u003ehttps://towardsdatascience.com/deep-learning-with-apache-spark-part-2-2a2938a36d35\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/5669198905533692/3647723071348946/3983381308530741/latest.html?source\u003dpost_page---------------------------\"\u003ehttps://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/5669198905533692/3647723071348946/3983381308530741/latest.html?source\u003dpost_page---------------------------\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003e\u003ca href\u003d\"https://machinelearningmastery.com/best-practices-document-classification-deep-learning/\"\u003ehttps://machinelearningmastery.com/best-practices-document-classification-deep-learning/\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eRequirements\u003c/h2\u003e\n\u003cul\u003e\n  \u003cli\u003eDatabricks spark-deep-learning library \u003ca href\u003d\"https://github.com/databricks/spark-deep-learning?source\u003dpost_page---------------------------\"\u003ehttps://github.com/databricks/spark-deep-learning?source\u003dpost_page---------------------------\u003c/a\u003e\u003c/li\u003e\n  \u003cli\u003eKeras\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1563897788183_-568344970",
+      "id": "paragraph_1563897788183_-568344970",
+      "dateCreated": "2019-07-23 16:03:08.183",
+      "dateStarted": "2019-07-23 16:21:37.539",
+      "dateFinished": "2019-07-23 16:21:37.625",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nspark.version",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-23 16:34:25.434",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "u\u00272.4.3\u0027"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1563898837338_478452507",
+      "id": "paragraph_1563898837338_478452507",
+      "dateCreated": "2019-07-23 16:20:37.338",
+      "dateStarted": "2019-07-23 16:34:25.514",
+      "dateFinished": "2019-07-23 16:35:01.342",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-07-23 16:22:03.669",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1563898923668_-361843532",
+      "id": "paragraph_1563898923668_-361843532",
+      "dateCreated": "2019-07-23 16:22:03.669",
+      "status": "READY"
+    }
+  ],
+  "name": "tweets-language-classification",
+  "id": "2EK8RPC2Z",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-SNAPSHOT",
+  "permissions": {},
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {},
+  "path": "/zeppelin/tweets-language-classification"
+}
