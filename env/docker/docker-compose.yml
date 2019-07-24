@@ -17,7 +17,7 @@ services:
       - ${WORK_DIR}/software/spark:/usr/lib/spark
       - ${WORK_DIR}/resources/zeppelin/conf/log4j.properties:/zeppelin/conf/log4j.properties
       - ${WORK_DIR}/resources/zeppelin/conf/zeppelin-env.sh:/zeppelin/conf/zeppelin-env.sh
-      #- ${WORK_DIR}/resources/zeppelin/conf/interpreter.json:/zeppelin/conf/interpreter.json
+      #- ${WORK_DIR}/resources/zeppelin/conf/interpreter.json.0.9.0:/zeppelin/conf/interpreter.json
     networks:
       - wtsp-net
 
