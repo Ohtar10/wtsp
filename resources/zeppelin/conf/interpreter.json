@@ -393,33 +393,6 @@
         "isUserImpersonate": false
       }
     },
-    "java": {
-      "id": "java",
-      "name": "java",
-      "group": "java",
-      "properties": {},
-      "status": "READY",
-      "interpreterGroup": [
-        {
-          "name": "java",
-          "class": "org.apache.zeppelin.java.JavaInterpreter",
-          "defaultInterpreter": true,
-          "editor": {
-            "language": "java",
-            "editOnDblClick": false
-          }
-        }
-      ],
-      "dependencies": [],
-      "option": {
-        "remote": true,
-        "port": -1,
-        "isExistingProcess": false,
-        "setPermission": false,
-        "owners": [],
-        "isUserImpersonate": false
-      }
-    },
     "file": {
       "id": "file",
       "name": "file",
@@ -450,6 +423,33 @@
           "editor": {
             "editOnDblClick": false,
             "completionSupport": true
+          }
+        }
+      ],
+      "dependencies": [],
+      "option": {
+        "remote": true,
+        "port": -1,
+        "isExistingProcess": false,
+        "setPermission": false,
+        "owners": [],
+        "isUserImpersonate": false
+      }
+    },
+    "java": {
+      "id": "java",
+      "name": "java",
+      "group": "java",
+      "properties": {},
+      "status": "READY",
+      "interpreterGroup": [
+        {
+          "name": "java",
+          "class": "org.apache.zeppelin.java.JavaInterpreter",
+          "defaultInterpreter": true,
+          "editor": {
+            "language": "java",
+            "editOnDblClick": false
           }
         }
       ],
