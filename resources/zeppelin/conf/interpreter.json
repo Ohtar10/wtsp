@@ -10,13 +10,13 @@
           "value": "",
           "type": "url"
         },
-        "ignite.peerClassLoadingEnabled": {
-          "name": "ignite.peerClassLoadingEnabled",
+        "ignite.clientMode": {
+          "name": "ignite.clientMode",
           "value": true,
           "type": "checkbox"
         },
-        "ignite.clientMode": {
-          "name": "ignite.clientMode",
+        "ignite.peerClassLoadingEnabled": {
+          "name": "ignite.peerClassLoadingEnabled",
           "value": true,
           "type": "checkbox"
         },
@@ -112,11 +112,6 @@
       "name": "geode",
       "group": "geode",
       "properties": {
-        "geode.max.result": {
-          "name": "geode.max.result",
-          "value": "1000",
-          "type": "number"
-        },
         "geode.locator.host": {
           "name": "geode.locator.host",
           "value": "localhost",
@@ -125,6 +120,11 @@
         "geode.locator.port": {
           "name": "geode.locator.port",
           "value": "10334",
+          "type": "number"
+        },
+        "geode.max.result": {
+          "name": "geode.max.result",
+          "value": "1000",
           "type": "number"
         }
       },
@@ -336,16 +336,6 @@
       "name": "pig",
       "group": "pig",
       "properties": {
-        "zeppelin.pig.execType": {
-          "name": "zeppelin.pig.execType",
-          "value": "mapreduce",
-          "type": "string"
-        },
-        "SPARK_JAR": {
-          "name": "SPARK_JAR",
-          "value": "",
-          "type": "textarea"
-        },
         "zeppelin.pig.includeJobStats": {
           "name": "zeppelin.pig.includeJobStats",
           "value": false,
@@ -355,6 +345,16 @@
           "name": "zeppelin.pig.maxResult",
           "value": "1000",
           "type": "number"
+        },
+        "zeppelin.pig.execType": {
+          "name": "zeppelin.pig.execType",
+          "value": "mapreduce",
+          "type": "string"
+        },
+        "SPARK_JAR": {
+          "name": "SPARK_JAR",
+          "value": "",
+          "type": "textarea"
         },
         "SPARK_MASTER": {
           "name": "SPARK_MASTER",
@@ -949,6 +949,11 @@
           "value": "local[*]",
           "type": "string"
         },
+        "zeppelin.interpreter.connect.timeout": {
+          "name": "zeppelin.interpreter.connect.timeout",
+          "value": "1200000",
+          "type": "number"
+        },
         "args": {
           "name": "args",
           "value": "",
@@ -980,7 +985,7 @@
           "type": "textarea"
         }
       },
-      "status": "READY",
+      "status": "DOWNLOADING_DEPENDENCIES",
       "interpreterGroup": [
         {
           "name": "spark",
@@ -1039,6 +1044,10 @@
       "dependencies": [
         {
           "groupArtifactVersion": "com.esri.geometry:esri-geometry-api:2.2.2",
+          "local": false
+        },
+        {
+          "groupArtifactVersion": "com.twelvemonkeys.imageio:imageio-jpeg:3.3.1",
           "local": false
         }
       ],
@@ -1259,6 +1268,11 @@
           "value": "30000",
           "type": "number"
         },
+        "zeppelin.python.maxResult": {
+          "name": "zeppelin.python.maxResult",
+          "value": "1000",
+          "type": "number"
+        },
         "zeppelin.python.useIPython": {
           "name": "zeppelin.python.useIPython",
           "value": true,
@@ -1267,11 +1281,6 @@
         "zeppelin.ipython.grpc.message_size": {
           "name": "zeppelin.ipython.grpc.message_size",
           "value": "33554432",
-          "type": "number"
-        },
-        "zeppelin.python.maxResult": {
-          "name": "zeppelin.python.maxResult",
-          "value": "1000",
           "type": "number"
         }
       },
@@ -1414,15 +1423,15 @@
       "name": "scalding",
       "group": "scalding",
       "properties": {
-        "max.open.instances": {
-          "name": "max.open.instances",
-          "value": "50",
-          "type": "number"
-        },
         "args.string": {
           "name": "args.string",
           "value": "--local --repl",
           "type": "textarea"
+        },
+        "max.open.instances": {
+          "name": "max.open.instances",
+          "value": "50",
+          "type": "number"
         }
       },
       "status": "READY",
@@ -1448,6 +1457,11 @@
       "name": "flink",
       "group": "flink",
       "properties": {
+        "host": {
+          "name": "host",
+          "value": "local",
+          "type": "string"
+        },
         "zeppelin.flink.maxResult": {
           "name": "zeppelin.flink.maxResult",
           "value": "1000",
@@ -1457,11 +1471,6 @@
           "name": "port",
           "value": "6123",
           "type": "number"
-        },
-        "host": {
-          "name": "host",
-          "value": "local",
-          "type": "string"
         }
       },
       "status": "READY",

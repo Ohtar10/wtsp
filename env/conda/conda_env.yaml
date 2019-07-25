@@ -114,5 +114,5 @@ dependencies:
   - zeromq=4.3.1=h0a44026_1000
   - zlib=1.2.11=h1de35cc_3
   - zstd=1.4.0=ha9f0a20_0
-prefix: /Users/OhtarMac/anaconda3/envs/wtsp
+#prefix: /Users/OhtarMac/anaconda3/envs/wtsp
 
