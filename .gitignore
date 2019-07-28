@@ -156,3 +156,5 @@ docs/_build/
 
 # Custom
 software/
+datasets/flower_photos
+datasets/flower_photos.tgz

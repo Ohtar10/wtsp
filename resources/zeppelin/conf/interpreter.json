@@ -1047,8 +1047,18 @@
           "local": false
         },
         {
-          "groupArtifactVersion": "com.twelvemonkeys.imageio:imageio-jpeg:3.3.1",
+          "groupArtifactVersion": "com.twelvemonkeys.imageio:imageio-jpeg:3.4.1",
           "local": false
+        },
+        {
+          "groupArtifactVersion": "com.twelvemonkeys.imageio:imageio-core:3.4.1",
+          "local": false,
+          "exclusions": []
+        },
+        {
+          "groupArtifactVersion": "com.twelvemonkeys.common:common-lang:3.4.1",
+          "local": false,
+          "exclusions": []
         }
       ],
       "option": {
