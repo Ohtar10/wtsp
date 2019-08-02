@@ -28,7 +28,11 @@ class TweetSpamAssassinPipeline(val pipeline: PipelineModel) extends Transformer
   override def transform(dataset: Dataset[_]): DataFrame = {
     val context = "tweet-spam-assassin"
     logInfo(dataset.sparkSession, "Transforming and predicting spam vs ham tweets...", Option(context))
-    val predictions = pipeline.transform(dataset.select(fromFields:_*))
+    val ds = dataset.select(fromFields:_*)
+      .na.fill(0)
+      .na.fill(0.0)
+      .na.fill("")
+    val predictions = pipeline.transform(ds)
       .withColumn("is_spam",
         when(new Column("prediction") === 1.0, 0.0).otherwise(1.0))
       .select("id", "is_spam")

@@ -20,46 +20,70 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
   * @param spamPipelineModel path to the spam pipeline model
   * @param filterExpression SQL filter expression
   */
-class TwitterFilteringJob(spark: Option[SparkSession], input: String,
+class TwitterFilteringJob(spark: SparkSession, input: String,
                           output: String,
-                          spamPipelineModel: String,
-                          filterExpression: String)
+                          spamPipelineModel: Option[String],
+                          filterExpression: Option[String])
   extends Job with JobLogging{
 
   override def execute(): Unit = {
 
-    val sparkSession = spark.getOrElse(SparkSession.builder().getOrCreate())
-
-    logInfo(sparkSession, "Reading all the tweets")
+    logInfo(spark, "Reading all the tweets")
     val tweets = TweetTransformerBuilder()
       .withCols(Schemas.tweetObject:_*)
       .build()
-      .transform(sparkSession.read.schema(Schemas.sourceSchema).json(input))
+      .transform(spark.read.schema(Schemas.sourceSchema).json(input))
       .cache()
 
-    logInfo(sparkSession, "Calculating full statistics...")
-    //General statistics
-    calculateStatistics(tweets, "full_stats")
+    val tweetsWithCondition = filterExpression match {
+      case Some(expression) => {
+        logInfo(spark, s"Filtering with expression: $expression")
 
-    logInfo(sparkSession, s"Filtering with expression: $filterExpression")
-    //Filter by those satisfying the given condition
-    val tweetsWithCondition = tweets.where(filterExpression).cache()
+        tweets.where(expression)
+      }
+      case None => tweets
+    }
 
-    //Filtered statistics
-    logInfo(sparkSession, "Calculating statistics after filtering...")
-    calculateStatistics(tweetsWithCondition, "condition_stats")
+    tweetsWithCondition.cache()
 
-    //Predict if they are spam or ham
-    logInfo(sparkSession, "Classifying tweets if they are spam or ham...")
-    val hamTweets = filterSpamTweets(tweetsWithCondition)
+    val finalResults: DataFrame = spamPipelineModel match {
+      case Some(pipelinePath) => {
 
-    //Ham statistics
-    logInfo(sparkSession, "Calculating statistics after getting rid of the spam tweets...")
-    calculateStatistics(hamTweets, "final_stats")
+        //Predict if they are spam or ham
+        logInfo(spark, "Classifying tweets if they are spam or ham...")
+        val hamTweets = filterSpamTweets(tweetsWithCondition, pipelinePath)
+
+        hamTweets
+      }
+      case None => {
+        tweetsWithCondition
+      }
+    }
+
+    // Decide if further statistics calculation is required
+
+    // Full statistics if any condition is informed
+    if (spamPipelineModel.isDefined || filterExpression.isDefined){
+      calculateStatistics(tweets,
+        "full_stats",
+        Option("Calculating full statistics..."))
+    }
+
+    // Condition stats only if both are informed
+    if (spamPipelineModel.isDefined && filterExpression.isDefined){
+      calculateStatistics(tweetsWithCondition,
+        "condition_stats",
+        Option("Calculating statistics after filtering..."))
+    }
+
+    //Final statistics
+    calculateStatistics(finalResults,
+      "final_stats",
+      Option("Calculating statistics final statistics"))
 
     //Persist the final data frame to the provided output path
-    logInfo(sparkSession, "Persisting final results in parquet files...")
-    hamTweets.write.mode("append")
+    logInfo(spark, "Persisting final results in parquet files...")
+    finalResults.write.mode("append")
       .partitionBy("year", "month", "day", "hour")
       .parquet(s"$output/tweets")
   }
@@ -69,7 +93,8 @@ class TwitterFilteringJob(spark: Option[SparkSession], input: String,
     * @param df tweets data frame
     * @param name name of the output for persistence.
     */
-  private def calculateStatistics(df: DataFrame, name: String): Unit = {
+  private def calculateStatistics(df: DataFrame, name: String, logMessage: Option[String] = None): Unit = {
+    logMessage.foreach(logInfo(spark, _))
     val statisticsCalculator = TweetStatisticsCalculator.calculateStatistics(df, name)
     statisticsCalculator.saveResults(s"$output/statistics/$name")
   }
@@ -80,8 +105,8 @@ class TwitterFilteringJob(spark: Option[SparkSession], input: String,
     * @param df original tweets
     * @return spam tweets data frame
     */
-  private def filterSpamTweets(df: DataFrame): DataFrame = {
-    TweetSpamAssassinPipeline(spamPipelineModel)
+  private def filterSpamTweets(df: DataFrame, pipelinePath: String): DataFrame = {
+    TweetSpamAssassinPipeline(pipelinePath)
       .transform(df)
       .where("is_spam = 0")
   }
@@ -94,11 +119,11 @@ class TwitterFilteringJob(spark: Option[SparkSession], input: String,
   */
 object TwitterFilteringJob{
 
-  def apply(spark: Option[SparkSession] = None,
+  def apply(spark: SparkSession,
             input: String,
             output: String,
-            spamPipelineModel: String,
-            filterExpression: String = "place is not null and lang = 'en'"
+            spamPipelineModel: Option[String] = None,
+            filterExpression: Option[String] = None
             ): TwitterFilteringJob =
     new TwitterFilteringJob(spark, input, output, spamPipelineModel, filterExpression)
 

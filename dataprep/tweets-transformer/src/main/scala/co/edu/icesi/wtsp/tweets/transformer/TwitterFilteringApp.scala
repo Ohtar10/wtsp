@@ -20,9 +20,9 @@ private object AppUtils {
       .action((x, c)=> c.copy(output = x))
       .text("The output path to store the results is required.")
 
-    opt[String]('s', "spam-pipeline").required().valueName("<spam-pipeline-path>")
+    opt[String]('s', "spam-pipeline").valueName("<spam-pipeline-path>")
       .action((x, c)=> c.copy(spamPipeline = x))
-      .text("The path of the spam pipeline model is required.")
+      .text("The path of the spam pipeline model if spam filtering is needed.")
 
     opt[String]('f', "filter-expression").valueName("<sql-filter-expression>")
       .action((x, c) => c.copy(filterExpression = x))
@@ -69,8 +69,8 @@ object TwitterFilteringLocalApp extends App {
       Runner.run(spark,
         config.input,
         config.output,
-        config.spamPipeline,
-        config.filterExpression)
+        if (config.spamPipeline.nonEmpty) Option(config.spamPipeline) else None,
+        if (config.filterExpression.nonEmpty) Option(config.filterExpression) else None)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -88,8 +88,8 @@ object TwitterFilteringApp extends App{
       Runner.run(spark,
         config.input,
         config.output,
-        config.spamPipeline,
-        config.filterExpression)
+        if (config.spamPipeline.nonEmpty) Option(config.spamPipeline) else None,
+        if (config.filterExpression.nonEmpty) Option(config.filterExpression) else None)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -100,10 +100,10 @@ object Runner {
   def run(spark: SparkSession,
           input: String,
           output: String,
-          spamPipeline: String,
-          expression: String): Unit = {
+          spamPipeline: Option[String],
+          expression: Option[String]): Unit = {
 
-    TwitterFilteringJob(Option(spark),
+    TwitterFilteringJob(spark,
       input,
       output,
       spamPipeline,
