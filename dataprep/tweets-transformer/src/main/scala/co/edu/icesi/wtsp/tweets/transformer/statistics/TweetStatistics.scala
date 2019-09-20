@@ -41,11 +41,15 @@ object TweetStatisticsCalculator extends JobLogging{
     val userCount = tweets.select("user_id").distinct().count()
 
     logInfo(spark, "Calculating the average tweets per month", Option(name))
-    val avgTweetsPerMonth = tweets.withColumn("created_month",
+    val avgTweetsPerMonthRow = tweets.withColumn("created_month",
           date_format($"created_timestamp", "yyyy-MM"))
       .groupBy($"created_month")
       .agg(count(lit(1)).as("tweets_per_month"))
-      .agg(avg($"tweets_per_month")).first().getDouble(0)
+      .agg(avg($"tweets_per_month")).first()
+
+    var avgTweetsPerMonth = 0D
+    if (!avgTweetsPerMonthRow.isNullAt(0))
+      avgTweetsPerMonth = avgTweetsPerMonthRow.getDouble(0)
 
     logInfo(spark, "Counting the different locations...", Option(name))
     val locationCount = tweets.select("place_name").distinct().count()
