@@ -1,0 +1,239 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Amazon Product Review Exploratory Analysis\n## Author \u003ca href\u003d\"mailto:luis.ferro1@correo.icesi.edu.co\"\u003eluis.ferro1@correo.icesi.edu.co\u003c/a\u003e\n\n### Resources:\n* http://jmcauley.ucsd.edu/data/amazon/links.html\n\nThis notebook contains the exploratory analysis over the amazon review dataset prior to contructing the product embeddings.",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 02:34:50.748",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eAmazon Product Review Exploratory Analysis\u003c/h1\u003e\n\u003ch2\u003eAuthor \u003ca href\u003d\"mailto:luis.ferro1@correo.icesi.edu.co\"\u003e\u003ca href\u003d\"mailto:l\u0026#117;\u0026#x69;\u0026#x73;.\u0026#x66;\u0026#101;\u0026#114;\u0026#114;\u0026#x6f;\u0026#49;@\u0026#x63;\u0026#111;\u0026#114;\u0026#x72;\u0026#101;\u0026#x6f;\u0026#46;\u0026#105;\u0026#99;\u0026#x65;\u0026#x73;\u0026#x69;\u0026#46;\u0026#101;\u0026#100;\u0026#x75;\u0026#x2e;\u0026#99;\u0026#111;\"\u003el\u0026#117;\u0026#x69;\u0026#x73;.\u0026#x66;\u0026#101;\u0026#114;\u0026#114;\u0026#x6f;\u0026#49;@\u0026#x63;\u0026#111;\u0026#114;\u0026#x72;\u0026#101;\u0026#x6f;\u0026#46;\u0026#105;\u0026#99;\u0026#x65;\u0026#x73;\u0026#x69;\u0026#46;\u0026#101;\u0026#100;\u0026#x75;\u0026#x2e;\u0026#99;\u0026#111;\u003c/a\u003e\u003c/a\u003e\u003c/h2\u003e\n\u003ch3\u003eResources:\u003c/h3\u003e\n\u003cul\u003e\n  \u003cli\u003e\u003ca href\u003d\"http://jmcauley.ucsd.edu/data/amazon/links.html\"\u003ehttp://jmcauley.ucsd.edu/data/amazon/links.html\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eThis notebook contains the exploratory analysis over the amazon review dataset prior to contructing the product embeddings.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569551556755_1857856243",
+      "id": "paragraph_1569551556755_1857856243",
+      "dateCreated": "2019-09-27 02:32:36.755",
+      "dateStarted": "2019-09-27 02:34:50.748",
+      "dateFinished": "2019-09-27 02:34:50.780",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sh\nls -lah extra_dir",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 02:59:32.074",
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 31G\ndrwxrwxr-x 2 1000 1000 4.0K Sep 18 02:02 .\ndrwxr-xr-x 1 root root 4.0K Sep 27 02:57 ..\n-rw-rw-r-- 1 1000 1000  18G Sep 15 00:00 aggressive_dedup.json.gz\n-rw-r--r-- 1 1000 1000 9.9G Sep 17 01:28 metadata.json\n-rw-rw-r-- 1 1000 1000 3.2G Sep 14 20:21 metadata.json.gz\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569551705595_-188506631",
+      "id": "paragraph_1569551705595_-188506631",
+      "dateCreated": "2019-09-27 02:35:05.595",
+      "dateStarted": "2019-09-27 02:59:32.079",
+      "dateFinished": "2019-09-27 02:59:32.093",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nspark.version",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 03:01:57.123",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u00272.4.4\u0027"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569552551655_1672758186",
+      "id": "paragraph_1569552551655_1672758186",
+      "dateCreated": "2019-09-27 02:49:11.656",
+      "dateStarted": "2019-09-27 03:01:57.130",
+      "dateFinished": "2019-09-27 03:01:57.171",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nbase_path \u003d \"/zeppelin/extra_dir\"\nmetadata_path \u003d base_path + \"/metadata.json.gz\"",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 03:03:17.484",
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569551651988_-48875070",
+      "id": "paragraph_1569551651988_-48875070",
+      "dateCreated": "2019-09-27 02:34:11.988",
+      "dateStarted": "2019-09-27 03:03:17.497",
+      "dateFinished": "2019-09-27 03:03:17.592",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n\nmetadata_df \u003d spark.read.json(metadata_path)\nmetadata_df.show()",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 03:03:19.790",
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|_corrupt_record|      asin|     brand|          categories|         description|               imUrl|price|             related|           salesRank|               title|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|           null|0001048791|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 6334800,,,...|The Crucible: Per...|\n|           null|0000143561|      null|[[Movies \u0026 TV, Mo...|3Pack DVD set - I...|http://g-ecx.imag...|12.99|[, [B0036FO6SI, B...|[,,,,,,,,,,,,,,,,...|Everyday Italian ...|\n|           null|0000037214|Big Dreams|[[Clothing, Shoes...|                null|http://ecx.images...| 6.99|[, [B00JO8II76, B...|[,,,,,,,, 1233557...|Purple Sequin Tin...|\n|           null|0000032069|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.89|[[0000032050, B00...|                null|Adult Ballet Tutu...|\n|           null|0000031909|   Unknown|[[Sports \u0026 Outdoo...|High quality 3 la...|http://ecx.images...|  7.0|[[B002BZX8Z6, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0000032034|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.87|[[B00D2JSRFQ, 000...|                null|Adult Ballet Tutu...|\n|           null|0000589012|      null|[[Movies \u0026 TV, Mo...|                null|http://ecx.images...|15.95|[[B000Z3N1HQ, 057...|[,,,,,,,,,,,,,,,,...|Why Don\u0027t They Ju...|\n|           null|0001048775|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 13243226,,...|Measure for Measu...|\n|           null|0000031852|  Coxlures|[[Sports \u0026 Outdoo...|                TUtu|http://ecx.images...| 3.17|[[B00JHONN1S, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0001048236|      null|           [[Books]]|\u0026#34;One thing is...|http://ecx.images...| 9.26|[, [1442300191, 9...|[,,,,, 8973864,,,...|The Sherlock Holm...|\n|           null|0000401048|      null|           [[Books]]|                null|http://ecx.images...| null|  [, [068240103X],,]|[,,,,, 6448843,,,...|The rogue of publ...|\n|           null|0001019880|      null|           [[Books]]|                null|http://ecx.images...| 5.39|[, [B003HMB5FC, 0...|[,,,,, 9589258,,,...|Classic Soul Winn...|\n|           null|0001048813|      null|           [[Books]]|                null|http://ecx.images...| null|                null|                null|Archer Christmas ...|\n|           null|0001148427|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 5806769,,,...| Sonatas - For Piano|\n|           null|0001057170|      null|           [[Books]]|[Editor\u0027s Note: T...|http://ecx.images...| null|                null|[,,,,, 9318563,,,...|Classic Connolly ...|\n|           null|0001047566|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 3628249,,,...|       Hand in Glove|\n|           null|0001053396|      null|           [[Books]]|Writing poetry ha...|http://ecx.images...|17.99|                null|[,,,,, 12249714,,...|War Poems: An Ant...|\n|           null|0000913154|      null|           [[Books]]|                null|http://ecx.images...|23.26|[[0590429892, 111...|[,,,,, 455782,,,,...|The Way Things Wo...|\n|           null|0000032050|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...|12.85|[[B00D2JSRFQ, B00...|                null|Adult Ballet Tutu...|\n|           null|0001072986|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 8296784,,,...|As You Like it: C...|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569553333071_1921053375",
+      "id": "paragraph_1569553333071_1921053375",
+      "dateCreated": "2019-09-27 03:02:13.071",
+      "dateStarted": "2019-09-27 03:03:19.804",
+      "dateFinished": "2019-09-27 03:05:03.181",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-27 03:03:08.965",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569553388965_31814863",
+      "id": "paragraph_1569553388965_31814863",
+      "dateCreated": "2019-09-27 03:03:08.965",
+      "status": "READY"
+    }
+  ],
+  "name": "amazon_product_review_exploration",
+  "id": "2EN4URWG2",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-SNAPSHOT",
+  "permissions": {},
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {},
+  "path": "/zeppelin/amazon_product_review_exploration"
+}
