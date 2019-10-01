@@ -690,7 +690,7 @@
     {
       "text": "%sql\nselect place.place_type as place_type, count(1) as places \nfrom tweets_with_place \ngroup by place_type",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:17:52.601",
+      "dateUpdated": "2019-09-29 13:50:17.135",
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -826,7 +826,7 @@
     {
       "text": "%sql\nselect distinct(lang) as lang, place.country as country, count(1) as lang_count \nfrom tweets_with_place \ngroup by lang, country \nsort by lang_count desc",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:17:52.801",
+      "dateUpdated": "2019-09-29 13:50:18.334",
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -1025,7 +1025,7 @@
     {
       "text": "%sql\nselect place.country as country, count(1) as lang_count \nfrom tweets_with_place \nwhere lang \u003d \u0027en\u0027\ngroup by country \nsort by lang_count desc",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:17:52.879",
+      "dateUpdated": "2019-09-29 13:50:19.491",
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -1500,7 +1500,7 @@
     {
       "text": "%sql\nselect place.country as country, place.name as place, count(1) as tweets_per_place\nfrom tweets_with_place \ngroup by country, place",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 19:17:54.158",
+      "dateUpdated": "2019-09-29 13:50:24.673",
       "config": {
         "editorSetting": {
           "language": "sql",
@@ -2093,8 +2093,9 @@
       "status": "FINISHED"
     },
     {
+      "text": "",
       "user": "anonymous",
-      "dateUpdated": "2019-07-12 18:28:33.944",
+      "dateUpdated": "2019-09-29 13:50:09.771",
       "config": {},
       "settings": {
         "params": {},

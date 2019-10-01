@@ -3,7 +3,7 @@
     {
       "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-07-18 22:11:30.479",
+      "dateUpdated": "2019-10-01 13:47:29.399",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -29,7 +29,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 2.4.3\n"
+            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 2.4.4\n"
           }
         ]
       },
@@ -38,8 +38,50 @@
       "jobName": "paragraph_1563388136818_-1267733758",
       "id": "paragraph_1563388136818_-1267733758",
       "dateCreated": "2019-07-17 18:28:56.819",
-      "dateStarted": "2019-07-18 22:11:30.539",
-      "dateFinished": "2019-07-18 22:11:58.501",
+      "dateStarted": "2019-10-01 13:47:29.421",
+      "dateFinished": "2019-10-01 13:48:11.598",
+      "status": "FINISHED"
+    },
+    {
+      "text": "util.Properties.versionString",
+      "user": "anonymous",
+      "dateUpdated": "2019-10-01 13:48:13.002",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres2\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d version 2.11.12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569937651996_1839097359",
+      "id": "paragraph_1569937651996_1839097359",
+      "dateCreated": "2019-10-01 13:47:31.996",
+      "dateStarted": "2019-10-01 13:48:13.016",
+      "dateFinished": "2019-10-01 13:48:13.137",
       "status": "FINISHED"
     },
     {

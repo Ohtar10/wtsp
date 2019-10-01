@@ -47,7 +47,7 @@
     {
       "text": "%livy.spark\nspark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-10-01 00:19:03.325",
+      "dateUpdated": "2019-10-01 16:50:58.100",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -79,7 +79,7 @@
           },
           {
             "type": "HTML",
-            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+            "data": "\u003chr/\u003eSpark Application Id: application_1569945231771_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://node1:8088/proxy/application_1569945231771_0003/\"\u003ehttp://node1:8088/proxy/application_1569945231771_0003/\u003c/a\u003e"
           }
         ]
       },
@@ -88,14 +88,14 @@
       "jobName": "paragraph_1569885874260_-1311041618",
       "id": "paragraph_1569885874260_-1311041618",
       "dateCreated": "2019-09-30 23:24:34.260",
-      "dateStarted": "2019-10-01 00:19:03.339",
-      "dateFinished": "2019-10-01 00:19:11.454",
+      "dateStarted": "2019-10-01 16:50:58.108",
+      "dateFinished": "2019-10-01 16:51:31.817",
       "status": "FINISHED"
     },
     {
-      "text": "%livy.spark\n//val base_path \u003d \"/zeppelin/extra_dir\"\nval base_path \u003d \"/media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews\"\nval metadata_path \u003d base_path + \"/metadata.json.gz\"\nval reviews_path \u003d base_path + \"/aggressive_dedup.json.gz\"",
+      "text": "%livy.spark\n//val base_path \u003d \"/zeppelin/extra_dir\"\n//val base_path \u003d \"/media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews\"\nval base_path \u003d \"/user/hduser/datasets/amazon/\"\nval metadata_path \u003d base_path + \"/metadata.json.gz\"\nval reviews_path \u003d base_path + \"/aggressive_dedup.json.gz\"",
       "user": "anonymous",
-      "dateUpdated": "2019-10-01 00:22:30.870",
+      "dateUpdated": "2019-10-01 16:53:18.666",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -123,11 +123,11 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "base_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews\nmetadata_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews/metadata.json.gz\nreviews_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews/aggressive_dedup.json.gz"
+            "data": "base_path: String \u003d /user/hduser/datasets/amazon/\nmetadata_path: String \u003d /user/hduser/datasets/amazon//metadata.json.gz\nreviews_path: String \u003d /user/hduser/datasets/amazon//aggressive_dedup.json.gz"
           },
           {
             "type": "HTML",
-            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+            "data": "\u003chr/\u003eSpark Application Id: application_1569945231771_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://node1:8088/proxy/application_1569945231771_0003/\"\u003ehttp://node1:8088/proxy/application_1569945231771_0003/\u003c/a\u003e"
           }
         ]
       },
@@ -136,14 +136,14 @@
       "jobName": "paragraph_1569885912290_161678671",
       "id": "paragraph_1569885912290_161678671",
       "dateCreated": "2019-09-30 23:25:12.290",
-      "dateStarted": "2019-10-01 00:22:30.876",
-      "dateFinished": "2019-10-01 00:22:31.920",
+      "dateStarted": "2019-10-01 16:53:18.675",
+      "dateFinished": "2019-10-01 16:53:19.742",
       "status": "FINISHED"
     },
     {
       "text": "%livy.spark\nval metadata_df \u003d spark.read.json(metadata_path)\nmetadata_df.createOrReplaceTempView(\"product_metadata\")",
       "user": "anonymous",
-      "dateUpdated": "2019-10-01 00:22:35.825",
+      "dateUpdated": "2019-10-01 16:53:21.635",
       "config": {
         "tableHide": false,
         "editorSetting": {
@@ -175,7 +175,7 @@
           },
           {
             "type": "HTML",
-            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+            "data": "\u003chr/\u003eSpark Application Id: application_1569945231771_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://node1:8088/proxy/application_1569945231771_0003/\"\u003ehttp://node1:8088/proxy/application_1569945231771_0003/\u003c/a\u003e"
           }
         ]
       },
@@ -184,24 +184,24 @@
       "jobName": "paragraph_1569885925272_938916217",
       "id": "paragraph_1569885925272_938916217",
       "dateCreated": "2019-09-30 23:25:25.272",
-      "dateStarted": "2019-10-01 00:22:35.828",
-      "dateFinished": "2019-10-01 00:24:00.220",
+      "dateStarted": "2019-10-01 16:53:21.643",
+      "dateFinished": "2019-10-01 16:54:59.275",
       "status": "FINISHED"
     },
     {
-      "text": "%livy.sql\n\nselect * from product_metadata limit 100",
+      "text": "%livy.spark\nspark.sql(\"select * from product_metadata limit 100\").show()",
       "user": "anonymous",
-      "dateUpdated": "2019-10-01 00:24:15.608",
+      "dateUpdated": "2019-10-01 16:55:40.145",
       "config": {
         "tableHide": false,
         "editorSetting": {
-          "language": "sql",
+          "language": "scala",
           "editOnDblClick": false,
           "completionKey": "TAB",
           "completionSupport": true
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9.0,
         "editorHide": false,
         "runOnSelectionChange": true,
@@ -215,11 +215,15 @@
         "forms": {}
       },
       "results": {
-        "code": "ERROR",
+        "code": "SUCCESS",
         "msg": [
           {
             "type": "TEXT",
-            "data": "java.lang.RuntimeException: org.apache.thrift.TApplicationException: Internal error processing interpret\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:122)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:225)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:496)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:77)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:121)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:187)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.thrift.TApplicationException: Internal error processing interpret\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:79)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:227)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:211)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:230)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:226)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:118)\n\t... 13 more\n"
+            "data": "+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|_corrupt_record|      asin|     brand|          categories|         description|               imUrl|price|             related|           salesRank|               title|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|           null|0001048791|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 6334800,,,...|The Crucible: Per...|\n|           null|0000143561|      null|[[Movies \u0026 TV, Mo...|3Pack DVD set - I...|http://g-ecx.imag...|12.99|[, [B0036FO6SI, B...|[,,,,,,,,,,,,,,,,...|Everyday Italian ...|\n|           null|0000037214|Big Dreams|[[Clothing, Shoes...|                null|http://ecx.images...| 6.99|[, [B00JO8II76, B...|[,,,,,,,, 1233557...|Purple Sequin Tin...|\n|           null|0000032069|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.89|[[0000032050, B00...|                null|Adult Ballet Tutu...|\n|           null|0000031909|   Unknown|[[Sports \u0026 Outdoo...|High quality 3 la...|http://ecx.images...|  7.0|[[B002BZX8Z6, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0000032034|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.87|[[B00D2JSRFQ, 000...|                null|Adult Ballet Tutu...|\n|           null|0000589012|      null|[[Movies \u0026 TV, Mo...|                null|http://ecx.images...|15.95|[[B000Z3N1HQ, 057...|[,,,,,,,,,,,,,,,,...|Why Don\u0027t They Ju...|\n|           null|0001048775|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 13243226,,...|Measure for Measu...|\n|           null|0000031852|  Coxlures|[[Sports \u0026 Outdoo...|                TUtu|http://ecx.images...| 3.17|[[B00JHONN1S, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0001048236|      null|           [[Books]]|\u0026#34;One thing is...|http://ecx.images...| 9.26|[, [1442300191, 9...|[,,,,, 8973864,,,...|The Sherlock Holm...|\n|           null|0000401048|      null|           [[Books]]|                null|http://ecx.images...| null|  [, [068240103X],,]|[,,,,, 6448843,,,...|The rogue of publ...|\n|           null|0001019880|      null|           [[Books]]|                null|http://ecx.images...| 5.39|[, [B003HMB5FC, 0...|[,,,,, 9589258,,,...|Classic Soul Winn...|\n|           null|0001048813|      null|           [[Books]]|                null|http://ecx.images...| null|                null|                null|Archer Christmas ...|\n|           null|0001148427|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 5806769,,,...| Sonatas - For Piano|\n|           null|0001057170|      null|           [[Books]]|[Editor\u0027s Note: T...|http://ecx.images...| null|                null|[,,,,, 9318563,,,...|Classic Connolly ...|\n|           null|0001047566|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 3628249,,,...|       Hand in Glove|\n|           null|0001053396|      null|           [[Books]]|Writing poetry ha...|http://ecx.images...|17.99|                null|[,,,,, 12249714,,...|War Poems: An Ant...|\n|           null|0000913154|      null|           [[Books]]|                null|http://ecx.images...|23.26|[[0590429892, 111...|[,,,,, 455782,,,,...|The Way Things Wo...|\n|           null|0000032050|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...|12.85|[[B00D2JSRFQ, B00...|                null|Adult Ballet Tutu...|\n|           null|0001072986|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 8296784,,,...|As You Like it: C...|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\nonly showing top 20 rows"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: application_1569945231771_0003\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"http://node1:8088/proxy/application_1569945231771_0003/\"\u003ehttp://node1:8088/proxy/application_1569945231771_0003/\u003c/a\u003e"
           }
         ]
       },
@@ -228,9 +232,9 @@
       "jobName": "paragraph_1569885966327_-996740286",
       "id": "paragraph_1569885966327_-996740286",
       "dateCreated": "2019-09-30 23:26:06.328",
-      "dateStarted": "2019-10-01 00:24:15.617",
-      "dateFinished": "2019-10-01 00:24:15.649",
-      "status": "ERROR"
+      "dateStarted": "2019-10-01 16:55:40.161",
+      "dateFinished": "2019-10-01 16:57:49.803",
+      "status": "FINISHED"
     },
     {
       "user": "anonymous",
