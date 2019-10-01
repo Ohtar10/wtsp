@@ -1,0 +1,263 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n# Amazon Product reviews playground\nThis note contains my playground for amazon products using Apache Livy to communicate with Spark",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-30 23:24:34.261",
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch1\u003eAmazon Product reviews playground\u003c/h1\u003e\n\u003cp\u003eThis note contains my playground for amazon products using Apache Livy to communicate with Spark\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569885828063_-1291121149",
+      "id": "paragraph_1569885828063_-1291121149",
+      "dateCreated": "2019-09-30 23:23:48.063",
+      "dateStarted": "2019-09-30 23:24:34.261",
+      "dateFinished": "2019-09-30 23:24:35.131",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%livy.spark\nspark.version",
+      "user": "anonymous",
+      "dateUpdated": "2019-10-01 00:19:03.325",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res0: String \u003d 2.4.4"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569885874260_-1311041618",
+      "id": "paragraph_1569885874260_-1311041618",
+      "dateCreated": "2019-09-30 23:24:34.260",
+      "dateStarted": "2019-10-01 00:19:03.339",
+      "dateFinished": "2019-10-01 00:19:11.454",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%livy.spark\n//val base_path \u003d \"/zeppelin/extra_dir\"\nval base_path \u003d \"/media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews\"\nval metadata_path \u003d base_path + \"/metadata.json.gz\"\nval reviews_path \u003d base_path + \"/aggressive_dedup.json.gz\"",
+      "user": "anonymous",
+      "dateUpdated": "2019-10-01 00:22:30.870",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "base_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews\nmetadata_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews/metadata.json.gz\nreviews_path: String \u003d /media/ohtar10/Adder-Storage1/datasets/amazon_products/reviews/aggressive_dedup.json.gz"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569885912290_161678671",
+      "id": "paragraph_1569885912290_161678671",
+      "dateCreated": "2019-09-30 23:25:12.290",
+      "dateStarted": "2019-10-01 00:22:30.876",
+      "dateFinished": "2019-10-01 00:22:31.920",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%livy.spark\nval metadata_df \u003d spark.read.json(metadata_path)\nmetadata_df.createOrReplaceTempView(\"product_metadata\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-10-01 00:22:35.825",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "metadata_df: org.apache.spark.sql.DataFrame \u003d [_corrupt_record: string, asin: string ... 8 more fields]"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003chr/\u003eSpark Application Id: null\u003cbr/\u003eSpark WebUI: \u003ca href\u003d\"null\"\u003enull\u003c/a\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569885925272_938916217",
+      "id": "paragraph_1569885925272_938916217",
+      "dateCreated": "2019-09-30 23:25:25.272",
+      "dateStarted": "2019-10-01 00:22:35.828",
+      "dateFinished": "2019-10-01 00:24:00.220",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%livy.sql\n\nselect * from product_metadata limit 100",
+      "user": "anonymous",
+      "dateUpdated": "2019-10-01 00:24:15.608",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "java.lang.RuntimeException: org.apache.thrift.TApplicationException: Internal error processing interpret\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:122)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.interpret(RemoteInterpreter.java:225)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:496)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:77)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:121)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:187)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.thrift.TApplicationException: Internal error processing interpret\n\tat org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:79)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.recv_interpret(RemoteInterpreterService.java:227)\n\tat org.apache.zeppelin.interpreter.thrift.RemoteInterpreterService$Client.interpret(RemoteInterpreterService.java:211)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:230)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter$4.call(RemoteInterpreter.java:226)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterProcess.callRemoteFunction(RemoteInterpreterProcess.java:118)\n\t... 13 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569885966327_-996740286",
+      "id": "paragraph_1569885966327_-996740286",
+      "dateCreated": "2019-09-30 23:26:06.328",
+      "dateStarted": "2019-10-01 00:24:15.617",
+      "dateFinished": "2019-10-01 00:24:15.649",
+      "status": "ERROR"
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569886766536_-656176601",
+      "id": "paragraph_1569886766536_-656176601",
+      "dateCreated": "2019-09-30 23:39:26.536",
+      "status": "READY"
+    }
+  ],
+  "name": "amazon_products_livy_playground",
+  "id": "2ER47P97J",
+  "defaultInterpreterGroup": "livy",
+  "version": "0.9.0-SNAPSHOT",
+  "permissions": {},
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {},
+  "path": "/zeppelin/amazon_products_livy_playground"
+}

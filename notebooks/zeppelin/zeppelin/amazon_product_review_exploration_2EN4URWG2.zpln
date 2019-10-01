@@ -47,7 +47,7 @@
     {
       "text": "%sh\nls -lah extra_dir",
       "user": "anonymous",
-      "dateUpdated": "2019-09-27 02:59:32.074",
+      "dateUpdated": "2019-09-29 00:45:40.730",
       "config": {
         "editorSetting": {
           "language": "sh",
@@ -73,7 +73,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "total 31G\ndrwxrwxr-x 2 1000 1000 4.0K Sep 18 02:02 .\ndrwxr-xr-x 1 root root 4.0K Sep 27 02:57 ..\n-rw-rw-r-- 1 1000 1000  18G Sep 15 00:00 aggressive_dedup.json.gz\n-rw-r--r-- 1 1000 1000 9.9G Sep 17 01:28 metadata.json\n-rw-rw-r-- 1 1000 1000 3.2G Sep 14 20:21 metadata.json.gz\n"
+            "data": "total 21G\ndrwxrwxr-x 2 1000 1000 4.0K Sep 29 00:21 .\ndrwxr-xr-x 1 root root 4.0K Sep 29 00:29 ..\n-rw-rw-r-- 1 1000 1000  18G Sep 15 00:00 aggressive_dedup.json.gz\n-rw-rw-r-- 1 1000 1000 3.2G Sep 14 20:21 metadata.json.gz\n"
           }
         ]
       },
@@ -82,29 +82,29 @@
       "jobName": "paragraph_1569551705595_-188506631",
       "id": "paragraph_1569551705595_-188506631",
       "dateCreated": "2019-09-27 02:35:05.595",
-      "dateStarted": "2019-09-27 02:59:32.079",
-      "dateFinished": "2019-09-27 02:59:32.093",
+      "dateStarted": "2019-09-29 00:45:40.845",
+      "dateFinished": "2019-09-29 00:45:41.430",
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\nspark.version",
+      "text": "spark.version",
       "user": "anonymous",
-      "dateUpdated": "2019-09-27 03:01:57.123",
+      "dateUpdated": "2019-09-29 00:51:44.693",
       "config": {
-        "runOnSelectionChange": true,
-        "title": false,
-        "checkEmpty": true,
-        "colWidth": 12.0,
-        "fontSize": 9.0,
-        "enabled": true,
-        "results": {},
         "editorSetting": {
-          "language": "python",
+          "language": "scala",
           "editOnDblClick": false,
           "completionSupport": true,
           "completionKey": "TAB"
         },
-        "editorMode": "ace/mode/python"
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
       },
       "settings": {
         "params": {},
@@ -115,7 +115,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u00272.4.4\u0027"
+            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 2.4.4\n"
           }
         ]
       },
@@ -124,23 +124,524 @@
       "jobName": "paragraph_1569552551655_1672758186",
       "id": "paragraph_1569552551655_1672758186",
       "dateCreated": "2019-09-27 02:49:11.656",
-      "dateStarted": "2019-09-27 03:01:57.130",
-      "dateFinished": "2019-09-27 03:01:57.171",
+      "dateStarted": "2019-09-29 00:51:44.696",
+      "dateFinished": "2019-09-29 00:51:52.003",
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\n\nbase_path \u003d \"/zeppelin/extra_dir\"\nmetadata_path \u003d base_path + \"/metadata.json.gz\"",
+      "text": "val base_path \u003d \"/zeppelin/extra_dir\"\nval metadata_path \u003d base_path + \"/metadata.json.gz\"\nval reviews_path \u003d base_path + \"/aggressive_dedup.json.gz\"",
       "user": "anonymous",
-      "dateUpdated": "2019-09-27 03:03:17.484",
+      "dateUpdated": "2019-09-29 00:59:26.363",
       "config": {
         "editorSetting": {
-          "language": "python",
+          "language": "scala",
           "editOnDblClick": false,
           "completionKey": "TAB",
           "completionSupport": true
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/python",
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mbase_path\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /zeppelin/extra_dir\n\u001b[1m\u001b[34mmetadata_path\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /zeppelin/extra_dir/metadata.json.gz\n\u001b[1m\u001b[34mreviews_path\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d /zeppelin/extra_dir/aggressive_dedup.json.gz\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569551651988_-48875070",
+      "id": "paragraph_1569551651988_-48875070",
+      "dateCreated": "2019-09-27 02:34:11.988",
+      "dateStarted": "2019-09-29 00:59:26.373",
+      "dateFinished": "2019-09-29 00:59:26.529",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Create a product metadata data frame\nThis dataframe contains all the products metadata including the id, category and description which are very useful to create the semantic space along with the product reviews.",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 00:57:14.625",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCreate a product metadata data frame\u003c/h2\u003e\n\u003cp\u003eThis dataframe contains all the products metadata including the id, category and description which are very useful to create the semantic space along with the product reviews.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569718566715_1965178510",
+      "id": "paragraph_1569718566715_1965178510",
+      "dateCreated": "2019-09-29 00:56:06.715",
+      "dateStarted": "2019-09-29 00:57:14.626",
+      "dateFinished": "2019-09-29 00:57:15.449",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val metadata_df \u003d spark.read.json(metadata_path)\nz.show(metadata_df.limit(100))",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 00:55:08.239",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "_corrupt_record": "string",
+                      "asin": "string",
+                      "brand": "string",
+                      "categories": "string",
+                      "description": "string",
+                      "imUrl": "string",
+                      "price": "string",
+                      "related": "string",
+                      "salesRank": "string",
+                      "title": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "_corrupt_record\tasin\tbrand\tcategories\tdescription\timUrl\tprice\trelated\tsalesRank\ttitle\nnull\t0001048791\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51MKP0T4DBL.jpg\tnull\tnull\t[null,null,null,null,null,6334800,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Crucible: Performed by Stuart Pankin, Jerome Dempsey \u0026amp; Cast\nnull\t0000143561\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\t3Pack DVD set - Italian Classics, Parties and Holidays.\thttp://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._CB192198896_.gif\t12.99\t[null,WrappedArray(B0036FO6SI, B000KL8ODE, 000014357X, B0037718RC, B002I5GNVU, B000RBU4BM),null,WrappedArray(B0036FO6SI, B000KL8ODE, 000014357X, B0037718RC)]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,376041,null,null,null,null,null,null,null,null,null,null,null,null]\tEveryday Italian (with Giada de Laurentiis), Volume 1 (3 Pack): Italian Classics, Parties, Holidays\nnull\t0000037214\tBig Dreams\tWrappedArray(WrappedArray(Clothing, Shoes \u0026 Jewelry, Girls), WrappedArray(Clothing, Shoes \u0026 Jewelry, Novelty, Costumes \u0026 More, Costumes \u0026 Accessories, More Accessories, Kids \u0026 Baby))\tnull\thttp://ecx.images-amazon.com/images/I/31mCncNuAZL.jpg\t6.99\t[null,WrappedArray(B00JO8II76, B00DGN4R1Q, B00E1YRI4C),null,null]\t[null,null,null,null,null,null,null,null,1233557,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tPurple Sequin Tiny Dancer Tutu Ballet Dance Fairy Princess Costume Accessory\nnull\t0000032069\tBubuBibi\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance, Clothing, Girls, Skirts))\tnull\thttp://ecx.images-amazon.com/images/I/51EzU6quNML._SX342_.jpg\t7.89\t[WrappedArray(0000032050, B00D0DJAEG, 0000032042, B00D0F450I, B00D2JTMS2, B00D0FDUAY, B00D2JSRFQ, 0000032034, B00D0D5F6S, B00D2JRWWA, B00D0FIIJM, B00D0FCQQI, B00EXVN9PU, B0041EOTJO, B004PYEE8G, B001GTKPDQ, B00EON0SJ2, B005HMHOQ4, B002XZMGGQ),WrappedArray(B00D0F450I, 0000032050, B00D2JTMS2, 0000032042, B004PYEE8G, B00JHNSNSM, B00D0DJAEG, B00D2JSRFQ, B00D0FCQQI, B00D2JRWWA, B003AVNY6I, B0071KR2LC, B00GOR07RE, B00D0FIIJM, B005F50FXC, B0079MCIMU, B00D0FDUAY, B00H3RYN3I, B005C4Y4F6, B007IEFT84, B00D0D5F6S, B002BZX8Z6, B00JHONN1S, B008F0SU0Y, B00FNNFXAG, B007R2RM8W, B007VM3AMK, B00C0PLENA, B00BJGG6VG, B00E1YRI4C, B00IIK61WA, B009UC638W, B00KZN6RVI, B00CSFEENY, B002GZGI4E, B00HSOJJ94, B00LIPP4VG, B009RXWNSI, B00E87F196, B005HMHOQY, B00J6S9MSS, 0000032034, B00CJQGNJK, B008FCA0F0, B0056LG7GY, B00DPQWCZ2, B00I3PV0US, B00KZN6IVW, B0054TBWKO, B00I2S01I8, B00BXF12P8, B00GVHU678, B005NWENGC, B003AVKOP2, B00JK8MQ4Q, B00FZIMVQS, B008BB19VE, B00GTEXPOE, B009WPT2RQ, B00E37SBBG),WrappedArray(0000032050, B00D0DJAEG, 0000032042, B00D0F450I),null]\tnull\tAdult Ballet Tutu Cheetah Pink\nnull\t0000031909\tUnknown\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance))\tHigh quality 3 layer ballet tutu. 12 inches in length\thttp://ecx.images-amazon.com/images/I/41xBoP0FVzL._SY300_.jpg\t7.0\t[WrappedArray(B002BZX8Z6, B00JHONN1S, 0000031895, B00D2K1M3O, 0000031852, B00D0WDS9A, B00D10CLVW, B00D103F8U, B003AVEU6G, B00D2K0PA0, B002GZGI4E, B00D0ZF44Y, B008F0SMUC, B00D0GCI8S, B008F0SU0Y, B002YSCPZY, 0448408775, B002R0FABA, B008GHWNWC, B002R0FA24, B001GTKPEK, B006XA7KZO, B001GZUQ9S, B00613VNL0, B003IEDM9Q, B003LTOZK8, B003AVNY6I, B008UBQZKU, B001AQD8VQ, B003ILA0L2, B00AFDOPDA, B002R0F7FE),WrappedArray(B002BZX8Z6, B00JHONN1S, B008F0SU0Y, B00E1YRI4C, B00AFDOPDA, B002GZGI4E, B00CEUWY8K, B003IEDM9Q, B00HSOJB9M, 0000031895, B003AVKOP2, B005C4Y4F6, B008F0SMUC, B00362QGW0, B008UD01L2, B00FAZ5ZE6, B008F0SY6O, B00DPLLQR2, B00CEUWUZC, B004PYEE8G, B003AVNY6I, B00CEUX0D8, B00JHNSNSM, B00D10CLVW, B00D23MC6W, B007XAI53E, B008X6CBS2, B004PEI45U, B005HMHOQ4, B002C3Y6WG, B00HSC8O74, B008BMGHM4, B00CEUWTFS, B00FNNFXAG, B00CYBU84G, B00D9C32NI, B0046W9T8C, B008UBG5IW, B001YHX45G, B00CEV8366, B00I2UHSZA, B009RXWNSI, B008FCA0F0, B001GTKPEK, B004TU1VPU, B00CBPIO7S, B00CHHXJ0M, B00538F5OK, B005F50FXC, B00CEUX4QQ, B003XRKA7A, 0000031852, B002C3R5XI, B00C6Q1Z6E),WrappedArray(B002BZX8Z6),null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,201847,null,null]\tGirls Ballet Tutu Neon Pink\nnull\t0000032034\tBubuBibi\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance, Clothing, Girls, Skirts))\tnull\thttp://ecx.images-amazon.com/images/I/21GNUNIa1CL.jpg\t7.87\t[WrappedArray(B00D2JSRFQ, 0000032042, 0000032050, B00D2JTMS2, B00D0FDUAY, B00D0FIIJM, B00D2JRWWA, B00D0F450I, B00D0FCQQI, B00H3RYN3I, B002I55DT8, B00498HUQ6, B001YZCF1M, B00FNNFXAG, B00EON0SJ2, B000J09OV2, B0048WRX5G, B00I2EOG92, B003UM99FC, B00D0DJAEG, 0000032069, B00I2S01I8, B003AVKOP2, B003CPDAUW, B005HMHOQ4, B00JHONN1S, B00GOR07RE, B007TMMVJA, B00DPPRW2G, B0089ND408, B0046W9T8C, B005HMHOQE, B00EOOR812, B00CLZWXYI, B008AU29UQ, B00BNRKT6E, B004YHFSIO, B00EB5WN9Q, B008UBQZKU, B00D0D5F6S, B004PYEE8G, B00FQU9ZUA, B008AABRPO, B007BZ5CUA, B00I5SCG7E, B0036LOTNO, B009WPT2SA, B009QVCTTY, B00KZN5J8U, B008B81LN8, B00E1YRI4C, B004SVOVSE, B002I4ZJ1Q, B005AZMN3C, B00BBQFGWO, B009QVQZ3K, B005C4Y4F6, B008CLA6HG, B0085D9V1S, B000M55BDY, B00FE9DIHO, B009QVWIQ8, B00LIPP114, B001YHX45G, B00BN6S8WC, B009MDB6FE, B007AK1KTS, B00J6LZ16M, B002FRPE9I, B002RHLXKU, B006F404KQ, B00362OQQI, B003UNHJ4Y, B00D10CLVW, B002BZX8Z6, B0041EOTJO, B00F3KZUPC, B0055A1F4A, B0035BGVYU, B000P18LZ0, B007F2H4PU, B004XHVUE6, B00KF54D6W, B0097B1D8G, B00840TWES, B0050GAHKC, B00I9JSUO2, B003HCYEQY, B0075CNY7M, B00AFDOPDA, B008FCA0F0, B000IRG356, B00DSVBR7S, B00DYIQ8E2, B0041BVA80, B009M7FWBE),WrappedArray(B00D2JSRFQ, 0000032050, B00JHNSNSM, 0000032042, B00D2JTMS2, B003AVKOP2, B004YHFSIO, B00GOR07RE, B00D0FDUAY, B004PYEE8G, B00D0FCQQI, B009WPT2SA, B003AVNY6I, B00EON0SJ2, B005C4Y4F6, B00D0FIIJM, B00FNNFXAG, B00D0F450I, B00D2JRWWA, B008F0SU0Y, B00JHONN1S, B00FE9DIHO, B0071KR2LC, B00H3RYN3I, B00IIK61WA, B00D0DJAEG, B00KZN6RVI, B0054TBWKO, B00GEDG8D0, B00JMX4CCS, B00K18LJ6U, B0079MCIMU, B005HMHOQY, B009RXWNSI, B007XAI4LW, B007IEFTO8, B00E1YRI4C, B007R2RM8W, B002BZX8Z6, B00IIK61UW, B008F0SMUC, B00KF54D6W, B00E1Q66BG, B003WFSLBA, B00IJVASUE, B00DPPRW2G, B00HAVJ48G, B002C3Y6WG, B00I5RLL4Y, B003AVEU6G, B00E95LC8Q, B005F50FXC, B002U03H1M, B00E87F196, B008A7TFK6, B00HSOJB9M, B008A7TFGK, B00DPYOB2Q, 0375851682, B00CSFEENY),WrappedArray(B00D2JSRFQ, 0000032050, 0000032042, B00D2JTMS2),null]\tnull\tAdult Ballet Tutu Yellow\nnull\t0000589012\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tnull\thttp://ecx.images-amazon.com/images/I/519%2B1kseM3L._SY300_.jpg\t15.95\t[WrappedArray(B000Z3N1HQ, 0578045427, B007VI5AQ8, B003AC98V2, B004V4RW8O, B000I0QL7I, B000J10F8C, B0007CEXYK, B000ERVK4Y, B000XSKDBA, B002UNMWTC, B00008MTXI, B007TSV4GK, B0052ADP6Y, B00EUENWIY, B003YKYX9M, B004RD3YFE, B007Y9F6RW, B00004UEDQ, B0039Y774Q, B0006IIKRG, B00JAGF9HE, 6305162026, 6305692572, B001D7T460, B0018QOIWG, B002Y7ZELW, B0045HCJ08, 0830907394, B000LAZDPG, B00A2H9QN8, B001O5CLXY, B000JBXXYK, B003B3NGS6, B0037SR3N4, B00641Y2ZS, 0470903953, 0977977315, B00049QQHI, B000E6ESU8, 0470402741, 061565732X, 0615763146, B000VZPTH8, B003JO6OPO, B00787BTEO, B004R1Q7YQ, B001GG6GKK, B0015VQAZM, 1592854869, B000QRIL08, B000GQLA8O, B000MPM3TE, 0979021804, 1608823407, 159285821X, B00005Q4CS, B0000549B1, 6305594333, B00AFEXRME, B004FN25AG, 0830906363, 0470402768, 1118414756, B009SV4O2M, 1481106694, 1572306254, B0013MOLPO, B00009Y3QI, B003NMOL2U, B001AKBI8C, 0981708803, 1572306394, B00B9LNPA6, B005BYBZEK, B004D7SBMU, B00CQMADIO, 0470405511, B00CHEHHT4, B000ESUWY2, 0792838068, B00AWE09Z0, B00E4XZZEK, 0830914870, B00GFZLEF4, 083090459X, 1402218443, 1893007170, 1893277046, B005CKI7H6, B0001LQL6K, B000067S10, 0890425558, B00114KYC8, 1466221224, 0943158508, B00A7ID5BG, 0671765582, B000B8IH10, 1568381395),null,null,WrappedArray(B003AC98V2, B007VI5AQ8, B000ERVK4Y, B0007CEXYK)]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,1084845,null,null,null,null,null,null,null,null,null,null,null,null]\tWhy Don\u0027t They Just Quit? DVD Roundtable Discussion: What Families and Friends need to Know About Addiction and Recovery\nnull\t0001048775\tnull\tWrappedArray(WrappedArray(Books))\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\thttp://ecx.images-amazon.com/images/I/5166EBHDQYL.jpg\tnull\tnull\t[null,null,null,null,null,13243226,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMeasure for Measure: Complete \u0026amp; Unabridged\nnull\t0000031852\tCoxlures\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance))\tTUtu\thttp://ecx.images-amazon.com/images/I/51fAmVkTbyL._SY300_.jpg\t3.17\t[WrappedArray(B00JHONN1S, B002BZX8Z6, B00D2K1M3O, 0000031909, B00613WDTQ, B00D0WDS9A, B00D0GCI8S, 0000031895, B003AVKOP2, B003AVEU6G, B003IEDM9Q, B002R0FA24, B00D23MC6W, B00D2K0PA0, B00538F5OK, B00CEV86I6, B002R0FABA, B00D10CLVW, B003AVNY6I, B002GZGI4E, B001T9NUFS, B002R0F7FE, B00E1YRI4C, B008UBQZKU, B00D103F8U, B007R2RM8W),WrappedArray(B002BZX8Z6, B00JHONN1S, B008F0SU0Y, B00D23MC6W, B00AFDOPDA, B00E1YRI4C, B002GZGI4E, B003AVKOP2, B00D9C1WBM, B00CEV8366, B00CEUX0D8, B0079ME3KU, B00CEUWY8K, B004FOEEHC, 0000031895, B00BC4GY9Y, B003XRKA7A, B00K18LKX2, B00EM7KAG6, B00AMQ17JA, B00D9C32NI, B002C3Y6WG, B00JLL4L5Y, B003AVNY6I, B008UBQZKU, B00D0WDS9A, B00613WDTQ, B00538F5OK, B005C4Y4F6, B004LHZ1NY, B00CPHX76U, B00CEUWUZC, B00IJVASUE, B00GOR07RE, B00J2GTM0W, B00JHNSNSM, B003IEDM9Q, B00CYBU84G, B008VV8NSQ, B00CYBULSO, B00I2UHSZA, B005F50FXC, B007LCQI3S, B00DP68AVW, B009RXWNSI, B003AVEU6G, B00HSOJB9M, B00EHAGZNA, B0046W9T8C, B00E79VW6Q, B00D10CLVW, B00B0AVO54, B00E95LC8Q, B00GOR92SO, B007ZN5Y56, B00AL2569W, B00B608000, B008F0SMUC, B00BFXLZ8M),WrappedArray(B002BZX8Z6),null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,211836,null,null]\tGirls Ballet Tutu Zebra Hot Pink\nnull\t0001048236\tnull\tWrappedArray(WrappedArray(Books))\t\u0026#34;One thing is certain, Sherlockians, put aside your Baring-GouldAnnotated, your Folio SocietyIllustrated-for the time being, the Oxford is the edition to curl up with on a winter\u0027s night\u0026#34;--The Chicago Tribune\u0026#34;An incomparable gift book; or, should you find it impossible to surrender up such treasures, the best of gifts to oneself\u0026#34;--USA Today\u0026#34;To the true Sherlockian, this will be a treasure; to otherwise diverted detective story fans, it is a rich lode for discovery\u0026#34;--Denver Post\u0026#34;The complete and authentic adventures of the legendary detective--expertly edited and annotated by a team of Holmes scholars....in a handsome, boxed set....A lovely gift\u0026#34;--The Christian Science Monitor\u0026#34;Here in nine volumes...are all the adventures of Holmes and Watson. Each book has an introduction, something new and fascinating for even the most devoted Holmesians plus a series of intelligent notes at the back of each volume.\u0026#34;--Oxford Times\u0026#34;TheOxford Sherlock Holmes, a new edition of the stories, is a splendid piece of publishing. Nine compact volumes, beautifully produced, each with a stimulating introduction; clear type, accurate texts, a handy chronology, a helpful bibliography. And, most valuable of all, explanatory notes running to 50 pages or more per volume.\u0026#34; --John Gross, writing inSunday Telegraph--This text refers to thePaperbackedition.\thttp://ecx.images-amazon.com/images/I/51DH145C5JL.jpg\t9.26\t[null,WrappedArray(1442300191, 9626349786, 1602837155, 1598879162, 1400115159, 1478396202, 1408426250, B007PM2A4A, 1609980603),null,WrappedArray(0312089457)]\t[null,null,null,null,null,8973864,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Sherlock Holmes Audio Collection\nnull\t0000401048\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41bchvIfgaL.jpg\tnull\t[null,WrappedArray(068240103X),null,null]\t[null,null,null,null,null,6448843,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe rogue of publishers\u0027 row;: Confessions of a publisher (A Banner Book)\nnull\t0001019880\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/61LcHUdvS1L.jpg\t5.39\t[null,WrappedArray(B003HMB5FC, 0834004593),null,WrappedArray(031095360X, 0834004577)]\t[null,null,null,null,null,9589258,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tClassic Soul Winner\u0027s New Testament Bible\nnull\t0001048813\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41k5u0lr6NL.jpg\tnull\tnull\tnull\tArcher Christmas 4 Tape Pack\nnull\t0001148427\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41tN4KuOXkL.jpg\tnull\tnull\t[null,null,null,null,null,5806769,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tSonatas - For Piano\nnull\t0001057170\tnull\tWrappedArray(WrappedArray(Books))\t[Editor\u0027s Note: The following is a combined review with CLASSIC CONNOLLY IN WORDS AND MUSIC.]--Those of you who enjoyed Billy Connolly\u0027s moving performance in the film MRS. BROWN may not know (or believe) that he began his professional life as a Glasgow folky and gained first fame as a stand-up comic. Now\u0027s your chance to catch up on his sordid past with these compilations from his club recordings of the \u002770s and \u002780s. He loves the shaggy dog story and the wicked song but doesn\u0027t mind flinging one-liners either. His raucous, scatological, profane humor is best enjoyed by heavy drinkers familiar with the Scottish tongue. The rest of us will get plenty of yuks from those punch lines we can decipher.  Y.R. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\thttp://ecx.images-amazon.com/images/I/51M65KR89XL.jpg\tnull\tnull\t[null,null,null,null,null,9318563,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tClassic Connolly Boxed Set (Vol 1 \u0026amp; 2)\nnull\t0001047566\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51FWARNTHCL.jpg\tnull\tnull\t[null,null,null,null,null,3628249,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHand in Glove\nnull\t0001053396\tnull\tWrappedArray(WrappedArray(Books))\tWriting poetry has always been a way to express what is going on in the world around us. Unfortunately, sometimes what is around us is war. Acclaimed British actor Paul McGann reads poems that date from the eighteenth century to modern times in this moving audio anthology. McGann is originally from Liverpool, and he still retains a slight Northern accent. Its lilting cadence blends well with the rhythm and worldliness of these powerful poems. Although some of the pieces are well known, others are less so, and this makes the collection even more intriguing for lovers of literature.  R.A.P. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\thttp://ecx.images-amazon.com/images/I/51WTKK4V2DL.jpg\t17.99\tnull\t[null,null,null,null,null,12249714,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tWar Poems: An Anthology of Poetry from the 18th Cantury to the Present Day\nnull\t0000913154\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/7113akhDnTL.jpg\t23.26\t[WrappedArray(0590429892, 1114119512, B000HW2YQE, 0395938473, 0395428572, 0449208133, 0486217094, 0618233784, 0486443604, 1856698769, 0942364155, 0936070129, 0671224549),null,null,WrappedArray(0395938473, B000GP0CT8, 0590429892, 1114119512)]\t[null,null,null,null,null,455782,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Way Things Work: An Illustrated Encyclopedia of Technology\nnull\t0000032050\tBubuBibi\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance, Clothing, Girls, Skirts))\tnull\thttp://ecx.images-amazon.com/images/I/41TxNYG8cwL._SX342_.jpg\t12.85\t[WrappedArray(B00D2JSRFQ, B00D2JTMS2, 0000032042, 0000032034, B00D0FDUAY, B00D2JRWWA, B00D0FIIJM, B00D0DJAEG, B00D0F450I, B00FNNFXAG, 0000032069, B00JHNSNSM, B00D0FCQQI, B009QVVPM6, B00H3RYN3I, B004PYEE8G, B00EON0SJ2, B0079MCIMU, B00D0D5F6S, B005HMHOQ4, B0046W9T8C, B001GTKPDQ, B002RHLXKU, B002BZX8Z6, B00E1YRI4C, B009QVW5FM, B005C4Y4F6, B002C3Y6WG, B001YHX45G, B00DPM8UWA, B009V5DTDA, B00EOOR812, B00G9QRLNI, B003AVKOP2, B00JMBEZZY, B007F2H4PU, B004YV8M88, B003IRFOU8, B008S9PLZ4, B009QVQZ3K, B009MFI4FC, B00K189G60, B00BNRKT6E, B00AHJCTF8, B00IOHJ7HS, B009K8XS0M, B00DPYOB2Q, B009QVCTTY, B002YS7AUO, B002SWWY3E, B005JJDKPO, B00JHONN1S, B00LIPP4VG, B002S3QECA, B007JYBGCQ, B002YSETF8, B0034E81U0, B009QVOMSK, B003AVNY6I, B007M8RZG0, B007IEFT84, B003IEDM9Q, B004SVOIHS, B002C3R5XI, B003ZWDIFE, B009FGMZ08, B004TK0A4S, B009K90F3O, B00BOXAJVW, B00GJ0XOKS, B001VDR42M, 1416970797, B0033II4NG, B00BITBIB2, B009QVWIQ8, B000J09OV2, B003O86MB6, B00430ALB6, B003ILA0L2, B00KF54D6W, B00CQGUSYY, B005RTJ438, B0071KR2LC, B002XZMGGQ, B0092BWWG8, B000VLS7BM, B009MDB6FE),WrappedArray(B00D2JTMS2, B00D2JSRFQ, B004PYEE8G, 0000032042, 0000032034, B00D0FIIJM, B00D0FDUAY, B00D2JRWWA, B00JHNSNSM, B00D0FCQQI, B00D0DJAEG, B00FNNFXAG, B00H3RYN3I, B00D0F450I, B003AVNY6I, B00GOR07RE, B00DPM8UWA, B0079MCIMU, B002C3Y6WG, B007IEFT84, B008F0SU0Y, B00EON0SJ2, B005C4Y4F6, B00HSOJJ94, 0000032069, B00K18LJ6U, B00JHONN1S, B002BZX8Z6, B003AVKOP2, B00IIK61WA, B0071KR2LC, B00I3PV0US, B009RXWNSI, B00GTEXPOE, B00KF54D6W, B00CSFEENY, B007OGJ2DE, B00E1YRI4C, B008F0SMUC, B00KZN6IVW, B005F50FXC, B005HMHOQY, B00H7NF9TK, B00KZN6RVI, B007R2RM8W, B00JMX4CCS, B00IJVASUE, B0054TBWKO, B00J6NY1FW, B003WFSLBA, B003WFQ42S, B00HETH828, B009V5EAB0, B00DPPRW2G, B0043007YW, B007IEFTO8, B0083OQ31A, B00DFYIXPM, B00C0PLENA),WrappedArray(B00D2JTMS2, B00D2JSRFQ, 0000032042, 0000032034),null]\tnull\tAdult Ballet Tutu Purple\nnull\t0001072986\tnull\tWrappedArray(WrappedArray(Books))\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\thttp://ecx.images-amazon.com/images/I/51X8Z6CJ10L.jpg\tnull\tnull\t[null,null,null,null,null,8296784,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tAs You Like it: Complete \u0026amp; Unabridged\nnull\t0001053744\tnull\tWrappedArray(WrappedArray(Books))\tWhile many readers are familiar with SIR GAWAIN AND THE GREEN KNIGHT (and perhaps even Tolkien\u0027s translation), these poems from the same fourteenth-century manuscript are less well known. PEARL the longer of the two, is an elegy for the poet\u0027s baby daughter, told in alliterative verse. SIR ORFEO is a Celtic version of the Greek myth of Orpheus and Eurydice, complete with a happy ending that the older story lacks. Terry Jones, former member of Monty Python and a medieval scholar to boot, sounds perfectly comfortable with the rhythms and language. One even gets a taste of the original Middle English on the final side, when Jones puts these works into context by reading Tolkien\u0027s own introductions.  D.B. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\thttp://ecx.images-amazon.com/images/I/712C-G3XiTL.jpg\t6.05\t[null,WrappedArray(0345277600),null,WrappedArray(0312248733, 0345277600, 0140442898)]\t[null,null,null,null,null,5665835,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tPearl and Sir Orfeo\n{\u0027asin\u0027: \u00270001055178\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027Beryl Bainbridge seems drawn to disaster. First she tackled the  unfortunate Scott expedition to the South Pole inThe Birthday Boys; later (but emphatically pre-DiCaprio) came the sinking of the Titanic, inEvery Man for Himself. Now, in her 3rd historical novel (and her 16th overall), she takes on the Crimean War, and the result is a slim, gripping volume with all of the doomed intensity of the Light Brigade\\\u0027s charge--but, thankfully, without the Tennysonian bombast. \"Some pictures,\" a character confides, \"would only cause alarm to ordinary folk.\" There\\\u0027s a warning concealed here, and one that easily disturbed readers would do well to heed:Master Georgieis intense, disturbing, revelatory--and not always pretty to look at.Bainbridge\\\u0027s narrative circles round the enigmatic figure of George Hardy, a surgeon, amateur photographer, alcoholic, and repressed homosexual who counters the dissipation of his prosperous Liverpool life by heading for the Crimean Peninsula in 1854. His journey and subsequent tour of duty are told in three very different voices: Myrtle, an orphan whose lifelong loyalty to her \"Master Georgie\" becomes an overriding obsession; Pompey Jones, street urchin, fire-eater, photographer, and George\\\u0027s sometime lover; and Dr. Potter, George\\\u0027s scholarly brother-in-law, whose retreat from the war\\\u0027s carnage and into books takes on a tinge of madness.United by a sudden death in a Liverpool brothel in 1846, these characters plumb the curious workings of love, war, class, and fate. In between, Bainbridge frames an unforgettable series oftableaux morts: a dying soldier, one lens of his glasses \"fractured into a spider\\\u0027s web\"; a decapitated leg, toes \"poking through the shreds of a cavalry boot\"; two dead men \"on their knees, facing one another, propped up by the pat-a-cake thrust of their hands.\" Glimpsed as if sidewise and then passed over in language that is as understated as it is lovely, these are images that sear into the brain.Master Georgieis full of such moments, horrors painted with an exquisite brush.--Mary Park--This text refers to an out of print or unavailable edition of this title.\u0027, \u0027title\u0027: \u0027Master Georgie\u0027, \u0027price\u0027: 16.95, \u0027salesRank\u0027: {\u0027Books\u0027: 14149327}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/51ZSC6TKS3L.jpg\u0027, \u0027related\u0027: {\u0027also_viewed\u0027: [\u00270349116156\u0027, \u00270307947726\u0027, \u00270786702079\u0027, \u00270786701463\u0027, \u00270786707739\u0027, \u0027B001IDZK0I\u0027, \u00270226743497\u0027, \u00270786703229\u0027, \u00270802142818\u0027, \u00270375700234\u0027, \u00270679731369\u0027, \u00270812976533\u0027, \u00270385722109\u0027, \u00271609450868\u0027, \u00271416562605\u0027, \u0027B000GH2YRY\u0027, \u00270679777504\u0027, \u00271590170180\u0027, \u0027B001LF2H7W\u0027, \u00270374526400\u0027, \u00270807608815\u0027, \u00271573225436\u0027, \u00271609450566\u0027, \u0027B003H4RCJS\u0027, \u00271586420046\u0027, \u00270143124870\u0027, \u00270571319661\u0027, \u00270385474547\u0027, \u00270140092552\u0027, \u00270316074314\u0027], \u0027buy_after_viewing\u0027: [\u00270349116156\u0027, \u00271609450868\u0027, \u00270307947726\u0027, \u0027B008SM8T5K\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001064487\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41bI6DhG7SL.jpg\tnull\t[null,WrappedArray(9589269117, 9589269125, 9589269109, 9589269273, 9588201748),null,WrappedArray(9589269117, 9589269125, 9589269109)]\t[null,null,null,null,null,1549956,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tCelebremos Su Gloria\nnull\t0001042335\tnull\tWrappedArray(WrappedArray(Books))\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\thttp://ecx.images-amazon.com/images/I/51ZSAPAXN4L.jpg\tnull\tnull\t[null,null,null,null,null,4849400,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHamlet: Complete \u0026amp; Unabridged\nnull\t0000202010\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/516Xv4rbRoL.jpg\tnull\tnull\t[null,null,null,null,null,1455209,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Laurel \u0026amp; Hardy Book (The Curtis Film Series)\nnull\t0001057138\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41K9BHNH7CL.jpg\tnull\tnull\t[null,null,null,null,null,5457145,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tClassic Connolly in Words and Music (HarperCollinsComedy)\n{\u0027asin\u0027: \u0027000136118X\u0027, \u0027description\u0027: \u0027One, Two, Guess Who? by Colin and Jacqui Hawkins turns counting to 10 into a game. A pair of numbers is presented in a rhyme with a clue: \"Who found the slipper left behind on the stairs? The Ugly Sisters said it was theirs.\" Three choices appear on a flap with the answer underneath, \"It was Prince Charming who came to call,/ carrying the slipper last at the ball.\" Children can go from one to 10 all over again on the last pages, which briefly recap the number rhyme and the objects seen.Copyright 2001 Cahners Business Information, Inc.--This text refers to an out of print or unavailable edition of this title.\u0027, \u0027title\u0027: \u0027One, Two, Guess Who?\u0027, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/51HK6S3HJNL.jpg\u0027, \u0027salesRank\u0027: {\u0027Books\u0027: 8798712}, \u0027categories\u0027: [[\u0027Books\u0027]]}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0000000868\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41K1RtF0J0L.jpg\t21.85\tnull\t[null,null,null,null,null,14161827,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tFoot Rot of Piper nigrum. L. (Phytopathological Paper)\nnull\t0000695009\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tnull\thttp://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._CB192198896_.gif\tnull\tnull\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,1022732,null,null,null,null,null,null,null,null,null,null,null,null]\tUnderstanding Seizures and Epilepsy DVD\nnull\t0001053655\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41C0C3DKRWL.jpg\tnull\t[null,null,null,WrappedArray(0571230547, 1845134885)]\t[null,null,null,null,null,3843450,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tWho on Earth is Tom Baker?\nnull\t0001360000\tnull\tWrappedArray(WrappedArray(Books))\tJudith Kerr\u0026#8217;s best\u0026#8211;selling adventures of that endearing (and exasperating) cat Mog have entertained children for more than 30 years. Now, even infants and toddlers can enjoy meeting this loveable feline. These sturdy little board books\u0026#8212;with their bright, simple pictures, easy text, and hand\u0026#8211;friendly formats\u0026#8212;are just the thing to delight the very young. Ages 6 months\u0026#8211;2 years.\thttp://ecx.images-amazon.com/images/I/514Y3NCWBTL.jpg\t10.76\t[WrappedArray(0007171285, 0007347049, 0007171331, 0007117523, 0007347030, 000717134X, 0007228953, 0007193661, 0007167059, 0007171315, 0007171366, 0007149697, 0001374761),null,null,WrappedArray(0007117523, 0007171285, 0007171331, 0007171366)]\t[null,null,null,null,null,1760368,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMog\u0027s Kittens\nnull\t0000038504\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51x9TcnJXiL._SL500_.jpg\tnull\t[null,WrappedArray(0060161345, 0060928395),null,WrappedArray(0060161345)]\t[null,null,null,null,null,3472679,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tDouble-Speak: From Revenue Enhancement to Terminal Living--How Government, Business, Advertisers and Others Use Language to Deceive You\nnull\t0001203088\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41oE0tqP3zL.jpg\tnull\t[WrappedArray(0001203010, 083174474X),null,null,null]\t[null,null,null,null,null,859965,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHilda Boswell\u0027s Omnibus - A Treasury of Favorites\nnull\t0001061100\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/61Y8fD-3reL.jpg\tnull\tnull\t[null,null,null,null,null,3213316,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tChess for Children\nnull\t000107461X\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tnull\thttp://ecx.images-amazon.com/images/I/41WY47gLVtL.jpg\tnull\tnull\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,954116,null,null,null,null,null,null,null,null,null,null,null,null]\tLive in Houston [VHS]\n{\u0027asin\u0027: \u00270001018043\u0027, \u0027description\u0027: \u0027Grade 3-6-In this fast-paced fantasy, a neglected wooden horse is changed back into the beautiful mare it once was, through the loving care of a shy, lonely, preadolescent girl. Irina sees the old rocking horse in a junkstore window and decides she must have it. The proprietor, sensing her need for it, gives Bella to her, and tells her about a live Bella, a beautiful, once-wild horse that used to belong to a local farmer who mistreated her. As the wooden horse gradually comes to life, Irina blossoms. She is happier than she has ever been, especially when her Bella takes her on thrilling midnight rides. One cold winter night, the animal leaves the child to run through the hills with a herd of wild horses. Irina is devastated. Too late she realizes she has not heeded the storekeeper\\\u0027s warning \"Never say that any creature on this earth is yours....\" She withdraws into herself again-until Bella returns, bringing her injured foal for Irina to nurse. This time she promises herself to let it go when it is grown. In so doing, she frees herself to grow up. The message may seem obvious to some, but that will not deter young horse lovers and beginning readers of fantasy, who will be absorbed by the details of equistrian care, the magic of the animal\\\u0027s transformation, and the excitement of the late-night rides. The many fine black-and-white drawings convey Irina\\\u0027s sadness, Bella\\\u0027s magical changes, and the strong energy of the galloping horses.Virginia Golodetz, St. Michael\\\u0027s College, Winooski, VTCopyright 1993 Reed Business Information, Inc.--This text refers to an out of print or unavailable edition of this title.\u0027, \u0027title\u0027: \u0027The Enchanted Horse\u0027, \u0027price\u0027: 8.09, \u0027salesRank\u0027: {\u0027Books\u0027: 13835337}, \u0027categories\u0027: [[\u0027Books\u0027]]}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0000143529\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tDisc 1: Flour Power (Scones; Shortcakes; Southern Biscuits; Salmon Turnovers; Fruit Tart; Funnel Cake; Sweet or Savory; Pte  Choux) Disc 2: Super Sweets 4 (Banana Spitsville; Burned Peach Ice Cream; Chocolate Taffy; Acid Jellies; Peanut Brittle; Chocolate Fudge; Peanut Butter Fudge) Disc 3: Super Sweets 5 (Lemon Meringue Pie; Pie Crust; Yeast Doughnuts; Doughnut Glaze; Chocolate Doughnut Glaze; Sugar Cookies; Royal Icing; Chocolate Peppermint Pinwheel Cookies)\thttp://ecx.images-amazon.com/images/I/51QY79CDfjL._SY300_.jpg\t19.99\t[WrappedArray(B000NR4CRM, B0019BK3KQ, B000PNECNI, B000PNUILI, B0018Y5NVI, B000UMM9UC, B000PMPV6G, B001UFO924, B0019BIB4Q, 0000143499, B000P1CKES, B000UMMB5K, B002VZUC32),null,null,WrappedArray(B0018Y5NVI, B003RLLSWI, B002N30SRC, B002OXET30)]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,463562,null,null,null,null,null,null,null,null,null,null,null,null]\tMy Fair Pastry (Good Eats Vol. 9)\nnull\t0000477141\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51ky-L29jTL.jpg\t41.22\t[null,WrappedArray(000047715X, 1934465259, 1505610001, 1934465267),null,WrappedArray(000047715X, 1934465542, 1934465259, 1607148439)]\t[null,null,null,null,null,3088988,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMKSAP 15 Audio Companion\nnull\t0001437879\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51PA8hajWWL._SL500_.jpg\tnull\tnull\t[null,null,null,null,null,6887541,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tGreat Hymns of the Faith: King James Responsive Readings\nnull\t0001035649\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51P6XDFRVKL.jpg\tnull\tnull\t[null,null,null,null,null,485920,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tUnder Milk Wood: Dylan Thomas \u0026amp; the Original Cast\nnull\t0001381245\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/A1%2B%2BKHnzuVL.jpg\t5.47\t[WrappedArray(1439596867, B001E1HCR8, 141783241X, 0756980976, 0689852797, 1416927875, 1416927883, 0528820508),null,null,WrappedArray(1416927832, 1416927883, B001E1HCR8, 043944036X)]\t[null,null,null,null,null,735776,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMisty of Chincoteague\nnull\t000102521X\tnull\tWrappedArray(WrappedArray(Books))\tFor lovers of extravagant words and action charged with mystery and passion, Mr Jarvis must be hard to beat.\u0027 Times Educational Supplement \u0027Jarvis creates a rich, intricate world... well worth reading.\u0027 The Daily Telegraph \u0027The best one yet!\u0027 12-yr old fan, Tunbridge Wells\thttp://ecx.images-amazon.com/images/I/516TRJBF9XL.jpg\tnull\tnull\t[null,null,null,null,null,13970164,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Fatal Strand (Tales from the Wyrd Museum)\nnull\t0001371045\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/81VxVmFrJaL.jpg\tnull\t[WrappedArray(0001203010, 083174474X),null,null,WrappedArray(0001203010)]\t[null,null,null,null,null,3168215,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHilda Boswell\u0027s treasury of children\u0027s stories: A new anthology of stories for the young\nnull\t0001468685\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/71eeMmDZhTL.jpg\tnull\tnull\t[null,null,null,null,null,2714140,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tSuddenly One Was Taken!\nnull\t0000031887\tBoutique Cutie\tWrappedArray(WrappedArray(Clothing, Shoes \u0026 Jewelry, Girls, Clothing, Active, Active Skirts))\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\thttp://ecx.images-amazon.com/images/I/314qZjYevsL.jpg\t6.79\t[WrappedArray(0000031852, 0000031895, 0000031909, B00D2K1M3O, B00D10CLVW, B003AVKOP2, B00D103F8U, B00613WDTQ, B008F0SU0Y, B00D23MC6W, B00D0GCI8S, B00E1YRI4C, B008UBQZKU, B003AVEU6G, B008F0SMUC, B002C3Y6WG, B005JJ275S, B00D0WDS9A, B00EN6QXI0, B00D0ZF44Y, B00D2K0PA0, B00HSOJB9M, B00CF7G0UA, B003IEDM9Q, B005JJ274Y, B000G8GME4, B000IRG356, B003AVNY6I, B003WFQ42S, B005JJ2762, B00CEUWY8K, 0375843930, B00AFDOPDA, B00613VNL0, B004JBEYC6, B009QVCTTY, B00I1W2E1C, 0375851682, B005JJ2758, B002R0FABA, B002GZPTRQ, B005Z2UDEG, B002R0FA24, B002GZGI4E, B00CEUX0D8, B001V5XKC8, B00HSC8O74, B003UM99FC, B00538F5OK, B008LOSB2Q, B003ILA0L2, B002G9UFNK, B007Z7HSFG, B007XAI4LW, B004LHZ1NY, B003LTOZK8, 0000032034, B00CEV86I6, B003IRFOU8, B00BC4GY9Y, B00DJB65ME, B005BGOWJ8, B005Y0QYHY, B00498HUQ6, B0079MHVEA, B00ATBQSKG, B00I1VZPVY, B001QKHXEE, B004PEI45U, B000NZT2H4, B008C7PHOC, B00ATBQSL0, B00A8PUJ62, 0448408775, B008CLA6GW, B00DSJ6QGW, B008F0SY6O, B002R0F7FE, B00FAZ5ZE6, B00D8ERLL6, B008X6CBS2, B00D0FCQQI, B008UD01L2, B00D9C1WBM, B000VLO9JQ, B00CEUWUZC, B001GTKPEK, B002SJ7N42, B008HA0BDG, B000KIJP2Q, B00427XACM, B004BFI994, B00D2JTMS2, B001T9NUFS, B0046W9T8C),WrappedArray(B00E1YRI4C, B00D23MC6W, B00AFDOPDA, B00538F5OK, B003AVKOP2, B008F0SU0Y, B004303OEW, B002GZPTRQ, B002GZGI4E, B00HSOJB9M, B003IEDM9Q, B008F0SMUC, B005C4Y4F6, B008UD01L2, B0071KR2LC, B00D0FCQQI, B004PYEE8G, B003AVNY6I, B002C3Y6WG, B003L2OASM, B00CEUWTFS, B004YHFSIO, B009RXWNSI, B00D2JSRFQ, B00I2EOG92, B00K18LJ6U, B00JHNSNSM, B0054TBWKO, B003AVEU6G, B00CEUWUZC, B00D103F8U, B00D2JTMS2, B008BMGHM4, B00CEUX0D8, B00JMX4CCS, B003WFSLBA, B00CEUWY8K, 0000032050, B00GOR07RE, B009V5DTDA, 0000032042, B00I3OX1II, B008X6CBS2, B007XAI4LW, B008UBQZKU, B00DPLLQR2, B007XAI53E, 0000032034, B00K18LKX2, B00IIK61WA, 0000031852, B004PEI45K, 0000031895, B00CEUX4QQ, B005HMHOQY, B008UBG5IW, B00E1Q66BG, B00HSOJKN4, B004ILT36Y),WrappedArray(B00D23MC6W),null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,8547,null,null,null]\tBallet Dress-Up Fairy Tutu\n{\u0027asin\u0027: \u00270000143502\u0027, \u0027categories\u0027: [[\u0027Movies \u0026 TV\u0027, \u0027Movies\u0027]], \u0027description\u0027: \u0027Rise and Swine (Good Eats Vol. 7) includes bonus footage \"Ask Alton\" and 3 discs. Disc 1: Breakfast Eats 3 (Bacon Vinaigrette with Grilled Radicchio; Scrap Iron Chef\\\u0027s Bacon; Honey Mustard Cure; Molasses Black Pepper Cure; Red Pepper Brine; Soy Honey Brine; Omelet; Omelet for a Crowd; Frittata; Blueberry Muffins; And More...) Disc 2: Fruit Fest (It\\\u0027s a Wonderful Waldorf; 10 Minute Applesauce; Baker, Baker; Clotted Cream; Macerated Strawberries; Strawberry Pudding; Frozen Strawberries; Banana Ice Cream; Bananas Foster; Fried Plantains; And more...) Disc 3: Manly Eats (Sirloin Steak; Skirt Steak; Pulled Pork; Corn Dogs; Mini Man Burgers; And More...)\u0027, \u0027title\u0027: \u0027Rise and Swine (Good Eats Vol. 7)\u0027, \u0027price\u0027: 62.51, \u0027salesRank\u0027: {\u0027Movies \u0026 TV\u0027: 467172}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/51NQ%2B7AMXpL._SY300_.jpg\u0027, \u0027related\u0027: {\u0027also_bought\u0027: [\u0027B0018Y5NVI\u0027, \u00270000143499\u0027, \u0027B000NR4CRM\u0027, \u0027B000PNUILI\u0027, \u0027B004NKINFM\u0027, \u0027B002VZUC32\u0027, \u0027B000UMMB5K\u0027, \u0027B000PMPV6G\u0027, \u0027B0019BK3KQ\u0027, \u0027B000UMM9UC\u0027, \u0027B000P1CKES\u0027, \u0027B0019BK1SU\u0027, \u0027B000UMMA8I\u0027, \u0027B0019BIB4Q\u0027, \u0027B000PNECNI\u0027, \u0027B0019BCO44\u0027, \u0027B001UFO924\u0027, \u0027B0019BCOWG\u0027, \u0027B002OXKNHQ\u0027], \u0027buy_after_viewing\u0027: [\u0027B0018Y5NVI\u0027, \u0027B002OXKNHQ\u0027, \u0027B000UMMB5K\u0027, \u0027B000PNUILI\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0000619574\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/71Yc3Bep7VL.jpg\tnull\tnull\t[null,null,null,null,null,6210147,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tA Diamond of Years; the Best of the Woman\u0027s Home Companion\nnull\t0001473727\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/512M299KGAL.jpg\t2.99\t[WrappedArray(160386489X, 1614271046, 1475009771, 1614270074, B000ALVEHM),null,null,WrappedArray(B000ALVEHM, 1614271046, B00085X2O8, 1475009771)]\t[null,null,null,null,null,1088147,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Greatest Book on \u0026quot;Dispensational Truth\u0026quot; in the World\nnull\t0001061127\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/71zWyybZsqL.jpg\tnull\t[WrappedArray(1904600069),null,null,WrappedArray(0812918673)]\t[null,null,null,null,null,1682154,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tChess for Young Beginners\nnull\t0001384198\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/81SL54R-Q0L.jpg\t13.86\t[null,WrappedArray(044845257X, 0448463598, 0448400715, 0763622281, 0698120132, B009ZMLPTE, 0689847432, 0671317741, B00ES26VQ8),null,WrappedArray(044845257X, 0448463598, 0448400715, 0140501738)]\t[null,null,null,null,null,2179336,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Little Engine That Could: Pop-up Book\nnull\t0000191639\tDr. Seuss\tWrappedArray(WrappedArray(Toys \u0026 Games, Puzzles, Jigsaw Puzzles))\tThree Dr. Suess\u0027 Puzzles: Green Eggs and Ham, Favorite Friends, and One Fish Two Fish Red Fish Blue Fish\thttp://ecx.images-amazon.com/images/I/414PLROXy-L._SY300_.jpg\t37.12\tnull\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,612379,null,null]\tDr. Suess 19163 Dr. Seuss Puzzle 3 Pack Bundle\nnull\t0000230022\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/218uMkP0QhL.jpg\t6.93\t[WrappedArray(1133188923, 0399144463, 1608100189, 0988620103, 0205097839, B002CSH5VU, 0071819045, 1435460065, 0688123163, 0830826769, 1578569753, B005OL8KC0, 0615372414, 0195289609, 0786866020, 0205742017, 0385513518, 1404100164, 1608100375, 0091816971, 068815428X, 0743256298, B0013PT94O, 0385523866, 1608100707, 0060937335, B005065TR8, 1608100863, 1608100723, 1885228678, 0470279494, B00847DQ70, 0312601417, 1423145844),null,null,WrappedArray(0688014291, 0385513518, 0938045768, 0399144463)]\t[null,null,null,null,null,957067,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Simple Truths of Service: Inspired by Johnny the Bagger\nnull\t0001057324\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51t2n4sLtPL.jpg\tnull\tnull\t[null,null,null,null,null,10330063,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tArdal O\u0027Hanlon: Star of Channel 4\u0027s Father Ted in His Hilarious Stand-Up Show (HarperCollinsComedy)\nnull\t0000031895\tBubuBibi\tWrappedArray(WrappedArray(Sports \u0026 Outdoors, Other Sports, Dance))\tDance tutu for girls ages 2-8 years. Perfect for dance practice, recitals and performances, costumes or just for fun!\thttp://ecx.images-amazon.com/images/I/41Csjlr%2BxpL._SY300_.jpg\t2.99\t[WrappedArray(B002BZX8Z6, B00JHONN1S, 0000031909, B008F0SU0Y, B003AVKOP2, B002C3Y6WG, B00D2K1M3O, B002YSAX58, B008F0SMUC, B00D2K0PA0, B003AVEU6G, B00HYHUHH8, 0000031852, B00D10CLVW, B002GZGI4E, B00D0WDS9A, B00E1YRI4C, B003IEDM9Q, B00D23MC6W, B00D103F8U, B00D0ZF44Y, B00AFDOPDA, B002R0FABA, B00KZN5J8U, B008UBQZKU, B001GTKPEK, B002GZPTRQ, B007XAI4LW, B009QVSFM4, B009QVW5FM, B003YK5KCG, B00D0GCI8S, B005IDQRVK, B000IRG356, B008B81LN8, B009QVQZ3K, B0046W9T8C, B0097K2JF8, B005AEBZH8, B002R0FA24, B002AWEYGW),WrappedArray(B002BZX8Z6, B00E1YRI4C, B00JHONN1S, B00D10CLVW, B00CEUX0D8, B00HSOJB9M, B008F0SY6O, B00AFDOPDA, B008F0SU0Y, B003WFQ42S, B003AVKOP2, B004PEI45K, B00GOR07RE, B00GOR92SO, B00D23MC6W, B009V5EAB0, B00JHNSNSM, B00FNNFXAG, B003IEDM9Q, B008F0SMUC, B003AVNY6I, B002C3Y6WG, B003AVEU6G, B002GZGI4E, B003WFSLBA, B00CEUWY8K, B005C4Y4F6, B00HSC8O74, B00K18LKX2, B002GZPTRQ, B00CEUWUZC, B00JDR95V6, B00J92V2SO, B008UBQZKU, B004PEI45U, 0000032042, B00CRBFQAO, B00D2JTMS2, B004PYEE8G, B00D9C32NI, B00CEUWTFS, B008UD01L2, B00538F5OK, B00I3OX1II, B00IIK61WA, B00K18LJ6U, B00D2JSRFQ, 0000031909, B00FOLK51Y, B00CEV7ZWE, B00DJF9EUK, B00E1Q66BG, B00D0WDS9A, B00KOH3C3Q, B008X6CBS2, 0000032050, B00KZN6RVI, B00CEV8366, 0000031852),WrappedArray(B002BZX8Z6, B008F0SU0Y),null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,36575,null,null]\tGirls Ballet Tutu Neon Blue\nnull\t0001382489\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51mBWBUNljL.jpg\tnull\tnull\t[null,null,null,null,null,4751538,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHuck Scarry on Wheels\nnull\t0001001787\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/A1wv9mXUbcL.jpg\tnull\tnull\t[null,null,null,null,null,8822152,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tSailing\nnull\t0000174076\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/31%2BHg%2Bum5uL.jpg\t53.55\t[WrappedArray(0195335325, 1605477087, 0131757288, 1936523175, 159158700X, 1433805618, 1936523035, 1936523000, 141299098X, 080362235X, 0323067506, 1452226105, B008UBD6DO, 1936523124, 1936523027, 0890425558, 1593850204, 1884585884, 1567933769, 0131367390, 0137071302, 1452203407, 1412979595, 1118022025, 0558686435, 0205332927, 1412977983, 1585623857, 0078112656, 0205797253, 0495812412, 0132851024, 1412980445, 1111346550, 143380557X, 0387289860, 1412995302, 0618481109, 0323065848, 084235252X, B006W7OYCU, 1598849751, 1412954614, 0978718682, 0838910521, 0749459522, 1597526614, 0805816178, 0786433671, 1591586003, 1609186508, 1563249588, 155570672X),null,null,WrappedArray(1936523027, 0195335325, 0131757288, 1936523000)]\t[null,null,null,null,null,1190078,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tEvaluating Research in Academic Journals - A Practical Guide to Realistic Evaluation (5th Fifth Edition) - By Fred Pyrczak\nnull\t0001056107\tnull\tWrappedArray(WrappedArray(Books))\t\u0027A fabulous tale of the days when giants and dragons walked the kingdom\u0027 Sunday Times\thttp://ecx.images-amazon.com/images/I/51SC9FWR8RL.jpg\tnull\t[null,WrappedArray(0345518845, 0345357116, 0618009361, 0547154119, 0375823735, 0345466454, 0618056998, 0345466462, 0345336062, 0618126996),null,null]\t[null,null,null,null,null,12617688,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tFarmer Giles of Ham: And Other Stories\nnull\t0000000116\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51Rbg%2BCYkIL.jpg\tnull\t[null,WrappedArray(B005U9T66K, B00602O7PG, B00HFXLAZE, B00I89T5J2, B00B15OO3C, B008PPP7LO, B00ANI0LZI),null,null]\t[null,null,null,null,null,10790794,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tGeorgina Goodman Nelson Womens Size 8.5 Purple Regular Suede Platforms Shoes\nnull\t0000013714\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51M1p2doKXL.jpg\t8.09\t[WrappedArray(0005080789, 0005476798, 0005476216, 0005064341, 0005235073, 1883206561, 0006180116, 0005064295, 0871482215, B005HWXXCI, 0006458718, 9990810397, B001U5LQG6, 0894770004, 0002877813, 0005448506, 0005064309, 0834193345, B007ZJE5OG),null,WrappedArray(0005080789, 0005476798),WrappedArray(0006180116, 0005080789, B005HWXXCI, 0871482215)]\t[null,null,null,null,null,64393,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHeavenly Highway Hymns: Shaped-Note Hymnal\nnull\t0001380877\tnull\tWrappedArray(WrappedArray(Books))\tnull\tnull\tnull\tnull\t[null,null,null,null,null,7193309,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tBest Christmas Book Ever\nnull\t0001486632\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/61aFyTenvgL._SL500_.jpg\tnull\tnull\t[null,null,null,null,null,10766316,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tNew England Christmas\nnull\t0001484648\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51SNaJTxgvL.jpg\tnull\tnull\t[null,null,null,null,null,8563495,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tAll rapped up: An inside look at the rap/dance music scene : video study guide\nnull\t0001057146\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41SGKNED4QL.jpg\tnull\tnull\t[null,null,null,null,null,11957535,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMore Classic Connolly\nnull\t0001360183\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51J29R9ZAJL.jpg\tnull\tnull\t[null,null,null,null,null,6169540,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tFoxy Plays Hide and Seek\n{\u0027asin\u0027: \u00270000143588\u0027, \u0027categories\u0027: [[\u0027Movies \u0026 TV\u0027, \u0027Movies\u0027]], \u0027description\u0027: \u0027Barefoot Contessa Volume 2: On these three discs, \"Brunch N Lunch\", \"Picnic Parties\", and \"Summer Entertaining\", Ina shows you the ins and outs of casual yet elegant entertaining. Learn to prepare scrumptious dishes for all occasions, from birthday parties and picnics to beach parties and brunch gatherings at home. Recipes include Endive and Avocado Salad, Meringues with Cassis and Raspberries, Affogato, Caesar Salad with Pancetta, Pissaladiere, Lemon Cake, Marmalade Butter, Potato Basil Frittata, Cheddar Corn Chowder, and many more delicious offerings....210 minutes run time\u0027, \u0027title\u0027: \"Barefoot Contessa (with Ina Garten), Entertaining With Ina Vol. 2 (3 Pack): Brunch \u0027n\u0027 Lunch, Picnic Parties, Summer Entertaining\", \u0027price\u0027: 9.15, \u0027salesRank\u0027: {\u0027Movies \u0026 TV\u0027: 309405}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/51-qpMfgseL._SY300_.jpg\u0027, \u0027related\u0027: {\u0027also_viewed\u0027: [\u0027B002VJVD3Q\u0027, \u0027B006EIZPVG\u0027, \u0027B009UY3W8O\u0027, \u0027B009UYE8NM\u0027, \u0027B0062NAWJS\u0027, \u0027B002I5GNW4\u0027], \u0027buy_after_viewing\u0027: [\u0027B002VJVD3Q\u0027, \u0027B006EIZPVG\u0027, \u0027B0017DHKHA\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001517791\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tPraise Aerobics - A low-intensity/high-intesity low impact aerobic workout.\thttp://ecx.images-amazon.com/images/I/51T8Q9BG42L._SY300_.jpg\tnull\t[null,WrappedArray(B000EK77AM, B00I6MQJFE),null,null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,557724,null,null,null,null,null,null,null,null,null,null,null,null]\tPraise Aerobics [VHS]\nnull\t0001056530\tnull\tWrappedArray(WrappedArray(Books))\t\u0027Archer has a gift for plot that can only be described as genius\u0027 Daily Telegraph\thttp://ecx.images-amazon.com/images/I/51A4zWHY4QL.jpg\t11.18\t[null,null,null,WrappedArray(B0046LUGJO, 0312937717)]\t[null,null,null,null,null,12033348,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Grass Is Always Greener and Other Stories\nnull\t000077135X\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/A1JR4vuuVuL.jpg\tnull\tnull\t[null,null,null,null,null,4987146,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tBloomberg Businessweek Magazine (April 1, 2013 - April 7, 2013) Samsung\u0027s Secret\nnull\t0001006002\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51ZGRV5J5QL.jpg\tnull\tnull\t[null,null,null,null,null,14110702,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Rescue Party\nnull\t0001632108\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41I51DIkA5L.jpg\tnull\tnull\t[null,null,null,null,null,7799584,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tPixie Tales\nnull\t0001436163\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/21WbLCEAWwL.jpg\t41.81\t[null,null,null,WrappedArray(B004J0FKO8, 0805485554, 0784725292, 080548552X)]\t[null,null,null,null,null,2912110,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tPolished Communion Tray\n{\u0027asin\u0027: \u00270001006657\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027PreS?A humorous look at manners that\\\u0027s sure to appeal to preschoolers. The book opens as the Little Princess screams, \"I want my dinner!\" The picture of her red-faced temper tantrum, complete with silverware flying through the air, shows more than the text reveals. Next, she demands her potty (while squeezing toothpaste all over the cat). Finally, she remembers to say the magic word when she requests her teddy bear. Then, on a walk, she encounters a big, red-nosed blue Beastie. He pitches a fit about wanting his dinner, and the Little Princess tells him to say please. The smiling, yellow-crowned child reminds him to say thank you, too. The simple text combined with exuberant, colorful watercolors show Ross at his best. Any child who has been reminded to be courteous will appreciate the cheerful, comical illustrations.?Janet M. Bair, Trumbull Library, CTCopyright 1996 Reed Business Information, Inc.--This text refers to an out of print or unavailable edition of this title.\u0027, \u0027title\u0027: \u0027I Want My Dinner\u0027, \u0027price\u0027: 7.99, \u0027salesRank\u0027: {\u0027Books\u0027: 12568876}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/510AQCZVBGL.jpg\u0027, \u0027related\u0027: {\u0027buy_after_viewing\u0027: [\u00271933605162\u0027, \u0027B00D9U1JJE\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001527665\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tnull\thttp://ecx.images-amazon.com/images/I/51RTA77RZXL._SY300_.jpg\t9.98\tnull\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,734524,null,null,null,null,null,null,null,null,null,null,null,null]\tPeace Child [VHS]\nnull\t0001713086\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51FM1XYWQVL.jpg\t8.96\t[WrappedArray(1880507013, 0394816269, 1880507730, 1930332432, 0394815424, 1933032413, 1880507056, 1930332831, 1930332351, 1933032251, 1933032073),null,null,WrappedArray(1880507013, 1930332831, 1930332432, 0375823611)]\t[null,null,null,null,null,2113933,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tDr. Seuss ABC (Dr.Seuss Classic Collection) (Spanish Edition)\nnull\t0001361155\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51ZTHY6ENTL.jpg\tnull\t[WrappedArray(0007167016, 026167238X, 0261672347, B002OVED5Q, 1841355267, 0001982419, 0261672401, 0340893656, B001KP2YBW, 0007310498, 0603564860, 0001982389, 0340893648, 0261672479, 1841354589, B001KQS3VG, 0603560733, 1405248483, 0603560741, 0261672517, B002RAUTAM, 0375839429, 0603568122, 0361085966, 0361004575, 0747532257, 0747532265, 0007210698, 0261672533, 1575846837, B000G7P8PE, 0603032818, 0361004230, 0525467262, 0261672436, 030717025X, 0261672509, 0261672371, 0261672487, 1575846845, 0361071752, 026167255X, B001D475FU, 1841355291),null,null,WrappedArray(0603564860, B002OVED5Q, 0007167016, 0261672401)]\t[null,null,null,null,null,493419,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tNoddy Story Book Treasury\nnull\t000171287X\tnull\tWrappedArray(WrappedArray(Books))\tBy Stan Berenstain and Jan Berenstain, Illustrated by Stan Berenstain and Jan Berenstain\thttp://ecx.images-amazon.com/images/I/31hjUxZugDL.jpg\t3.13\t[WrappedArray(0679887059, 0394823249, 0394811429, 0394810767, 039482492X, 0394823958, 067988632X, 0679888349, 0394822862, 0394806697, 0394839102, 0394800176, 0394824903, 0307021106, 039480029X, 0394829131, B00000IZQX, 0394800168, 0394800303, 0394809378, 039480077X, 0394831292, B001BKYT8W, 0394827198),null,null,WrappedArray(0394823249, 0679887059, 039482492X, 0679890483)]\t[null,null,null,null,null,576826,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Berenstains\u0027 B Book (Bright \u0026amp; Early Books)\nnull\t0001472933\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/414KH1FPH9L.jpg\t26.55\t[WrappedArray(1475009771, 160386489X, 1614271046, 1603864830, 0766177467, 1596053003, 1483964140, B000GGTK2M, 1614270074, B000ALVEHM, 1169298273, 1475009976, 1162886951, 1162851813, 0310308909, 0736906452, 0884193608, 1169723578, B000872ZB2, 1616403756, 1456306561, 1602067678, B001V4MSAY, 031026510X, B005L4J8ZI, 1452868565, 1605200638, 143825346X, 1169752330, 1617952141, 0736937781, 1169770673, 1480102768, B0015NVDSO, 1468193856, B0073W7PSS, 0802434347, 0985604522, 0736901388, 1439297703, 1450583822, 1414353731, 1892112620, 0785250506, 0977102181, 0825420903, 1438266758, 1161540601, 0802490514),null,null,WrappedArray(160386489X, 1614271046, 1475009771, 1603864830)]\t[null,null,null,null,null,170629,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Book of Daniel\nnull\t000171130X\tnull\tWrappedArray(WrappedArray(Books))\tIllus. in full color. The adventures of Dr. Dolittle, the veterinarian who can talk to his patients, have been charming children the world over since 1920. This edition offers the only text especially adapted for beginning readers.\u0026#160;\u0026#160;--This text refers to an out of print or unavailable edition of this title.\thttp://ecx.images-amazon.com/images/I/51Q7XxU5OBL.jpg\t3.6\t[null,WrappedArray(0486293505, 0440400023, B000UPBYVO, 0394826876),null,WrappedArray(0486293505)]\t[null,null,null,null,null,9031863,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Travels of Doctor Dolittle (Beginner Series)\nnull\t0001837192\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/913JcEhB6wL.jpg\tnull\tnull\t[null,null,null,null,null,5555643,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tPieter Brueghel\u0027s The fair: Story\nnull\t0001361139\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/517N5AQ9E7L.jpg\tnull\t[null,WrappedArray(0694010421, B001D3W7NG, B001I0ILO8, B000KVD78Q, B004LW5YZ4, B001FAFO3W),null,WrappedArray(0694010421)]\t[null,null,null,null,null,2009724,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMy Anastasia Storybook (Anastasia)\n{\u0027asin\u0027: \u0027000100039X\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027In a distant, timeless place, a mysterious prophet walks the sands. At the moment of his departure, he wishes to offer the people gifts but possesses nothing. The people gather round, each asks a question of the heart, and the man\\\u0027s wisdom is his gift. It is Gibran\\\u0027s gift to us, as well, for Gibran\\\u0027s prophet is rivaled in his wisdom only by the founders of the world\\\u0027s great religions. On the most basic topics--marriage, children, friendship, work, pleasure--his words have a power and lucidity that in another era would surely have provoked the description \"divinely inspired.\" Free of dogma, free of power structures and metaphysics, consider these poetic, moving aphorisms a 20th-century supplement to all sacred traditions--as millions of other readers already have.--Brian Bruya--This text refers to theHardcoveredition.\u0027, \u0027title\u0027: \u0027The Prophet\u0027, \u0027price\u0027: 3.99, \u0027salesRank\u0027: {\u0027Books\u0027: 587803}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/81ZKLPivYUL.jpg\u0027, \u0027related\u0027: {\u0027also_bought\u0027: [\u00271851686274\u0027, \u00270785830618\u0027, \u0027014019553X\u0027, \u00271888375000\u0027, \u00271555916910\u0027, \u00270061122416\u0027, \u00270893891517\u0027, \u00270307267075\u0027, \u00270520272986\u0027, \u00270887272991\u0027, \u00270684870002\u0027, \u00270679757899\u0027, \u00270887306314\u0027, \u00270062509594\u0027, \u00271557421501\u0027, \u00271851689451\u0027, \u00271878424319\u0027, \u00270802130860\u0027, \u00270806509163\u0027, \u00271909735221\u0027, \u00270553208845\u0027, \u00270156329301\u0027, \u0027185168557X\u0027, \u0027B000U335L8\u0027, \u00271492207829\u0027, \u00270446675156\u0027, \u00271851685731\u0027, \u00270060527986\u0027, \u00271607432390\u0027, \u00270517543052\u0027, \u00270061687456\u0027, \u00271591799422\u0027, \u00270140195548\u0027, \u00271602062447\u0027, \u0027006251475X\u0027, \u00270743278909\u0027, \u0027B004S0ZKJO\u0027, \u00271570627428\u0027, \u00270553382233\u0027, \u00270375413316\u0027, \u00270060589280\u0027, \u00271878424424\u0027, \u00270805210318\u0027, \u00270307744574\u0027, \u00270345805054\u0027, \u00271603864784\u0027, \u00270806516526\u0027, \u00270553378384\u0027, \u00270446671002\u0027, \u00271481863223\u0027, \u00270486475891\u0027, \u00271577314808\u0027, \u00270486411346\u0027, \u00270060812451\u0027, \u00271878424114\u0027, \u00270806500220\u0027, \u00270671732463\u0027, \u00270385469012\u0027, \u00271585092479\u0027, \u00271162921099\u0027, \u00270061735183\u0027, \u00270452289963\u0027, \u00271573229377\u0027, \u00271585426253\u0027, \u00270486437876\u0027, \u00270143115413\u0027, \u00270061124265\u0027, \u00270060750502\u0027, \u00270393960129\u0027, \u00270061116718\u0027, \u0027014312417X\u0027, \u00270060916095\u0027, \u00270811218511\u0027, \u00270553279726\u0027, \u0027048626467X\u0027, \u0027B00F99USGI\u0027, \u00270060839872\u0027, \u00271878424610\u0027, \u00270446674575\u0027, \u00271605296481\u0027, \u00270671600419\u0027, \u0027039592720X\u0027, \u00270440351839\u0027, \u00271434440613\u0027, \u00270924486848\u0027, \u00271603864806\u0027, \u00271571746897\u0027, \u0027147675540X\u0027, \u00271897238452\u0027, \u00270486275507\u0027, \u00270060883286\u0027, \u00270802141323\u0027, \u00270553351397\u0027, \u00270307741206\u0027, \u00270679723005\u0027, \u00270062508342\u0027, \u00271401308589\u0027, \u00270156528207\u0027, \u00270060648791\u0027], \u0027bought_together\u0027: [\u00270061122416\u0027, \u00271878424319\u0027], \u0027buy_after_viewing\u0027: [\u00271851689451\u0027, \u0027B004S0ZKJO\u0027, \u00271909735221\u0027, \u00270785830618\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001062395\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/6103qtYQ5FL._SL500_.jpg\tnull\t[null,WrappedArray(0394837541),null,WrappedArray(0394844130, 0448452030)]\t[null,null,null,null,null,4554456,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tstar wars a pop-up book\nnull\t0001473905\tnull\tWrappedArray(WrappedArray(Books))\t--This text refers to thePaperbackedition.\thttp://ecx.images-amazon.com/images/I/61KPC59B81L.jpg\t2.99\t[WrappedArray(1614271046, 1169298273, B000872ZB2, 0766177467, 0001472933, 1562294512, 1414336241, B000GGTK2M, 1475009771, 1605200638, 160386489X, 1169723578, B000ALVEHM),null,null,WrappedArray(1603864830, 160386489X, 1614271046, 1475009771)]\t[null,null,null,null,null,1536630,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tRightly Dividing the Word\nnull\t000047715X\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41P1Pouu-9L.jpg\t41.22\t[WrappedArray(1938245008, 1451121180, 0781778239, 160978880X, 0199985871, 1451193785, 0199948941, B00AG3QDWU, 1451109849, 1455706922, 098529650X, 0071771956, 1934465437, 007174889X, 0071603891, 0071806334, 1932703640, 1616690135, 1605477311, 1930808747, 1607148439, 1934465542, 007174519X, 193824513X, 0763764051, 0912912065, B008CJ6A0K, B000F4UOXY, B002DW12NC, 193080878X, 089203579X, 0071496130, 1609133609, 0071346821, 0323079326, 0323074448, 007179302X, 0071716726, 1934465275, 1934465259, 0387356649, 0964519143, 143771367X, B00062N428, 0071712976, B001NMT6N6, B0009NXNQ6),null,null,WrappedArray(1938245008, 1934465542, 193824513X, 1451193785)]\t[null,null,null,null,null,274390,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMksap 16 Audio Companion: Medical Knowledge Self-Assessment Program\nnull\t0001386301\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/81ayhE3K30L.jpg\tnull\t[WrappedArray(0448092905, 0448400448, 044840043X, 0448408333, 0001923471),null,null,WrappedArray(0448092905, 0448092891, 0448400448, 044840043X)]\t[null,null,null,null,null,2451796,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tThe Things in Mouldy Manor (Spooky Pop Ups)\nnull\t0001536338\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51lITheXdiL.jpg\t12.6\tnull\t[null,null,null,null,null,5418087,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tCall Upon the Lord\nnull\t0001720104\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51TZQYZDJ9L.jpg\tnull\tnull\t[null,null,null,null,null,7924031,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMR. PLOD AND THE STOLEN BICYCLE (TOY TOWN STORIES)\n{\u0027asin\u0027: \u00270001714546\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027Illustrated in full color. \"Wings! Wings! Wings! They are wonderful flying things...\" Come join Marc Brown for a wacky, whimsical whirl through the world of winged things. Kids will learn about creatures and things that have wings and - equally as important - those that don\\\u0027t. \"Wings are on eagles. Never on beagles. Always on ducks. Never on trucks. Wings on chairs. Never on bears...\" Brown\\\u0027s dazzling, bold art perfectly complements his easy-to-read rhyming text giving this spiffy reissue a truly nifty set ofsaleswings!\u0026#160;\u0026#160;--This text refers to an out of print or unavailable edition of this title.\u0027, \u0027title\u0027: \u0027Wings on Things (Bright and Early Books)\u0027, \u0027price\u0027: 8.09, \u0027salesRank\u0027: {\u0027Books\u0027: 2806916}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/51RA5485J4L.jpg\u0027, \u0027related\u0027: {\u0027also_viewed\u0027: [\u00270679882820\u0027, \u00270394829131\u0027, \u00270394823958\u0027, \u00270394831284\u0027, \u00270394826876\u0027, \u00270394827198\u0027, \u00270375824928\u0027, \u00270679881298\u0027, \u00270679890483\u0027, \u00270394871804\u0027, \u00270375824936\u0027, \u00270394800389\u0027, \u00270394839102\u0027, \u0027067988632X\u0027, \u00270394800907\u0027, \u00270394800281\u0027, \u00270394822862\u0027, \u00270394829204\u0027, \u00270394824903\u0027, \u00270394800915\u0027, \u00270803731957\u0027, \u00270679887059\u0027, \u00270375800999\u0027, \u00270394800877\u0027, \u00270394800362\u0027, \u00270679888101\u0027, \u00270394800788\u0027, \u00270449810828\u0027, \u00270679882839\u0027, \u0027039480001X\u0027, \u00270679886303\u0027, \u0027039482492X\u0027, \u0027030797586X\u0027, \u00270679894268\u0027, \u00270394800230\u0027, \u00270679853006\u0027, \u00270375812407\u0027, \u00270394800176\u0027, \u00270060245867\u0027, \u00270394826922\u0027, \u00270375851569\u0027, \u00270679805273\u0027], \u0027buy_after_viewing\u0027: [\u00270394824903\u0027, \u00270679882820\u0027, \u00270375828826\u0027, \u0027067988632X\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001720252\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/51FKWNPBRPL.jpg\t4.49\t[null,WrappedArray(0679882812, 0375833870, 0679882839, 0394800133),null,WrappedArray(0679882812, 0671449044, 0394800303, 0679882820)]\t[null,null,null,null,null,3637878,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tDr.Seuss\u0027s ABC (Bright \u0026amp; Early Board Books)\nnull\t0001371037\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/41KAlz21cRL.jpg\tnull\tnull\t[null,null,null,null,null,3273740,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tHilda Boswell\u0027s Treasury of Poetry\nnull\t0001516035\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tWorship with Don Moen [VHS]\thttp://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._CB192198896_.gif\t19.99\t[WrappedArray(B00000FAC8, B00004YS5C),null,null,null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,435882,null,null,null,null,null,null,null,null,null,null,null,null]\tWorship with Don Moen [VHS]\nnull\t0001621076\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/91LasvmncIL.jpg\tnull\tnull\tnull\tOur Friend Jennings\n{\u0027asin\u0027: \u00270001839225\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027\"!the most researched-crammed fantasy ever set before small children!\" Sunday Times Magazine\u0027, \u0027title\u0027: \u0027Spring Story (Brambly Hedge)\u0027, \u0027price\u0027: 7.99, \u0027salesRank\u0027: {\u0027Books\u0027: 738272}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/61qIWAs9HxL.jpg\u0027, \u0027related\u0027: {\u0027also_bought\u0027: [\u00270399207457\u0027, \u00270689830599\u0027, \u00270689830572\u0027, \u00270001840851\u0027, \u00270689831714\u0027, \u00270689830912\u0027, \u00270001937391\u0027, \u00271499328753\u0027, \u00270312085125\u0027, \u00270001983679\u0027, \u00270964484609\u0027, \u00270689811624\u0027, \u00270007371667\u0027, \u00270006640664\u0027, \u00270006640672\u0027, \u00270811855201\u0027, \u00270310715059\u0027, \u00271932012974\u0027, \u00270738216852\u0027, \u00270140505393\u0027], \u0027buy_after_viewing\u0027: [\u00270007371667\u0027, \u00270001840851\u0027, \u00270689830599\u0027, \u00270007581602\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001501348\tnull\tWrappedArray(WrappedArray(CDs \u0026 Vinyl, Christian, Pop \u0026 Contemporary), WrappedArray(CDs \u0026 Vinyl, Christian, Praise \u0026 Worship), WrappedArray(CDs \u0026 Vinyl, Gospel))\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\thttp://ecx.images-amazon.com/images/I/412JH6CMZ5L._SY300_.jpg\tnull\t[WrappedArray(6303646611, B000002C45, 6303908845, 6304326335, 8472000516, 8472000389),WrappedArray(B000002C45, 6303908845),null,null]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,359265,null,null,null,null,null,null,null,null,null,null,null,null]\tLift Him Up With Ron Kenoly [VHS]\nnull\t0001384163\tnull\tWrappedArray(WrappedArray(Books))\t\u0026#8220;Soft pastel illustrations lend a friendly, calm feeling to the adventures.\u0026#8221; --Publisher Weekly\thttp://ecx.images-amazon.com/images/I/51NRP9JWN3L.jpg\t8.99\t[null,WrappedArray(000717134X, 0007171285, 0007171331, 0001360000, 0007347049, 0007171366, 076364563X, 0007171315, 0001374761, 0007149697, 0007117523, 0399226907, 0006617999),null,WrappedArray(000717134X, 0007171285, 0007171331, 0007167059)]\t[null,null,null,null,null,3057822,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tMog and Me (Mog the Cat Board Books)\nnull\t0001944959\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/61qtGCCUX%2BL.jpg\tnull\tnull\t[null,null,null,null,null,4727390,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tWorms Wiggle\n{\u0027asin\u0027: \u00270001837397\u0027, \u0027categories\u0027: [[\u0027Books\u0027]], \u0027description\u0027: \u0027\"!the most research-crammed fantasy ever set before small children!\" Sunday Times Magazine\u0027, \u0027title\u0027: \u0027Autumn Story Brambly Hedge\u0027, \u0027price\u0027: 7.99, \u0027salesRank\u0027: {\u0027Books\u0027: 1133514}, \u0027imUrl\u0027: \u0027http://ecx.images-amazon.com/images/I/61SVJoaIhlL.jpg\u0027, \u0027related\u0027: {\u0027also_bought\u0027: [\u00270001839225\u0027, \u00270689830572\u0027, \u00270689830599\u0027, \u00270001840851\u0027, \u00270689831714\u0027, \u00270001937391\u0027, \u00270689830912\u0027, \u00270007371667\u0027, \u00270001983679\u0027, \u00270312085125\u0027, \u00270006640664\u0027, \u00270375829288\u0027, \u00270745917437\u0027, \u00270006640672\u0027, \u00273825170101\u0027, \u00270006645887\u0027], \u0027buy_after_viewing\u0027: [\u00270007581602\u0027, \u00270007371667\u0027, \u00270001840851\u0027, \u00270001839225\u0027]}}\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\tnull\nnull\t0001944541\tnull\tWrappedArray(WrappedArray(Books))\tnull\thttp://ecx.images-amazon.com/images/I/61Eytup9aFL.jpg\tnull\tnull\t[null,null,null,null,null,9607278,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]\tSuperTed and the Goldmine\nnull\t0000791156\tnull\tWrappedArray(WrappedArray(Movies \u0026 TV, Movies))\tYou can flow effortlessly and powerfully in the gifts of the Holy Spirit today! Join Joseph Prince as he expounds on the nine gifts of the Holy Spirit and be encouraged to know that every believer-including you-can operate in these grace gifts. Understand how the Spirit leads you in using these gifts and why ministering in love is so important. Discover the secret to stepping out in faith and love, and moving super-naturally in the Spirit. Find out also what your gifts are and how to flow in them. Whether it\u0027s in the area of your family, ministry or work, the messages in this powerful DVD resource will stir your faith and help you to operate and minister in the power of the Holy Spirit! 6-DVD Set(7 Sermons-approx. total duration: 5hr 47min)\thttp://ecx.images-amazon.com/images/I/41VOn2LBVJL.jpg\t13.62\t[WrappedArray(1606830090, 1616385898, 1616384492, 1606833553, 1621362507, 1621360105, 145555314X, 1455557137, 0020110006, 9810535384),null,null,WrappedArray(0020110006, 1616384492)]\t[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,350631,null,null,null,null,null,null,null,null,null,null,null,null]\tSpirit Led-Moving By Grace In The Holy Spirit\u0027s Gifts\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmetadata_df\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [_corrupt_record: string, asin: string ... 8 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569553333071_1921053375",
+      "id": "paragraph_1569553333071_1921053375",
+      "dateCreated": "2019-09-27 03:02:13.071",
+      "dateStarted": "2019-09-29 00:53:12.349",
+      "dateFinished": "2019-09-29 00:54:56.706",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Create the product review data frame\nThis dataframe contains all the product reviews including the id and review text, we will match each product metadata with each review in order to build the semantic space with embeddings later.",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 00:58:31.023",
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCreate the product review data frame\u003c/h2\u003e\n\u003cp\u003eThis dataframe contains all the product reviews including the id and review text, we will match each product metadata with each review in order to build the semantic space with embeddings later.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569718638290_-438751323",
+      "id": "paragraph_1569718638290_-438751323",
+      "dateCreated": "2019-09-29 00:57:18.290",
+      "dateStarted": "2019-09-29 00:58:31.025",
+      "dateFinished": "2019-09-29 00:58:31.056",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val reviews_df \u003d spark.read.json(reviews_path)\nz.show(reviews_df.limit(100))\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:08:26.793",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionSupport": true,
+          "completionKey": "TAB"
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "asin": "string",
+                      "helpful": "string",
+                      "overall": "string",
+                      "reviewText": "string",
+                      "reviewTime": "string",
+                      "reviewerID": "string",
+                      "reviewerName": "string",
+                      "summary": "string",
+                      "unixReviewTime": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "asin\thelpful\toverall\treviewText\treviewTime\treviewerID\treviewerName\tsummary\tunixReviewTime\nB003UYU16G\tWrappedArray(0, 0)\t5.0\tIt is and does exactly what the description said it would be and would do. Couldn\u0027t be happier with it.\t11 21, 2012\tA00000262KYZUE4J55XGL\tSteven N Elich\tDoes what it\u0027s supposed to do\t1353456000\nB005FYPK9C\tWrappedArray(0, 0)\t5.0\tI was sketchy at first about these but once you wear them for a couple hours they break in they fit good on my board an have little wear from skating in them. They are a little heavy but won\u0027t get eaten up as bad by your grip tape like poser dc shoes.\t01 8, 2013\tA000008615DZQRRI946FO\tmj waldon\tgreat buy\t1357603200\nB000VEBG9Y\tWrappedArray(0, 0)\t3.0\tVery mobile product. Efficient. Easy to use; however product needs a varmint guard. Critters are able to gorge themselves without a guard.\t03 24, 2014\tA00000922W28P2OCH6JSE\tGabriel Merrill\tGreat product but needs a varmint guard.\t1395619200\nB001EJMS6K\tWrappedArray(0, 0)\t4.0\tEasy to use a mobile. If you\u0027re taller than 4ft, be ready to tuck your legs behind you as you hang and pull.\t03 24, 2014\tA00000922W28P2OCH6JSE\tGabriel Merrill\tGreat inexpensive product. Mounts easily and transfers to the ground for multiple push up positions.\t1395619200\nB003XJCNVO\tWrappedArray(0, 0)\t4.0\tLove this feeder. Heavy duty \u0026 capacity. Best feature is the large varmint guard. Definitely use a small lock or securing device on the battery housing latch. I gave 4 stars because several bolts were missing. Check contents b4 beginning.\t03 24, 2014\tA00000922W28P2OCH6JSE\tGabriel Merrill\tGreat feeder. Would recommend for use for those that can\u0027t check a feeder regularly. Solid varmint guard.\t1395619200\nB00G3KN9LI\tWrappedArray(0, 0)\t4.0\tSolid, stable mount. Holds iPhone with phone protector well. I have not however used the dash mount part of this product (only windshield).\t03 29, 2014\tA00000922W28P2OCH6JSE\tGabriel Merrill\tSolid mount.\t1396051200\nB000SAUVC4\tWrappedArray(0, 0)\t5.0\tI bought this pepper because I wanted a lot of cayenne powder I mean a lot. I drink shots of this powder daily and I do like it but I\u0027m not sure if it\u0027s just me but it does not seem to strong I sweat for a minute but I feel like it could be stronger I even touched my eyes to see if it would hurt still not feeling much pain. Im one in 7 billion so do forget my review since I\u0027m more hardcore.\t08 12, 2013\tA000013090ZI3HIT9N5V\tElvis florian\tCayenne powder strength\t1376265600\nB00125OS3C\tWrappedArray(0, 0)\t5.0\tBeautiful photos/film with wonderful music.  Giriodi lets you know where you are with on screen notes.  It helps to keep your heart in Colorado when you can\u0027t be there.\t08 31, 2013\tA00001362Q1PGIX2FYSSH\tPamela Bellamy\tA very good film in several areas of Colorado.\t1377907200\nB002IGHX40\tWrappedArray(1, 1)\t2.0\tMy idea of Colorado is \u0026#34;Mountains\u0026#34;.  Colorado Landscapes seemed to focus on the flatlands and foothills.  It gave you no idea where you were  - it could have used a narrator or notes on-screen.\t08 31, 2013\tA00001362Q1PGIX2FYSSH\tPamela Bellamy\tDoesn\u0027t show the beauty of Colorado.\t1377907200\nB004WPCQKG\tWrappedArray(6, 7)\t1.0\tNo matter what we did the bills just kept jamming in the machine. The bill counts were not consistent. We returned the product because it did not work correctly.\t11 19, 2012\tA00001483M88NBD66LEP0\tJARPD\tDisappointed\t1353283200\nB000GAYQTU\tWrappedArray(0, 0)\t1.0\ti do not suggest buying this product i thought it seemed nice and everything but it did not work when i removed it from the packaging. for this reason i do not trust the shipping methods that the seller uses.\t04 21, 2014\tA0000188NWOSI5X2PMSN\tpaula george\tI like the look but mine was broken when I opened it.\t1398038400\nB002HHZVNA\tWrappedArray(0, 1)\t1.0\tUseless  - ALL you need is a Good Diet , and 1 hour cardio everyday , These kind of thigs are useless\t11 23, 2013\tA0000196KBA0ICH151EG\tKhalid\tUseless  - ALL you need is a Good Diet\t1385164800\n0957544901\tWrappedArray(0, 0)\t4.0\tThis book is really great for those that have an artistic soul and looking for better life or business. I highly recommend it.\t04 19, 2014\tA000023026XVLM97BM7KY\tT.Dobrowolski\tUse creativity to design your life\t1397865600\nB002Y2U8MC\tWrappedArray(1, 1)\t5.0\tIt is not a sticker, it is a Chritsmas story  by itself, full of details, and cover a big  space\t02 18, 2013\tA00003262KNLZOSMMMFVV\tHarue Rojas\tVery complete\t1361145600\nB004P598FY\tWrappedArray(1, 1)\t5.0\tLOve the size and the details, and its very colorful. It looks really nice  and  catch your attention  when you pass by\t02 18, 2013\tA00003262KNLZOSMMMFVV\tHarue Rojas\tGreat details\t1361145600\nB005MU3UE6\tWrappedArray(1, 1)\t5.0\tIts very colorful and the image once  you  put all de pieces in order is pretty  cute. The window looks terrific\t02 18, 2013\tA00003262KNLZOSMMMFVV\tHarue Rojas\tIts a very beautiful image!\t1361145600\n0786903945\tWrappedArray(0, 0)\t5.0\tThe condition of the book was exactly as described. There were minimal if any damages, and certainly nothing that would hinder the use of the book.\t06 26, 2014\tA00003322NZ9C82Y46DFN\tKyle Downey\tGreat Condition\t1403740800\nB00474A3DY\tWrappedArray(0, 0)\t4.0\tOnly negative. Thing I can say is when my fish swim near the sides of the tank at the top they aren\u0027t illuminated by the light from the center. The blue night light is beautiful. The led light gives a healthy glow during the day, and overall the Hood looks and works great\t11 17, 2012\tA00003323X6I53YWRGN0\tbig show\tgreat hood\t1353110400\nB00D8W4YO0\tWrappedArray(2, 3)\t5.0\tBought this for my daughter and she loves it!  It is also easy to attach the wheels; it\u0027s ready to go in under 5 minutes.\t10 17, 2013\tA00003783ISYSII6MAN88\tJoseph Consuegra\tBanana Board\t1381968000\n1492111619\tWrappedArray(0, 0)\t5.0\tThis book is a great eye opener for small to mid- size business owners. The marketing and SEO tips are very up to date and accurate. This information is vital to running a successful business. I learned more about marketing and how to make your page simulated for the customers you want to reel in. Also the process of \"Big Fish Results\" helps me understand how I can \"reel in the catch\" instead of just trying an idea and hoping it will work. With this information I\u0027ve managed to set up better marketing tools that actually work!!!Great work! What a book!\t09 26, 2013\tA0000440NYTE2D2YB089\tKristen S.\tWow\t1380153600\nB00EG0C20G\tWrappedArray(1, 1)\t5.0\tKeeps my phone safe and sound when I drop it! I\u0027m a clumsy person when it comes to phones! Hehe\t03 24, 2014\tA0000488123JA1KQJTEM8\tTrinity Cross\tGREAT\t1395619200\n0062023144\tWrappedArray(0, 0)\t5.0\tThis book caught my eye, and when I read the sample, I was hooked. The final hook was one other reviewer explaining the unemotional aspect of the book\u0027s dramatic swings, because of the method of writing employed. (I have often been accused of being unemotional, or anti-sentimental... which is not true. People show these depths of feeling in many different ways--not all of us are weepers, people...) And The Call delivered. The emotion is there, and it\u0027s pretty raw at times, but it\u0027s emoted in unexpected ways. The characters cracked me up, felt very real, and the story was believable and at times serious, then light, then laugh-out-loud funny. I really enjoyed the writing style, and although it did take a few pages of adjustment, I was very glad I stuck with it. In the same way that Cormac MacCarthy\u0027s writing is at first difficult to take in, this was a little bit tough to \u0026#34;get\u0026#34; until I\u0027d gotten through several pages. I have already recommended this to several people. Made me want to try writing again. : )\t03 3, 2014\tA00005181SC9PSCD58LCG\tMelissa Loizes\tThe Call - well worth the adjustment period\t1393804800\n076278038X\tWrappedArray(0, 0)\t4.0\tSue (Zoo, as her buddy calls her) tells a sometimes upsetting, always heartening story of how she comes to know an elderly man who survived more than a life\u0027s worth of hurts, yet maintained his spirit and spark throughout. The story is written in a somewhat disjointed manner, jumping from era/scene to a completely different era/scene, but that matches the story b/c it mirrors how she came to know more about this friend. The information he shared was piecemeal, out of time, snippets that she had to piece together bit by bit. Worth the read for sure.\t01 13, 2014\tA00005181SC9PSCD58LCG\tMelissa Loizes\tvery enlightening read\t1389571200\n0800720024\tWrappedArray(0, 0)\t5.0\tI was already of this author\u0027s opinion, and everything he said just cemented my position. He presents his history, how he came to be in the position he\u0027s in, how his life experiences (especially outside of America) have molded his expectations and understanding of value and wealth, and he makes a great case with real examples of how simplification is the best way. You\u0027ll be changed permanently by how many of your problems are \u0026#34;first-world\u0026#34; type, nothing more. Well worth the read--our culture could benefit greatly by more exposure to, and influence by, this book.\t05 14, 2014\tA00005181SC9PSCD58LCG\tMelissa Loizes\tevery \"modern\" American should read it\t1400025600\n630575067X\tWrappedArray(1, 1)\t4.0\taction packed, with memorable characters and lighter moments. my 8-year-old loves it, and I can watch it too. the racing is exciting and I personally find Anakin slightly less annoying when he\u0027s a small child. so, this is my fave.\t01 13, 2014\tA00005181SC9PSCD58LCG\tMelissa Loizes\tentertainment suitable for younger viewers as well\t1389571200\nB001GCUO7A\tWrappedArray(0, 0)\t5.0\tmost boys would eat this up. it has all the requisite characteristics of a movie for young boys. it was funny, it had some good fights, some out-smarting some bad guys, and explosions to boot. I didn\u0027t watch the whole thing with him, but picked up on some good lessons about being yourself and being true to friends. not a morality lesson, but hey--better than lots of garbage out there. he really enjoyed it and went back to see some parts again/show me. he would have watched it again immediately if I hadn\u0027t kiboshed the idea...-mom\t12 14, 2013\tA00005181SC9PSCD58LCG\tMelissa Loizes\tmy 8-year-old son loved it\t1386979200\nB00A9LVA0Y\tWrappedArray(0, 0)\t5.0\tStunning look and I need a case that Showcase the complete look of my Iphone beautiful.This case suites me the best in looks.\t01 1, 2014\tA00005303588WHRQZ6N4L\tDeepAk\tThose who prefer exact IPhone looks , Just go and grab it\t1388534400\nB006K6WPCO\tWrappedArray(0, 0)\t5.0\tGood material:\t06 30, 2014\tA00005783VHRG0BPBWR0X\tWandy\tFive Stars\t1404086400\nB00EWASFQA\tWrappedArray(0, 0)\t5.0\tLove it\t06 30, 2014\tA00005783VHRG0BPBWR0X\tWandy\tFive Stars\t1404086400\nB00K7SH0OE\tWrappedArray(0, 0)\t5.0\tLove it love it \u0026#9829;\u0026#9829;\u0026#9829;\t06 30, 2014\tA00005783VHRG0BPBWR0X\tWandy\tFive Stars\t1404086400\n1606841769\tWrappedArray(0, 1)\t5.0\tShadows was an amazing book that caught my imagination instantly! It had love, brutality, adventure, and suspense that captivates your mind throughout the whole book.\t05 5, 2013\tA000059624SSMC21VECIQ\tHdv2513\tShadows by ilsa j bick\t1367712000\nB00E90VMKY\tWrappedArray(0, 0)\t5.0\tExactly as advertised, good quality, fast delivery. It looks so cute on my great grandson. His family was so proud to have everyone sporting the Cowboys outer ware.\t12 18, 2013\tA0000618JRL8NVY0J0AN\tCarol\tJunior Dallas fan\t1387324800\nB0012AL4DE\tWrappedArray(6, 6)\t5.0\tLove this grill and the fact that the plates are removable to put in the dishwasher.  Bun warmer doesn\u0027t grill the buns but just warms them up but I didn\u0027t buy the unit for that anyways.  It\u0027s also twice as big as my last George Foreman grill so I am a happy grilled!!!\t04 5, 2013\tA000063614T1OE0BUSKUT\tPatricia M. Lane\tAwesome\t1365120000\nB003ESE4TI\tWrappedArray(0, 0)\t5.0\tI buy these for my om every year at Christmas and she loves them.  She wouldn\u0027t own any other brand.  I was skeptical when she first asked for them but they are high quality and durable.  She wears them every day.  Also, Amazon prices are better than anywhere on the web - haven\u0027t found them cheaper.\t04 5, 2013\tA000063614T1OE0BUSKUT\tPatricia M. Lane\tGreat value\t1365120000\nB00419ZT3E\tWrappedArray(0, 0)\t5.0\tPut this in my player once and ran it and things are playing great again.  Great product.  Thanks Clean Dr.!!!\t04 5, 2013\tA000063614T1OE0BUSKUT\tPatricia M. Lane\tVery happy\t1365120000\nB00432ZSHG\tWrappedArray(2, 2)\t5.0\tThought some of my discs were lost forever due to skipping and freezing but after using this they are watchable again.  Thanks skip dr!!\t04 5, 2013\tA000063614T1OE0BUSKUT\tPatricia M. Lane\tVery happy\t1365120000\n0345803493\tWrappedArray(0, 2)\t5.0\tI don\u0027t ever read but this book changed me I love love this book I hated when I got to the last book I didn\u0027t want it to be over\t11 17, 2012\tA00006923FEAFJLE7GHEL\tCynthia\tLOVE!!\t1353110400\n0345803507\tWrappedArray(0, 1)\t5.0\tI wish she would write 50 more books I love love these books I was so sad when I got to the last page\t11 17, 2012\tA00006923FEAFJLE7GHEL\tCynthia\tLOVE!!!!\t1353110400\n1451661215\tWrappedArray(0, 1)\t5.0\tThis book wasn\u0027t as good as 50 Shades oh Grey but it was a very good book I would tell someone to get this book\t11 17, 2012\tA00006923FEAFJLE7GHEL\tCynthia\tOk!!\t1353110400\nB00A3LVMMQ\tWrappedArray(0, 0)\t5.0\tI wanted a razor and brush stand that would give off the classy 1920s/30s vibe that seemed to match with using a safety razor. This stand does the job. It fits my razor and brush perfectly, and looks damn good while it does it.\t03 13, 2014\tA0000726154QG4JYYPS1W\tEdward Delman\tSleek, professional, and classy\t1394668800\n0977645908\tWrappedArray(0, 0)\t5.0\tThe author has been there and done that when it comes to what he suggests. He was an Air Force SERE ( Survival Evasion Resistance Escape ) instructor for 30 years. His approach to the subject of survival is practical in that he does NOT approach the topic with primitive tool making or cutting trees down to make a shelter. His approach is quick, practical and effective. I highly recommend this book!\t06 27, 2014\tA00007762BKXYRMOCC0A\tHello\tAmazing book thus far\t1403827200\n0060294671\tWrappedArray(0, 0)\t5.0\tThis book is for girls that love girly books and you will absolutely fall in love when you read with this book\t11 27, 2012\tA00008222HA6HLYZNCWXK\tKatie Harris\tPrincess in Love\t1353974400\nB008FFE1R0\tWrappedArray(1, 1)\t5.0\tThe reason I gave this book a 5/5 is because I thought this book was just like the movie: The Ten Commandments. I would recommend this book to anyone who wants to read and get a better understanding about Moses\u0027 life.\t11 29, 2012\tA00008222HA6HLYZNCWXK\tKatie Harris\tMoses\t1354147200\nB00INO8F98\tWrappedArray(0, 0)\t3.0\tCute\t07 22, 2014\tA00008281Z7EL3AO1UQD7\tkylie moskos\tThree Stars\t1405987200\n0130676446\tWrappedArray(0, 0)\t5.0\tIt is very good. The book looks very new and some of key point were highlighted. It is very useful for me to preview and review. Thank you very much.\t02 18, 2014\tA00008821J0F472NDY6A2\tElaine\tGood\t1392681600\nB007T8XPC6\tWrappedArray(1, 1)\t5.0\tThis is a gift for my friend! Her skin is very dry, so I think this is the best for her. I think she will be happy.\t05 9, 2013\tA00008821J0F472NDY6A2\tElaine\tGood\t1368057600\nB006WSZNQK\tWrappedArray(2, 2)\t5.0\tI bought this battery to replace the original battery for my Samsung SGH-I727 Galaxy II Skyrocket, and it works perfectly. I had to remove the sticker for the battery cover to close correctly, but I knew what I was getting myself into before I even bought it. The charge time takes a little longer, as expected, but having the extra battery life is well worth it.\t04 3, 2013\tA00009182QVLSWIGHLS1B\tRonald J Honey\tWorks perfectly in my Galaxy S II Skyrocket!\t1364947200\nB009SXR7WE\tWrappedArray(0, 0)\t5.0\tI bought this for a friend for her Samsung Galaxy Tab 2, and it fits like a glove. Well worth the money paid for it!\t04 3, 2013\tA00009182QVLSWIGHLS1B\tRonald J Honey\tBought this for a friend, and she loves it!\t1364947200\nB00006IC2T\tWrappedArray(0, 0)\t1.0\tI have purchased this product several times and have gotten the same poor results, the adhesive sucks.  I have used it to hang many small objects, such as a tv remote, a small alarm clock or even to hide wires unde a cabinet.  The adhesive just does not stick well to anything, except itself.  I have no complaints about the hook and loop side, but it is certainly not anything that should be called \u0026#34; industrial strength\u0026#34; if the adhesive cant even hold up a tv remote,  3M please fix this problem, I know you have better permanent adhesive that can withstand a warm surface, but this product adhesive is a big FAIL!\t04 20, 2014\tA00009323JAEPXA0ZV6CG\tDavid\u0027s Phoenix Account\tLousy adhesive\t1397952000\nB00ARF428E\tWrappedArray(2, 2)\t4.0\tIt was a gift for my son but he told me he liked it very much and use it for the whole body.  That is all I know, sorry!\t10 18, 2013\tA000096617D1KX8J1SNO6\tMaritza Molina\tLike it.\t1382054400\nB004GWQBWY\tWrappedArray(0, 0)\t5.0\tLoftek is an awesome product! I recently bought a IP camera loftek CXS2200 and was impressed at its practical function and Tech support. How easy it was to set up. Just follow the directions provided or go to their website. If ever you are having some issues, you can always contact them and you are guaranteed a response from them.My wife and I were so impressed that we bought another camera,we are setting it up so we can monitor our child at home even when we are away. The camera come with a factory ddns .It is very convininet for user to view the camera on our phone. Moreover it\u0027s hard to ignore it\u0027s alarm trigger and video recording trigger. I can receive a alarm email when someon break into my home.Big two thumps up! Cost and Quality is great!\t10 26, 2012\tA00009661LC9LQPGKJ24G\tCherry\tAwsome Camera!\t1351209600\n0871714779\tWrappedArray(0, 0)\t1.0\tBecause I have not gotten the book yet, I may change my mind when I get it. I will let you know.\t05 22, 2013\tA000096625CHSNKYTYGZN\tMelody L Fearn\tI Have Not Got It Yet.\t1369180800\nB009QUZBXQ\tWrappedArray(0, 0)\t4.0\tI liked mine so much, I ordered one for a friend and he likes it too, now I am thinking about ordering another for my sister.\t05 22, 2013\tA000096625CHSNKYTYGZN\tMelody L Fearn\tGreat for making Margaritas.\t1369180800\nB00AG715PG\tWrappedArray(0, 0)\t5.0\tIt was just what I needed, I had lost mine at work, I was use to using it, it was verry handy and I was happy to replace it.\t05 22, 2013\tA000096625CHSNKYTYGZN\tMelody L Fearn\tA handy tool.\t1369180800\n1479294608\tWrappedArray(1, 1)\t5.0\tThis was a great book, easy read, laugh out loud funny. Cant wait to read Sugar Ticket. Highly recommend this book. Looking forward to reading all the other books by Susan Ricci.\t03 23, 2014\tA00009921ASVLX5LO5L46\tmaria keever\tgreat book!\t1395532800\nB004RMK57U\tWrappedArray(0, 0)\t5.0\tI show this raking because i was really confortable with the productand off couser i will recomendared to another person\t11 20, 2012\tA00010181745VTMHSO9TO\tLuis Villalta\tReview PSN3\t1353369600\nB00006IDP4\tWrappedArray(0, 0)\t5.0\tThis Hammermill 106125 - Color Copy Paper, 100 Brightness, 28lb, 12 x 18, Photo...paper works great. does not curl like other brands.\t04 1, 2014\tA0001028APITAYQ44NF3\tBrenda Lashua\tfive star review of hammermill 106125 color copy paper, 100 brightness, 28lb, 12 x 18, photo\t1396310400\nB004VO8NFK\tWrappedArray(0, 0)\t5.0\tI love this app. I am glad I downloaded it. its very helpful and informative.  its also a good way to keep track.\t06 18, 2013\tA00010542J5ZR1XVV16PA\tl.rabbers\treview\t1371513600\nB009O7UEGU\tWrappedArray(1, 1)\t5.0\tthe hooks were not chipped shipping was really fast nothing was broken all hooks were in package as described with all the sizes A+++++ thank you\t06 7, 2013\tA00010623ABUJLF77C27O\tJak H.\tAWESOME\t1370563200\nB002SSM5AU\tWrappedArray(0, 0)\t5.0\tfor being on a budget, this came out as a great buy, and it matches my coby mp3 player\u0027s color scheme so thats another plus for me. i have the earphones for when im taking a walk and the headphones are comfortable and just such a nice sound while using that completely overpowers whatever junk my roommate listens to. money well spent in my opinion\t04 8, 2013\tA00010809P09NUU6ZP6H\tLuis Gamez\tbest headphones ive gotten so far\t1365379200\nB00I7QWA5C\tWrappedArray(0, 0)\t5.0\tMy son loves these gloves! They\u0027re the only ones he hasn\u0027t lost this winter! Will be ordering them again next winter.\t03 15, 2014\tA00011281MQX55UGPP92V\trebecca roberts\tGreat product\t1394841600\nB008R51SYM\tWrappedArray(0, 0)\t2.0\tProduct is not long enough to secure to headrests in my 2013 dodge ram. Product seems like it is meant for small vehicles.\t12 18, 2013\tA00011762QYPGLMHJQIRH\tBrad McNaughton\tReview for full size truck\t1387324800\n4805311673\tWrappedArray(4, 4)\t5.0\tI just received a set of Japanese Hiragana and Katakana flash cards by Glen McCabe as recently revised by Professor Emiko Konomi.  I am really impressed, both by the low price and by the overall quality and value of the set.  The real usefulness of a set like this is in the way it can facilitate the speed and accuracy of character recognition.  I\u0027m looking forward to using it this way.  The cards are plastic coated, so they won\u0027t get \"funky\" like the ones I made for myself some time ago.  Each card has a series of words written in kana, which aids in the reading of whole words.  One of the most important features involves a high quality CD that comes with the cards.  Using the CD in conjunction with the cards allows the learner to completely avoid using roomaji, and go directly from the Japanese character to the correct Japanese pronunciation.  The 200 cards include the so-called \"twisted sounds\" as well as the \"voiced\" sounds.  There are also wall charts of the characters, which, sad to say, I still find necessary on occasion.  For the beginner, such charts would be of great value.  I am currently teaching \"Scientific Communication in English\" at the Tokorozawa Campus of Waseda University.  I am a colleague of Konomi-sensei at Portland State University and have also been a student in a Japanese class in which she was the instructor.  She is truly a master teacher, and has used her considerable skills to produce a valuable and useful aid in the flash card set.\t11 27, 2012\tA0001176G5I54P8WV7J5\tDr. Larry Crawshaw\tHiragana and Katakana Flashcards - WOW -\t1353974400\nB00APEIXE6\tWrappedArray(0, 0)\t3.0\tThe case feels a bit cheap but overall it\u0027s a nice case. A but hard to use when a call comes in but if you usually use headsets it won\u0027t be a problem.\t04 28, 2014\tA000123613N4QBI2JI0JD\tPriscilla Rosario\tNice colorful case\t1398643200\nB00DTP2GDC\tWrappedArray(0, 0)\t5.0\tI put this decal over my bed and looks amazing. Just the little things can make a  difference in a room.\t04 28, 2014\tA000123613N4QBI2JI0JD\tPriscilla Rosario\tLooks amazing once on!\t1398643200\nB00004T7EA\tWrappedArray(0, 0)\t5.0\tA great little bit. I was having trouble finding a bit in this size and was glad to have found it. Not disappointed in the performance. Holds up well to heven harder woods.\t11 19, 2012\tA00013803RVZPCZKTT9U\tDaniel Liston\tA tiny bit review\t1353283200\nB004JR3OVM\tWrappedArray(0, 0)\t1.0\tI\u0027m sorry but this movie was horrible. i can\u0027t believe i actually sat through the whole thing. The acting was bad, the plot sucked, and nobody actually knew how to play the guitar. I\u0027ll give it this, some of the humor was good, but that was the only good point. The music may be considered good by some but to me the songs grated on my nerves and all the background music was cheap and overused. This might be acceptable for kids, but it certainly is not for me. Oh, and cinderella is saddened by this lack of respect to her name.\t07 14, 2013\tA0001392IVCRENBEIEYS\tAlvery123\tThis is a let down.\t1373760000\nB00EKSG8JU\tWrappedArray(0, 0)\t4.0\tI like the case however, it fits loosely and the tablet is moving around alot...otherwise it\u0027s an excellent piece for the price.  I would recommend it  however, you should get the specifications correct..\t01 22, 2014\tA00014061C2IZNE0YEILY\tRandy BowenJillian Moore\tGalaxy Tab 2 case\t1390348800\n0545229243\tWrappedArray(0, 0)\t5.0\tEs un libro maravilloso con ilustraciones increibles y una muy buena calidad de papel. Super\u0026oacute; mis expectativas!! Lleg\u0026oacute; a mi domicilio en perfectas condiciones.\t11 17, 2012\tA0001416457G6D1TZ0XY\tLufa\texcelente libro\t1353110400\nB00F3L19KQ\tWrappedArray(0, 0)\t5.0\tGreat, Just as good as more expensive mouses and feels great to use.\t07 15, 2014\tA000145014WOTZJ5NSKOR\tDustin\tFive Stars\t1405382400\n0975878905\tWrappedArray(1, 1)\t5.0\tThis book is life changing! Jesus really is real and He really does love us. And He is the same yesterday, today, and forever! He is still doing miracles and amazing things and He has called us to do even greater!\t10 2, 2013\tA0001488CNASNTUMNFQS\tBrianna Howard\tEven Greater is GREAT\t1380672000\nB001CZDQOY\tWrappedArray(0, 0)\t5.0\tBought this for my 21\" asp to give it some length and make it easier to grab which makes it easier to get out of the scabbard. It looks great and even after several months of use there are only a couple marks from dropping it. I am only a security guard but I will be using this product on my asp once I become a Police Officer.\t03 23, 2013\tA0001488DZ7OUAZ5WMTX\tSirius\tAwesome!\t1363996800\nB003RWLV1K\tWrappedArray(0, 0)\t5.0\tNeeded this for a 2001 Mercury Sable. I called the dealership and they said one remote was $60. I bought two for $22.97. Both arrived on time and feel very sturdy so far, but it is only the first day. The instructions were the same as what was listed in my owners manual and both remotes programmed easily. I hope they work for awhile. Overall great purchase, especially for the money.\t03 23, 2013\tA0001488DZ7OUAZ5WMTX\tSirius\tKeyless entry fob 4 key: great.\t1363996800\nB00594XOZU\tWrappedArray(1, 1)\t4.0\tI love it! But there\u0027s some flaws like nothing really! Its so fun now i can reach my friends over summer! How cool! You should definitely download this app! Enjoy:)\t07 19, 2013\tA00015162RKOTD56BSIPU\tjilagraves\tThe new text!\t1374192000\nB0052N2PF8\tWrappedArray(0, 0)\t5.0\tThis book was so much fun to read. I really had to read it all at once. If it was in French I would buy a copy to all my family members.I look forward to seeing the results of the money speng and money earned report. I\u0027m so excited and full of hope.\t01 31, 2014\tA00015222CD60U6XT0DBM\tAmazon Customer\tJamila\t1391126400\nB001MSVPM6\tWrappedArray(1, 6)\t1.0\twill not fit kindle fire hd 7\u0026#34;had to order different brand hope it fitsor maybe my kindle is one of a kind\t02 22, 2013\tA00015222LZ55IJSVL5IX\tkevin clark\twill not fit kindle fire hd 7\"\t1361491200\nB00474ORI6\tWrappedArray(1, 1)\t1.0\tThe mp3 comes in Chinese!!! I DON\u0027T KNOW THAT LANGUAGE, I AM ORDERING FOM USA. I DON\u0027T UNDERSTAND ANYTHING AND I AM NOT ABLE TO CHANGE IT!!\t06 13, 2014\tA00015228CUPGPF957DS\tJacky\tNot good\t1402617600\nB006SVFAYQ\tWrappedArray(0, 0)\t1.0\tEven though the case was nice, i waited one month to get it !! It was too much time I had to wait\t01 11, 2014\tA00015228CUPGPF957DS\tJacky\tVery late delivery!!\t1389398400\nB009VUZJTM\tWrappedArray(3, 3)\t5.0\tI have been using this product for about three weeks, and couldn\u0027t be happier! I have been using it for about 4 weeks now, and the results have been amazing, I have lost inches around my waist and am getting closer to the flat tummy I have always wanted. I am a full time college student, but I make sure I make the time to get to the gym Monday through Friday! When I received my product there was a paper inside offering me a free bottle, and who doesn\u0027t love free stuff? I received a call from Maggie who asked me how the product was working, and encouraged me to call if I ever had any questions, as she said \"we are here to help you reach your goal\". A company that cares about the customers, and gives a free product gets my vote 100%!! With all that being said give naturewise a try.Thank you Naturewise, and Maggie for your encouraging words.\t10 21, 2013\tA000152835L65OOF6JM10\tValerietashaa\tGREAT PRODUCT!\t1382313600\nB0002BBZ2Y\tWrappedArray(0, 0)\t5.0\tGreat!\t07 3, 2014\tA0001528BGUBOEVR6T5U\tigozingo\tFive Stars\t1404345600\nB000UH5SY6\tWrappedArray(2, 3)\t2.0\tVery dry, discolored, not one sprouted... Out of 10 seeds. I am an avid seeder and planter and vegetable gardener.\t03 10, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tShishito Peppers...\t1362873600\nB0016H5BD2\tWrappedArray(0, 0)\t5.0\tGREAT set of cards! Very well made, I enjoyed it very much, it was a girf to a 11 year old and it broke in 20 minutes... It is delicate maybe I should have given better instruction. Great set overall!!!\t03 10, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tDeck...\t1362873600\nB0055Q2VNI\tWrappedArray(1, 1)\t5.0\tGreat. Fast, silent, big drive. I would recommend to anyone. For the price its a great buy and internally its a good drive.\t03 10, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tHD\t1362873600\nB005XU7OL0\tWrappedArray(4, 6)\t5.0\tWell what can I say. Its a dome. Water tight, nice, does what it should, protects! Its nice, well made......etc. Buy it.\t03 10, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tDome...\t1362873600\nB006M1N9QI\tWrappedArray(0, 2)\t4.0\tI like it. Prints fast, clean, small foot print, for the cost its great. Wireless works perfectly. Ink is reasonable.\t03 10, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tPrinter...\t1362873600\nB007DJTBVK\tWrappedArray(0, 0)\t3.0\tJust ok!\t07 3, 2014\tA0001528BGUBOEVR6T5U\tigozingo\tThree Stars\t1404345600\nB008O5BIWW\tWrappedArray(4, 14)\t5.0\tThe Foscam FI8919W is a great camera. I am a dealer for Foscam and I sell a lot of the FI9810W. Fantastic camera for the money. I thought I would try this camera and bought 3 for my company to test. So great... We hooked it up in 5 minutes, setup is like any other Foscam Camera, the IR works great, not sure why people are putting this camera down... We have been \"working\" one of the cameras all the time to try to make it fail and it still works great. Im buying more and going to promote it more as well.\t02 13, 2013\tA0001528BGUBOEVR6T5U\tigozingo\tFoscam FI8919W\t1360713600\nB00BB2MMNE\tWrappedArray(0, 0)\t2.0\tNot stable. Had to return.\t07 3, 2014\tA0001528BGUBOEVR6T5U\tigozingo\tTwo Stars\t1404345600\nB00HCUMX8I\tWrappedArray(0, 0)\t5.0\tThis is another dine and dash game that I love. This game was really fun and I and my kids loves it. Awesome game first play you should really think about making more games like this. Best game ever.\t04 18, 2014\tA00015842726W83CCXUIF\tSarah\tlove it\t1397779200\nB000002KIC\tWrappedArray(0, 0)\t5.0\tIve liked the band since first heard them. Figured it was time to get the Last Waltz. May start more of a collection.\t02 17, 2013\tA0001624UKLQG4OFIM8X\tRobert Nichols\tvery good listening\t1361059200\nB0000224JG\tWrappedArray(1, 1)\t5.0\tIt was a gift for my son, a plumber. He loves it, said he uses it every day. Will purchase more rigid tools.\t01 15, 2013\tA0001624UKLQG4OFIM8X\tRobert Nichols\tGreat wrench\t1358208000\n0307934055\tWrappedArray(0, 0)\t5.0\tA must read for anyone who has wondered when an urchin or poor knocked on your car windows while waiting for the green light. A masterpiece of unbiased as-is.\t02 23, 2014\tA00017621IJYBPLGHS502\tVipin\tpractical economics\t1393113600\nB004EIJXES\tWrappedArray(0, 0)\t5.0\tconnot be beaten for the price! works likea charm and i would absolutely recommend this product to anyone looking for at the very least an entry level antenna\t02 13, 2013\tA00018041RRVMCICCAP79\tMark L\tworth every penny\t1360713600\nB005ERKYI2\tWrappedArray(0, 2)\t5.0\tExcellent quality as advertised! Follow sizing chart as provided. Cover did fit for us. We also purchased the cover alarm. Very nice set up \u0026 also will be purchasing the lock they suggest purchasing!! Would recommend to anyone that wants a long term quality cover!\t01 6, 2014\tA00018041RRVMCICCAP79\tMark L\tThis was accidentallly written for the wrong purchase\t1388966400\nB0091PI5IO\tWrappedArray(1, 1)\t5.0\tWe ordered this Ted doll for our son that is in college. It was the Christmas hit in our household. After much research trying to make sure we ordered the right doll, we certainly received the correct one. This doll is the \u0026#34;EXPLICIT\u0026#34; version. We learned we needed to order the one with the \u0026#34;RED Letter R\u0026#34; tag to get what we wanted (which we did)! He also sings the \u0026#34;Thunder Song\u0026#34;! To our surprise, he is huge...a true 24\u0026#34;!! He also looked identical to the movie bear! We received this bear within 3 days, which was through our Amazon Prime account. I would highly recommend this one to anyone looking for these options. Will not be disappointed!\t01 6, 2014\tA00018041RRVMCICCAP79\tMark L\tLoved This Bear!\t1388966400\nB004UUHG3U\tWrappedArray(0, 0)\t5.0\tThe costume was Great Quality it had a lot of room to wear clothes underneath to stay warm.  You could easily run and play and the costume did not tear.  The shipment was very fast, received it in 3 days with standard shipping!\t11 16, 2012\tA0001824S8GVGNC9O588\tJovana\tThe best\t1353024000\nB000JD4N9M\tWrappedArray(1, 1)\t5.0\tBefore ordering this online, I read some reviews saying it wasn\u0027t as strong as what they got in the store.  I wonder if they are comparing cologne they originally had to this product which is eau de toilette, a much lighter fragrance, which I prefer.  For me, this was a great deal.\t04 10, 2014\tA000186437REL8X2RW8UW\tRichard Roberts\tSame as in the store\t1397088000\nB007X26T3A\tWrappedArray(0, 0)\t4.0\tNot wanting to run wires out to the patio I thought I would give these a try.  After getting them delivered and seeing how small and lightweight they are, I was skeptical.  After hooking them up, I was surprised by how good the sound quality was.  They are very easy to install.  I used a 3.5mm Stereo Female to RCA Male Y-Cable to attach the transmitter to an audio out plug on my AV Reciever.  This way I can play CDs or listen to the music channels from Cable TV.  I have them plugged into wall sockets, instead of using batteries, since other reviews said the sound quality isn\u0027t as good with the batteries (although I never did try batteries).  I bought a second pair of speakers (comes with a free transmitter) to use on another section of the patio, still using just the one transmitter.  Very easy to set up.\t07 5, 2014\tA000186437REL8X2RW8UW\tRichard Roberts\tConvenient, Good Outdoor Sound\t1404518400\nB001KW8OG4\tWrappedArray(0, 0)\t5.0\tFairly fast delivery. Very good price. Will try to buy from again in future.Most places were much higher. Just started using one of the batteriesso I can\u0027t comment on much else yet.\t01 9, 2013\tA000187635I595IAVSQLH\tTTZP95\tGreat price!\t1357689600\nB003EO1H7E\tWrappedArray(0, 0)\t5.0\tI am a newbie at buying\\using usb sticks. I found out I could store full length movies on them \u0026 play them back on my tv with a fairly low cost media player. I think it\u0027s pretty neat to be able to store 5 or 6 movies on a 16 gig little stick \u0026 watch them on tv without messing with storing DVD\u0027s. I don\u0027t know much about these sticks or how long they should last etc., but hey, no moving parts! I bought this item at a very reasonable price \u0026 shipping was pretty good. Would buy again. Probably soon.\t01 26, 2013\tA000187635I595IAVSQLH\tTTZP95\tWas asked for my opinion on this item.\t1359158400\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mreviews_df\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [asin: string, helpful: array\u003cbigint\u003e ... 7 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569553388965_31814863",
+      "id": "paragraph_1569553388965_31814863",
+      "dateCreated": "2019-09-27 03:03:08.965",
+      "dateStarted": "2019-09-29 01:01:44.297",
+      "dateFinished": "2019-09-29 01:08:25.858",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Transform the original data and create the tables\nAs for the metadata, we have a several categories per product, we are interested in separating them such that all the relevant text to one particular category can be easily obtained. This still will preserve the semantic relationship between different categories if they were originally togheter.",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:11:19.319",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eTransform the original data and create the tables\u003c/h2\u003e\n\u003cp\u003eAs for the metadata, we have a several categories per product, we are interested in separating them such that all the relevant text to one particular category can be easily obtained. This still will preserve the semantic relationship between different categories if they were originally togheter.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569718904294_244495961",
+      "id": "paragraph_1569718904294_244495961",
+      "dateCreated": "2019-09-29 01:01:44.295",
+      "dateStarted": "2019-09-29 01:11:19.318",
+      "dateFinished": "2019-09-29 01:11:19.351",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val metadata_test_df \u003d metadata_df.limit(100)",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:15:19.301",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mmetadata_test_df\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [_corrupt_record: string, asin: string ... 8 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569719698206_-1120294518",
+      "id": "paragraph_1569719698206_-1120294518",
+      "dateCreated": "2019-09-29 01:14:58.207",
+      "dateStarted": "2019-09-29 01:15:19.312",
+      "dateFinished": "2019-09-29 01:15:19.445",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import spark.implicits._\nimport org.apache.spark.sql.functions._\n\n//We need to double explode the records to get the categories separated.\nval test \u003d metadata_test_df.select($\"asin\", explode($\"categories\").as(\"categories\"), $\"description\").select($\"asin\", explode($\"categories\").as(\"category\"), $\"description\")\nz.show(test)",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:49:22.444",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "asin": "string",
+                      "category": "string",
+                      "description": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "asin\tcategory\tdescription\n0001048791\tBooks\tnull\n0000143561\tMovies \u0026 TV\t3Pack DVD set - Italian Classics, Parties and Holidays.\n0000143561\tMovies\t3Pack DVD set - Italian Classics, Parties and Holidays.\n0000037214\tClothing, Shoes \u0026 Jewelry\tnull\n0000037214\tGirls\tnull\n0000037214\tClothing, Shoes \u0026 Jewelry\tnull\n0000037214\tNovelty, Costumes \u0026 More\tnull\n0000037214\tCostumes \u0026 Accessories\tnull\n0000037214\tMore Accessories\tnull\n0000037214\tKids \u0026 Baby\tnull\n0000032069\tSports \u0026 Outdoors\tnull\n0000032069\tOther Sports\tnull\n0000032069\tDance\tnull\n0000032069\tClothing\tnull\n0000032069\tGirls\tnull\n0000032069\tSkirts\tnull\n0000031909\tSports \u0026 Outdoors\tHigh quality 3 layer ballet tutu. 12 inches in length\n0000031909\tOther Sports\tHigh quality 3 layer ballet tutu. 12 inches in length\n0000031909\tDance\tHigh quality 3 layer ballet tutu. 12 inches in length\n0000032034\tSports \u0026 Outdoors\tnull\n0000032034\tOther Sports\tnull\n0000032034\tDance\tnull\n0000032034\tClothing\tnull\n0000032034\tGirls\tnull\n0000032034\tSkirts\tnull\n0000589012\tMovies \u0026 TV\tnull\n0000589012\tMovies\tnull\n0001048775\tBooks\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\n0000031852\tSports \u0026 Outdoors\tTUtu\n0000031852\tOther Sports\tTUtu\n0000031852\tDance\tTUtu\n0001048236\tBooks\t\u0026#34;One thing is certain, Sherlockians, put aside your Baring-GouldAnnotated, your Folio SocietyIllustrated-for the time being, the Oxford is the edition to curl up with on a winter\u0027s night\u0026#34;--The Chicago Tribune\u0026#34;An incomparable gift book; or, should you find it impossible to surrender up such treasures, the best of gifts to oneself\u0026#34;--USA Today\u0026#34;To the true Sherlockian, this will be a treasure; to otherwise diverted detective story fans, it is a rich lode for discovery\u0026#34;--Denver Post\u0026#34;The complete and authentic adventures of the legendary detective--expertly edited and annotated by a team of Holmes scholars....in a handsome, boxed set....A lovely gift\u0026#34;--The Christian Science Monitor\u0026#34;Here in nine volumes...are all the adventures of Holmes and Watson. Each book has an introduction, something new and fascinating for even the most devoted Holmesians plus a series of intelligent notes at the back of each volume.\u0026#34;--Oxford Times\u0026#34;TheOxford Sherlock Holmes, a new edition of the stories, is a splendid piece of publishing. Nine compact volumes, beautifully produced, each with a stimulating introduction; clear type, accurate texts, a handy chronology, a helpful bibliography. And, most valuable of all, explanatory notes running to 50 pages or more per volume.\u0026#34; --John Gross, writing inSunday Telegraph--This text refers to thePaperbackedition.\n0000401048\tBooks\tnull\n0001019880\tBooks\tnull\n0001048813\tBooks\tnull\n0001148427\tBooks\tnull\n0001057170\tBooks\t[Editor\u0027s Note: The following is a combined review with CLASSIC CONNOLLY IN WORDS AND MUSIC.]--Those of you who enjoyed Billy Connolly\u0027s moving performance in the film MRS. BROWN may not know (or believe) that he began his professional life as a Glasgow folky and gained first fame as a stand-up comic. Now\u0027s your chance to catch up on his sordid past with these compilations from his club recordings of the \u002770s and \u002780s. He loves the shaggy dog story and the wicked song but doesn\u0027t mind flinging one-liners either. His raucous, scatological, profane humor is best enjoyed by heavy drinkers familiar with the Scottish tongue. The rest of us will get plenty of yuks from those punch lines we can decipher.  Y.R. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\n0001047566\tBooks\tnull\n0001053396\tBooks\tWriting poetry has always been a way to express what is going on in the world around us. Unfortunately, sometimes what is around us is war. Acclaimed British actor Paul McGann reads poems that date from the eighteenth century to modern times in this moving audio anthology. McGann is originally from Liverpool, and he still retains a slight Northern accent. Its lilting cadence blends well with the rhythm and worldliness of these powerful poems. Although some of the pieces are well known, others are less so, and this makes the collection even more intriguing for lovers of literature.  R.A.P. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\n0000913154\tBooks\tnull\n0000032050\tSports \u0026 Outdoors\tnull\n0000032050\tOther Sports\tnull\n0000032050\tDance\tnull\n0000032050\tClothing\tnull\n0000032050\tGirls\tnull\n0000032050\tSkirts\tnull\n0001072986\tBooks\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\n0001053744\tBooks\tWhile many readers are familiar with SIR GAWAIN AND THE GREEN KNIGHT (and perhaps even Tolkien\u0027s translation), these poems from the same fourteenth-century manuscript are less well known. PEARL the longer of the two, is an elegy for the poet\u0027s baby daughter, told in alliterative verse. SIR ORFEO is a Celtic version of the Greek myth of Orpheus and Eurydice, complete with a happy ending that the older story lacks. Terry Jones, former member of Monty Python and a medieval scholar to boot, sounds perfectly comfortable with the rhythms and language. One even gets a taste of the original Middle English on the final side, when Jones puts these works into context by reading Tolkien\u0027s own introductions.  D.B. \u0026copy; AudioFile 2001, Portland, Maine--Copyright \u0026#169; AudioFile, Portland, Maine\n0001064487\tBooks\tnull\n0001042335\tBooks\tWilliam Shakespeare is widely regarded as the greatest playwright the world has seen. He produced an astonishing amount of work; 37 plays, 154 sonnets, and 5 poems. He died on 23rd April 1616, aged 52, and was buried in the Holy Trinity Church, Stratford.\n0000202010\tBooks\tnull\n0001057138\tBooks\tnull\n0000000868\tBooks\tnull\n0000695009\tMovies \u0026 TV\tnull\n0000695009\tMovies\tnull\n0001053655\tBooks\tnull\n0001360000\tBooks\tJudith Kerr\u0026#8217;s best\u0026#8211;selling adventures of that endearing (and exasperating) cat Mog have entertained children for more than 30 years. Now, even infants and toddlers can enjoy meeting this loveable feline. These sturdy little board books\u0026#8212;with their bright, simple pictures, easy text, and hand\u0026#8211;friendly formats\u0026#8212;are just the thing to delight the very young. Ages 6 months\u0026#8211;2 years.\n0000038504\tBooks\tnull\n0001203088\tBooks\tnull\n0001061100\tBooks\tnull\n000107461X\tMovies \u0026 TV\tnull\n000107461X\tMovies\tnull\n0000143529\tMovies \u0026 TV\tDisc 1: Flour Power (Scones; Shortcakes; Southern Biscuits; Salmon Turnovers; Fruit Tart; Funnel Cake; Sweet or Savory; Pte  Choux) Disc 2: Super Sweets 4 (Banana Spitsville; Burned Peach Ice Cream; Chocolate Taffy; Acid Jellies; Peanut Brittle; Chocolate Fudge; Peanut Butter Fudge) Disc 3: Super Sweets 5 (Lemon Meringue Pie; Pie Crust; Yeast Doughnuts; Doughnut Glaze; Chocolate Doughnut Glaze; Sugar Cookies; Royal Icing; Chocolate Peppermint Pinwheel Cookies)\n0000143529\tMovies\tDisc 1: Flour Power (Scones; Shortcakes; Southern Biscuits; Salmon Turnovers; Fruit Tart; Funnel Cake; Sweet or Savory; Pte  Choux) Disc 2: Super Sweets 4 (Banana Spitsville; Burned Peach Ice Cream; Chocolate Taffy; Acid Jellies; Peanut Brittle; Chocolate Fudge; Peanut Butter Fudge) Disc 3: Super Sweets 5 (Lemon Meringue Pie; Pie Crust; Yeast Doughnuts; Doughnut Glaze; Chocolate Doughnut Glaze; Sugar Cookies; Royal Icing; Chocolate Peppermint Pinwheel Cookies)\n0000477141\tBooks\tnull\n0001437879\tBooks\tnull\n0001035649\tBooks\tnull\n0001381245\tBooks\tnull\n000102521X\tBooks\tFor lovers of extravagant words and action charged with mystery and passion, Mr Jarvis must be hard to beat.\u0027 Times Educational Supplement \u0027Jarvis creates a rich, intricate world... well worth reading.\u0027 The Daily Telegraph \u0027The best one yet!\u0027 12-yr old fan, Tunbridge Wells\n0001371045\tBooks\tnull\n0001468685\tBooks\tnull\n0000031887\tClothing, Shoes \u0026 Jewelry\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\n0000031887\tGirls\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\n0000031887\tClothing\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\n0000031887\tActive\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\n0000031887\tActive Skirts\tThis adorable basic ballerina tutu is perfect for dance recitals. Fairy Princes Dress up, costume, play and much. Comes individually packaged. Use for a Tinkerbell dress up accessory and watch her flutter excitedly for hours in her tutu. Very soft elastic waist that is trimmed in satin and stretches to fit from an average size 3 to a size 8.\n0000619574\tBooks\tnull\n0001473727\tBooks\tnull\n0001061127\tBooks\tnull\n0001384198\tBooks\tnull\n0000191639\tToys \u0026 Games\tThree Dr. Suess\u0027 Puzzles: Green Eggs and Ham, Favorite Friends, and One Fish Two Fish Red Fish Blue Fish\n0000191639\tPuzzles\tThree Dr. Suess\u0027 Puzzles: Green Eggs and Ham, Favorite Friends, and One Fish Two Fish Red Fish Blue Fish\n0000191639\tJigsaw Puzzles\tThree Dr. Suess\u0027 Puzzles: Green Eggs and Ham, Favorite Friends, and One Fish Two Fish Red Fish Blue Fish\n0000230022\tBooks\tnull\n0001057324\tBooks\tnull\n0000031895\tSports \u0026 Outdoors\tDance tutu for girls ages 2-8 years. Perfect for dance practice, recitals and performances, costumes or just for fun!\n0000031895\tOther Sports\tDance tutu for girls ages 2-8 years. Perfect for dance practice, recitals and performances, costumes or just for fun!\n0000031895\tDance\tDance tutu for girls ages 2-8 years. Perfect for dance practice, recitals and performances, costumes or just for fun!\n0001382489\tBooks\tnull\n0001001787\tBooks\tnull\n0000174076\tBooks\tnull\n0001056107\tBooks\t\u0027A fabulous tale of the days when giants and dragons walked the kingdom\u0027 Sunday Times\n0000000116\tBooks\tnull\n0000013714\tBooks\tnull\n0001380877\tBooks\tnull\n0001486632\tBooks\tnull\n0001484648\tBooks\tnull\n0001057146\tBooks\tnull\n0001360183\tBooks\tnull\n0001517791\tMovies \u0026 TV\tPraise Aerobics - A low-intensity/high-intesity low impact aerobic workout.\n0001517791\tMovies\tPraise Aerobics - A low-intensity/high-intesity low impact aerobic workout.\n0001056530\tBooks\t\u0027Archer has a gift for plot that can only be described as genius\u0027 Daily Telegraph\n000077135X\tBooks\tnull\n0001006002\tBooks\tnull\n0001632108\tBooks\tnull\n0001436163\tBooks\tnull\n0001527665\tMovies \u0026 TV\tnull\n0001527665\tMovies\tnull\n0001713086\tBooks\tnull\n0001361155\tBooks\tnull\n000171287X\tBooks\tBy Stan Berenstain and Jan Berenstain, Illustrated by Stan Berenstain and Jan Berenstain\n0001472933\tBooks\tnull\n000171130X\tBooks\tIllus. in full color. The adventures of Dr. Dolittle, the veterinarian who can talk to his patients, have been charming children the world over since 1920. This edition offers the only text especially adapted for beginning readers.\u0026#160;\u0026#160;--This text refers to an out of print or unavailable edition of this title.\n0001837192\tBooks\tnull\n0001361139\tBooks\tnull\n0001062395\tBooks\tnull\n0001473905\tBooks\t--This text refers to thePaperbackedition.\n000047715X\tBooks\tnull\n0001386301\tBooks\tnull\n0001536338\tBooks\tnull\n0001720104\tBooks\tnull\n0001720252\tBooks\tnull\n0001371037\tBooks\tnull\n0001516035\tMovies \u0026 TV\tWorship with Don Moen [VHS]\n0001516035\tMovies\tWorship with Don Moen [VHS]\n0001621076\tBooks\tnull\n0001501348\tCDs \u0026 Vinyl\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tChristian\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tPop \u0026 Contemporary\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tCDs \u0026 Vinyl\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tChristian\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tPraise \u0026 Worship\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tCDs \u0026 Vinyl\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001501348\tGospel\tLenny LeBlanc, Alex Acuna, Justo Almario, Tom Brooks, Abraham Laboriel, Chester Thompson\n0001384163\tBooks\t\u0026#8220;Soft pastel illustrations lend a friendly, calm feeling to the adventures.\u0026#8221; --Publisher Weekly\n0001944959\tBooks\tnull\n0001944541\tBooks\tnull\n0000791156\tMovies \u0026 TV\tYou can flow effortlessly and powerfully in the gifts of the Holy Spirit today! Join Joseph Prince as he expounds on the nine gifts of the Holy Spirit and be encouraged to know that every believer-including you-can operate in these grace gifts. Understand how the Spirit leads you in using these gifts and why ministering in love is so important. Discover the secret to stepping out in faith and love, and moving super-naturally in the Spirit. Find out also what your gifts are and how to flow in them. Whether it\u0027s in the area of your family, ministry or work, the messages in this powerful DVD resource will stir your faith and help you to operate and minister in the power of the Holy Spirit! 6-DVD Set(7 Sermons-approx. total duration: 5hr 47min)\n0000791156\tMovies\tYou can flow effortlessly and powerfully in the gifts of the Holy Spirit today! Join Joseph Prince as he expounds on the nine gifts of the Holy Spirit and be encouraged to know that every believer-including you-can operate in these grace gifts. Understand how the Spirit leads you in using these gifts and why ministering in love is so important. Discover the secret to stepping out in faith and love, and moving super-naturally in the Spirit. Find out also what your gifts are and how to flow in them. Whether it\u0027s in the area of your family, ministry or work, the messages in this powerful DVD resource will stir your faith and help you to operate and minister in the power of the Holy Spirit! 6-DVD Set(7 Sermons-approx. total duration: 5hr 47min)\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "import spark.implicits._\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mtest\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [asin: string, category: string ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569719479316_-119044034",
+      "id": "paragraph_1569719479316_-119044034",
+      "dateCreated": "2019-09-29 01:11:19.316",
+      "dateStarted": "2019-09-29 01:47:42.075",
+      "dateFinished": "2019-09-29 01:49:21.518",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\nNow, we can proceed to create a temporary table with the exploded data avoiding null records for later combination with the product reviews.",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:33:35.606",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eNow, we can proceed to create a temporary table with the exploded data avoiding null records for later combination with the product reviews.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569720778745_1960986293",
+      "id": "paragraph_1569720778745_1960986293",
+      "dateCreated": "2019-09-29 01:32:58.745",
+      "dateStarted": "2019-09-29 01:33:35.607",
+      "dateFinished": "2019-09-29 01:33:35.629",
+      "status": "FINISHED"
+    },
+    {
+      "text": "metadata_df.limit(1000).select($\"asin\", explode($\"categories\").as(\"categories\"), $\"description\")\n    .select($\"asin\", explode($\"categories\").as(\"category\"), $\"description\")\n    .createOrReplaceTempView(\"product_metadata\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:53:17.641",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
         "fontSize": 9.0,
         "runOnSelectionChange": true,
         "title": false,
@@ -158,25 +659,70 @@
       },
       "apps": [],
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1569551651988_-48875070",
-      "id": "paragraph_1569551651988_-48875070",
-      "dateCreated": "2019-09-27 02:34:11.988",
-      "dateStarted": "2019-09-27 03:03:17.497",
-      "dateFinished": "2019-09-27 03:03:17.592",
+      "jobName": "paragraph_1569719528236_278361167",
+      "id": "paragraph_1569719528236_278361167",
+      "dateCreated": "2019-09-29 01:12:08.236",
+      "dateStarted": "2019-09-29 01:53:17.653",
+      "dateFinished": "2019-09-29 01:53:17.935",
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\n\nmetadata_df \u003d spark.read.json(metadata_path)\nmetadata_df.show()",
+      "text": "%md\nNow let\u0027s deal with the product reviews",
       "user": "anonymous",
-      "dateUpdated": "2019-09-27 03:03:19.790",
+      "dateUpdated": "2019-09-29 01:43:42.542",
       "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
         "editorSetting": {
-          "language": "sh",
-          "editOnDblClick": false,
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
           "completionSupport": false
         },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eNow let\u0026rsquo;s deal with the product reviews\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569720863767_1134807635",
+      "id": "paragraph_1569720863767_1134807635",
+      "dateCreated": "2019-09-29 01:34:23.767",
+      "dateStarted": "2019-09-29 01:43:42.542",
+      "dateFinished": "2019-09-29 01:43:42.561",
+      "status": "FINISHED"
+    },
+    {
+      "text": "reviews_df.limit(1000).select($\"asin\", $\"summary\", $\"reviewText\".as(\"review_text\")).createOrReplaceTempView(\"product_reviews\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:56:00.386",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/sh",
+        "editorMode": "ace/mode/scala",
         "fontSize": 9.0,
         "runOnSelectionChange": true,
         "title": false,
@@ -190,36 +736,200 @@
       },
       "results": {
         "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569721422540_294490352",
+      "id": "paragraph_1569721422540_294490352",
+      "dateCreated": "2019-09-29 01:43:42.540",
+      "dateStarted": "2019-09-29 01:56:00.390",
+      "dateFinished": "2019-09-29 01:56:00.582",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n## Perform sql ver the two tables\nNow, let\u0027s join them and filter for thosw which have more than 5 reviews",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 01:47:01.792",
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
         "msg": [
           {
-            "type": "TEXT",
-            "data": "+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|_corrupt_record|      asin|     brand|          categories|         description|               imUrl|price|             related|           salesRank|               title|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\n|           null|0001048791|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 6334800,,,...|The Crucible: Per...|\n|           null|0000143561|      null|[[Movies \u0026 TV, Mo...|3Pack DVD set - I...|http://g-ecx.imag...|12.99|[, [B0036FO6SI, B...|[,,,,,,,,,,,,,,,,...|Everyday Italian ...|\n|           null|0000037214|Big Dreams|[[Clothing, Shoes...|                null|http://ecx.images...| 6.99|[, [B00JO8II76, B...|[,,,,,,,, 1233557...|Purple Sequin Tin...|\n|           null|0000032069|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.89|[[0000032050, B00...|                null|Adult Ballet Tutu...|\n|           null|0000031909|   Unknown|[[Sports \u0026 Outdoo...|High quality 3 la...|http://ecx.images...|  7.0|[[B002BZX8Z6, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0000032034|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...| 7.87|[[B00D2JSRFQ, 000...|                null|Adult Ballet Tutu...|\n|           null|0000589012|      null|[[Movies \u0026 TV, Mo...|                null|http://ecx.images...|15.95|[[B000Z3N1HQ, 057...|[,,,,,,,,,,,,,,,,...|Why Don\u0027t They Ju...|\n|           null|0001048775|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 13243226,,...|Measure for Measu...|\n|           null|0000031852|  Coxlures|[[Sports \u0026 Outdoo...|                TUtu|http://ecx.images...| 3.17|[[B00JHONN1S, B00...|[,,,,,,,,,,,,,,,,...|Girls Ballet Tutu...|\n|           null|0001048236|      null|           [[Books]]|\u0026#34;One thing is...|http://ecx.images...| 9.26|[, [1442300191, 9...|[,,,,, 8973864,,,...|The Sherlock Holm...|\n|           null|0000401048|      null|           [[Books]]|                null|http://ecx.images...| null|  [, [068240103X],,]|[,,,,, 6448843,,,...|The rogue of publ...|\n|           null|0001019880|      null|           [[Books]]|                null|http://ecx.images...| 5.39|[, [B003HMB5FC, 0...|[,,,,, 9589258,,,...|Classic Soul Winn...|\n|           null|0001048813|      null|           [[Books]]|                null|http://ecx.images...| null|                null|                null|Archer Christmas ...|\n|           null|0001148427|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 5806769,,,...| Sonatas - For Piano|\n|           null|0001057170|      null|           [[Books]]|[Editor\u0027s Note: T...|http://ecx.images...| null|                null|[,,,,, 9318563,,,...|Classic Connolly ...|\n|           null|0001047566|      null|           [[Books]]|                null|http://ecx.images...| null|                null|[,,,,, 3628249,,,...|       Hand in Glove|\n|           null|0001053396|      null|           [[Books]]|Writing poetry ha...|http://ecx.images...|17.99|                null|[,,,,, 12249714,,...|War Poems: An Ant...|\n|           null|0000913154|      null|           [[Books]]|                null|http://ecx.images...|23.26|[[0590429892, 111...|[,,,,, 455782,,,,...|The Way Things Wo...|\n|           null|0000032050|  BubuBibi|[[Sports \u0026 Outdoo...|                null|http://ecx.images...|12.85|[[B00D2JSRFQ, B00...|                null|Adult Ballet Tutu...|\n|           null|0001072986|      null|           [[Books]]|William Shakespea...|http://ecx.images...| null|                null|[,,,,, 8296784,,,...|As You Like it: C...|\n+---------------+----------+----------+--------------------+--------------------+--------------------+-----+--------------------+--------------------+--------------------+\nonly showing top 20 rows\n\n"
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003ePerform sql ver the two tables\u003c/h2\u003e\n\u003cp\u003eNow, let\u0026rsquo;s join them and filter for thosw which have more than 5 reviews\u003c/p\u003e\n\u003c/div\u003e"
           }
         ]
       },
       "apps": [],
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1569553333071_1921053375",
-      "id": "paragraph_1569553333071_1921053375",
-      "dateCreated": "2019-09-27 03:02:13.071",
-      "dateStarted": "2019-09-27 03:03:19.804",
-      "dateFinished": "2019-09-27 03:05:03.181",
+      "jobName": "paragraph_1569721509729_-1689366567",
+      "id": "paragraph_1569721509729_-1689366567",
+      "dateCreated": "2019-09-29 01:45:09.729",
+      "dateStarted": "2019-09-29 01:47:01.791",
+      "dateFinished": "2019-09-29 01:47:01.795",
       "status": "FINISHED"
     },
     {
-      "text": "%pyspark\n",
+      "text": "%sql\nselect pm.category, pm.description, pr.summary, pr.review_text\nfrom product_metadata as pm inner join product_reviews pr on pm.asin \u003d pr.asin\nwhere pm.asin in (\"0001048791\", \"0000031909\")\n",
       "user": "anonymous",
-      "dateUpdated": "2019-09-27 03:03:08.965",
-      "config": {},
+      "dateUpdated": "2019-09-29 02:28:30.280",
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "asin": "string",
+                      "count(summary)": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Futures timed out after [300 seconds]\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569721621791_-210686947",
+      "id": "paragraph_1569721621791_-210686947",
+      "dateCreated": "2019-09-29 01:47:01.791",
+      "dateStarted": "2019-09-29 02:28:30.283",
+      "dateFinished": "2019-09-29 02:33:30.365",
+      "status": "ERROR"
+    },
+    {
+      "text": "%sql\nselect pm.category, pm.description, pr.summary, pr.review_text\nfrom product_metadata as pm, product_reviews pr\nwhere  pm.asin \u003d pr.asin and pm.asin in (\"0001048791\", \"0000031909\")",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 02:45:26.808",
+      "config": {
+        "runOnSelectionChange": true,
+        "title": false,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Futures timed out after [300 seconds]\nset zeppelin.spark.sql.stacktrace \u003d true to see full stacktrace"
+          }
+        ]
+      },
+      "apps": [],
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1569725095861_830940209",
+      "id": "paragraph_1569725095861_830940209",
+      "dateCreated": "2019-09-29 02:44:55.861",
+      "dateStarted": "2019-09-29 02:45:26.820",
+      "dateFinished": "2019-09-29 02:50:26.904",
+      "status": "ERROR"
+    },
+    {
+      "text": "%sql\nwhere pm.asin in\n    (select asin from ((select pm.asin, count(pr.summary)\n                        from product_metadata as pm inner join product_reviews pr on pm.asin \u003d pr.asin\n                        group by pm.asin\n                        having count(pr.summary) \u003e 1)\n                        )\n",
+      "user": "anonymous",
+      "dateUpdated": "2019-09-29 02:30:36.562",
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1569553388965_31814863",
-      "id": "paragraph_1569553388965_31814863",
-      "dateCreated": "2019-09-27 03:03:08.965",
+      "jobName": "paragraph_1569722003523_-483691975",
+      "id": "paragraph_1569722003523_-483691975",
+      "dateCreated": "2019-09-29 01:53:23.524",
       "status": "READY"
     }
   ],
