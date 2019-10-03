@@ -18,3 +18,6 @@ dependencies:
   - jupyter
   - jupyterlab
   - pyarrow
+  - ipyleaflet
+  - sparkmagic
+  - nodejs>5
