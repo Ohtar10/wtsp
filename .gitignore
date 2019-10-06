@@ -158,3 +158,4 @@ docs/_build/
 software/
 datasets/flower_photos
 datasets/flower_photos.tgz
+.ipynb_checkpoints/
