@@ -19,5 +19,13 @@ dependencies:
   - jupyterlab
   - pyarrow
   - ipyleaflet
+  - shapely
+  - geopandas
   - sparkmagic
   - nodejs>5
+  - poppler<0.62
+  - gensim
+  - dask
+  - pip:
+    - urlextract
+    - swifter
