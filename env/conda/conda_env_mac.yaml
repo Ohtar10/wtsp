@@ -1,0 +1,28 @@
+name: wtsp
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.6
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - nltk
+  - spacy
+  - keras
+  - jupyter
+  - jupyterlab
+  - pyarrow
+  - ipyleaflet
+  - shapely
+  - geopandas
+  - sparkmagic
+  - nodejs>5
+  - poppler<0.62
+  - gensim
+  - dask
+  - pip:
+    - urlextract
+    - swifter
