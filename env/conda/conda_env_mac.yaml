@@ -16,6 +16,7 @@ dependencies:
   - jupyterlab
   - pyarrow
   - ipyleaflet
+  - folium
   - shapely
   - geopandas
   - sparkmagic
@@ -23,6 +24,7 @@ dependencies:
   - poppler<0.62
   - gensim
   - dask
+  - pyemd
   - pip:
     - urlextract
     - swifter
