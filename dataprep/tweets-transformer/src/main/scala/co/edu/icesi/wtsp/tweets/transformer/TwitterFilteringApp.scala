@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 import scopt.OptionParser
 
 private object Metadata {
-  val version: String = "1.0.0"
+  val version: String = "0.2.0"
 }
 
 private object AppUtils {

@@ -1,0 +1,29 @@
+categories:
+  - name: "Movies & TV"
+    mappings:
+      - Movies
+      - Movies & TV
+  - name: "Clothing, Shoes & Jewelry"
+    mappings:
+      - Clothing
+      - T-Shirts
+      - Shirts
+      - Jewelry
+      - Dresses
+      - Boots
+      - Shoes
+      - "Jewelry: International Shipping Available"
+      - "Shoes & Accessories: International Shipping Available"
+      - Fashion
+      - Earrings
+  - name: "Music"
+    mappings:
+      - Music
+      - Digital Music
+      - CDs & Vinyl
+      - Pop
+      - Jazz
+      - Alternative Rock
+      - Rock
+      - World Music
+      - Dance & Electronic

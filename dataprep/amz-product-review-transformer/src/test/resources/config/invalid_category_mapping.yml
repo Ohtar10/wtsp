@@ -1,0 +1,5 @@
+categories:
+  - test "this should fail"
+    - one
+    - two
+    - three

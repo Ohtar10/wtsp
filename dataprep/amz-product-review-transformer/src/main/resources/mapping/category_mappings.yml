@@ -1,0 +1,65 @@
+categories:
+  - name: "Movies & TV"
+    mappings:
+      - Movies
+      - Movies & TV
+  - name: "Clothing, Shoes & Jewelry"
+    mappings:
+      - Clothing
+      - T-Shirts
+      - Shirts
+      - Jewelry
+      - Dresses
+      - Boots
+      - Shoes
+      - "Jewelry: International Shipping Available"
+      - "Shoes & Accessories: International Shipping Available"
+      - "Clothing, Shoes & Jewelry"
+      - Fashion
+      - Earrings
+  - name: "Music"
+    mappings:
+      - Music
+      - Digital Music
+      - CDs & Vinyl
+      - Pop
+      - Jazz
+      - Alternative Rock
+      - Rock
+      - World Music
+      - Dance & Electronic
+  - name: "Technology, Electronics & Accessories"
+    mappings:
+      - Electronics
+      - Cell Phones & Accessories
+      - Computers & Accessories
+      - Camera & Photo
+  - name: "Books"
+    mappings:
+      - Books
+      - Kindle eBooks
+      - Kindle Store
+      - Literature & Fiction
+      - Kindle Short Reads
+      - Christian Books & Bibles
+  - name: "Toys & Games"
+    mappings:
+      - Games
+      - Toys & Games
+  - name: "Home & Kitchen"
+    mappings:
+      - Home & Kitchen
+      - Kitchen & Dining
+  - name: "Office & School Supplies"
+    mappings:
+      - Office & School Supplies
+      - Office Products
+  - name: "Health & Personal Care"
+    mappings:
+      - Hair Care
+      - Skin Care
+      - Health & Personal Care
+  - name: "Health, Fitness & Dieting"
+    mappings:
+      - Athletic
+      - Health, Fitness & Dieting
