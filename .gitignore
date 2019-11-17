@@ -159,3 +159,5 @@ software/
 datasets/flower_photos
 datasets/flower_photos.tgz
 .ipynb_checkpoints/
+.java-version
+.travis.yml
