@@ -9,7 +9,9 @@ class AmzProductReviewTransformerJob(spark: SparkSession,
                                      metadataInput: String,
                                      reviewsInput: String,
                                      output: String,
-                                     categoryMappingFile: String)
+                                     categoryMappingFile: String,
+                                     limit: Option[Int],
+                                     seed: Option[Int])
   extends Job with JobLogging {
 
   override def execute(): Unit = {
@@ -18,13 +20,16 @@ class AmzProductReviewTransformerJob(spark: SparkSession,
     logInfo(spark, "Metadata Transformation")
     val productMetadata = metadataTransformer.transform(rawMetadata)
 
-    val reviewTransformer = ReviewsTransformer(spark, productMetadata)
+    val reviewTransformer = ReviewsTransformer(spark, productMetadata, limit, seed)
     val rawReviews = spark.read.json(reviewsInput)
     logInfo(spark, "Reviews Transformation")
     val productReviews = reviewTransformer.transform(rawReviews)
 
     logInfo(spark, "Persisting final result")
-    productReviews.write.mode("overwrite").parquet(output)
+
+    productReviews.write
+      .mode("overwrite")
+      .parquet(output)
   }
 }
 
@@ -33,12 +38,16 @@ object AmzProductReviewTransformerJob{
             metadataInput: String,
             reviewsInput: String,
             output: String,
-            categoryMappingFile: String = CategoryParser.defaultMappingPath
+            categoryMappingFile: String = CategoryParser.defaultMappingPath,
+            limit: Option[Int],
+            seed: Option[Int]
             ): AmzProductReviewTransformerJob =
 
     new AmzProductReviewTransformerJob(spark,
       metadataInput,
       reviewsInput,
       output,
-      categoryMappingFile)
+      categoryMappingFile,
+      limit,
+      seed)
 }

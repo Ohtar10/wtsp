@@ -24,8 +24,17 @@ private object AppUtils {
       .action((x, c)=> c.copy(output = x))
       .text("The output path to store the results is required.")
 
-    opt[String]('c', "category-maps").valueName("<category-mappings>")
+    opt[String]('c', "category-maps").required().valueName("<category-mappings>")
         .action((x, c)=> c.copy(categoryMappingFile = x))
+        .text("The category mapping file is required.")
+
+    opt[Int]('l', "limit").valueName("<record-limit>")
+        .action((x, c) => c.copy(limit = x))
+        .text("If you want to limit the amount of records obtained from the process")
+
+    opt[Int]('s', "seed").valueName("<sample-seed>")
+        .action((x, c) => c.copy(seed = x))
+        .text("The random seed for the limit option if you want reproducible results")
 
     help('h', "help").text("Prints this usage text")
   }
@@ -52,7 +61,9 @@ case class Config(
                  metadataInput: String = "",
                  reviewsInput: String = "",
                  output: String = "",
-                 categoryMappingFile: String = ""
+                 categoryMappingFile: String = "",
+                 limit: Int = 0,
+                 seed: Int = 0
                  )
 
 /**
@@ -69,7 +80,9 @@ object AmzProductReviewTransformerLocalApp extends App {
         config.metadataInput,
         config.reviewsInput,
         config.output,
-        config.categoryMappingFile)
+        config.categoryMappingFile,
+        config.limit,
+        config.seed)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -88,7 +101,9 @@ object AmzProductReviewTransformerApp extends App{
         config.metadataInput,
         config.reviewsInput,
         config.output,
-        config.categoryMappingFile)
+        config.categoryMappingFile,
+        config.limit,
+        config.seed)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -100,13 +115,18 @@ object Runner {
           metadataInput: String,
           reviewsInput: String,
           output: String,
-          categoryMappingFile: String): Unit = {
+          categoryMappingFile: String,
+          limit:Int,
+          seed: Int): Unit = {
 
     AmzProductReviewTransformerJob(spark,
       metadataInput,
       reviewsInput,
       output,
-      categoryMappingFile)
+      categoryMappingFile,
+      if (limit > 0) Some(limit) else None,
+      if (seed > 0) Some(seed) else None
+    )
         .execute()
   }
 }

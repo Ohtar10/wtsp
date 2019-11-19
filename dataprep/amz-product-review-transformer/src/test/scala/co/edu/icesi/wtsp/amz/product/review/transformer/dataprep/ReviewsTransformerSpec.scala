@@ -68,5 +68,48 @@ class ReviewsTransformerSpec extends FlatSpec
     //The result should not include the corrupt record
     result.where($"title" === title).count() shouldBe 0L
   }
+  it should "apply the limit accordingly" in {
+    val productMetadata = spark.read.parquet(transformedMetadataPath)
+    val reviews = spark.read.json(productReviewsPath)
+
+    val limit = Some(1000)
+    val reviewsTransformer = ReviewsTransformer(spark, productMetadata, limit)
+
+    val result = reviewsTransformer.transform(reviews)
+
+    val initialRecords = reviews.count()
+    val threshold = 0.1
+    val resultCount = result.count().intValue()
+    val lowerBound = limit.get - (initialRecords * threshold)
+    val upperBound = limit.get + (initialRecords * threshold)
+
+    resultCount should be >= lowerBound.intValue()
+    resultCount should be <= upperBound.intValue()
+
+  }
+  it should "apply the limit accordingly with seed" in {
+    val productMetadata = spark.read.parquet(transformedMetadataPath)
+    val reviews = spark.read.json(productReviewsPath)
+
+    val limit = Some(1000)
+    val seed = Some(123)
+    val reviewsTransformer = ReviewsTransformer(spark, productMetadata, limit, seed)
+
+    val result = reviewsTransformer.transform(reviews)
+
+    val initialRecords = reviews.count()
+    val threshold = 0.1
+    val resultCount = result.count().intValue()
+    val lowerBound = limit.get - (initialRecords * threshold)
+    val upperBound = limit.get + (initialRecords * threshold)
+
+    resultCount should be >= lowerBound.intValue()
+    resultCount should be <= upperBound.intValue()
+
+    //if we execute again we should get exactly the same records
+    val result2 = reviewsTransformer.transform(reviews)
+
+    assertDataFrameEquals(result, result2)
+  }
 
 }

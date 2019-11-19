@@ -4,6 +4,7 @@ import java.io.File
 import java.nio.file.{Files, Paths}
 
 import co.edu.icesi.wtsp.amz.product.review.transformer.SpecCommon
+import co.edu.icesi.wtsp.amz.product.review.transformer.util.CategoryParser
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.SparkException
 import org.apache.spark.sql.AnalysisException
@@ -15,16 +16,20 @@ class AmzProductTransformerJobSpec extends FlatSpec
   with SpecCommon{
 
   "The product review transformer job" should "be able to process products from a path" in {
-    val expected = spark.read.parquet(transformedReviewsPath)
+    val expected = spark.read.parquet(transformedReviewsPath).orderBy("title")
     val job = AmzProductReviewTransformerJob(spark,
       productMetadataPath,
       productReviewsPath,
-      testOutputPath)
+      testOutputPath,
+      CategoryParser.defaultMappingPath,
+      None,
+      None)
 
     job.execute()
 
     Files.exists(Paths.get(testOutputPath)) shouldBe true
-    val result = spark.read.parquet(testOutputPath)
+    val result = spark.read.parquet(testOutputPath).orderBy("title")
+
     assertDataFrameEquals(expected, result)
 
     deleteRecursively(new File(testOutputPath))
@@ -33,7 +38,10 @@ class AmzProductTransformerJobSpec extends FlatSpec
     val job = AmzProductReviewTransformerJob(spark,
       "invalid_metadata_path",
       productReviewsPath,
-      testOutputPath)
+      testOutputPath,
+      CategoryParser.defaultMappingPath,
+      None,
+      None)
 
     a[AnalysisException] should be thrownBy {
       job.execute()
@@ -42,7 +50,10 @@ class AmzProductTransformerJobSpec extends FlatSpec
     val job2 = AmzProductReviewTransformerJob(spark,
       productMetadataPath,
       "invalid_product_reviews_path",
-      testOutputPath)
+      testOutputPath,
+      CategoryParser.defaultMappingPath,
+      None,
+      None)
 
     a[AnalysisException] should be thrownBy {
       job2.execute()
@@ -53,7 +64,10 @@ class AmzProductTransformerJobSpec extends FlatSpec
     val job = AmzProductReviewTransformerJob(spark,
       transformedMetadataPath,
       productReviewsPath,
-      testOutputPath)
+      testOutputPath,
+      CategoryParser.defaultMappingPath,
+      None,
+      None)
 
     a[SparkException] should be thrownBy {
       job.execute()
@@ -64,7 +78,9 @@ class AmzProductTransformerJobSpec extends FlatSpec
       productMetadataPath,
       productReviewsPath,
       testOutputPath,
-      categoryConfigPath)
+      categoryConfigPath,
+      None,
+      None)
 
     job.execute()
 

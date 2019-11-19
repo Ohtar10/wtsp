@@ -8,8 +8,8 @@ import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.StructType
 
-class MetadataTransformer(spark: SparkSession,
-                          categoryParser: CategoryParser)
+class MetadataTransformer(val spark: SparkSession,
+                          val categoryParser: CategoryParser)
   extends Transformer
   with JobLogging
   with Common{
@@ -48,13 +48,15 @@ class MetadataTransformer(spark: SparkSession,
     df.select($"asin",
       trim($"title").as("title"),
       trim($"description").as("description"),
-      categoryColumn.as("category")).
-      where("category is not null")
+      categoryColumn.otherwise("skip").as("category")).
+      where($"category".isNotNull && $"category" =!= "skip")
   }
 
   private def regroupCategories(df: Dataset[_]): DataFrame = {
     logInfo(spark, "Regrouping product categories")
-    df.groupBy($"asin", $"title", $"description").agg(collect_set($"category").as("categories"))
+    df.groupBy($"asin", $"title", $"description")
+      .agg(collect_set($"category").as("categories"))
+      .cache()
   }
 
   override def copy(extra: ParamMap): Transformer = ???
