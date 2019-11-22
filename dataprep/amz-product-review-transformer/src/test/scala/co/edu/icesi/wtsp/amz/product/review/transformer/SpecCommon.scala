@@ -12,6 +12,10 @@ trait SpecCommon {
   val productReviewsPath = s"$resourcesBasePath/reviews/product_reviews.json"
   val transformedReviewsPath = s"$resourcesBasePath/reviews/transformed_reviews"
 
+  val finalDocumentsPath = s"$resourcesBasePath/documents"
+  val documentsWithArrayCategoriesPath = s"$finalDocumentsPath/expected_docs.parquet"
+  val documentsWithStringCategoriesPath = s"$finalDocumentsPath/expected_docs_str_cat.parquet"
+
   val categoryConfigPath = s"$resourcesBasePath/config/category_mapping.yml"
 
   val testOutputPath = s"$resourcesBasePath/testOutput/"

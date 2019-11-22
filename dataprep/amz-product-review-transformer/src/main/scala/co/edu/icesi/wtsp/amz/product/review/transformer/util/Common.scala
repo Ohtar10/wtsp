@@ -8,10 +8,10 @@ trait Common {
   /**
    * Regex pattern to clean up text from dirty character.
    */
-  val textBlacklistRegex: String = "&.+;|'+|[@#$%^&*<>_-]"
+  val textBlacklistRegex: String = "&.+;|'+|\"+|[@#$%^&*<>_-]"
 
   /**
-   * The minimum amount of characters for the review text.
+   * The minimum amount of characters for the document text.
    */
-  val reviewTextMinCharacters: Int = 100
+  val documentTextMinCharacters: Int = 100
 }

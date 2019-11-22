@@ -20,7 +20,7 @@ class MetadataTransformer(val spark: SparkSession,
     logInfo(spark, "Transforming product metadata")
     val expandedCategories = expandCategories(dataset)
     val categoryMapped = applyCategoryMapping(expandedCategories)
-    regroupCategories(categoryMapped)
+    regroupCategories(categoryMapped).cache()
   }
 
   private def expandCategories(df: Dataset[_]): DataFrame = {

@@ -15,8 +15,10 @@ class AmzProductTransformerJobSpec extends FlatSpec
   with Matchers
   with SpecCommon{
 
-  "The product review transformer job" should "be able to process products from a path" in {
-    val expected = spark.read.parquet(transformedReviewsPath).orderBy("title")
+  import spark.implicits._
+
+  "The product review transformer job" should "be able to generate documents in array category form" in {
+    val expected = spark.read.parquet(documentsWithArrayCategoriesPath).orderBy($"document")
     val job = AmzProductReviewTransformerJob(spark,
       productMetadataPath,
       productReviewsPath,
@@ -28,7 +30,27 @@ class AmzProductTransformerJobSpec extends FlatSpec
     job.execute()
 
     Files.exists(Paths.get(testOutputPath)) shouldBe true
-    val result = spark.read.parquet(testOutputPath).orderBy("title")
+    val result = spark.read.parquet(testOutputPath).orderBy($"document")
+
+    assertDataFrameEquals(expected, result)
+
+    deleteRecursively(new File(testOutputPath))
+  }
+  it should "be able to generate documents in string category form" in {
+    val expected = spark.read.parquet(documentsWithStringCategoriesPath).orderBy($"document")
+    val job = AmzProductReviewTransformerJob(spark,
+      productMetadataPath,
+      productReviewsPath,
+      testOutputPath,
+      CategoryParser.defaultMappingPath,
+      None,
+      None,
+      strCat = true)
+
+    job.execute()
+
+    Files.exists(Paths.get(testOutputPath)) shouldBe true
+    val result = spark.read.parquet(testOutputPath).orderBy($"document")
 
     assertDataFrameEquals(expected, result)
 

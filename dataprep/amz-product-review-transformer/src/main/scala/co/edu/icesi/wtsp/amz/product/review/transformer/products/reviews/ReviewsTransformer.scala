@@ -34,15 +34,13 @@ class ReviewsTransformer(spark: SparkSession,
       case None => dataset
     }
 
-    base.select($"asin", $"summary", $"reviewText".as("review_text")).
-      join(productMetadata, "asin").
+    base.select($"asin", $"summary", $"reviewText".as("review_text"))
+      .where($"review_text".isNotNull && (length($"review_text") >= documentTextMinCharacters))
+      .join(productMetadata, "asin").
       select($"categories",
-        $"title",
-        $"description",
         trim(regexp_replace($"summary", textBlacklistRegex, "")).as("summary"),
         trim(regexp_replace($"review_text", textBlacklistRegex, "")).as("review_text"))
-      .where($"review_text".isNotNull && (length($"review_text") > reviewTextMinCharacters))
-      .orderBy($"title")
+      .orderBy($"summary").cache()
   }
 
   override def copy(extra: ParamMap): Transformer = ???

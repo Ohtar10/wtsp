@@ -36,6 +36,10 @@ private object AppUtils {
         .action((x, c) => c.copy(seed = x))
         .text("The random seed for the limit option if you want reproducible results")
 
+    opt[Unit]("strcat").valueName("<string-categories>")
+        .action((_, c) => c.copy(strCat = true))
+        .text("document categories as comma separated strings")
+
     help('h', "help").text("Prints this usage text")
   }
 
@@ -63,7 +67,8 @@ case class Config(
                  output: String = "",
                  categoryMappingFile: String = "",
                  limit: Int = 0,
-                 seed: Int = 0
+                 seed: Int = 0,
+                 strCat: Boolean = false
                  )
 
 /**
@@ -82,7 +87,8 @@ object AmzProductReviewTransformerLocalApp extends App {
         config.output,
         config.categoryMappingFile,
         config.limit,
-        config.seed)
+        config.seed,
+        config.strCat)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -103,7 +109,8 @@ object AmzProductReviewTransformerApp extends App{
         config.output,
         config.categoryMappingFile,
         config.limit,
-        config.seed)
+        config.seed,
+        config.strCat)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -117,7 +124,8 @@ object Runner {
           output: String,
           categoryMappingFile: String,
           limit:Int,
-          seed: Int): Unit = {
+          seed: Int,
+          strCat: Boolean): Unit = {
 
     AmzProductReviewTransformerJob(spark,
       metadataInput,
@@ -125,7 +133,8 @@ object Runner {
       output,
       categoryMappingFile,
       if (limit > 0) Some(limit) else None,
-      if (seed > 0) Some(seed) else None
+      if (seed > 0) Some(seed) else None,
+      strCat
     )
         .execute()
   }

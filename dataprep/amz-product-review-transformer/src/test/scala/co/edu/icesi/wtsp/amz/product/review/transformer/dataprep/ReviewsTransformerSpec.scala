@@ -15,7 +15,7 @@ class ReviewsTransformerSpec extends FlatSpec
   import spark.implicits._
 
   "The Reviews transformer" should "be able to read clean reviews" in {
-    val expected = spark.read.parquet(transformedReviewsPath).orderBy($"title")
+    val expected = spark.read.parquet(transformedReviewsPath).orderBy($"summary")
     val productMetadata = spark.read.parquet(transformedMetadataPath)
     val reviews = spark.read.json(productReviewsPath)
 
