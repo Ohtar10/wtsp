@@ -56,7 +56,7 @@
     "executorCores": 4,
     "numExecutors": 2,
     "conf": {
-      "spark.jars.packages": "com.esri.geometry:esri-geometry-api:2.2.2"
+      "spark.jars.packages": "com.esri.geometry:esri-geometry-api:2.2.2,io.circe:circe-yaml_2.11:0.10.0,io.circe:circe-generic_2.11:0.11.1"
     }
   },
 

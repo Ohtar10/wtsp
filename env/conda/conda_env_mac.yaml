@@ -25,6 +25,7 @@ dependencies:
   - gensim
   - dask
   - pyemd
+  - beautifulsoup4
   - pip:
     - urlextract
     - swifter
