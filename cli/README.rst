@@ -1,0 +1,139 @@
+WTSP ML — CLI to Where to Sell Products ML training
+===================================================
+
+.. contents:: **Table of Contents**
+  :depth: 3
+
+Introduction
+------------
+
+This repository contains the code for the project under the codename *wtsp*,
+an automated workflow to describe, train and transform data from twitter and
+product review data in order to characterize geographic areas in terms of their
+relationship with products.
+
+The tool is a CLI (Command Line Interface) that executes the necessary tasks in
+the above mentioned stages, saving metadata on each execution in the local file
+system that can be used by subsequent stages or by the user as output or intermediate
+results.
+
+This tool is part of the MsC project of Luis Eduardo Ferro Diez <luisedof10@gmail.com>
+and it has only demonstrative purpose.
+
+The project is maintained by Luis Eduardo Ferro Diez.
+
+
+Deliverables
+------------
+
+The tool will be a python installable CLI tool from sources, not all the dependencies
+will be part of the final requirements file since there are some that are really
+hard to make it work out of the box and they will be advertised to the users
+to install them manually.
+
+There will be a dockerized version of the tool to speed up the setup process, however,
+the ANN portion of the project won't be able to take advantage of the GPU if available.
+
+.. code-block:: console
+
+    docker container run -v ~/.wtsp/:/home/wtsp/.wtsp/ wtsp:0.1.0
+
+Formally released packages will follow later.
+
+
+Directory layout
+----------------
+
+This is a rough overview of the top-level directory structure inside the
+repository:
+
+::
+
+    +- docs             # documentation for the tool's usage.
+    |
+    +- examples         # examples, mini milestones, notebooks.
+    |
+    +- wtsp
+    |  |
+    |  +- core       # Core artifacts
+    |  |
+    |  +- utils         # utilities and helpers.
+    |
+    +- tests
+       |
+       +- assets        # assets used in the tests
+       |
+       +- unit          # unit tests.
+
+
+Development setup for end users
+-------------------------------
+
+Prerequisites
+.............
+
+Make sure you have a working installation of Python 3.6+. All commands below
+are to be entered at a command prompt in the root directory of the unpacked
+Nagini repository.
+
+Install instructions
+....................
+
+It is recommended to use Conda_ to create an isolated environment, first.
+Then, you can install the package using ``conda`` from the unpacked archive's
+root directory like this:
+
+.. code-block:: console
+
+    $ conda env create --name wtsp -f environment.yml
+    $ conda activate wtsp
+    $ pip install -e .
+
+To update the conda environment.yml file and export without fixed versions:
+
+.. code-block:: console
+
+    $ conda update conda
+    $ conda update --all
+    $ conda env export | cut -f 1 -d '=' > environment.yml
+
+
+Test instructions
+.................
+
+To run the entire test suite you only need to execute the following command:
+
+.. code-block:: console
+
+    $ make test
+
+
+Support
+-------
+
+The best way to get support is to create a Github,
+
+Contribution
+------------
+
+See `CONTRIBUTING.rst`_
+
+.. _CONTRIBUTING.rst: ./CONTRIBUTING.rst
+
+Future
+------
+
+* Better automation and execution control.
+
+License
+-------
+
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+See the LICENSE_ file in the root of this project for license details.
+
+
+.. _Anaconda: https://www.anaconda.com/distribution/
+.. _Conda: https://docs.conda.io/
+.. _LICENSE: ./LICENSE

@@ -1,0 +1,6 @@
+#Python files
+.mypy_cache
+.pytest_cache
+.coverage
+.benchmarks
+wtsp.egg-info
