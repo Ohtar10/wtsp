@@ -32,9 +32,9 @@ def test_transform_help_command():
     assert all(item in result.output.split() for item in cli.transform.__doc__.split())
 
 
-def test_report_help_command():
+def test_export_help_command():
     runner = CliRunner()
-    result = runner.invoke(cli.report, ['--help'])
+    result = runner.invoke(cli.export, ['--help'])
     assert result.exit_code == 0
-    assert all(item in result.output.split() for item in cli.report.__doc__.split())
+    assert all(item in result.output.split() for item in cli.export.__doc__.split())
 

@@ -63,7 +63,7 @@ def train_tweets(ctx, model, input_file, kwargs):
         location*            The base location to filter the data points (tweets.place_name)"""
     work_dir = ctx['WORKDIR']
     debug = ctx['DEBUG']
-    trainer = Trainer(work_dir, debug, model)
+    trainer = Trainer(work_dir, debug, "tweets", model)
     args = utils.parse_kwargs(kwargs)
     return trainer.run(input_file, **args)
 
@@ -81,8 +81,8 @@ def transform(ctx):
 
 @wtsp.group()
 @click.pass_context
-def report(ctx):
-    """Report module.
+def export(ctx):
+    """Export module.
 
     Use this module to export in different formants the results of
     the previous two modules.
