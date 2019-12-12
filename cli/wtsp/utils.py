@@ -1,8 +1,20 @@
+"""General and transversal utilities module."""
+
+
 from typing import Dict
 import re
 
 
-def parse_kwargs(string:str) -> Dict[str, object]:
+def parse_kwargs(string: str) -> Dict[str, object]:
+    """Parse kwargs strings with format.
+
+    key1=value1,key2=1,key3=0.5,key4="hello world",key5='hello world'
+
+    and converts it into a dictionary with each key and parsed value.
+
+    :param string: kwargs strings
+    :returns: dictionary with parameters parsing
+    """
     arg_list = string.split(",")
     kwargs = {key: infer_and_cast_to_type(extract_string(value))
               for key, value in [arg.split("=") for arg in arg_list]}
@@ -10,11 +22,25 @@ def parse_kwargs(string:str) -> Dict[str, object]:
 
 
 def extract_string(string: str) -> str:
+    """Extract text from a string that is enclosed with quotes.
+
+    e.g., converts "my string" into->  my string
+
+    :param string: string to extract text
+    :returns: string without quotes
+    """
     matcher = re.search(r'^[\'"]?([\w\d\s\\.]+)[\'"]?$', string)
     return matcher.group(1)
 
 
 def infer_and_cast_to_type(string: str) -> object:
+    """Try to parse the given string into numerical types.
+
+    float->int->str
+
+    :param string: string value to be parsed
+    :returns: float or int if it was possible to convert, str otherwise
+    """
     try:
         return float(string)
     except (ValueError, TypeError):

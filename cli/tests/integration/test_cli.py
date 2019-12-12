@@ -1,3 +1,5 @@
+"""CLI related tests."""
+
 from click.testing import CliRunner
 from wtsp.cli import cli
 

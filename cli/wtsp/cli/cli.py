@@ -1,3 +1,5 @@
+"""CLI implementation."""
+
 import click
 from wtsp import utils
 from wtsp.__version__ import __version__
@@ -5,6 +7,7 @@ from wtsp.train.base import Trainer
 
 
 def docstring_parameter(*sub):
+    """Decorate the main click command to format the docstring."""
     def dec(obj):
         obj.__doc__ = obj.__doc__.format(*sub)
         return obj
@@ -18,8 +21,7 @@ def docstring_parameter(*sub):
 @click.pass_context
 @docstring_parameter(__version__)
 def wtsp(ctx, debug, work_dir):
-    """Where To Sell Products (wtsp) {0}"""
-
+    """Where To Sell Products (wtsp) {0}."""
     ctx.ensure_object(dict)
     ctx.obj['DEBUG'] = debug
     ctx.obj['WORKDIR'] = work_dir
@@ -30,7 +32,9 @@ def wtsp(ctx, debug, work_dir):
 def describe(ctx):
     """Describe module.
 
-    Use this module to generate descriptive data that might help you to take decisions."""
+    Use this module to generate descriptive data 
+    that might help you to take decisions.
+    """
     pass
 
 
@@ -39,7 +43,8 @@ def describe(ctx):
 def train(ctx):
     """Train module.
 
-    Use this module to train the different models used for the project."""
+    Use this module to train the different models used for the project.
+    """
     pass
 
 
@@ -49,7 +54,7 @@ def train(ctx):
 @click.argument('input')
 @click.argument('kwargs', required=True, nargs=-1)
 def train_tweets(ctx, model, input_file, kwargs):
-    """Trains ML models within the tweets domain.
+    r"""Train ML models within the tweets domain.
 
     Provide the model to train via the --model option
 
@@ -60,7 +65,8 @@ def train_tweets(ctx, model, input_file, kwargs):
     For model 'nearest-neighbor':
 
         n_neighbors*         The number of neighbors to consider\n
-        location*            The base location to filter the data points (tweets.place_name)"""
+        location*            The base location to filter the data points (tweets.place_name)
+    """
     work_dir = ctx['WORKDIR']
     debug = ctx['DEBUG']
     trainer = Trainer(work_dir, debug, "tweets", model)
@@ -75,7 +81,8 @@ def transform(ctx):
 
     Use this module to transform data using the trained models.
 
-    Note: You need to first execute the train module first."""
+    Note: You need to first execute the train module first.
+    """
     pass
 
 
@@ -88,6 +95,7 @@ def export(ctx):
     the previous two modules.
 
     Note: You need to first execute one or both of the previous
-    modules in order to invoke reports."""
+    modules in order to invoke reports.
+    """
     pass
 

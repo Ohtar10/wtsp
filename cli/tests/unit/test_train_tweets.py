@@ -1,3 +1,5 @@
+"""Tests related to tweet model training."""
+
 import os.path
 import pytest
 

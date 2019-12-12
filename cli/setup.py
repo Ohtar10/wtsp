@@ -1,6 +1,7 @@
-from setuptools import setup, find_packages
 
-"""This is the setup file as used by ``setuptools`` and ``pip``"""
+"""This is the setup file as used by ``setuptools`` and ``pip``."""
+
+from setuptools import setup, find_packages
 
 with open('README.rst', encoding='utf-8') as f:
     readme = f.read()

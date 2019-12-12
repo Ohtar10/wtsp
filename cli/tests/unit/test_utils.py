@@ -1,3 +1,5 @@
+"""Tests the utils functions."""
+
 import pytest
 from wtsp.utils import parse_kwargs
 

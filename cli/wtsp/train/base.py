@@ -1,3 +1,6 @@
+"""Base components of the train module."""
+
+
 import os.path
 from wtsp.core.base import Process
 from wtsp.exceptions import InvalidArgumentException
@@ -5,15 +8,20 @@ from wtsp.train.tweets import GeoTweetsNearestNeighbors
 
 
 class Trainer(Process):
-    """This class orchestrates the model training modules
-    invoking each according to how this class was initialized"""
+    """Trainer class.
+
+    This class orchestrates the model training modules
+    invoking each according to how this class was initialized.
+    """
 
     def __init__(self, work_dir, debug, domain, model):
+        """Create a Trainer object."""
         super().__init__(work_dir, debug)
         self.domain = domain
         self.model = model
 
     def run(self, input_file, **kwargs):
+        """Execute the training process."""
         self.__validate_inputs(input_file, kwargs)
         if self.domain == 'tweets':
             if self.model == 'nearest-neighbors':

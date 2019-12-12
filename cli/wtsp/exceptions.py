@@ -1,7 +1,11 @@
+"""WTSP custom exceptions."""
+
+
 class WTSPBaseException(Exception):
-    """Base class for WTSP Exceptions"""
+    """Base class for WTSP Exceptions."""
 
     def __init__(self, *args: object) -> None:
+        """Create a WTSPBaseException object."""
         self.offending_data = args[0]
         super().__init__(self._build_message())
 
@@ -10,6 +14,7 @@ class WTSPBaseException(Exception):
 
 
 class InvalidArgumentException(WTSPBaseException):
-
+    """Rised when invalid arguments when invoking functionalities."""
+    
     def _build_message(self) -> str:
         return f"An invalid argument was provided: {self.offending_data}. Please review."

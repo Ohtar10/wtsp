@@ -1,1 +1,1 @@
-"""wtsp command line tool main package"""
+"""wtsp command line tool main package."""
