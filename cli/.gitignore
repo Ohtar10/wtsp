@@ -4,3 +4,4 @@
 .coverage
 .benchmarks
 wtsp.egg-info
+tests/assets/test_work_dir

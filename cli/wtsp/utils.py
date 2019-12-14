@@ -1,9 +1,8 @@
 """General and transversal utilities module."""
 
-
-from typing import Dict
 import re
-
+from typing import Dict
+from shapely import wkt
 
 def parse_kwargs(string: str) -> Dict[str, object]:
     """Parse kwargs strings with format.
@@ -51,3 +50,15 @@ def infer_and_cast_to_type(string: str) -> object:
         return int(string)
     except (ValueError, TypeError):
         return string
+
+
+def parse_geometry(geom):
+    """Parse geometry.
+
+    Parses a WKT geometry and return the
+    corresponding shapely object.
+    """
+    if geom:
+        return wkt.loads(geom)
+    else:
+        return None
