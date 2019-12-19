@@ -1,16 +1,23 @@
 """Scikit learn transformers of data."""
+import logging
+import os
+import pickle
 from typing import Dict
 
 import geopandas as gpd
 import numpy as np
 import pandas as pd
-import os
-import shutil
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
+from keras import regularizers
+from keras.callbacks import EarlyStopping
+from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
+from keras.models import Model
 from nltk.tokenize import word_tokenize
 from shapely import wkt
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import MultiLabelBinarizer
+
 from wtsp.utils import ensure_nltk_resource_is_available
 
 
@@ -196,6 +203,7 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         d2v_model.build_vocab(tagged_documents)
 
         for epoch in range(self.epochs):
+            logging.info(f"Epoch {epoch}/{self.epochs}...")
             d2v_model.train(tagged_documents,
                             total_examples=d2v_model.corpus_count,
                             epochs=d2v_model.epochs)
@@ -222,6 +230,140 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         if os.path.exists(f"{save_path}.wv.vectors.npy"):
             os.remove(f"{save_path}.wv.vectors.npy")
         self.d2v_model.save(save_path)
+
+    @staticmethod
+    def load(model_path: str, document_column: str):
+        d2v_model = Doc2Vec.load(model_path)
+        transformer = Doc2VecWrapper(document_column=document_column)
+        transformer.d2v_model = d2v_model
+        return transformer
+
+
+class CategoryEncoder(BaseEstimator, TransformerMixin):
+    """Category encoder.
+
+    This transformer will train a sklearn MultilabelBinarizer
+    on the selected column of the provided data frame and
+    on transform it will add the encoded values as an
+    additional column. The encoder can be saved for
+    later usage.
+    """
+    def __init__(self, label_column="categories"):
+        self.label_column = label_column
+        self.label_encoder = None
+
+    def fit(self, X, y=None):
+        data = X.copy()
+        categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
+        category_encoder = MultiLabelBinarizer()
+        category_encoder.fit(categories)
+        self.label_encoder = category_encoder
+        return self
+
+    def transform(self, X, y=None):
+        data = X.copy()
+        categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
+        encoded_labels = self.label_encoder.transform(categories)
+        encoded_labels = [arr for arr in encoded_labels]
+        data["encoded_label"] = encoded_labels
+        return data
+
+    def save_model(self, save_path):
+        with open(save_path, 'wb') as model_file:
+            pickle.dump(self.label_encoder, model_file)
+
+
+class ProductsCNN(BaseEstimator, TransformerMixin):
+    """Products Classifier CNN.
+
+    This transformer contains the logic and architecture
+    definition of the Convolutional Neural Network that classifies
+    products in based on the document embeddings that represents them.
+    """
+    def __init__(self, features_column, label_column, classes,
+                 vec_size=100,
+                 epochs=100,
+                 batch_size=1000,
+                 validation_split=0.2):
+
+        self.features_column = features_column
+        self.label_column = label_column
+        self.vec_size = vec_size
+        self.classes = classes
+        self.epochs = epochs
+        self.batch_size = batch_size
+        self.validation_split = validation_split
+        self.history = None
+        self.ann_model = None
+
+    def __build_ann_architecture(self):
+        # Define the inputs
+        embedding_input = Input(shape=(self.vec_size, 1), dtype='float32', name='comment_text')
+
+        # Define convolutional layers
+        conv = Conv1D(64, 3, activation='tanh', input_shape=(self.vec_size,), kernel_regularizer=regularizers.l2())(
+            embedding_input)
+        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
+        conv = Conv1D(128, 3, activation='tanh')(conv)
+        conv = SpatialDropout1D(0.2)(conv)
+        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
+        conv = Conv1D(128, 3, activation='tanh')(conv)
+        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
+        conv = SpatialDropout1D(0.1)(conv)
+        conv = Conv1D(64, 3, activation='tanh')(conv)
+        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
+        conv_output = Flatten()(conv)
+
+        # Define dense layers
+        # minimize the dense layers - maybe add one of 64
+        x = Dense(128, activation='relu')(conv_output)
+        x = Dropout(0.5)(x)
+
+        # And finally make the predictions using the previous layer as input
+        main_output = Dense(self.classes, activation='softmax', name='prediction')(x)
+
+        ann_model = Model(inputs=embedding_input, outputs=main_output)
+        ann_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+        self.ann_model = ann_model
+
+    def fit(self, X, y=None):
+        self.__build_ann_architecture()
+        X_train = X[self.features_column].values
+        X_train = np.array([e for e in X_train])
+        y_true = np.array([l for l in y])
+        X_rs = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
+        early_stopping = EarlyStopping(monitor='val_loss', patience=10, min_delta=1e-7, restore_best_weights=True)
+        history = self.ann_model.fit(X_rs, y_true,
+                                     epochs=self.epochs,
+                                     batch_size=self.batch_size,
+                                     validation_split=self.validation_split,
+                                     callbacks=[early_stopping])
+        self.history = history
+        return self
+
+    def transform(self, X, y=None):
+        data = X.copy()
+        features = data[self.features_column].values
+        features = np.array([e for e in features])
+        features = features.reshape(features.shape[0], features.shape[1], 1)
+        predictions = self.ann_model.predict(features)
+        predictions = [p for p in predictions]
+        data["predictions"] = predictions
+        return data
+
+    def save_model(self, save_path, name=None):
+        if not name:
+            name = "product_cnn"
+        definition_path = f"{save_path}/{name}-def.yaml"
+        weights_path = f"{save_path}/{name}-weights.h5"
+
+        ann_model_definition = self.ann_model.to_yaml()
+
+        with open(definition_path, 'w') as file:
+            file.write(ann_model_definition)
+
+        self.ann_model.save_weights(weights_path)
 
 
 def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):

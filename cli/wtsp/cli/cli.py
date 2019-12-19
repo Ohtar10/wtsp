@@ -7,6 +7,7 @@ import click
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
+from wtsp.exceptions import ModelTrainingException
 from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
 
@@ -134,8 +135,11 @@ def train_products(ctx, model, params, input_data):
     """
     work_dir = ctx.obj["WORK_DIR"]
     trainer = ProductsTrainer(work_dir, model, params)
-    result = trainer.train(input_data)
-    print(result)
+    try:
+        result = trainer.train(input_data)
+        print(result)
+    except ModelTrainingException as e:
+        print(e)
 
 
 @wtsp.group()

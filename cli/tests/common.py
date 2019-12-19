@@ -4,9 +4,9 @@ import shutil
 ASSETS_PATH = "tests/assets"
 
 # input data variables
-RAW_TWEETS_PATH = f"{ASSETS_PATH}/tweets"
-RAW_PRODUCTS_PATH = f"{ASSETS_PATH}/products"
-
+RAW_TWEETS_PATH = f"{ASSETS_PATH}/tweets/tweets.parquet"
+RAW_PRODUCTS_PATH = f"{ASSETS_PATH}/products/products.parquet"
+EMBEDDINGS_PATH = f"{ASSETS_PATH}/products/embeddings/"
 # application variables
 TEST_WORK_DIR_PATH = f"{ASSETS_PATH}/test_work_dir"
 
@@ -26,3 +26,10 @@ def get_full_path(file, relative):
 
 def delete_path(path):
     shutil.rmtree(path, ignore_errors=True)
+
+
+def copy_folder_recursively(origin: str, destination: str):
+    try:
+        shutil.copytree(origin, destination)
+    except (shutil.Error, OSError) as e:
+        print(f"Directory not copied. Error {e}")
