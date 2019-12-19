@@ -42,13 +42,13 @@ def infer_and_cast_to_type(string: str) -> object:
     :returns: float or int if it was possible to convert, str otherwise
     """
     try:
-        return float(string)
+        return int(string)
     except (ValueError, TypeError):
         # Ignore and continue with the next type
         pass
 
     try:
-        return int(string)
+        return float(string)
     except (ValueError, TypeError):
         return string
 

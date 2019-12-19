@@ -1,8 +1,11 @@
 """Scikit learn transformers of data."""
 
 from sklearn.base import BaseEstimator, TransformerMixin
+from shapely import wkt
 from typing import Dict
 import pandas as pd
+import geopandas as gpd
+import numpy as np
 
 
 class CountTransformer(BaseEstimator, TransformerMixin):
@@ -44,7 +47,7 @@ class DataFrameFilter(BaseEstimator, TransformerMixin):
     input data frame according to the provided
     filed values.
     """
-    def __init__(self, field_values: Dict[str, str]):
+    def __init__(self, field_values: Dict[str, object]):
         self.field_values = field_values
 
     def fit(self, X, y=None):
@@ -80,7 +83,54 @@ class MultiValueColumnExpander(BaseEstimator, TransformerMixin):
         return data.explode(self.expand_column)
 
 
-def flat_columns(df: pd.DataFrame, colnames :Dict[str, str] = {}):
+class GeoPandasTransformer(BaseEstimator, TransformerMixin):
+    """Geo Pandas Transformer.
+
+    Given a normal pandas data frame with a geometry column
+    it will convert it into a geo pandas data frame.
+    """
+    def __init__(self, geometry_field, columns):
+        self.geometry_field = geometry_field
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self  # do nothing
+
+    def transform(self, X, y=None):
+        data = X[self.columns]
+        data = data[data[self.geometry_field].notnull()]
+        data[self.geometry_field] = data[self.geometry_field].apply(parse_geometry)
+        return gpd.GeoDataFrame(data, geometry=self.geometry_field)
+
+
+class GeoPointTransformer(BaseEstimator, TransformerMixin):
+    """Geo Point transformer.
+
+    Given a geo pandas data frame and
+    a location column, it will get the points
+    as x, y coordinates and either add them as an additional
+    column in the data frame or return only the points as
+    a numpy array.
+    """
+    def __init__(self, location_column, only_points=False):
+        self.location_column = location_column
+        self.only_points = only_points
+
+    def fit(self, X, y=None):
+        return self  # do nothing
+
+    def transform(self, X, y=None):
+        data = X[X[self.location_column].notnull()]
+        points = data[self.location_column].apply(lambda p: [p.x, p.y])
+        if self.only_points:
+            points = np.array(points.values.tolist())
+            return points
+        else:
+            data["location_coordinates"] = points
+            return data
+
+
+def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
     """Flat columns.
 
     Given a multi-indexed pandas DataFrame,
@@ -92,3 +142,16 @@ def flat_columns(df: pd.DataFrame, colnames :Dict[str, str] = {}):
     if colnames:
         return df.rename(columns=colnames)
     return df
+
+
+def parse_geometry(geom):
+    """Parse Geometry.
+
+    If a valid WKT geometry is provided
+    it will convert it ino a shapely geometry.
+    Otherwise None is returned.
+    """
+    if geom:
+        return wkt.loads(geom)
+    else:
+        return None

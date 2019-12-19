@@ -7,6 +7,7 @@ from wtsp.__version__ import __version__
 from wtsp.describe.describe import Describer
 from wtsp.train.base import Trainer
 from wtsp.core.base import DEFAULT_WORK_DIR
+from wtsp.train.tweets import TweetsTrainer
 
 
 def docstring_parameter(*sub):
@@ -89,10 +90,14 @@ def train(ctx):
 
 @train.command("tweets")
 @click.pass_context
-@click.option('-m', '--model', required=True, help='Executes a model training in the tweets domain')
-@click.argument('input_file')
-@click.argument('kwargs', required=True, nargs=-1)
-def train_tweets(ctx, model, input_file, kwargs):
+@click.option('-m', '--model', default="nearest-neighbors",
+              required=True, help='Executes a model training in the tweets domain')
+@click.option("-f", "--filters", required=True,
+              help="Filters to use over the data set columns to narrow down the load.")
+@click.option('-p', "--params", required=True, help="Model parameters")
+@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.argument('input_data')
+def train_tweets(ctx, model, filters, params, output_dir, input_data):
     r"""Train ML models within the tweets domain.
 
     Provide the model to train via the --model option
@@ -104,13 +109,11 @@ def train_tweets(ctx, model, input_file, kwargs):
     For model 'nearest-neighbor':
 
         n_neighbors*         The number of neighbors to consider\n
-        location*            The base location to filter the data points (tweets.place_name)
+        location_column*     the location column with the geometry\n
     """
-    work_dir = ctx['WORKDIR']
-    debug = ctx['DEBUG']
-    trainer = Trainer(work_dir, debug, "tweets", model)
-    args = utils.parse_kwargs(kwargs)
-    return trainer.run(input_file, **args)
+    trainer = TweetsTrainer(model, filters, params, output_dir)
+    result = trainer.train(input_data)
+    print(result)
 
 
 @train.command("products")
