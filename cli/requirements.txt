@@ -1,3 +1,7 @@
+nltk
+geopandas
+shapely
+gensim
 scikit-learn
 numpy
 pandas

@@ -1,12 +1,13 @@
 """CLI implementation."""
 
-import click
 import logging
-from wtsp import utils
+
+import click
+
 from wtsp.__version__ import __version__
-from wtsp.describe.describe import Describer
-from wtsp.train.base import Trainer
 from wtsp.core.base import DEFAULT_WORK_DIR
+from wtsp.describe.describe import Describer
+from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
 
 
@@ -119,9 +120,9 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
 @train.command("products")
 @click.pass_context
 @click.option("-m", "--model", required=True, help="Model type to train against he products")
-@click.option("-d", "--data", required=True, help="Data set name to use in training")
-@click.argument("kwargs", required=True, nargs=-1)
-def train_products(ctx, model, data, kwargs):
+@click.option('-p', "--params", required=True, help="Model parameters")
+@click.argument('input_data')
+def train_products(ctx, model, params, input_data):
     r"""Train ML models for products.
 
     Trains the model requested with --model option and using
@@ -131,7 +132,10 @@ def train_products(ctx, model, data, kwargs):
     Provide them as a comma separated key=value argument string, e.g.,
     key1=value1,key2=value2. Arguments with (*) are mandatory.
     """
-    pass
+    work_dir = ctx.obj["WORK_DIR"]
+    trainer = ProductsTrainer(work_dir, model, params)
+    result = trainer.train(input_data)
+    print(result)
 
 
 @wtsp.group()

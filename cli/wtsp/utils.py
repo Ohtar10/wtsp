@@ -1,6 +1,7 @@
 """General and transversal utilities module."""
 
 import re
+import nltk
 from typing import Dict
 from shapely import wkt
 
@@ -63,3 +64,11 @@ def parse_geometry(geom):
         return wkt.loads(geom)
     else:
         return None
+
+
+def ensure_nltk_resource_is_available(name: str):
+    """Ensure nltk resource is available."""
+    try:
+        nltk.data.find(f"tokenizers/{name}")
+    except LookupError:
+        nltk.download(name)

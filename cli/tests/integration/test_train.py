@@ -25,3 +25,26 @@ def test_train_tweets_n_neighbors():
     assert os.path.exists(f"{result_dir}/nearest_neighbors.png")
     assert os.path.exists(f"{result_dir}/scatter_plot.png")
     common.delete_path(result_dir)
+
+
+def test_train_product_embeddings():
+    runner = CliRunner()
+    input_data = common.get_full_path(tests_path, common.RAW_PRODUCTS_PATH)
+    output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+    params = "label_col=categories,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+    result = runner.invoke(cli.wtsp, ['--work-dir',
+                                      output_path,
+                                      "train",
+                                      "products",
+                                      "--model",
+                                      "embeddings",
+                                      "--params",
+                                      params,
+                                      input_data])
+    assert result.exit_code == 0
+    # validate the existence of the output directory
+    result_dir = f"{output_path}/products/models/embeddings"
+    assert os.path.exists(result_dir)
+    # and the content
+    assert os.path.exists(f"{result_dir}/d2v_model.model")
+    common.delete_path(result_dir)
