@@ -2,17 +2,25 @@
 import logging
 import os
 import pickle
+import warnings
 from typing import Dict
+
+# To suppress lib warnings
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", category=FutureWarning)
+    import tensorflow as tf
+    from keras import regularizers
+    from keras.callbacks import EarlyStopping
+    from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
+    from keras.models import Model
+    tf.logging.set_verbosity(tf.logging.ERROR)
+
 
 import geopandas as gpd
 import numpy as np
 import pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
-from keras import regularizers
-from keras.callbacks import EarlyStopping
-from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
-from keras.models import Model
 from nltk.tokenize import word_tokenize
 from shapely import wkt
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -297,6 +305,7 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         self.ann_model = None
 
     def __build_ann_architecture(self):
+        init_tensorflow()
         # Define the inputs
         embedding_input = Input(shape=(self.vec_size, 1), dtype='float32', name='comment_text')
 
@@ -409,3 +418,10 @@ def create_tagged_document_fn(tags_column, corpus_column):
         return pd.Series([categories, document, tagged_document], index=index)
 
     return create_tagged_document
+
+
+def init_tensorflow():
+    s_config = tf.ConfigProto()
+    # s_config.gpu_options.allow_growth = True
+    s_config.gpu_options.per_process_gpu_memory_fraction = 0.6
+    tf.keras.backend.set_session(tf.Session(config=s_config))
