@@ -4,6 +4,7 @@ import re
 from typing import Dict
 from shapely import wkt
 
+
 def parse_kwargs(string: str) -> Dict[str, object]:
     """Parse kwargs strings with format.
 

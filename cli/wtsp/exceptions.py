@@ -14,7 +14,21 @@ class WTSPBaseException(Exception):
 
 
 class InvalidArgumentException(WTSPBaseException):
-    """Rised when invalid arguments when invoking functionalities."""
+    """Raised when invalid arguments when invoking functionalities."""
     
     def _build_message(self) -> str:
         return f"An invalid argument was provided: {self.offending_data}. Please review."
+
+
+class DataException(WTSPBaseException):
+    """Raised when there is a data related error."""
+
+    def _build_message(self) -> str:
+        return f"There is a data related error: {self.offending_data}. Please review."
+
+
+class DataLoadException(DataException):
+    """Raised when there is a problem loading data."""
+
+    def _build_message(self) -> str:
+        return f"There is a problem loading the data: {self.offending_data}. Please review."

@@ -1,9 +1,12 @@
 """CLI implementation."""
 
 import click
+import logging
 from wtsp import utils
 from wtsp.__version__ import __version__
+from wtsp.describe.describe import Describer
 from wtsp.train.base import Trainer
+from wtsp.core.base import DEFAULT_WORK_DIR
 
 
 def docstring_parameter(*sub):
@@ -16,78 +19,16 @@ def docstring_parameter(*sub):
 
 @click.group()
 @click.option('--debug/--no-debug', default=False, help='Enable debug output.')
-@click.option('-wd', '--work-dir', default='~/.wtsp',
+@click.option('-wd', '--work-dir', default=DEFAULT_WORK_DIR,
               help='Which folder to use as working directory. Default to ~/.wtsp')
 @click.pass_context
 @docstring_parameter(__version__)
 def wtsp(ctx, debug, work_dir):
     """Where To Sell Products (wtsp) {0}."""
+    logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s ",
+                        level=logging.INFO if not debug else logging.DEBUG)
     ctx.ensure_object(dict)
-    ctx.obj['DEBUG'] = debug
-    ctx.obj['WORKDIR'] = work_dir
-
-
-@wtsp.group()
-@click.pass_context
-def data(ctx):
-    """Data module.
-
-    Use this module to load and manage the data
-    that you want to use.
-    """
-    pass
-
-
-@data.command("load")
-@click.pass_context
-@click.option("-d", "--domain", required=True, help="Data set domain to load. <tweets|products>")
-@click.option("-n", "--name", required=True, help="Name to use to identify the data set")
-@click.option("-o", "--overwrite", is_flag=True)
-@click.argument("path")
-def data_load(ctx, domain, name, overwrite, path):
-    """Data load.
-
-    Load data into the local tool metadata with a name.
-    This command will apply minor transformations on the
-    data to enable easier process in later stages.
-    """
-    pass
-
-
-@data.command("list")
-@click.pass_context
-def data_list(ctx):
-    """Data list.
-
-    List the current loaded data including
-    intermediate results of later stages.
-    """
-    pass
-
-
-@data.command("head")
-@click.pass_context
-@click.option("-n", "--name", required=True, help="Name of the data registry to display")
-@click.option("-t", "--top", default=10, help="Number of rows to display")
-def data_head(ctx, name, top):
-    """Data head.
-
-    Displays the top n (default 10) rows
-    of the data set corresponding to the given
-    name.
-    """
-    pass
-
-
-@data.command("delete")
-@click.pass_context
-@click.option("-n", "--name", required=True, help="Name of the data registry to delete")
-def data_delete(ctx, name):
-    """Data delete.
-
-    Deletes a data registry and its content.
-    """
-    pass
+    ctx.obj['WORK_DIR'] = work_dir
 
 
 @wtsp.group()
@@ -99,6 +40,37 @@ def describe(ctx):
     that might help you to take decisions.
     """
     pass
+
+
+@describe.command("tweets")
+@click.pass_context
+@click.option("-f", "--filters", required=True, help="Filters to use over the data set columns to narrow down the load.")
+@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-g", "--groupby", default="place_name", help="The group by column to use.")
+@click.option("-c", "--count", default="tweet", help="The value to count by group.")
+@click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
+@click.argument("input-data", required=True)
+def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_data):
+    """Describe tweets.
+
+    Use this command to print counts of tweets per place_name.
+    """
+    describer = Describer(output_dir, groupby, count, "tweets", filters, min_count)
+    return describer.describe(input_data)
+
+
+@describe.command("products")
+@click.pass_context
+@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
+@click.argument("input-data", required=True)
+def describe_products(ctx, output_dir, min_count, input_data):
+    """Describe products.
+
+    Use this command to print counts of products per category.
+    """
+    describer = Describer(output_dir, "categories", "document", "documents", min_count=min_count)
+    return describer.describe(input_data)
 
 
 @wtsp.group()
@@ -163,110 +135,5 @@ def transform(ctx):
     Use this module to transform data using the trained models.
 
     Note: You need to first execute the train module first.
-    """
-    pass
-
-
-@wtsp.group()
-@click.pass_context
-def export(ctx):
-    """Export module.
-
-    Use this module to export in different formants the results of
-    the previous two modules.
-
-    Note: You need to first execute one or both of the previous
-    modules in order to invoke reports.
-    """
-    pass
-
-
-@export.group("tweet")
-@click.pass_context
-def export_tweet(ctx):
-    """Export tweet.
-
-    Use this command to export tweet related reports, plots
-    and data.
-    """
-    pass
-
-
-@export_tweet.command("stats")
-@click.pass_context
-@click.option("-d", "--data", required=True, help="Data set or result to export")
-@click.argument("output_path", required=True)
-def export_tweet_stats(ctx, data, output_path):
-    """Tweet stats.
-
-    Exports a handful of basic stats and plots about
-    the tweets data sets.
-    """
-    pass
-
-
-@export_tweet.command("map")
-@click.pass_context
-@click.option("-d", "--data", required=True, help="Data set or result to export")
-@click.argument("output_path", required=True)
-def export_tweet_map(ctx, data, output_path):
-    """Tweet map.
-
-    Export different forms of tweet maps as HTML including
-    raw tweets locations, locations with cluster colors and
-    cluster polygons.
-    """
-    pass
-
-
-@export.group("product")
-@click.pass_context
-def export_product(ctx):
-    """Export product.
-
-    Exports different forms of metrics results
-    related to product models and data.
-    """
-    pass
-
-
-@export_product.command("stats")
-@click.pass_context
-@click.option("-d", "--data", required=True, help="Data set or result to export")
-@click.argument("output_path", required=True)
-def export_product_stats(ctx, data, output_path):
-    """
-    Product stats.
-
-    Exports basic statistics about the product
-    data sets.
-    """
-    pass
-
-
-@export_product.command("metrics")
-@click.pass_context
-@click.option("-d", "--data", required=True, help="Data set or result to export")
-@click.argument("output_path", required=True)
-def export_product_metrics(ctx, data, output_path):
-    """
-    Product metrics.
-
-    Export metric results related to the product
-    models.
-    """
-    pass
-
-
-@export.command("wtsp")
-@click.pass_context
-@click.option("-d", "--data", required=True, help="Data set or result to export")
-@click.argument("output_path", required=True)
-def export_wtsp(ctx, data, output_path):
-    """Export wtsp results.
-
-    Exports the final result of all the process.
-    Includes a cluster classification and metadata
-    and an HTML map with the final classifications.
     """
     pass
