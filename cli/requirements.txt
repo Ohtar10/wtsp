@@ -1,3 +1,6 @@
+scikit-learn
+numpy
+pandas
 # developer
 click
 flake8

@@ -91,7 +91,7 @@ def train(ctx):
 @train.command("tweets")
 @click.pass_context
 @click.option('-m', '--model', default="nearest-neighbors",
-              required=True, help='Executes a model training in the tweets domain')
+              help='Executes a model training in the tweets domain')
 @click.option("-f", "--filters", required=True,
               help="Filters to use over the data set columns to narrow down the load.")
 @click.option('-p', "--params", required=True, help="Model parameters")
@@ -100,16 +100,16 @@ def train(ctx):
 def train_tweets(ctx, model, filters, params, output_dir, input_data):
     r"""Train ML models within the tweets domain.
 
-    Provide the model to train via the --model option
+    Provide the model to train via the --model option (default to 'nearest-neighbors')
 
     KWARGS: Depending on the model to train, the arguments my vary.
     Provide them as a comma separated key=value argument string, e.g.,
     key1=value1,key2=value2. Arguments with (*) are mandatory
 
-    For model 'nearest-neighbor':
+    For model 'nearest-neighbors':
 
-        n_neighbors*         The number of neighbors to consider\n
-        location_column*     the location column with the geometry\n
+        n_neighbors*         The number of neighbors to consider
+        location_column*     the location column with the geometry
     """
     trainer = TweetsTrainer(model, filters, params, output_dir)
     result = trainer.train(input_data)
