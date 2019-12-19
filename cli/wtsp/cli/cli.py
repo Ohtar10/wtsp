@@ -62,14 +62,16 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
 @describe.command("products")
 @click.pass_context
 @click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-g", "--groupby", default="categories", help="The group by column to use.")
+@click.option("-c", "--count", default="document", help="The value to count by group.")
 @click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
 @click.argument("input-data", required=True)
-def describe_products(ctx, output_dir, min_count, input_data):
+def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
     """Describe products.
 
     Use this command to print counts of products per category.
     """
-    describer = Describer(output_dir, "categories", "document", "documents", min_count=min_count)
+    describer = Describer(output_dir, groupby, count, "documents", min_count=min_count)
     return describer.describe(input_data)
 
 
