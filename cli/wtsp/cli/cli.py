@@ -56,7 +56,8 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
     Use this command to print counts of tweets per place_name.
     """
     describer = Describer(output_dir, groupby, count, "tweets", filters, min_count)
-    return describer.describe(input_data)
+    result = describer.describe(input_data)
+    print(result)
 
 
 @describe.command("products")
@@ -72,7 +73,8 @@ def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
     Use this command to print counts of products per category.
     """
     describer = Describer(output_dir, groupby, count, "documents", min_count=min_count)
-    return describer.describe(input_data)
+    result = describer.describe(input_data)
+    print(result)
 
 
 @wtsp.group()
