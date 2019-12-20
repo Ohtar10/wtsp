@@ -48,7 +48,7 @@ def describe(ctx):
 @describe.command("tweets")
 @click.pass_context
 @click.option("-f", "--filters", required=True, help="Filters to use over the data set columns to narrow down the load.")
-@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-o", "--output-dir", help="Path where the describe results will be printed out.")
 @click.option("-g", "--groupby", default="place_name", help="The group by column to use.")
 @click.option("-c", "--count", default="tweet", help="The value to count by group.")
 @click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
@@ -58,6 +58,9 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
 
     Use this command to print counts of tweets per place_name.
     """
+    if not output_dir:
+        output_dir = ctx.obj["WORK_DIR"]
+
     describer = Describer(output_dir, groupby, count, "tweets", filters, min_count)
     result = describer.describe(input_data)
     print(result)
@@ -65,7 +68,7 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
 
 @describe.command("products")
 @click.pass_context
-@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-o", "--output-dir", help="Path where the describe results will be printed out.")
 @click.option("-g", "--groupby", default="categories", help="The group by column to use.")
 @click.option("-c", "--count", default="document", help="The value to count by group.")
 @click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
@@ -75,6 +78,9 @@ def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
 
     Use this command to print counts of products per category.
     """
+    if not output_dir:
+        output_dir = ctx.obj["WORK_DIR"]
+
     describer = Describer(output_dir, groupby, count, "documents", min_count=min_count)
     result = describer.describe(input_data)
     print(result)
@@ -97,7 +103,7 @@ def train(ctx):
 @click.option("-f", "--filters", required=True,
               help="Filters to use over the data set columns to narrow down the load.")
 @click.option('-p', "--params", required=True, help="Model parameters")
-@click.option("-o", "--output-dir", required=True, help="Path where the describe results will be printed out.")
+@click.option("-o", "--output-dir", help="Path where the describe results will be printed out.")
 @click.argument('input_data')
 def train_tweets(ctx, model, filters, params, output_dir, input_data):
     r"""Train ML models within the tweets domain.
@@ -113,6 +119,9 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
         n_neighbors*         The number of neighbors to consider
         location_column*     the location column with the geometry
     """
+    if not output_dir:
+        output_dir = ctx.obj["WORK_DIR"]
+
     trainer = TweetsTrainer(model, filters, params, output_dir)
     result = trainer.train(input_data)
     print(result)

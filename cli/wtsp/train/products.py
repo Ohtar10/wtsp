@@ -3,10 +3,15 @@ import logging
 
 import pandas as pd
 import os
+import numpy as np
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, multilabel_confusion_matrix, classification_report
 
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
+from wtsp.view.view import plot_cnn_history, plot_classification_report
 
 
 class ProductsTrainer:
@@ -104,6 +109,7 @@ class ProductsClassifierTrainer:
                  classes: int,
                  document_column: str = "document",
                  label_column: str = "categories",
+                 test_size=0.3,
                  vec_size=100,
                  epochs=100,
                  batch_size=1000,
@@ -113,6 +119,7 @@ class ProductsClassifierTrainer:
         self.classes = classes
         self.document_column = document_column
         self.label_column = label_column
+        self.test_size=test_size
         self.vec_size = vec_size
         self.epochs = epochs
         self.batch_size = batch_size
@@ -145,13 +152,37 @@ class ProductsClassifierTrainer:
         logging.debug("Encoding the categories...")
         encoded_embeddings = category_encoder.fit_transform(document_embeddings)
 
+        # train test split to validate at the end
         logging.debug("Training the Neural Network...")
         y = encoded_embeddings["encoded_label"].values
-        prod_classifier_cnn.fit(encoded_embeddings, y)
+        X_train, X_test, y_train, y_test = train_test_split(encoded_embeddings, y, test_size=self.test_size)
+        prod_classifier_cnn.fit(X_train, y_train)
+
+        # score against the testing set
+        features = X_test["d2v_embedding"].values
+        X_test_rs = np.array([e for e in features])
+        X_test_rs = X_test_rs.reshape(X_test_rs.shape[0], X_test_rs.shape[1], 1)
+        y_pred = np.where(prod_classifier_cnn.ann_model.predict(X_test_rs) > 0.5, 1., 0.)
+        y_true = np.array([l for l in y_test])
+        acc = accuracy_score(y_true, y_pred)
+        cm = multilabel_confusion_matrix(y_true, y_pred)
+        cr = classification_report(y_true, y_pred)
 
         # persist the results
         output_dir = f"{self.work_dir}/products/models/classifier"
         os.makedirs(output_dir, exist_ok=True)
         category_encoder.save_model(f"{output_dir}/category_encoder.model")
         prod_classifier_cnn.save_model(f"{output_dir}", "prod_classifier")
+
+        # plot the history
+        plot_cnn_history(prod_classifier_cnn.ann_model.history,
+                         f"{output_dir}/training_history.png")
+
+        # plot classification report
+        title = f"Products classification report (Acc: {acc:.2f})"
+        file = f"{output_dir}/classification_report.png"
+        plot_classification_report(cr,
+                                   category_encoder.label_encoder.classes_,
+                                   file,
+                                   title)
         return f"Product classifier trained successfully. Result is stored at: {output_dir}"

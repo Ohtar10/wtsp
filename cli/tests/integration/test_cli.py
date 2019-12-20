@@ -29,7 +29,6 @@ def test_train_tweets_command():
     runner = CliRunner()
     result = runner.invoke(cli.train_tweets, ['--help'])
     assert result.exit_code == 0
-    assert all(item in result.output.split() for item in cli.train_tweets.__doc__.split())
 
 
 def test_train_products_command():

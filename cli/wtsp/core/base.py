@@ -5,7 +5,7 @@ rest of the project.
 """
 from pathlib import Path
 
-DEFAULT_WORK_DIR = f"{str(Path.home())}/.wtsp"
+DEFAULT_WORK_DIR = f"{str(Path.home())}/wtsp"
 DEFAULT_DATA_TWEETS_DIR = "data/tweets"
 DEFAULT_DATA_PRODUCTS_DIR = "data/products"
 

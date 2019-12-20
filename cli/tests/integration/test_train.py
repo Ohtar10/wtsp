@@ -60,7 +60,7 @@ def test_train_product_classifier():
     # we are going to assume the working directory already has a embeddings model trained
     copy_folder_recursively(embeddings_path, models_path)
 
-    params = "label_col=categories,doc_col=document,classes=10," \
+    params = "label_col=categories,doc_col=document,classes=10,test_size=0.3," \
              "lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
@@ -79,4 +79,6 @@ def test_train_product_classifier():
     assert os.path.exists(f"{result_dir}/category_encoder.model")
     assert os.path.exists(f"{result_dir}/prod_classifier-def.yaml")
     assert os.path.exists(f"{result_dir}/prod_classifier-weights.h5")
+    assert os.path.exists(f"{result_dir}/training_history.png")
+    assert os.path.exists(f"{result_dir}/classification_report.png")
     common.delete_path(output_path)
