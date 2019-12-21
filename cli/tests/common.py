@@ -7,6 +7,10 @@ ASSETS_PATH = "tests/assets"
 RAW_TWEETS_PATH = f"{ASSETS_PATH}/tweets/tweets.parquet"
 RAW_PRODUCTS_PATH = f"{ASSETS_PATH}/products/products.parquet"
 EMBEDDINGS_PATH = f"{ASSETS_PATH}/products/embeddings/"
+CLASSIFIER_DEF_PATH = f"{ASSETS_PATH}/products/classifier/prod_classifier-def.yaml"
+CLASSIFIER_WEIGHTS_PATH = f"{ASSETS_PATH}/products/classifier/prod_classifier-weights.yaml"
+CATEGORY_ENCODER_PATH = f"{ASSETS_PATH}/products/classifier/category_encoder.model"
+
 # application variables
 TEST_WORK_DIR_PATH = f"{ASSETS_PATH}/test_work_dir"
 

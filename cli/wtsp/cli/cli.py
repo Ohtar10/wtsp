@@ -7,9 +7,10 @@ import click
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
-from wtsp.exceptions import ModelTrainingException
+from wtsp.exceptions import ModelTrainingException, WTSPBaseException
 from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
+from wtsp.transform.transformers import WhereToSellProductsTransformer
 
 
 def docstring_parameter(*sub):
@@ -151,13 +152,23 @@ def train_products(ctx, model, params, input_data):
         print(e)
 
 
-@wtsp.group()
+@wtsp.command("predict")
 @click.pass_context
-def transform(ctx):
-    """Transform module.
+@click.option("-f", "--filters", required=True,
+              help="Filters to use over the data set columns to narrow down the load.")
+@click.option('-p', "--params", required=True, help="Model parameters")
+@click.argument("input_data")
+def transform(ctx, filters, params, input_data):
+    """Predict module.
 
     Use this module to transform data using the trained models.
 
     Note: You need to first execute the train module first.
     """
-    pass
+    work_dir = ctx.obj["WORK_DIR"]
+    transformer = WhereToSellProductsTransformer(work_dir, filters, params)
+    try:
+        result = transformer.transform(input_data)
+        print(result)
+    except WTSPBaseException as e:
+        print(e)

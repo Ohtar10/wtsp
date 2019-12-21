@@ -55,6 +55,7 @@ def test_train_product_classifier():
     runner = CliRunner()
     input_data = common.get_full_path(tests_path, common.RAW_PRODUCTS_PATH)
     output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+
     embeddings_path = common.get_full_path(tests_path, common.EMBEDDINGS_PATH)
     models_path = f"{output_path}/products/models/embeddings"
     # we are going to assume the working directory already has a embeddings model trained

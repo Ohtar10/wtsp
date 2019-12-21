@@ -5,6 +5,17 @@ rest of the project.
 """
 from pathlib import Path
 
+DEFAULT_TWEETS_COLUMNS = ["id",
+                   "tweet",
+                   "country",
+                   "country_code",
+                   "place_name",
+                   "place_full_name",
+                   "location_geometry",
+                   "place_geometry",
+                   "created_timestamp"]
+
+
 DEFAULT_WORK_DIR = f"{str(Path.home())}/wtsp"
 DEFAULT_DATA_TWEETS_DIR = "data/tweets"
 DEFAULT_DATA_PRODUCTS_DIR = "data/products"

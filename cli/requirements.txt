@@ -1,3 +1,5 @@
+scipy
+folium
 matplotlib
 tensorflow
 keras

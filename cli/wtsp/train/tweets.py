@@ -6,21 +6,13 @@ import numpy as np
 import logging
 from sklearn.neighbors import NearestNeighbors
 from sklearn.pipeline import Pipeline
+
+from wtsp.core.base import DEFAULT_TWEETS_COLUMNS
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, GeoPointTransformer
 from wtsp.utils import parse_kwargs
 from typing import Dict
 
 from wtsp.view.view import plot_nearest_neighbors, plot_points
-
-DEFAULT_COLUMNS = ["id",
-                   "tweet",
-                   "country",
-                   "country_code",
-                   "place_name",
-                   "place_full_name",
-                   "location_geometry",
-                   "place_geometry",
-                   "created_timestamp"]
 
 
 class TweetsTrainer:
@@ -96,7 +88,7 @@ class GeoTweetsNearestNeighbors:
         pipeline = Pipeline(
             [
                 ("filter", DataFrameFilter(self.filters)),
-                ("to_geopandas", GeoPandasTransformer(geometry_field, DEFAULT_COLUMNS)),
+                ("to_geopandas", GeoPandasTransformer(geometry_field, DEFAULT_TWEETS_COLUMNS)),
                 ("to_geopoint", GeoPointTransformer(geometry_field, only_points=True))
             ]
         )

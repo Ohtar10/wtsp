@@ -6,7 +6,7 @@ import os
 import numpy as np
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, multilabel_confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, classification_report
 
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
@@ -165,7 +165,6 @@ class ProductsClassifierTrainer:
         y_pred = np.where(prod_classifier_cnn.ann_model.predict(X_test_rs) > 0.5, 1., 0.)
         y_true = np.array([l for l in y_test])
         acc = accuracy_score(y_true, y_pred)
-        cm = multilabel_confusion_matrix(y_true, y_pred)
         cr = classification_report(y_true, y_pred)
 
         # persist the results

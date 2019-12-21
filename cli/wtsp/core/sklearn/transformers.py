@@ -3,9 +3,15 @@ import logging
 import os
 import pickle
 import warnings
+from operator import itemgetter
 from typing import Dict
 
 # To suppress lib warnings
+from keras.engine.saving import model_from_yaml
+from scipy.spatial.qhull import ConvexHull
+from shapely.geometry import Polygon, Point
+from sklearn.cluster import OPTICS
+
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=FutureWarning)
     import tensorflow as tf
@@ -375,6 +381,128 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         self.ann_model.save_weights(weights_path)
 
 
+class ClusterAggregator(BaseEstimator, TransformerMixin):
+    """Cluster Aggergator.
+
+    This transformer will aggregate all the
+    common clusters in terms of its corpus
+    and points that composes it.
+    """
+    def __init__(self, columns,
+                 location_column,
+                 agg_colnames,
+                 clusters=None,
+                 n_neighbors=10,
+                 eps=0.004,
+                 filter_noise=True):
+        self.columns = columns
+        self.location_column = location_column
+        self.agg_colnames = agg_colnames
+        self.filter_noise = filter_noise
+        self.clusters = clusters
+        self.n_neighbors = n_neighbors
+        self.eps = eps
+
+    def fit(self, X, y=None):
+        return self  # do nothing
+
+    def transform(self, X, y=None):
+        data = X.copy()
+
+        if not self.clusters:
+            self.clusters = self.__fit_clusters(data)
+
+        data['cluster'] = self.clusters.labels_
+        data = data[["cluster", "tweet"] + self.columns]
+
+        if self.filter_noise:
+            data = data[data.cluster != -1]
+
+        data = data.groupby("cluster").filter(is_valid_polygon(self.location_column))
+        data = data.groupby("cluster").agg({
+            self.location_column: ['count', calculate_polygon],
+            'tweet': [concatenate_text()]
+        })
+        data = flat_columns(data, self.agg_colnames)
+        return data.reset_index()
+
+    def __fit_clusters(self, X):
+        points_getter = GeoPointTransformer(location_column=self.location_column,
+                                            only_points=True)
+        points = points_getter.transform(X)
+        return OPTICS(cluster_method="dbscan",
+                      eps=self.eps,
+                      min_samples=self.n_neighbors,
+                      metric="minkowski",
+                      n_jobs=-1).fit(points)
+
+
+class ClusterProductPredictor(BaseEstimator, TransformerMixin):
+    """Cluster Product Predictor.
+
+    This transformer takes a aggregates cluster
+    data frame as input and with the given models,
+    it will predict the product class for each.
+    """
+    def __init__(self, corpus_column,
+                 d2v_model_path,
+                 category_encoder_path,
+                 prod_predictor_path,
+                 prod_predictor_name):
+        self.corpus_column = corpus_column
+        self.d2v_model_path = d2v_model_path
+        self.category_encoder_path = category_encoder_path
+        self.prod_predictor_path = prod_predictor_path
+        self.prod_predictor_name = prod_predictor_name
+        self.classes = None
+        self.d2v_model = None
+        self.category_encoder = None
+        self.prod_predictor_model = None
+
+    def fit(self, X, y=None):
+        return self  # do nothing
+
+    def transform(self, X, y=None):
+        self.__load_models()
+        data = X.copy()
+        data["d2v_embeddings"] = data[self.corpus_column].apply(self.__featurize_text)
+        data['predictions'] = data["d2v_embeddings"].apply(self.__classify_embedding)
+        return data
+
+    def __load_models(self):
+        d2v_model = Doc2Vec.load(self.d2v_model_path)
+
+        with open(self.category_encoder_path, "rb") as file:
+            category_encoder = pickle.load(file)
+
+        ann_def_path = f"{self.prod_predictor_path}/{self.prod_predictor_name}-def.yaml"
+        ann_weights_path = f"{self.prod_predictor_path}/{self.prod_predictor_name}-weights.h5"
+
+        with open(ann_def_path, 'r') as file:
+            prod_predictor_model = model_from_yaml(file.read())
+
+        prod_predictor_model.load_weights(ann_weights_path)
+
+        self.d2v_model = d2v_model
+        self.category_encoder = category_encoder
+        self.prod_predictor_model = prod_predictor_model
+        self.classes = category_encoder.classes_.tolist()
+
+    def __featurize_text(self, text):
+        return self.d2v_model.infer_vector(word_tokenize(text))
+
+    def __classify_embedding(self, embedding, with_classes=True, sort=True):
+        entry_arr = np.array([embedding]).reshape(1, -1, 1)
+        pred = self.prod_predictor_model.predict(entry_arr)[0]
+
+        if with_classes:
+            pred = pred.T.tolist()
+            pred = [(cat, score) for cat, score in list(zip(self.classes, pred))]
+        if sort:
+            pred.sort(key=itemgetter(1), reverse=True)
+        return pred
+
+
 def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
     """Flat columns.
 
@@ -418,6 +546,53 @@ def create_tagged_document_fn(tags_column, corpus_column):
         return pd.Series([categories, document, tagged_document], index=index)
 
     return create_tagged_document
+
+
+def concatenate_text(sep='\n'):
+    """Concatenate Text
+    This function will simply join every
+    text it receives as a single text and
+    separate it by the provide separator.
+    Default \n """
+
+    def concat(text):
+        return sep.join(text)
+
+    return concat
+
+
+def calculate_polygon(points):
+    """Calculate polygon
+    This function will calculate the polygon
+    enclosing all the points provided as argument.
+    It will use the convex-hull geometric function."""
+    points = np.array([list(p.coords[0]) for p in points])
+    hull = ConvexHull(points)
+    x = points[hull.vertices, 0]
+    y = points[hull.vertices, 1]
+    boundaries = list(zip(x, y))
+
+    return Polygon(boundaries)
+
+
+def is_valid_polygon(location_column):
+    """Check if provided polygon is valid.
+
+    Verifies that the input data is a valid polygon.
+    """
+    def is_valid_polygon_fn(geometry):
+        points = geometry[location_column].values
+        if isinstance(points, Point):
+            return False
+        if points.shape[0] < 3:
+            return False
+        coords = np.array([p.coords[0] for p in points])
+        upoints = np.unique(coords)
+        if upoints.shape[0] < 3:
+            return False
+        return True
+
+    return is_valid_polygon_fn
 
 
 def init_tensorflow():

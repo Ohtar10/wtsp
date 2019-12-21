@@ -30,7 +30,7 @@ def extract_string(string: str) -> str:
     :param string: string to extract text
     :returns: string without quotes
     """
-    matcher = re.search(r'^[\'"]?([\w\d\s\\.]+)[\'"]?$', string)
+    matcher = re.search(r'^[\'"]?([-;\w\d\s\\.]+)[\'"]?$', string)
     return matcher.group(1)
 
 

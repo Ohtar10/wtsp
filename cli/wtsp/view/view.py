@@ -1,10 +1,18 @@
 """Contains presentation logic."""
 import itertools
+import json
 import re
+from itertools import cycle
+import random
+
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import math
+
+import folium
+from shapely.geometry import mapping
 
 
 def plot_counts(data: pd.DataFrame, title,  x_label: str, save_path: str):
@@ -153,3 +161,60 @@ def plot_classification_report(cr,
     plt.xlabel("Metrics", fontsize=14)
 
     plt.savefig(save_path, bbox_inches="tight")
+
+
+def plot_clusters_on_map(clusters,
+                         save_path,
+                         print_classes=False,
+                         center=(34, -118),
+                         zoom=10,
+                         tiles="OpenStreetMap",
+                         score_threshold=0.1):
+    unique_clusters = np.unique(clusters.cluster.values)
+    n_clusters = unique_clusters.shape[0]
+    colormap = cycle(plt.cm.rainbow(np.linspace(0, 1, n_clusters)))
+    colors = [matplotlib.colors.to_hex(next(colormap)) for _ in range(len(unique_clusters))]
+    random.shuffle(colors)
+    colors = {k: c for k, c in zip(unique_clusters, colors)}
+
+    m = folium.Map(location=center,
+                   zoom_start=zoom,
+                   tiles=tiles)
+
+    def style_function(row):
+        color = colors[row.cluster]
+        return lambda x: {'fillColor': color,
+                          'fillOpacity': 0.6,
+                          'weight': 1}
+
+    def highlight_function(row):
+        color = colors[row.cluster]
+        return lambda x: {'fillColor': color,
+                          'fillOpacity': 0.8,
+                          'weight': 1}
+
+    def create_tooltip(row):
+        if print_classes:
+            cluster_id = row.cluster
+            size = row['size']
+            classes = row.predictions
+            classes = [f"{cl} - {score * 100:.2f}%" for cl, score in classes if score >= score_threshold]
+            classes = '<br>'.join(classes)
+            return folium.map.Tooltip(text=f"Cluster id: {cluster_id}<br>Size: {size}<br>{classes}",
+                                      style="color: DodgerBlue")
+        else:
+            return folium.map.Tooltip(text=f"Cluster id: {row.cluster}<br>Size: {row['size']}",
+                                      style="color: DodgerBlue")
+
+    def create_polygon(row):
+        geojson = json.dumps(mapping(row['polygon']))
+        tooltip = create_tooltip(row)
+
+        folium.GeoJson(geojson,
+                       style_function=style_function(row),
+                       highlight_function=highlight_function(row),
+                       tooltip=tooltip).add_to(m)
+
+    clusters.apply(create_polygon, axis=1)
+
+    m.save(save_path)
