@@ -1,16 +1,14 @@
-import pandas as pd
 import os
 import logging
 from sklearn.pipeline import Pipeline
 
-from wtsp.core.base import DataLoader
+from wtsp.core.base import DataLoader, Filterable
 from wtsp.core.sklearn.transformers import CountTransformer, DataFrameFilter, MultiValueColumnExpander
-from wtsp.exceptions import InvalidArgumentException, DescribeException
+from wtsp.exceptions import DescribeException
 from wtsp.view import view
-from wtsp.utils import parse_kwargs
 
 
-class Describer(DataLoader):
+class Describer(DataLoader, Filterable):
     """Describer.
 
     This is the common place where data set describe
@@ -22,13 +20,8 @@ class Describer(DataLoader):
                  domain: str,
                  filters: str = None,
                  min_count: int = 5000):
-
-        super().__init__()
-        try:
-            self.filters = parse_kwargs(filters) if filters else None
-        except (ValueError, AttributeError) as e:
-            raise InvalidArgumentException("Filter value is invalid. use: key=value", e)
-
+        DataLoader.__init__(self)
+        Filterable.__init__(self, filters, can_be_none=True)
         self.output_dir = output_dir
         self.groupby = groupby
         self.count_col = count_col

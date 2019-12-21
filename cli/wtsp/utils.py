@@ -17,7 +17,7 @@ def parse_kwargs(string: str) -> Dict[str, object]:
     :returns: dictionary with parameters parsing
     """
     arg_list = string.split(",")
-    kwargs = {key: infer_and_cast_to_type(extract_string(value))
+    kwargs = {key.strip(): infer_and_cast_to_type(extract_string(value).strip())
               for key, value in [arg.split("=") for arg in arg_list]}
     return kwargs
 

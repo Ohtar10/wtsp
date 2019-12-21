@@ -7,24 +7,23 @@ import logging
 from sklearn.neighbors import NearestNeighbors
 from sklearn.pipeline import Pipeline
 
-from wtsp.core.base import DEFAULT_TWEETS_COLUMNS
+from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, GeoPointTransformer
-from wtsp.utils import parse_kwargs
 from typing import Dict
 
 from wtsp.view.view import plot_nearest_neighbors, plot_points
 
 
-class TweetsTrainer:
+class TweetsTrainer(Filterable, Parametrizable):
     """Tweets Trainer.
 
     Orchestrator class to train tweets
     related models.
     """
     def __init__(self, model: str, filters: str, params: str, output_dir: str):
+        Filterable.__init__(self, filters)
+        Parametrizable.__init__(self, params)
         self.model = model
-        self.filters = parse_kwargs(filters) if filters else None
-        self.params = parse_kwargs(params) if params else None
         self.output_dir = output_dir
 
     def train(self, input_data: str) -> str:
@@ -36,7 +35,7 @@ class TweetsTrainer:
             return trainer.train(input_data)
 
 
-class GeoTweetsNearestNeighbors:
+class GeoTweetsNearestNeighbors(DataLoader):
     """Geo tweets Nearest Neighbors.
 
     It will train a nearest neighbors model
@@ -50,6 +49,7 @@ class GeoTweetsNearestNeighbors:
     def __init__(self, filters: Dict[str, object],
                  params: Dict[str, object],
                  output_dir: str):
+        super().__init__()
         self.filters = filters
         self.params = params
         self.output_dir = output_dir
@@ -83,7 +83,7 @@ class GeoTweetsNearestNeighbors:
         return f"Result generated successfully at: {output_dir}"
 
     def __transform_data(self, input_data: str) -> pd.DataFrame:
-        data = pd.read_parquet(input_data)
+        data = self.load_data(input_data)
         geometry_field = self.params["location_column"]
         pipeline = Pipeline(
             [
