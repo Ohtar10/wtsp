@@ -3,21 +3,21 @@ import os
 import pandas as pd
 from sklearn.pipeline import Pipeline
 
-from wtsp.core.base import DEFAULT_TWEETS_COLUMNS
+from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, ClusterAggregator, \
     ClusterProductPredictor
-from wtsp.utils import parse_kwargs
 from wtsp.view.view import plot_clusters_on_map
 
 
-class WhereToSellProductsTransformer:
+class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
     def __init__(self, work_dir: str, filters: str, params: str):
+        DataLoader.__init__(self)
+        Filterable.__init__(self, filters)
+        Parametrizable.__init__(self, params)
         self.work_dir = work_dir
-        self.filters = parse_kwargs(filters)
-        self.params = parse_kwargs(params)
 
     def transform(self, input_data: str):
-        data = pd.read_parquet(input_data, engine="pyarrow")
+        data = self.load_data(input_data)
 
         location_column = self.params["location_column"]
 

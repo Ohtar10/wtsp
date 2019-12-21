@@ -8,22 +8,22 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 
+from wtsp.core.base import Parametrizable, DataLoader
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
 from wtsp.view.view import plot_cnn_history, plot_classification_report
 
 
-class ProductsTrainer:
+class ProductsTrainer(Parametrizable):
     """Products Trainer.
 
     Main orchestrator of product related models.
     """
     def __init__(self, work_dir: str, model: str, params: str):
+        super().__init__(params)
         if not work_dir:
             raise InvalidArgumentException("The working directory is required.")
-        if not params:
-            raise InvalidArgumentException("Model parameters are required.")
 
         self.work_dir = work_dir
         self.model = model
@@ -43,7 +43,7 @@ class ProductsTrainer:
         return result
 
 
-class DocumentEmbeddingsTrainer:
+class DocumentEmbeddingsTrainer(DataLoader):
     """Document Embeddings trainer.
 
     Orchestrates the document embedding training.
@@ -59,7 +59,7 @@ class DocumentEmbeddingsTrainer:
                  min_count=1,
                  dm=0,
                  **kwargs):
-
+        super().__init__()
         self.work_dir = work_dir
         self.label_col = label_col
         self.doc_col = doc_col
@@ -76,7 +76,7 @@ class DocumentEmbeddingsTrainer:
             self.__setattr__(k, v)
 
     def train(self, input_data: str) -> str:
-        data = pd.read_parquet(input_data, engine="pyarrow")
+        data = self.load_data(input_data)
 
         document_tagger = DocumentTagger(self.label_col,
                                          self.doc_col)
@@ -99,7 +99,7 @@ class DocumentEmbeddingsTrainer:
         return f"Product document embeddings trained successfully. Result is stored at: {output_dir}"
 
 
-class ProductsClassifierTrainer:
+class ProductsClassifierTrainer(DataLoader):
     """Product Classifier Trainer.
 
     Orchestrates the training of the product
@@ -115,6 +115,7 @@ class ProductsClassifierTrainer:
                  batch_size=1000,
                  validation_split=0.2,
                  **kwargs):
+        super().__init__()
         self.work_dir = work_dir
         self.classes = classes
         self.document_column = document_column
@@ -128,7 +129,7 @@ class ProductsClassifierTrainer:
             self.__setattr__(k, v)
 
     def train(self, input_data: str) -> str:
-        data = pd.read_parquet(input_data, engine="pyarrow")
+        data = self.load_data(input_data)
         d2v_model_path = f"{self.work_dir}/products/models/embeddings/d2v_model.model"
         if not os.path.exists(d2v_model_path):
             raise ModelTrainingException("No product embeddings found in the working directory. "

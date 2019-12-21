@@ -34,7 +34,7 @@ class DataLoader:
         self.engine = engine
 
     def load_data(self, input_data):
-        if not os.path.exists(input_data):
+        if not input_data or not os.path.exists(input_data):
             raise InvalidArgumentException("The provided input data path is not valid")
         try:
             return pd.read_parquet(input_data, engine=self.engine)
