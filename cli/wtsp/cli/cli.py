@@ -7,7 +7,7 @@ import click
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
-from wtsp.exceptions import ModelTrainingException, WTSPBaseException, DescribeException
+from wtsp.exceptions import ModelTrainingException, WTSPBaseException, DescribeException, InvalidArgumentException
 from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
 from wtsp.transform.transformers import WhereToSellProductsTransformer
@@ -66,7 +66,7 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
     try:
         result = describer.describe(input_data)
         print(result)
-    except DescribeException as e:
+    except WTSPBaseException as e:
         print(e)
 
 
@@ -89,7 +89,7 @@ def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
     try:
         result = describer.describe(input_data)
         print(result)
-    except DescribeException as e:
+    except WTSPBaseException as e:
         print(e)
 
 
@@ -133,7 +133,7 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
     try:
         result = trainer.train(input_data)
         print(result)
-    except ModelTrainingException as e:
+    except WTSPBaseException as e:
         print(e)
 
 
@@ -177,7 +177,7 @@ def train_products(ctx, model, params, input_data):
     try:
         result = trainer.train(input_data)
         print(result)
-    except ModelTrainingException as e:
+    except WTSPBaseException as e:
         print(e)
 
 

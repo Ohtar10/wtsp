@@ -20,6 +20,13 @@ class InvalidArgumentException(WTSPBaseException):
         return f"An invalid argument was provided: {self.offending_data}. Please review."
 
 
+class DataLoadException(WTSPBaseException):
+    """Raised when there is a problem loading data."""
+
+    def _build_message(self) -> str:
+        return f"A problem occurred trying to load the data: {self.offending_data}. Please review."
+
+
 class DescribeException(WTSPBaseException):
     """Raised when there is a problem describing the data."""
 
