@@ -34,3 +34,47 @@ def test_transform_where_to_sell_products():
     assert os.path.exists(f"{result_dir}/classified_clusters.csv")
     assert os.path.exists(f"{result_dir}/classified_clusters.html")
     common.delete_path(output_path)
+
+
+def test_transform_no_filters_should_fail():
+    runner = CliRunner()
+    input_data = common.get_full_path(tests_path, common.RAW_TWEETS_PATH)
+    output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+    params = "center='34;-118',eps=0.04,n_neighbors=2,location_column=location_geometry,min_score=0.1"
+    result = runner.invoke(cli.wtsp, ["--work-dir",
+                                      output_path,
+                                      "predict",
+                                      "--params",
+                                      params,
+                                      input_data])
+    assert result.exit_code != 0
+    assert 'Error: Missing option "-f" / "--filters"' in result.output
+
+
+def test_transform_no_params_should_fail():
+    runner = CliRunner()
+    input_data = common.get_full_path(tests_path, common.RAW_TWEETS_PATH)
+    output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+    result = runner.invoke(cli.wtsp, ["--work-dir",
+                                      output_path,
+                                      "predict",
+                                      "--filters",
+                                      "place_name='Los Angeles'",
+                                      input_data])
+    assert result.exit_code != 0
+    assert 'Error: Missing option "-p" / "--params"' in result.output
+
+
+def test_transform_no_input_data_should_fail():
+    runner = CliRunner()
+    output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+    params = "center='34;-118',eps=0.04,n_neighbors=2,location_column=location_geometry,min_score=0.1"
+    result = runner.invoke(cli.wtsp, ["--work-dir",
+                                      output_path,
+                                      "predict",
+                                      "--params",
+                                      params,
+                                      "--filters",
+                                      "place_name='Los Angeles'"])
+    assert result.exit_code != 0
+    assert 'Error: Missing argument "INPUT_DATA"' in result.output

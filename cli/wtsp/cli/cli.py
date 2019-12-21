@@ -7,7 +7,7 @@ import click
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
-from wtsp.exceptions import ModelTrainingException, WTSPBaseException
+from wtsp.exceptions import ModelTrainingException, WTSPBaseException, DescribeException
 from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
 from wtsp.transform.transformers import WhereToSellProductsTransformer
@@ -63,8 +63,11 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
         output_dir = ctx.obj["WORK_DIR"]
 
     describer = Describer(output_dir, groupby, count, "tweets", filters, min_count)
-    result = describer.describe(input_data)
-    print(result)
+    try:
+        result = describer.describe(input_data)
+        print(result)
+    except DescribeException as e:
+        print(e)
 
 
 @describe.command("products")
@@ -83,8 +86,11 @@ def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
         output_dir = ctx.obj["WORK_DIR"]
 
     describer = Describer(output_dir, groupby, count, "documents", min_count=min_count)
-    result = describer.describe(input_data)
-    print(result)
+    try:
+        result = describer.describe(input_data)
+        print(result)
+    except DescribeException as e:
+        print(e)
 
 
 @wtsp.group()
@@ -124,8 +130,11 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
         output_dir = ctx.obj["WORK_DIR"]
 
     trainer = TweetsTrainer(model, filters, params, output_dir)
-    result = trainer.train(input_data)
-    print(result)
+    try:
+        result = trainer.train(input_data)
+        print(result)
+    except ModelTrainingException as e:
+        print(e)
 
 
 @train.command("products")
@@ -142,6 +151,26 @@ def train_products(ctx, model, params, input_data):
     KWARGS: Depending on the model to train, the arguments my vary.
     Provide them as a comma separated key=value argument string, e.g.,
     key1=value1,key2=value2. Arguments with (*) are mandatory.
+
+    For model 'embeddings':
+
+        label_col           The column name that holds the label
+        doc_col             The column name that holds the document
+        lr                  The learning rate
+        epochs              The epochs/iterations to train the Doc2Vec
+        vec_size            The desired embedding vector size
+        alpha               Alpha parameter to pass to Doc2Vec
+        min_alpha           Minimum alpha parameter for the Doc2Vec model
+
+    For model 'classifier':
+
+        label_col           The column name that holds the label
+        doc_col             The column name that holds the document
+        classes             The amount of expected classes to find
+        test_size           The size of the testing set for hold-out
+        lr                  The learning rate
+        epochs              The epochs/iterations to train the Doc2Vec
+        vec_size            The desired embedding vector size
     """
     work_dir = ctx.obj["WORK_DIR"]
     trainer = ProductsTrainer(work_dir, model, params)

@@ -12,7 +12,8 @@ from wtsp.utils import parse_kwargs
         ("key=10", {"key": 10}),
         ("key='two words'", {"key": "two words"}),
         ('key="two words"', {"key": "two words"}),
-        ("key=1.4", {"key": 1.4})
+        ("key=1.4", {"key": 1.4}),
+        ("key='34.2;-118.2'", {"key": '34.2;-118.2'})
     ]
 )
 def test_parse_kwargs(string, expected):
