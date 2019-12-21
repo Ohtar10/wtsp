@@ -1,12 +1,10 @@
 """Contains logic to train products related models"""
 import logging
-
-import pandas as pd
 import os
-import numpy as np
 
-from sklearn.model_selection import train_test_split
+import numpy as np
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
 
 from wtsp.core.base import Parametrizable, DataLoader
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN

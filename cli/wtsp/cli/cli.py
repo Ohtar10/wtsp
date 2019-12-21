@@ -7,7 +7,7 @@ import click
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
-from wtsp.exceptions import ModelTrainingException, WTSPBaseException, DescribeException, InvalidArgumentException
+from wtsp.exceptions import WTSPBaseException
 from wtsp.train.products import ProductsTrainer
 from wtsp.train.tweets import TweetsTrainer
 from wtsp.transform.transformers import WhereToSellProductsTransformer

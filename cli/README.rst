@@ -36,7 +36,7 @@ the ANN portion of the project won't be able to take advantage of the GPU if ava
 
 .. code-block:: console
 
-    docker container run -v ~/.wtsp/:/home/wtsp/.wtsp/ wtsp:0.1.0
+    docker container run -v ~/wtsp/:/home/wtsp/wtsp/ wtsp:0.1.0
 
 Formally released packages will follow later.
 
@@ -111,7 +111,7 @@ To run the entire test suite you only need to execute the following command:
 Support
 -------
 
-The best way to get support is to create a Github,
+The best way to get support is to create a Github ticket.
 
 Contribution
 ------------
