@@ -3,5 +3,6 @@
 .pytest_cache
 .coverage
 .benchmarks
+.coverage.*
 wtsp.egg-info
 tests/assets/test_work_dir

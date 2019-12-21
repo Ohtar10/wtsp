@@ -192,7 +192,17 @@ def transform(ctx, filters, params, input_data):
 
     Use this module to transform data using the trained models.
 
-    Note: You need to first execute the train module first.
+    Note: You need to train the embeddings and classifier first,
+    ensure that these models are already trained in your working
+    directory.
+
+    Params:
+
+        center          The geographic coordinates to center the map output in format: lat;long, e.g., 34.1;118.3
+        eps             The epsilon value to train the DBSCAN cluster based on the nearest neighbors model.
+        n_neighbors     The minimum number of neighbors per cluster
+        location_column The name of the column containing the location to use
+        min_score       The minimum classification score to show on clusters.
     """
     work_dir = ctx.obj["WORK_DIR"]
     transformer = WhereToSellProductsTransformer(work_dir, filters, params)
