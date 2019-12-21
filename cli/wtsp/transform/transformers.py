@@ -1,3 +1,4 @@
+import logging
 import os
 
 import pandas as pd
@@ -6,10 +7,17 @@ from sklearn.pipeline import Pipeline
 from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, ClusterAggregator, \
     ClusterProductPredictor
+from wtsp.exceptions import WTSPBaseException
 from wtsp.view.view import plot_clusters_on_map
 
 
 class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
+    """Where to sell products transformer.
+
+    Main transformers which takes the tweet data provided
+    and will predict the polygons and their relationship
+    with products.
+    """
     def __init__(self, work_dir: str, filters: str, params: str):
         DataLoader.__init__(self)
         Filterable.__init__(self, filters)
@@ -35,6 +43,7 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
                                                eps=eps,
                                                n_neighbors=n_neighbors)
 
+        logging.debug("Loading ML models")
         models_path = f"{self.work_dir}/products/models/"
         label_encoder_path= f"{models_path}/classifier/category_encoder.model"
         d2v_model_path = f"{models_path}/embeddings/d2v_model.model"
@@ -54,7 +63,13 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
                 ("cluster_predictor", cluster_predictor)
             ]
         )
-        classified_clusters: pd.DataFrame = pipeline.transform(data)
+
+        try:
+            logging.debug("Transforming and predicting the data.")
+            classified_clusters: pd.DataFrame = pipeline.transform(data)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise WTSPBaseException("There is a problem processing the data, see the error message", e)
 
         # visualization
         filter_key = next(iter(self.filters))

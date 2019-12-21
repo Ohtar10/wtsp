@@ -11,6 +11,7 @@ from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Param
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, GeoPointTransformer
 from typing import Dict
 
+from wtsp.exceptions import ModelTrainingException
 from wtsp.view.view import plot_nearest_neighbors, plot_points
 
 
@@ -60,7 +61,11 @@ class GeoTweetsNearestNeighbors(DataLoader):
         points = self.__transform_data(input_data)
         # Train the nearest neighbors
         logging.debug(f"Training the nearest neighbors model...")
-        distances = self.__train_nearest_neighbors(points)
+        try:
+            distances = self.__train_nearest_neighbors(points)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # Plot the results
         logging.debug(f"Plotting the results...")

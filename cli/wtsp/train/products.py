@@ -89,8 +89,12 @@ class DocumentEmbeddingsTrainer(DataLoader):
                                      min_count=self.min_count,
                                      dm=self.dm)
 
-        tagged_docs = document_tagger.transform(data)
-        d2v_wrapper.fit(tagged_docs)
+        try:
+            tagged_docs = document_tagger.transform(data)
+            d2v_wrapper.fit(tagged_docs)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # save the model
         output_dir = f"{self.work_dir}/products/models/embeddings"
@@ -147,17 +151,27 @@ class ProductsClassifierTrainer(DataLoader):
 
         # Since we only need to execute transform in some and fit in others
         # we invoke them directly instead of chaining them in a pipeline
-        logging.debug("Transforming documents into embeddings...")
-        document_embeddings = embeddings_transformer.transform(data)
+        try:
+            logging.debug("Transforming documents into embeddings...")
+            document_embeddings = embeddings_transformer.transform(data)
 
-        logging.debug("Encoding the categories...")
-        encoded_embeddings = category_encoder.fit_transform(document_embeddings)
+            logging.debug("Encoding the categories...")
+            encoded_embeddings = category_encoder.fit_transform(document_embeddings)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # train test split to validate at the end
         logging.debug("Training the Neural Network...")
         y = encoded_embeddings["encoded_label"].values
         X_train, X_test, y_train, y_test = train_test_split(encoded_embeddings, y, test_size=self.test_size)
-        prod_classifier_cnn.fit(X_train, y_train)
+
+        logging.debug("Training the Neural Network...")
+        try:
+            prod_classifier_cnn.fit(X_train, y_train)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # score against the testing set
         features = X_test["d2v_embedding"].values
