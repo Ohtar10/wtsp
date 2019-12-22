@@ -42,4 +42,4 @@ dist:
 	python setup.py sdist
 	python setup.py bdist_wheel --universal
 
-all: build install typing lint test
+all: build install test

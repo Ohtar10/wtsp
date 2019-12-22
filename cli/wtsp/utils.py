@@ -2,11 +2,11 @@
 
 import re
 import nltk
-from typing import Dict
+from typing import Dict, Optional
 from shapely import wkt
 
 
-def parse_kwargs(string: str) -> Dict[str, object]:
+def parse_kwargs(string: Optional[str]) -> Dict[str, object]:
     """Parse kwargs strings with format.
 
     key1=value1,key2=1,key3=0.5,key4="hello world",key5='hello world'
@@ -16,6 +16,10 @@ def parse_kwargs(string: str) -> Dict[str, object]:
     :param string: kwargs strings
     :returns: dictionary with parameters parsing
     """
+
+    if not string:
+        raise ValueError("None is not a valid kwargs")
+
     arg_list = string.split(",")
     kwargs = {key.strip(): infer_and_cast_to_type(extract_string(value).strip())
               for key, value in [arg.split("=") for arg in arg_list]}
@@ -31,7 +35,10 @@ def extract_string(string: str) -> str:
     :returns: string without quotes
     """
     matcher = re.search(r'^[\'"]?([-;\w\d\s\\.]+)[\'"]?$', string)
-    return matcher.group(1)
+    if matcher:
+        return matcher.group(1)
+    else:
+        return ""
 
 
 def infer_and_cast_to_type(string: str) -> object:

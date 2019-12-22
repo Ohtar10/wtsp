@@ -11,7 +11,7 @@ from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Param
 from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, GeoPointTransformer
 from typing import Dict
 
-from wtsp.exceptions import ModelTrainingException
+from wtsp.exceptions import ModelTrainingException, InvalidArgumentException
 from wtsp.view.view import plot_nearest_neighbors, plot_points
 
 
@@ -34,6 +34,7 @@ class TweetsTrainer(Filterable, Parametrizable):
                                                 self.params,
                                                 self.output_dir)
             return trainer.train(input_data)
+        raise InvalidArgumentException(f"The model requested is not recognized: {self.model}")
 
 
 class GeoTweetsNearestNeighbors(DataLoader):

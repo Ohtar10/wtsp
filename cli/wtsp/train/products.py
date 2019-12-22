@@ -1,12 +1,13 @@
 """Contains logic to train products related models"""
 import logging
 import os
+from typing import Dict, Optional
 
 import numpy as np
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 
-from wtsp.core.base import Parametrizable, DataLoader
+from wtsp.core.base import Parametrizable, DataLoader, Trainer
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
@@ -25,10 +26,10 @@ class ProductsTrainer(Parametrizable):
 
         self.work_dir = work_dir
         self.model = model
-        self.params = parse_kwargs(params)
+        self.params :Dict[str, object] = parse_kwargs(params)
 
     def train(self, input_data) -> str:
-        trainer = None
+        trainer: Optional[Trainer] = None
         if self.model == "embeddings":
             trainer = DocumentEmbeddingsTrainer(self.work_dir, **self.params)
         elif self.model == "classifier":
@@ -41,7 +42,7 @@ class ProductsTrainer(Parametrizable):
         return result
 
 
-class DocumentEmbeddingsTrainer(DataLoader):
+class DocumentEmbeddingsTrainer(Trainer, DataLoader):
     """Document Embeddings trainer.
 
     Orchestrates the document embedding training.
@@ -101,7 +102,7 @@ class DocumentEmbeddingsTrainer(DataLoader):
         return f"Product document embeddings trained successfully. Result is stored at: {output_dir}"
 
 
-class ProductsClassifierTrainer(DataLoader):
+class ProductsClassifierTrainer(Trainer, DataLoader):
     """Product Classifier Trainer.
 
     Orchestrates the training of the product

@@ -5,6 +5,8 @@ rest of the project.
 """
 from pathlib import Path
 import os
+from typing import Optional, Dict
+
 import pandas as pd
 
 from wtsp.exceptions import InvalidArgumentException, DataLoadException
@@ -42,16 +44,26 @@ class DataLoader:
             raise DataLoadException("The provided input data is not a valid parquet file", e)
 
 
+class Trainer:
+    """Trainer.
+
+    Parent class of all trainers
+    """
+    def train(self, input_data):
+        # This is expected to be overwritten
+        return "Not Implemented"
+
+
 class Filterable:
     """Filterable.
 
     Contains general functionality for
     filterable structures.
     """
-    def __init__(self, filters: str, can_be_none: bool = False):
+    def __init__(self, filters: Optional[str], can_be_none: bool = False):
         try:
             if can_be_none:
-                self.filters = parse_kwargs(filters) if filters else None
+                self.filters: Optional[Dict[str, object]] = parse_kwargs(filters) if filters else None
             else:
                 self.filters = parse_kwargs(filters)
         except (ValueError, AttributeError) as e:

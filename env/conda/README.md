@@ -26,7 +26,7 @@ $ conda activate wtsp
 ### Copy the sparkmagic configuration file
 ```bash
 $ mkdir -p ~/.sparkmagic/
-$ cp ./config.json ~/.sparkmagic/
+$ cp ./sparkmagic.config.json ~/.sparkmagic/
 ```
 
 ### Install ipyleaflet lab extension
