@@ -32,7 +32,6 @@ __pycache__/
 .env
 .Python
 env/
-bin/
 build/*.jar
 develop-eggs/
 dist/
@@ -95,7 +94,6 @@ __pycache__/
 .env
 .Python
 env/
-bin/
 build/
 develop-eggs/
 dist/
