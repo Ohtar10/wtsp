@@ -1,24 +1,17 @@
 version: "3"
 services:
   zeppelin:
-    image: ohtar10/zeppelin:0.9.0-SNAPSHOT
-    # build:
-    #   context: ./images/zeppelin
-    container_name: zeppelin
-    ports:
-      - "8080:8080"
-      - "4040:4040"
+    image: ohtar10/wtsp:0.1.0
+    container_name: wtsp
     environment: 
-      - ZEPPELIN_WEBSOCKET_MAX_TEXT_MESSAGE_SIZE=4096000
+      - ENV LC_ALL=C.utf-8
+      - ENV LANG=C.utf-8
+    command: tail -f /var/log/lastlog
     volumes:
-      - ${WORK_DIR}/notebooks/zeppelin/:/zeppelin/notebook
-      - ${WORK_DIR}/datasets/:/zeppelin/datasets
-      - ${WORK_DIR}/models/:/zeppelin/models
-      - ${WORK_DIR}/software/spark:/usr/lib/spark
-      - ${WORK_DIR}/resources/zeppelin/conf/:/zeppelin/conf/
+      - ${WORK_DIR}/datasets:/datasets
     networks:
       - wtsp-net
-
+  
 networks:
   wtsp-net:
     driver: bridge

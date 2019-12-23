@@ -24,7 +24,7 @@ def docstring_parameter(*sub):
 @click.group()
 @click.option('--debug/--no-debug', default=False, help='Enable debug output.')
 @click.option('-wd', '--work-dir', default=DEFAULT_WORK_DIR,
-              help='Which folder to use as working directory. Default to ~/.wtsp')
+              help='Which folder to use as working directory. Default to ~/wtsp')
 @click.pass_context
 @docstring_parameter(__version__)
 def wtsp(ctx, debug, work_dir):

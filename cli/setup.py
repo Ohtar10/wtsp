@@ -27,7 +27,7 @@ setup(
     long_description=readme,
     license=lic,
     author='Luis Eduardo Ferro Diez',
-    authod_email='luisedof10@gmail.com',
+    author_email='luisedof10@gmail.com',
     packages=packages,
     include_package_data=True,
     install_requires=requirements,
