@@ -6,6 +6,7 @@ services:
     environment: 
       - ENV LC_ALL=C.utf-8
       - ENV LANG=C.utf-8
+    # Just to avoid letting this container to die.
     command: tail -f /var/log/lastlog
     volumes:
       - ${WORK_DIR}/datasets:/datasets
