@@ -24,19 +24,27 @@ def plot_counts(data: pd.DataFrame, title,  x_label: str, save_path: str):
     min_val = 0
     max_val = max(data[data.columns[1]].values)
     # calculate the base 10 step size based on the maximum value
-    step = 10 ** (int(math.log(max_val, 10)))
+    step = __get_plot_step(max_val)
     new_index = data.columns[0]
     ax = data.set_index(new_index).plot(kind="bar",
                                         figsize=(10, 8),
                                         fontsize=12,
                                         grid=True,
-                                        yticks=np.arange(min_val, max_val + 1, step))
+                                        yticks=np.arange(min_val, max_val + step, step))
 
     ax.set_xlabel(x_label, fontsize=14)
     ax.set_ylabel("Count", fontsize=14)
     ax.set_title(title, fontsize=16)
     plt.legend(prop={"size": 14})
     plt.savefig(save_path, bbox_inches="tight")
+
+
+def __get_plot_step(max_val: int):
+    exp = int(math.log(max_val, 10))
+    for e in range(exp, 0, -1):
+        step = 10 ** e
+        if (max_val - step) >= step:
+            return step
 
 
 def plot_points(data, title, save_path):
