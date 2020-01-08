@@ -76,6 +76,7 @@ class Describer(DataLoader, Filterable):
 
         logging.debug("Saving results in destination folder")
         counts.to_csv(f"{output_dir}/counts.csv")
-        view.plot_counts(counts, title, x_label="Cities", save_path=f"{output_dir}/bar_chart.png")
+        x_label = "Categories" if self.domain == "documents" else "Cities"
+        view.plot_counts(counts, title, x_label=x_label, save_path=f"{output_dir}/bar_chart.png")
 
         return f"Result generated successfully at: {output_dir}"
