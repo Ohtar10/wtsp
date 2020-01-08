@@ -22,7 +22,7 @@ dependencies:
   - pyarrow=0.14.1
   - ipyleaflet
   - folium=0.10.0
-  - shapely=1.6.4.post1
+  - shapely=1.6.4
   - geopandas=0.4.1
   - sparkmagic
   - nodejs>5

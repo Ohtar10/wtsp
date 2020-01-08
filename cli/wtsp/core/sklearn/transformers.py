@@ -6,20 +6,22 @@ import warnings
 from operator import itemgetter
 from typing import Dict
 
-# To suppress lib warnings
-from keras.engine.saving import model_from_yaml
 from scipy.spatial.qhull import ConvexHull
 from shapely.geometry import Polygon, Point
 from sklearn.cluster import OPTICS
 
+# To suppress tensorflow warnings
 with warnings.catch_warnings():
-    warnings.filterwarnings("ignore", category=FutureWarning)
+    warnings.simplefilter("ignore")
+    from tensorflow import logging as tf_logging
+    tf_logging.set_verbosity(tf_logging.ERROR)
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     import tensorflow as tf
     from keras import regularizers
     from keras.callbacks import EarlyStopping
+    from keras.engine.saving import model_from_yaml
     from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
     from keras.models import Model
-    tf.logging.set_verbosity(tf.logging.ERROR)
 
 
 import geopandas as gpd
@@ -596,7 +598,9 @@ def is_valid_polygon(location_column):
 
 
 def init_tensorflow():
-    s_config = tf.ConfigProto()
-    # s_config.gpu_options.allow_growth = True
-    s_config.gpu_options.per_process_gpu_memory_fraction = 0.6
-    tf.keras.backend.set_session(tf.Session(config=s_config))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        s_config = tf.ConfigProto()
+        # s_config.gpu_options.allow_growth = True
+        s_config.gpu_options.per_process_gpu_memory_fraction = 0.6
+        tf.keras.backend.set_session(tf.Session(config=s_config))
