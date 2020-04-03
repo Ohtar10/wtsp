@@ -35,10 +35,10 @@ This job takes the twitter data, filters out the tweets that are not geotagged a
 #### Amazon Product Reviews Transformer
 This job takes the raw amazon product reviews and product metadata and converts them into 'documents' where each document is a category and either a review text or a product description.
 
-#### 3. Train the product classifier
+### 3. Train the product classifier
 Install the [cli](cli/) and follow the instructions to create the embeddings and train the classifier with the transformed product documents.
 
-#### 4. Predict the geographic area categories
+### 4. Predict the geographic area categories
 Use the [cli](cli/) to predict the detect and classify the geographic
 areas.
 
