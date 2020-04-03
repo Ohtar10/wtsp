@@ -108,23 +108,6 @@ To run the entire test suite you only need to execute the following command:
     $ make test
 
 
-Support
--------
-
-The best way to get support is to create a Github ticket.
-
-Contribution
-------------
-
-See `CONTRIBUTING.rst`_
-
-.. _CONTRIBUTING.rst: ./CONTRIBUTING.rst
-
-Future
-------
-
-* Better automation and execution control.
-
 License
 -------
 
