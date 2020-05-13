@@ -9,6 +9,9 @@ trait SpecCommon {
   val productMetadataPath = s"$resourcesBasePath/metadata/product_metadata.json"
   val transformedMetadataPath = s"$resourcesBasePath/metadata/transformed_metadata"
 
+  val filteredProductMetadataPath = s"$resourcesBasePath/metadata/filtered_metadata/expected_filtered_metadata.json"
+  val filteredReviewsPath = s"$resourcesBasePath/reviews/filtered_reviews/expected_filtered_reviews.json"
+
   val productReviewsPath = s"$resourcesBasePath/reviews/product_reviews.json"
   val transformedReviewsPath = s"$resourcesBasePath/reviews/transformed_reviews"
 

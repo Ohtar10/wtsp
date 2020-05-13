@@ -74,6 +74,7 @@ object AmzProductReviewTransformerJob{
             categoryMappingFile: String = CategoryParser.defaultMappingPath,
             limit: Option[Int],
             seed: Option[Int],
+            steps: Seq[String],
             strCat: Boolean = false
             ): AmzProductReviewTransformerJob =
 

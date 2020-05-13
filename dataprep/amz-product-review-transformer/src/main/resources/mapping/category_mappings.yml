@@ -1,65 +1,76 @@
 categories:
   - name: "Movies & TV"
     mappings:
-      - Movies
-      - Movies & TV
+      - "Movies"
+      - "Movies & TV"
   - name: "Clothing, Shoes & Jewelry"
     mappings:
-      - Clothing
-      - T-Shirts
-      - Shirts
-      - Jewelry
-      - Dresses
-      - Boots
-      - Shoes
+      - "Clothing"
+      - "T-Shirts"
+      - "Shirts"
+      - "Jewelry"
+      - "Dresses"
+      - "Boots"
+      - "Shoes"
       - "Jewelry: International Shipping Available"
       - "Shoes & Accessories: International Shipping Available"
       - "Clothing, Shoes & Jewelry"
-      - Fashion
-      - Earrings
+      - "Fashion"
+      - "Earrings"
   - name: "Music"
     mappings:
-      - Music
-      - Digital Music
-      - CDs & Vinyl
-      - Pop
-      - Jazz
-      - Alternative Rock
-      - Rock
-      - World Music
-      - Dance & Electronic
+      - "Music"
+      - "Digital Music"
+      - "CDs & Vinyl"
+      - "Pop"
+      - "Jazz"
+      - "Alternative Rock"
+      - "Rock"
+      - "World Music"
+      - "Dance & Electronic"
   - name: "Technology, Electronics & Accessories"
     mappings:
-      - Electronics
-      - Cell Phones & Accessories
-      - Computers & Accessories
-      - Camera & Photo
+      - "Electronics"
+      - "Cell Phones & Accessories"
+      - "Computers & Accessories"
+      - "Camera & Photo"
+      - "Laptop & Netbook Computer Accessories"
   - name: "Books"
     mappings:
-      - Books
-      - Kindle eBooks
-      - Kindle Store
-      - Literature & Fiction
-      - Kindle Short Reads
-      - Christian Books & Bibles
+      - "Books"
+      - "Kindle eBooks"
+      - "Kindle Store"
+      - "Literature & Fiction"
+      - "Kindle Short Reads"
+      - "Christian Books & Bibles"
   - name: "Toys & Games"
     mappings:
-      - Games
-      - Toys & Games
+      - "Games"
+      - "Toys & Games"
+      - "Video Games"
   - name: "Home & Kitchen"
     mappings:
-      - Home & Kitchen
-      - Kitchen & Dining
+      - "Home & Kitchen"
+      - "Kitchen & Dining"
+      - "Tools & Home Improvement"
+      - "Grocery & Gourmet Food"
+      - "Patio, Lawn & Garden"
+      - "Exterior Accessories"
+      - "Accessories & Supplies"
   - name: "Office & School Supplies"
     mappings:
-      - Office & School Supplies
-      - Office Products
+      - "Office & School Supplies"
+      - "Office Products"
   - name: "Health & Personal Care"
     mappings:
-      - Hair Care
-      - Skin Care
-      - Health & Personal Care
-  - name: "Health, Fitness & Dieting"
+      - "Hair Care"
+      - "Skin Care"
+      - "Health & Personal Care"
+      - "Health, Fitness & Dieting"
+      - "Beauty"
+  - name: "Sports & Outdoors"
     mappings:
-      - Athletic
-      - Health, Fitness & Dieting
+      - "Sports & Outdoors"
+      - "Athletic"
+      - "Hunting & Fishing"
+      

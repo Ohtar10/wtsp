@@ -9,7 +9,8 @@ private object Metadata {
 }
 
 private object AppUtils {
-  val parser = new OptionParser[Config]("amz-product-review-transformer") {
+
+  val parser: OptionParser[Config] = new OptionParser[Config]("amz-product-review-transformer") {
     head("amz-product-review-transformer", Metadata.version)
 
     opt[String]('m', "metadata").required().valueName("<metadata-path>")
@@ -24,19 +25,23 @@ private object AppUtils {
       .action((x, c)=> c.copy(output = x))
       .text("The output path to store the results is required.")
 
+    opt[Seq[String]]('s', "steps").optional().valueName("filter,transform")
+        .action((x, c) => c.copy(steps = x))
+        .text("The steps of the pipeline to execute, valid values: filter and transform")
+
     opt[String]('c', "category-maps").required().valueName("<category-mappings>")
         .action((x, c)=> c.copy(categoryMappingFile = x))
         .text("The category mapping file is required.")
 
-    opt[Int]('l', "limit").valueName("<record-limit>")
+    opt[Int]('l', "limit").optional().valueName("<record-limit>")
         .action((x, c) => c.copy(limit = x))
         .text("If you want to limit the amount of records obtained from the process")
 
-    opt[Int]('s', "seed").valueName("<sample-seed>")
+    opt[Int]("seed").optional().valueName("<sample-seed>")
         .action((x, c) => c.copy(seed = x))
         .text("The random seed for the limit option if you want reproducible results")
 
-    opt[Unit]("strcat").valueName("<string-categories>")
+    opt[Unit]("strcat").optional().valueName("<string-categories>")
         .action((_, c) => c.copy(strCat = true))
         .text("document categories as comma separated strings")
 
@@ -68,7 +73,8 @@ case class Config(
                  categoryMappingFile: String = "",
                  limit: Int = 0,
                  seed: Int = 0,
-                 strCat: Boolean = false
+                 strCat: Boolean = false,
+                 steps: Seq[String] = Seq("filter", "transform")
                  )
 
 /**
@@ -88,7 +94,8 @@ object AmzProductReviewTransformerLocalApp extends App {
         config.categoryMappingFile,
         config.limit,
         config.seed,
-        config.strCat)
+        config.strCat,
+        config.steps)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -110,7 +117,8 @@ object AmzProductReviewTransformerApp extends App{
         config.categoryMappingFile,
         config.limit,
         config.seed,
-        config.strCat)
+        config.strCat,
+        config.steps)
     }
     case _ => //Bad arguments. A message should have been displayed.
   }
@@ -125,7 +133,8 @@ object Runner {
           categoryMappingFile: String,
           limit:Int,
           seed: Int,
-          strCat: Boolean): Unit = {
+          strCat: Boolean,
+          steps: Seq[String]): Unit = {
 
     AmzProductReviewTransformerJob(spark,
       metadataInput,
@@ -134,8 +143,8 @@ object Runner {
       categoryMappingFile,
       if (limit > 0) Some(limit) else None,
       if (seed > 0) Some(seed) else None,
+      steps,
       strCat
-    )
-        .execute()
+    ).execute()
   }
 }

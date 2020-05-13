@@ -17,6 +17,8 @@ class AmzProductTransformerJobSpec extends FlatSpec
 
   import spark.implicits._
 
+  val steps: Seq[String] = Seq("filter", "transform")
+
   "The product review transformer job" should "be able to generate documents in array category form" in {
     val expected = spark.read.parquet(documentsWithArrayCategoriesPath).orderBy($"document")
     val job = AmzProductReviewTransformerJob(spark,
@@ -25,7 +27,9 @@ class AmzProductTransformerJobSpec extends FlatSpec
       testOutputPath,
       CategoryParser.defaultMappingPath,
       None,
-      None)
+      None,
+      steps
+    )
 
     job.execute()
 
@@ -45,6 +49,7 @@ class AmzProductTransformerJobSpec extends FlatSpec
       CategoryParser.defaultMappingPath,
       None,
       None,
+      steps,
       strCat = true)
 
     job.execute()
@@ -63,7 +68,8 @@ class AmzProductTransformerJobSpec extends FlatSpec
       testOutputPath,
       CategoryParser.defaultMappingPath,
       None,
-      None)
+      None,
+      steps)
 
     a[AnalysisException] should be thrownBy {
       job.execute()
@@ -75,7 +81,8 @@ class AmzProductTransformerJobSpec extends FlatSpec
       testOutputPath,
       CategoryParser.defaultMappingPath,
       None,
-      None)
+      None,
+      steps)
 
     a[AnalysisException] should be thrownBy {
       job2.execute()
@@ -89,7 +96,8 @@ class AmzProductTransformerJobSpec extends FlatSpec
       testOutputPath,
       CategoryParser.defaultMappingPath,
       None,
-      None)
+      None,
+      steps)
 
     a[SparkException] should be thrownBy {
       job.execute()
@@ -102,7 +110,8 @@ class AmzProductTransformerJobSpec extends FlatSpec
       testOutputPath,
       categoryConfigPath,
       None,
-      None)
+      None,
+      steps)
 
     job.execute()
 
