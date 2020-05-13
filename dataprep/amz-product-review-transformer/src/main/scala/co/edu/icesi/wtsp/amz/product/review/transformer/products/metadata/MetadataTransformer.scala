@@ -16,14 +16,17 @@ class MetadataTransformer(val spark: SparkSession,
 
   import spark.implicits._
 
+  private var transformedMetadata: DataFrame = _
+
   override def transform(dataset: Dataset[_]): DataFrame = {
     logInfo(spark, "Transforming product metadata")
     val expandedCategories = expandCategories(dataset)
-    val transformedCategories = transformCategories(expandedCategories)
-    transformDocuments(transformedCategories)
+    transformedMetadata = transformCategories(expandedCategories)
+    transformDocuments(transformedMetadata)
   }
 
   private def expandCategories(df: Dataset[_]): DataFrame = {
+    logInfo(spark, "Expanding categories")
     df.select($"asin",
       explode(flatten($"categories")).as("category"),
       $"title",
@@ -31,6 +34,7 @@ class MetadataTransformer(val spark: SparkSession,
   }
 
   private def generateCategoryColumn(): Column = {
+    logInfo(spark, "Generating category map case column")
     val categoryMap = categoryParser.getCategoryMappings()
     val categories = categoryParser.getCategories()
     val firstCase = when($"category".isin(categoryMap(categories.head):_*), categories.head)
@@ -40,6 +44,7 @@ class MetadataTransformer(val spark: SparkSession,
   }
 
   private def transformCategories(df: DataFrame): DataFrame = {
+    logInfo(spark, "Transforming categories according to mapping")
     val categoryColumn = generateCategoryColumn()
     df.select($"asin",
       $"title",
@@ -50,12 +55,15 @@ class MetadataTransformer(val spark: SparkSession,
   }
 
   private def transformDocuments(df: DataFrame): DataFrame = {
+    logInfo(spark, "Transforming product metadata into documents")
     df.filter($"title".isNotNull &&
       length(trim($"title")) >= 3 &&
       $"description".isNotNull &&
       length(trim($"description")) >= documentTextMinCharacters)
       .select($"category", concat_ws("\n", $"title", $"description").as("document"))
   }
+
+  def getTransformedMetadata: DataFrame = transformedMetadata
 
   override def copy(extra: ParamMap): Transformer = ???
 

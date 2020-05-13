@@ -5,8 +5,9 @@ import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.depreca
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.sql.AnalysisException
 import org.apache.spark.sql.functions._
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{DoNotDiscover, FlatSpec, Matchers}
 
+@DoNotDiscover
 class ReviewsTransformerSpec extends FlatSpec
   with DataFrameSuiteBase
   with Matchers
