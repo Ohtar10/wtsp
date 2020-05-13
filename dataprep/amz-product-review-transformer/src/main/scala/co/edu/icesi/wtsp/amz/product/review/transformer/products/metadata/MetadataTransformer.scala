@@ -4,59 +4,57 @@ import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Co
 import org.apache.spark.ml.Transformer
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{Column, DataFrame, Dataset, SparkSession}
 import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.functions._
 
 class MetadataTransformer(val spark: SparkSession,
                           val categoryParser: CategoryParser)
   extends Transformer
   with JobLogging
-  with Common{
+  with Common {
 
   import spark.implicits._
 
   override def transform(dataset: Dataset[_]): DataFrame = {
     logInfo(spark, "Transforming product metadata")
     val expandedCategories = expandCategories(dataset)
-    val categoryMapped = applyCategoryMapping(expandedCategories)
-    regroupCategories(categoryMapped).cache()
+    val transformedCategories = transformCategories(expandedCategories)
+    transformDocuments(transformedCategories)
   }
 
   private def expandCategories(df: Dataset[_]): DataFrame = {
-    logInfo(spark, "Expanding product metadata categories")
     df.select($"asin",
-      explode($"categories").as("categories"),
+      explode(flatten($"categories")).as("category"),
       $"title",
       $"description")
-      .select($"asin",
-        explode($"categories").as("category"),
-        trim(regexp_replace($"description", textBlacklistRegex, "")).as("description"),
-        trim(regexp_replace($"title", textBlacklistRegex, "")).as("title"))
   }
 
-  private def applyCategoryMapping(df: Dataset[_]): DataFrame = {
-    logInfo(spark, "Applying category mapping to product metadata")
+  private def generateCategoryColumn(): Column = {
     val categoryMap = categoryParser.getCategoryMappings()
     val categories = categoryParser.getCategories()
-
     val firstCase = when($"category".isin(categoryMap(categories.head):_*), categories.head)
-    val categoryColumn = categories.tail.foldLeft(firstCase){(column, category) =>
+    categories.tail.foldLeft(firstCase){ (column, category) =>
       column.when($"category".isin(categoryMap(category):_*), category)
-    }
-
-    df.select($"asin",
-      trim($"title").as("title"),
-      trim($"description").as("description"),
-      categoryColumn.otherwise("skip").as("category")).
-      where($"category".isNotNull && $"category" =!= "skip")
+    }.otherwise("skip").as("category")
   }
 
-  private def regroupCategories(df: Dataset[_]): DataFrame = {
-    logInfo(spark, "Regrouping product categories")
-    df.groupBy($"asin", $"title", $"description")
-      .agg(collect_set($"category").as("categories"))
-      .cache()
+  private def transformCategories(df: DataFrame): DataFrame = {
+    val categoryColumn = generateCategoryColumn()
+    df.select($"asin",
+      $"title",
+      trim($"description").as("description"),
+      categoryColumn)
+      .filter($"category".isNotNull && $"category" =!= "skip")
+      .distinct()
+  }
+
+  private def transformDocuments(df: DataFrame): DataFrame = {
+    df.filter($"title".isNotNull &&
+      length(trim($"title")) >= 3 &&
+      $"description".isNotNull &&
+      length(trim($"description")) >= documentTextMinCharacters)
+      .select($"category", concat_ws("\n", $"title", $"description").as("document"))
   }
 
   override def copy(extra: ParamMap): Transformer = ???
@@ -68,6 +66,6 @@ class MetadataTransformer(val spark: SparkSession,
 
 object MetadataTransformer {
   def apply(spark: SparkSession,
-            categoryParser: CategoryParser = CategoryParser(CategoryParser.defaultMappingPath)): MetadataTransformer =
+            categoryParser: CategoryParser = CategoryParser.fromYamlFile(CategoryParser.defaultMappingPath)): MetadataTransformer =
     new MetadataTransformer(spark, categoryParser)
 }

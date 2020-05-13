@@ -1,11 +1,11 @@
-package co.edu.icesi.wtsp.amz.product.review.transformer.dataprep
+package co.edu.icesi.wtsp.amz.product.review.transformer.dataprep.deprecated
 
 import co.edu.icesi.wtsp.amz.product.review.transformer.SpecCommon
-import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.ReviewsTransformer
+import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.deprecated.ReviewsTransformer
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.sql.AnalysisException
-import org.scalatest.{FlatSpec, Matchers}
 import org.apache.spark.sql.functions._
+import org.scalatest.{FlatSpec, Matchers}
 
 class ReviewsTransformerSpec extends FlatSpec
   with DataFrameSuiteBase

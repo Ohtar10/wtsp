@@ -1,7 +1,7 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer.job
 
-import co.edu.icesi.wtsp.amz.product.review.transformer.products.metadata.MetadataTransformer
-import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.ReviewsTransformer
+import co.edu.icesi.wtsp.amz.product.review.transformer.products.metadata.deprecated.MetadataTransformer
+import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.deprecated.ReviewsTransformer
 import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Common, JobLogging}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._

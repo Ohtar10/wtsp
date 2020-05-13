@@ -17,29 +17,6 @@ class DocumentFilterSpec extends FlatSpec
   val metadataCols = Seq("asin", "title", "description", "categories")
   val reviewsCols = Seq("asin", "summary", "reviewText")
 
-  val categoryMappingsYaml =
-    """
-    categories:
-      - name: "Movies & TV"
-        mappings:
-          - "Movies"
-          - "Movies & TV"
-      - name: "Clothing, Shoes & Jewelry"
-        mappings:
-          - "Clothing"
-          - "T-Shirts"
-          - "Shirts"
-          - "Jewelry"
-          - "Dresses"
-          - "Boots"
-          - "Shoes"
-          - "Jewelry: International Shipping Available"
-          - "Shoes & Accessories: International Shipping Available"
-          - "Clothing, Shoes & Jewelry"
-          - "Fashion"
-          - "Earrings"
-    """
-
   val categoryParser: CategoryParser = CategoryParser.fromYamlString(categoryMappingsYaml)
 
   "The reviews Filter" should "filter out product categories not in list" in {
