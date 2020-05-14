@@ -35,6 +35,7 @@ class ReviewsTransformer(spark: SparkSession,
   }
 
   private def filterReviewsByProducts(dataset: Dataset[_]): DataFrame = {
+    logInfo(spark, "Filtering reviews by the surviving product categories")
     dataset.as("rev").join(productMetadata.as("prod"), $"rev.asin" === $"prod.asin")
       .select($"prod.category",
         trim(regexp_replace($"rev.summary", textBlacklistRegex, "")).as("summary"),
@@ -42,6 +43,7 @@ class ReviewsTransformer(spark: SparkSession,
   }
 
   private def transformToDocuments(df: DataFrame): DataFrame = {
+    logInfo(spark, "Transforming reviews into product documents")
     df.filter($"summary".isNotNull
               && length(trim($"summary")) >= 3
               && $"review_text".isNotNull

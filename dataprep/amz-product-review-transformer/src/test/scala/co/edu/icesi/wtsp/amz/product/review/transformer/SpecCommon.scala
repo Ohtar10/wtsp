@@ -26,10 +26,9 @@ trait SpecCommon {
   val documentsWithStringCategoriesPath = s"$finalDocumentsPath/expected_docs_str_cat.parquet"
   val fullDocumentsPath = s"$finalDocumentsPath/full_documents"
 
-  val categoryConfigPath = s"$resourcesBasePath/config/category_mapping.yml"
-
   val testOutputPath = s"$resourcesBasePath/testOutput/"
 
+  val categoryConfigPath = s"$resourcesBasePath/config/category_mapping.yml"
   val categoryMappingsYaml =
     """
     categories:

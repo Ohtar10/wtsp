@@ -1,15 +1,17 @@
-package co.edu.icesi.wtsp.amz.product.review.transformer.job
+package co.edu.icesi.wtsp.amz.product.review.transformer.job.deprecated
 
 import java.io.File
 import java.nio.file.{Files, Paths}
 
 import co.edu.icesi.wtsp.amz.product.review.transformer.SpecCommon
+import co.edu.icesi.wtsp.amz.product.review.transformer.job.AmzProductReviewTransformerJob
 import co.edu.icesi.wtsp.amz.product.review.transformer.util.CategoryParser
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import org.apache.spark.SparkException
 import org.apache.spark.sql.AnalysisException
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{DoNotDiscover, FlatSpec, Matchers}
 
+@DoNotDiscover
 class AmzProductTransformerJobSpec extends FlatSpec
   with DataFrameSuiteBase
   with Matchers
@@ -19,8 +21,7 @@ class AmzProductTransformerJobSpec extends FlatSpec
 
   val steps: Seq[String] = Seq("filter", "transform")
 
-  //FIXME fix test
-  "The product review transformer job" should "be able to generate documents in array category form" ignore {
+  "The product review transformer job" should "be able to generate documents in array category form" in {
     val expected = spark.read.parquet(documentsWithArrayCategoriesPath).orderBy($"document")
     val job = AmzProductReviewTransformerJob(spark,
       productMetadataPath,
@@ -41,8 +42,7 @@ class AmzProductTransformerJobSpec extends FlatSpec
 
     deleteRecursively(new File(testOutputPath))
   }
-  //FIXME fix test
-  it should "be able to generate documents in string category form" ignore  {
+  it should "be able to generate documents in string category form" in  {
     val expected = spark.read.parquet(documentsWithStringCategoriesPath).orderBy($"document")
     val job = AmzProductReviewTransformerJob(spark,
       productMetadataPath,

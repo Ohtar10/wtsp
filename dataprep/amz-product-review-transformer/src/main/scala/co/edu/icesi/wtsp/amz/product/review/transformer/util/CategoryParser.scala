@@ -1,6 +1,7 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer.util
 
 import cats.syntax.either._
+import co.edu.icesi.wtsp.amz.product.review.transformer.exceptions.InvalidCategoryMappingException
 import io.circe._
 import io.circe.generic.auto._
 import io.circe.yaml
@@ -70,7 +71,7 @@ object CategoryParser{
 
     json.leftMap(err => err:Error).
       flatMap(_.as[CategoryMapping]).
-      valueOr(throw _)
+      valueOr(error => throw new InvalidCategoryMappingException("Yaml is invalid", error))
   }
 
 }

@@ -3,7 +3,7 @@ package co.edu.icesi.wtsp.amz.product.review.transformer.util
 import java.io.FileNotFoundException
 
 import co.edu.icesi.wtsp.amz.product.review.transformer.SpecCommon
-import io.circe.DecodingFailure
+import co.edu.icesi.wtsp.amz.product.review.transformer.exceptions.InvalidCategoryMappingException
 import org.scalatest.{FlatSpec, Matchers}
 
 class CategoryParserSpec extends FlatSpec
@@ -47,7 +47,7 @@ class CategoryParserSpec extends FlatSpec
   it should "fail when passed invalid configurations" in {
     val invalidMapping = s"$resourcesBasePath/config/invalid_category_mapping.yml"
 
-    a [DecodingFailure] should be thrownBy {
+    a [InvalidCategoryMappingException] should be thrownBy {
       CategoryParser.fromYamlFile(invalidMapping)
     }
   }
@@ -92,7 +92,7 @@ class CategoryParserSpec extends FlatSpec
     categoryMapping("Movies & TV").shouldBe(List("Movies", "Movies & TV"))
   }
   it should "fail when passed an invalid yaml string" in {
-    a [DecodingFailure] should be thrownBy {
+    a [InvalidCategoryMappingException] should be thrownBy {
       CategoryParser.fromYamlString("invalid yaml")
     }
   }

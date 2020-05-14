@@ -6,6 +6,7 @@ import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Co
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 
+@deprecated("Deprecated, use ProductReviewDocumentTransformer instead.")
 class AmzProductReviewTransformerJob(spark: SparkSession,
                                      metadataInput: String,
                                      reviewsInput: String,
@@ -66,6 +67,7 @@ class AmzProductReviewTransformerJob(spark: SparkSession,
   }
 }
 
+@deprecated("Deprecated, use ProductReviewDocumentTransformer instead.")
 object AmzProductReviewTransformerJob{
   def apply(spark: SparkSession,
             metadataInput: String,
