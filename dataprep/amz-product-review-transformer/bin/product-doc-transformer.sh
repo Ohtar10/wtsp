@@ -191,13 +191,15 @@ Spark Related Options:
   -jj --job-jar           Spark Job Jar path (Default: ./product-doc-transformer.jar)
 
 Job Related Options:
-  -o  --output            Output directory [Required.]
+  -o  --outputs           Output directories in k1=v1,k2=v2 format (keys: full-documents-output, review-documents-output, metadata-documents-output, filter-output [Required at least one.]
   -md --metadata          Product metadata file path [Required.]
   -rv --reviews           Product reviews file path [Required.]
+  -a --metadata-cols      The columns to select from the metadata.
+  -b --review-cols        The columns to select from the reviews.
   -cm --category-map      Product category mapping file (Default: ./category_mappings.yml)
-  -l  --limit             Maximum number of records to process (Default: 10000000)
-  -s  --seed              Random seed for sampling             (Default: 12345)
-  -ac --array-categories  Set if you want the categories per document as an array instead of a comma separated string.
+  -st --steps             The pipeline steps to execute (Default: filter, transform-metadata, transform-reviews, aggregate-documents)
+  -l  --limit             Maximum number of records to process
+  -s  --seed              Random seed for sampling
 
 HEREDOC
 }
@@ -240,10 +242,12 @@ _DEFAULT_JOB_JAR="./product-doc-transformer.jar"
 
 _METADATA_PATH=""
 _REVIEWS_PATH=""
+_METADATA_COLS="asin,title,description,categories"
+_REVIEW_COLS="asin,summary,reviewText"
 _CATEGORY_MAP_PATH="./category_mappings.yml"
-_LIMIT=10000000
-_SEED=12345
-_ARRAY_CAT=0
+_STEPS="filter,transform-metadata,transform-reviews,aggregate-documents"
+_LIMIT=0
+_SEED=0
 _OUTPUT_PATH=""
 
 # _require_argument()
@@ -278,9 +282,6 @@ do
       ;;
     --debug)
       _USE_DEBUG=1
-      ;;
-    -ac|--array-categories)
-      _ARRAY_CAT=1
       ;;
     -sh|--spark-home)
       _SPARK_HOME="${__maybe_param}"
@@ -318,7 +319,7 @@ do
       _DEFAULT_JOB_JAR="${__maybe_param}"
       shift
       ;;
-    -o|--output)
+    -o|--outputs)
       _require_argument "${__option}" "${__maybe_param}"
       _OUTPUT_PATH="${__maybe_param}"
       shift
@@ -336,6 +337,18 @@ do
     -cm|--category-map)
       _require_argument "${__option}" "${__maybe_param}"
       _CATEGORY_MAP_PATH="${__maybe_param}"
+      shift
+      ;;
+    -st|--steps)
+      _STEPS="${__maybe_param}"
+      shift
+      ;;
+    -a|--metadata-cols)
+      _METADATA_COLS="${__maybe_param}"
+      shift
+      ;;
+    -b|--review-cols)
+      _REVIEW_COLS="${__maybe_param}"
       shift
       ;;
     -l|--limit)
@@ -367,7 +380,7 @@ _spark_submit() {
 
   if [ -z "${_OUTPUT_PATH}" ];
   then
-    _die printf "Output path is required.\\n"
+    _die printf "At least one output path is required.\\n"
   fi
 
   if [ -z "${_SPARK_HOME}" ];
@@ -385,13 +398,6 @@ _spark_submit() {
     _die printf "The reviews path is required.\\n"
   fi
 
-
-  strcat=""
-  if [ "${_ARRAY_CAT}" -eq "1" ];
-  then
-    strcat="--strcat"
-  fi
-
   time ${_SPARK_HOME}/bin/spark-submit --class co.edu.icesi.wtsp.amz.product.review.transformer.AmzProductReviewTransformerApp \
   --master ${_DEFAULT_MASTER} \
   --driver-memory ${_DEFAULT_DRIVER_MEMORY} \
@@ -402,7 +408,7 @@ _spark_submit() {
   --conf "spark.eventLog.enabled=true" \
   --conf "spark.eventLog.compress=true" \
   --conf "spark.eventLog.dir=${_DEFAULT_EVENT_LOG_PATH}" \
-  ${_DEFAULT_JOB_JAR} -m "${_METADATA_PATH}"  -r "${_REVIEWS_PATH}" -c "${_CATEGORY_MAP_PATH}" -o "${_OUTPUT_PATH}" -l "${_LIMIT}" -s "${_SEED}" ${strcat}
+  ${_DEFAULT_JOB_JAR} -m "${_METADATA_PATH}" -r "${_REVIEWS_PATH}" -a "${_METADATA_COLS}" -b "${_REVIEW_COLS}" -c "${_CATEGORY_MAP_PATH}" -o "${_OUTPUT_PATH}" -s "${_STEPS}" -l "${_LIMIT}" --seed "${_SEED}"
 
 }
 

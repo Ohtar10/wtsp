@@ -25,6 +25,14 @@ private object AppUtils {
       .action((x, c)=> c.copy(outputs = x))
       .text(s"The output paths to store the results is required. Possible keys: ${defaults.outputKeys.mkString(", ")}")
 
+    opt[Seq[String]]('a', "metadata-cols").optional().valueName("<col1,col2>")
+      .action((x, c) => c.copy(metadataCols = x))
+      .text(s"The columns to select from metadata. Default to: ${defaults.metadataCols.mkString(", ")}")
+
+    opt[Seq[String]]('b', "review-cols").optional().valueName("<col1,col2>")
+      .action((x, c) => c.copy(reviewsCols = x))
+      .text(s"The columns to select from the reviews. Default to: ${defaults.reviewsCols.mkString(", ")}")
+
     opt[Seq[String]]('s', "steps").optional().valueName("<filter,transform-metadata,transform-reviews,aggregate-documents>")
         .action((x, c) => c.copy(steps = x))
         .text("The steps of the pipeline to execute, valid values: filter, transform-metadata, transform-reviews, aggregate-documents")
@@ -66,6 +74,8 @@ case class Config(
                  metadataInput: String = "",
                  reviewsInput: String = "",
                  outputs: Map[String, String] = Map.empty[String, String],
+                 metadataCols: Seq[String] = Seq("asin", "title", "description", "categories"),
+                 reviewsCols: Seq[String] = Seq("asin", "summary", "reviewText"),
                  categoryMappingFile: String = "",
                  limit: Int = 0,
                  seed: Int = 0,
@@ -91,6 +101,8 @@ object AmzProductReviewTransformerLocalApp extends App {
         config.metadataInput,
         config.reviewsInput,
         config.outputs,
+        config.metadataCols,
+        config.reviewsCols,
         config.categoryMappingFile,
         config.limit,
         config.seed,
@@ -113,6 +125,8 @@ object AmzProductReviewTransformerApp extends App{
         config.metadataInput,
         config.reviewsInput,
         config.outputs,
+        config.metadataCols,
+        config.reviewsCols,
         config.categoryMappingFile,
         config.limit,
         config.seed,
@@ -128,6 +142,8 @@ object Runner {
           metadataInput: String,
           reviewsInput: String,
           output: Map[String, String],
+          metadataCols: Seq[String],
+          reviewsCols: Seq[String],
           categoryMappingFile: String,
           limit: Int,
           seed: Int,
@@ -138,6 +154,8 @@ object Runner {
     val parameters = output.asInstanceOf[Map[String, _]] +
       ("metadata" -> metadataInput) +
       ("reviews" -> reviewsInput) +
+      ("metadata-cols" -> metadataCols) +
+      ("reviews-cols" -> reviewsCols) +
       ("category-mappings" -> Right(categoryMappingFile)) +
       ("limit" -> limitOpt) +
       ("seed" -> seedOpt)
