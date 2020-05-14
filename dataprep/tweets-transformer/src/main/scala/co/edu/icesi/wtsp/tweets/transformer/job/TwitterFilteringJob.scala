@@ -83,7 +83,7 @@ class TwitterFilteringJob(spark: SparkSession, input: String,
 
     //Persist the final data frame to the provided output path
     logInfo(spark, "Persisting final results in parquet files...")
-    finalResults.write.mode("append")
+    finalResults.coalesce(1).write.mode("append")
       .partitionBy("year", "month", "day", "hour")
       .parquet(s"$output/tweets")
   }
