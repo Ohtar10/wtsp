@@ -171,6 +171,51 @@ class ProductReviewDocumentTransformerJobSpec extends FlatSpec
     Files.exists(Paths.get(testOutputPath)) shouldBe true
     deleteRecursively(new File(testOutputPath))
   }
+  it should "work with output record limits" in {
+    val limit = Some(20)
+    val fullReviews = spark.read.parquet(reviewsDocuments).count()
+    val job = ProductReviewDocumentTransformerJob(spark,
+      Map(
+        "metadata" -> productMetadataPath,
+        "reviews" -> productReviewsPath,
+        "metadata-cols" -> metadataCols,
+        "reviews-cols" -> reviewsCols,
+        "limit" -> limit,
+        "seed" -> Some(1234),
+        "category-mappings" -> Left(categoryMappingsYaml),
+        "full-documents-output" -> testOutputPath
+      ),
+      fullPipeline
+    )
+
+    job.execute()
+
+    Files.exists(Paths.get(testOutputPath)) shouldBe true
+    val result = spark.read.parquet(testOutputPath).orderBy($"document").count()
+    val threshold = 0.2
+    val upperBound = limit.get + (fullReviews * threshold)
+    val lowerBound = limit.get - (fullReviews * threshold)
+    result.toInt should be >= lowerBound.intValue()
+    result.toInt should be <= upperBound.intValue()
+
+    deleteRecursively(new File(testOutputPath))
+  }
+  it should "fail if any output is configured" in {
+    val job = ProductReviewDocumentTransformerJob(spark,
+      Map(
+        "metadata" -> productMetadataPath,
+        "reviews" -> productReviewsPath,
+        "metadata-cols" -> metadataCols,
+        "reviews-cols" -> reviewsCols,
+        "category-mappings" -> Left(categoryMappingsYaml)
+      ),
+      fullPipeline
+    )
+
+    a[InvalidStepArgumentException] should be thrownBy {
+      job.execute()
+    }
+  }
 
   "The product review document job (Document Filter Step)" should "be able to filter and persist the data" in {
     val expectedMetadata = s"$testOutputPath/filtered-metadata"

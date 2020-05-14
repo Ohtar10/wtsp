@@ -1,6 +1,6 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer.job
 
-import co.edu.icesi.wtsp.amz.product.review.transformer.exceptions.{InvalidStepArgumentException, StepExecutionException}
+import co.edu.icesi.wtsp.amz.product.review.transformer.exceptions.InvalidStepArgumentException
 import co.edu.icesi.wtsp.amz.product.review.transformer.products.DocumentFilter
 import co.edu.icesi.wtsp.amz.product.review.transformer.products.metadata.MetadataTransformer
 import co.edu.icesi.wtsp.amz.product.review.transformer.products.reviews.ReviewsTransformer
@@ -12,11 +12,18 @@ class ProductReviewDocumentTransformerJob(spark: SparkSession,
                                           steps: Seq[String])
   extends Job with JobLogging with Common {
 
+  private val outputParams: Set[String] = Set("full-documents-output",
+  "review-documents-output",
+  "metadata-documents-output",
+  "filter-output")
+
   private def validate(): Unit = {
     if (!parameters.contains("metadata"))
       throw new InvalidStepArgumentException("The metadata is required.")
     if (!parameters.contains("reviews"))
       throw new InvalidStepArgumentException("The reviews are required.")
+    if (parameters.keySet.intersect(outputParams).isEmpty)
+      throw new InvalidStepArgumentException("No output configured, no data will be saved after processing.")
   }
 
   override def execute(): Unit = {

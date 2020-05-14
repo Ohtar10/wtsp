@@ -1,6 +1,6 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer
 
-import co.edu.icesi.wtsp.amz.product.review.transformer.job.AmzProductReviewTransformerJob
+import co.edu.icesi.wtsp.amz.product.review.transformer.job.{AmzProductReviewTransformerJob, ProductReviewDocumentTransformerJob}
 import org.apache.spark.sql.SparkSession
 import scopt.OptionParser
 
@@ -12,7 +12,7 @@ private object AppUtils {
 
   val parser: OptionParser[Config] = new OptionParser[Config]("amz-product-review-transformer") {
     head("amz-product-review-transformer", Metadata.version)
-
+    val defaults: Config = Config()
     opt[String]('m', "metadata").required().valueName("<metadata-path>")
       .action((x, c)=> c.copy(metadataInput = x))
       .text("The input path of the JSON metadata is required.")
@@ -21,13 +21,13 @@ private object AppUtils {
       .action((x, c)=> c.copy(reviewsInput = x))
       .text("The input path of the JSON reviews is required.")
 
-    opt[String]('o', "output").required().valueName("<output-path>")
-      .action((x, c)=> c.copy(output = x))
-      .text("The output path to store the results is required.")
+    opt[Map[String, String]]('o', "outputs").required().valueName("<k1=v1,k2=v2>")
+      .action((x, c)=> c.copy(outputs = x))
+      .text(s"The output paths to store the results is required. Possible keys: ${defaults.outputKeys.mkString(", ")}")
 
-    opt[Seq[String]]('s', "steps").optional().valueName("filter,transform")
+    opt[Seq[String]]('s', "steps").optional().valueName("<filter,transform-metadata,transform-reviews,aggregate-documents>")
         .action((x, c) => c.copy(steps = x))
-        .text("The steps of the pipeline to execute, valid values: filter and transform")
+        .text("The steps of the pipeline to execute, valid values: filter, transform-metadata, transform-reviews, aggregate-documents")
 
     opt[String]('c', "category-maps").required().valueName("<category-mappings>")
         .action((x, c)=> c.copy(categoryMappingFile = x))
@@ -40,10 +40,6 @@ private object AppUtils {
     opt[Int]("seed").optional().valueName("<sample-seed>")
         .action((x, c) => c.copy(seed = x))
         .text("The random seed for the limit option if you want reproducible results")
-
-    opt[Unit]("strcat").optional().valueName("<string-categories>")
-        .action((_, c) => c.copy(strCat = true))
-        .text("document categories as comma separated strings")
 
     help('h', "help").text("Prints this usage text")
   }
@@ -69,13 +65,17 @@ private object AppUtils {
 case class Config(
                  metadataInput: String = "",
                  reviewsInput: String = "",
-                 output: String = "",
+                 outputs: Map[String, String] = Map.empty[String, String],
                  categoryMappingFile: String = "",
                  limit: Int = 0,
                  seed: Int = 0,
-                 strCat: Boolean = false,
-                 steps: Seq[String] = Seq("filter", "transform")
-                 )
+                 steps: Seq[String] = Seq("filter", "transform-metadata", "transform-reviews", "aggregate-documents")
+                 ) {
+  val outputKeys: Set[String] = Set("full-documents-output",
+    "review-documents-output",
+    "metadata-documents-output",
+    "filter-output")
+}
 
 /**
   * Use this to test the app locally, from sbt:
@@ -90,11 +90,10 @@ object AmzProductReviewTransformerLocalApp extends App {
       Runner.run(spark,
         config.metadataInput,
         config.reviewsInput,
-        config.output,
+        config.outputs,
         config.categoryMappingFile,
         config.limit,
         config.seed,
-        config.strCat,
         config.steps)
     }
     case _ => //Bad arguments. A message should have been displayed.
@@ -113,11 +112,10 @@ object AmzProductReviewTransformerApp extends App{
       Runner.run(spark,
         config.metadataInput,
         config.reviewsInput,
-        config.output,
+        config.outputs,
         config.categoryMappingFile,
         config.limit,
         config.seed,
-        config.strCat,
         config.steps)
     }
     case _ => //Bad arguments. A message should have been displayed.
@@ -129,22 +127,24 @@ object Runner {
   def run(spark: SparkSession,
           metadataInput: String,
           reviewsInput: String,
-          output: String,
+          output: Map[String, String],
           categoryMappingFile: String,
-          limit:Int,
+          limit: Int,
           seed: Int,
-          strCat: Boolean,
           steps: Seq[String]): Unit = {
 
-    AmzProductReviewTransformerJob(spark,
-      metadataInput,
-      reviewsInput,
-      output,
-      categoryMappingFile,
-      if (limit > 0) Some(limit) else None,
-      if (seed > 0) Some(seed) else None,
-      steps,
-      strCat
-    ).execute()
+    val limitOpt = if (limit > 0) Some(limit) else None
+    val seedOpt = if (seed > 0) Some(seed) else None
+    val parameters = output.asInstanceOf[Map[String, _]] +
+      ("metadata" -> metadataInput) +
+      ("reviews" -> reviewsInput) +
+      ("category-mappings" -> Right(categoryMappingFile)) +
+      ("limit" -> limitOpt) +
+      ("seed" -> seedOpt)
+
+    ProductReviewDocumentTransformerJob(spark,
+      parameters,
+      steps
+      ).execute()
   }
 }
