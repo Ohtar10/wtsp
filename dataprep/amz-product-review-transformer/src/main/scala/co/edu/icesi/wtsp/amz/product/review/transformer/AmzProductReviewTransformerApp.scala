@@ -1,6 +1,6 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer
 
-import co.edu.icesi.wtsp.amz.product.review.transformer.job.{AmzProductReviewTransformerJob, ProductReviewDocumentTransformerJob}
+import co.edu.icesi.wtsp.amz.product.review.transformer.job.ProductReviewDocumentTransformerJob
 import org.apache.spark.sql.SparkSession
 import scopt.OptionParser
 

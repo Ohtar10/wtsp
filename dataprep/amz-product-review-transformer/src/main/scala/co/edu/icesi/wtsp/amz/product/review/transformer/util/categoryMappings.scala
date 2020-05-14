@@ -45,7 +45,7 @@ class CategoryParser(categoryMapping: CategoryMapping) {
 
 object CategoryParser{
   val defaultMappingPath: String = "src/main/resources/mapping/category_mappings.yml"
-  @deprecated("Deprecated, use fromYamlFile instead.")
+  @deprecated("Deprecated, use fromYamlFile instead.", "0.0.2")
   def apply(path: String): CategoryParser = {
     fromYamlFile(path)
   }
