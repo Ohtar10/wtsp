@@ -13,8 +13,8 @@ from sklearn.cluster import OPTICS
 # To suppress tensorflow warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    from tensorflow import logging as tf_logging
-    tf_logging.set_verbosity(tf_logging.ERROR)
+    #from tensorflow import logging as tf_logging
+    #tf_logging.set_verbosity(tf_logging.ERROR)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     import tensorflow as tf
     from keras import regularizers
@@ -600,7 +600,7 @@ def is_valid_polygon(location_column):
 def init_tensorflow():
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        s_config = tf.ConfigProto()
+        # s_config = tf.ConfigProto()
         # s_config.gpu_options.allow_growth = True
-        s_config.gpu_options.per_process_gpu_memory_fraction = 0.6
-        tf.keras.backend.set_session(tf.Session(config=s_config))
+        # s_config.gpu_options.per_process_gpu_memory_fraction = 0.6
+        # tf.keras.backend.set_session(tf.Session(config=s_config))

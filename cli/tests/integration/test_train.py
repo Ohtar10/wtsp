@@ -97,7 +97,7 @@ def test_train_tweets_no_filters_should_fail():
                                               output_path,
                                               input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-f" / "--filters"' in result.output
+    assert "Error: Missing option '-f' / '--filters'" in result.output
 
 
 def test_train_tweets_no_params_should_fail():
@@ -110,7 +110,7 @@ def test_train_tweets_no_params_should_fail():
                                               output_path,
                                               input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-p" / "--params"' in result.output
+    assert "Error: Missing option '-p' / '--params'" in result.output
 
 
 def test_train_tweets_no_input_data_should_fail():
@@ -125,7 +125,7 @@ def test_train_tweets_no_input_data_should_fail():
                                               "--output-dir",
                                               output_path])
     assert result.exit_code != 0
-    assert 'Error: Missing argument "INPUT_DATA"' in result.output
+    assert "Error: Missing argument 'INPUT_DATA'" in result.output
 
 
 def test_train_products_no_model_should_fail():
@@ -141,7 +141,7 @@ def test_train_products_no_model_should_fail():
                                       params,
                                       input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-m" / "--model"' in result.output
+    assert "Error: Missing option '-m' / '--model'" in result.output
 
 
 def test_train_products_no_params_should_fail():
@@ -156,7 +156,7 @@ def test_train_products_no_params_should_fail():
                                       "embeddings",
                                       input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-p" / "--params"' in result.output
+    assert "Error: Missing option '-p' / '--params'" in result.output
 
 
 def test_train_products_no_input_data_should_fail():
@@ -172,4 +172,4 @@ def test_train_products_no_input_data_should_fail():
                                       "--params",
                                       params])
     assert result.exit_code != 0
-    assert 'Error: Missing argument "INPUT_DATA"' in result.output
+    assert "Error: Missing argument 'INPUT_DATA'" in result.output

@@ -69,12 +69,18 @@ repository:
 Development setup for end users
 -------------------------------
 
-Prerequisites
+Requirements
 .............
 
 Make sure you have a working installation of Python 3.6+. All commands below
 are to be entered at a command prompt in the root directory of the unpacked
 Nagini repository.
+
+    Software packages:
+
+    - nvidia-cuda-toolkit
+    - cuda 10.1
+
 
 Install instructions
 ....................
@@ -85,9 +91,9 @@ root directory like this:
 
 .. code-block:: console
 
-    $ conda env create --name wtsp -f environment.yml
-    $ conda activate wtsp
-    $ pip install -e .
+    $ conda env create --name wtsp-cli-dev -f environment.yml
+    $ conda activate wtsp-cli-dev
+    $ make all
 
 To update the conda environment.yml file and export without fixed versions:
 

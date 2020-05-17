@@ -1,7 +1,7 @@
 .PHONY: all
 
 build:
-	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 
 benchmark:
 	pytest -v -s -m benchmark tests

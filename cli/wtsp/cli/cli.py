@@ -68,6 +68,7 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
         print(result)
     except WTSPBaseException as e:
         print(e)
+        exit(1)
 
 
 @describe.command("products")
@@ -91,6 +92,7 @@ def describe_products(ctx, output_dir, groupby, count, min_count, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
+        exit(1)
 
 
 @wtsp.group()
@@ -135,6 +137,7 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
+        exit(1)
 
 
 @train.command("products")
@@ -179,6 +182,7 @@ def train_products(ctx, model, params, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
+        exit(1)
 
 
 @wtsp.command("predict")
@@ -211,3 +215,4 @@ def transform(ctx, filters, params, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
+        exit(1)

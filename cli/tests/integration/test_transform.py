@@ -48,7 +48,7 @@ def test_transform_no_filters_should_fail():
                                       params,
                                       input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-f" / "--filters"' in result.output
+    assert "Error: Missing option '-f' / '--filters'" in result.output
 
 
 def test_transform_no_params_should_fail():
@@ -62,7 +62,7 @@ def test_transform_no_params_should_fail():
                                       "place_name='Los Angeles'",
                                       input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-p" / "--params"' in result.output
+    assert "Error: Missing option '-p' / '--params'" in result.output
 
 
 def test_transform_no_input_data_should_fail():
@@ -77,4 +77,4 @@ def test_transform_no_input_data_should_fail():
                                       "--filters",
                                       "place_name='Los Angeles'"])
     assert result.exit_code != 0
-    assert 'Error: Missing argument "INPUT_DATA"' in result.output
+    assert "Error: Missing argument 'INPUT_DATA'" in result.output

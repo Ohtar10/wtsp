@@ -38,7 +38,7 @@ def test_describe_tweets_no_filters_should_fail():
                                           10,
                                           input_data])
     assert result.exit_code != 0
-    assert 'Error: Missing option "-f" / "--filters"' in result.output
+    assert "Error: Missing option '-f' / '--filters'" in result.output
 
 
 def test_describe_tweets_no_input_data_should_fail():
@@ -52,7 +52,7 @@ def test_describe_tweets_no_input_data_should_fail():
                                           "--min-count",
                                           10])
     assert result.exit_code != 0
-    assert 'Error: Missing argument "INPUT_DATA"' in result.output
+    assert "Error: Missing argument 'INPUT_DATA'" in result.output
 
 
 def test_describe_products():
@@ -84,4 +84,4 @@ def test_describe_products_no_input_data_should_fail():
                                           "--min-count",
                                           10])
     assert result.exit_code != 0
-    assert 'Error: Missing argument "INPUT_DATA"' in result.output
+    assert "Error: Missing argument 'INPUT_DATA'" in result.output

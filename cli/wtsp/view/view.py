@@ -86,8 +86,8 @@ def plot_nearest_neighbors(data: np.ndarray,
 
 def plot_cnn_history(cnn,
                      save_path,
-                     acc='acc',
-                     val_acc='val_acc',
+                     acc='accuracy',
+                     val_acc='val_accuracy',
                      loss='loss',
                      val_loss='val_loss'):
     """Plot a trained cnn history."""
