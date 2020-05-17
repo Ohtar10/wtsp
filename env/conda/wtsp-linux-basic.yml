@@ -19,5 +19,6 @@ dependencies:
   - pyarrow
   - folium
   - geopandas
+  - shapely
 
 
