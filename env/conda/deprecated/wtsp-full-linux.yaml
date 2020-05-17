@@ -37,8 +37,8 @@ dependencies:
   - cloudpickle=1.2.2=py_0
   - coverage=4.5.4=py36h7b6447c_0
   - cryptography=2.7=py36h1ba5d50_0
-  - cudatoolkit=9.2=0
-  - cudnn=7.6.0=cuda9.2_0
+  - cudatoolkit=10.1.168=0
+  - cudnn=7.6.5=cuda10.2_0
   - cupti=9.2.148=0
   - curl=7.65.3=hbc83047_0
   - cycler=0.10.0=py36_0
@@ -110,11 +110,6 @@ dependencies:
   - jupyterlab=1.1.4=pyhf63ae98_0
   - jupyterlab_server=1.0.6=py_0
   - kealib=1.4.7=hd0c454d_6
-  - keras=2.2.4=py36_1
-  - keras-applications=1.0.8=py_1
-  - keras-base=2.2.4=py36_0
-  - keras-gpu=2.2.4=0
-  - keras-preprocessing=1.1.0=py_0
   - kiwisolver=1.1.0=py36he6710b0_0
   - krb5=1.16.1=h173b8e3_7
   - libcurl=7.65.3=h20c2e04_0
@@ -240,10 +235,8 @@ dependencies:
   - sqlite=3.30.0=h7b6447c_0
   - statsmodels=0.10.1=py36hdd07704_0
   - tblib=1.4.0=py_0
-  - tensorflow-base=1.12.0=gpu_py36had579c0_0
   - terminado=0.8.2=py36_0
   - testpath=0.4.2=py36_0
-  - theano=1.0.4=py36hf484d3e_1000
   - thrift-cpp=0.12.0=hf3afdfd_1004
   - tk=8.6.8=hbc83047_0
   - toolz=0.10.0=py_0
@@ -270,6 +263,11 @@ dependencies:
   - zipp=0.6.0=py_0
   - zlib=1.2.11=h7b6447c_3
   - zstd=1.4.0=h3b9ef0a_0
+  - keras=2.3.1
+  - keras-applications=1.0.8=py_1
+  - keras-base=2.3.1
+  - keras-gpu=2.3.1
+  - keras-preprocessing=1.1.0=py_0
   - pip:
     - absl-py==0.8.0
     - appdirs==1.4.3
@@ -291,10 +289,10 @@ dependencies:
     - pytest-mypy==0.4.2
     - snowballstemmer==2.0.0
     - swifter==0.295
-    - tensorboard==1.12.0
-    - tensorflow==1.12.0
-    - tensorflow-estimator==1.13.0
-    - tensorflow-gpu==1.12.0
+    - tensorboard==2.2.1
+    - tensorflow==2.2.0
+    - tensorflow-estimator==2.2.0
+    - tensorflow-gpu==2.2.0
     - termcolor==1.1.0
     - uritools==2.2.0
     - urlextract==0.13.0

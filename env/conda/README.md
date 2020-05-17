@@ -28,9 +28,3 @@ $ conda activate wtsp
 $ mkdir -p ~/.sparkmagic/
 $ cp ./sparkmagic.config.json ~/.sparkmagic/
 ```
-
-### Install ipyleaflet lab extension
-```bash
-$ conda activate wtsp
-(wtsp) $ jupyter labextension install @jupyter-widgets/jupyterlab-manager jupyter-leaflet
-```

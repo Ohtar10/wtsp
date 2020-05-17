@@ -11,19 +11,15 @@ dependencies:
   - seaborn
   - scikit-learn=0.21.3
   - nltk=3.4.5
-  - tensorflow=1.12.0
-  - tensorflow-gpu=1.12.0
-  - cudatoolkit=9.2
-  - cudnn=7.6.0
-  - keras=2.2.4
-  - keras-gpu=2.2.4
+  - cudatoolkit=10.1.168
+  - cudnn=7.6.0=cuda10.1_0
   - jupyter
   - jupyterlab
   - pyarrow=0.14.1
   - ipyleaflet
   - folium=0.10.0
   - shapely=1.6.4
-  - geopandas=0.4.1
+  - geopandas=0.5.0
   - sparkmagic
   - nodejs>5
   - poppler<0.62
@@ -34,3 +30,7 @@ dependencies:
   - pip:
     - urlextract
     - swifter
+    - tensorflow=2.2.0
+    - tensorflow-gpu=2.2.0
+    - keras=2.3.1
+    - keras-gpu=2.3.1
