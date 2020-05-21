@@ -1,0 +1,666 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>classes</th>
+    </tr>
+    <tr>
+      <th>cluster</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[(Books, 0.2654581367969513), (Technology, Electronics &amp; Accessories, 0.19804412126541138), (Music, 0.17068004608154297), (Clothing, Shoes &amp; Jewelry, 0.15397319197654724), (Toys &amp; Games, 0.11022748053073883), (Home &amp; Kitchen, 0.04037635400891304), (Movies &amp; TV, 0.027060091495513916), (Health &amp; Personal Care, 0.02595570683479309), (Office &amp; School Supplies, 0.006264568772166967), (Health, Fitness &amp; Dieting, 0.001960313180461526)]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[(Music, 0.5376389026641846), (Books, 0.44344577193260193), (Movies &amp; TV, 0.018546048551797867), (Technology, Electronics &amp; Accessories, 0.00012471470108721405), (Clothing, Shoes &amp; Jewelry, 0.00012087533832527697), (Home &amp; Kitchen, 5.547132604988292e-05), (Health, Fitness &amp; Dieting, 2.4558483346481808e-05), (Toys &amp; Games, 1.930955477291718e-05), (Office &amp; School Supplies, 1.547452120576054e-05), (Health &amp; Personal Care, 8.879526831151452e-06)]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[(Music, 0.29419711232185364), (Books, 0.24364612996578217), (Health &amp; Personal Care, 0.1781245470046997), (Toys &amp; Games, 0.12881053984165192), (Clothing, Shoes &amp; Jewelry, 0.1107938215136528), (Technology, Electronics &amp; Accessories, 0.024578379467129707), (Home &amp; Kitchen, 0.007816726341843605), (Office &amp; School Supplies, 0.005505091045051813), (Movies &amp; TV, 0.005124437622725964), (Health, Fitness &amp; Dieting, 0.0014032700564712286)]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[(Music, 0.7855560183525085), (Technology, Electronics &amp; Accessories, 0.1703551709651947), (Movies &amp; TV, 0.018451334908604622), (Books, 0.013350872322916985), (Toys &amp; Games, 0.01154443621635437), (Health &amp; Personal Care, 0.00047535679186694324), (Clothing, Shoes &amp; Jewelry, 0.0001761191088007763), (Office &amp; School Supplies, 6.397643301170319e-05), (Home &amp; Kitchen, 2.5714472940308042e-05), (Health, Fitness &amp; Dieting, 9.957051361197955e-07)]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[(Music, 0.9071811437606812), (Movies &amp; TV, 0.03500356152653694), (Clothing, Shoes &amp; Jewelry, 0.02369620092213154), (Books, 0.020484888926148415), (Toys &amp; Games, 0.004308540374040604), (Health &amp; Personal Care, 0.004249717574566603), (Home &amp; Kitchen, 0.0030230272095650434), (Technology, Electronics &amp; Accessories, 0.0019286911701783538), (Office &amp; School Supplies, 0.00011849124712171033), (Health, Fitness &amp; Dieting, 5.6390736062894575e-06)]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[(Music, 0.936496376991272), (Books, 0.022991308942437172), (Movies &amp; TV, 0.021974172443151474), (Technology, Electronics &amp; Accessories, 0.012404033914208412), (Clothing, Shoes &amp; Jewelry, 0.0045089623890817165), (Health &amp; Personal Care, 0.0008102717692963779), (Office &amp; School Supplies, 0.0007046969840303063), (Home &amp; Kitchen, 6.383828440448269e-05), (Toys &amp; Games, 4.583624831866473e-05), (Health, Fitness &amp; Dieting, 5.291243496685638e-07)]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>[(Books, 0.9988679885864258), (Music, 0.00040689902380108833), (Movies &amp; TV, 0.00040522587369196117), (Toys &amp; Games, 0.0003004585742019117), (Home &amp; Kitchen, 8.55550570122432e-06), (Health, Fitness &amp; Dieting, 7.242961146403104e-06), (Technology, Electronics &amp; Accessories, 1.856256403698353e-06), (Health &amp; Personal Care, 1.5411084177685552e-06), (Office &amp; School Supplies, 1.4232851697215665e-07), (Clothing, Shoes &amp; Jewelry, 1.0022078811289248e-07)]</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>[(Toys &amp; Games, 0.795873761177063), (Books, 0.13050901889801025), (Technology, Electronics &amp; Accessories, 0.06419913470745087), (Music, 0.003422123845666647), (Movies &amp; TV, 0.0028686707373708487), (Clothing, Shoes &amp; Jewelry, 0.001328085083514452), (Office &amp; School Supplies, 0.0012775079812854528), (Home &amp; Kitchen, 0.00040788252954371274), (Health &amp; Personal Care, 0.00011309207911835983), (Health, Fitness &amp; Dieting, 7.455870445483015e-07)]</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>[(Books, 0.7748633027076721), (Movies &amp; TV, 0.15161821246147156), (Toys &amp; Games, 0.047862060368061066), (Music, 0.024523349478840828), (Health &amp; Personal Care, 0.0005009387969039381), (Health, Fitness &amp; Dieting, 0.00034169855643995106), (Technology, Electronics &amp; Accessories, 0.00014725734945386648), (Office &amp; School Supplies, 5.8903238823404536e-05), (Home &amp; Kitchen, 5.7338049373356625e-05), (Clothing, Shoes &amp; Jewelry, 2.69271095021395e-05)]</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>[(Books, 0.8092854619026184), (Toys &amp; Games, 0.16500665247440338), (Technology, Electronics &amp; Accessories, 0.011959259398281574), (Health &amp; Personal Care, 0.0035283532924950123), (Music, 0.003263285383582115), (Home &amp; Kitchen, 0.0026467032730579376), (Health, Fitness &amp; Dieting, 0.0022316856775432825), (Clothing, Shoes &amp; Jewelry, 0.0010513183660805225), (Movies &amp; TV, 0.0007772173266857862), (Office &amp; School Supplies, 0.000250207755016163)]</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>[(Music, 0.5147817134857178), (Movies &amp; TV, 0.4448641240596771), (Health &amp; Personal Care, 0.01970956288278103), (Books, 0.0155282998457551), (Clothing, Shoes &amp; Jewelry, 0.0024072101805359125), (Toys &amp; Games, 0.0019582356326282024), (Technology, Electronics &amp; Accessories, 0.0002959781268145889), (Home &amp; Kitchen, 0.0002814766194205731), (Office &amp; School Supplies, 0.0001691433135420084), (Health, Fitness &amp; Dieting, 4.312511919124518e-06)]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>[(Movies &amp; TV, 0.8700496554374695), (Music, 0.11169005185365677), (Books, 0.015918951481580734), (Health &amp; Personal Care, 0.0010654240613803267), (Clothing, Shoes &amp; Jewelry, 0.0007702909642830491), (Home &amp; Kitchen, 0.0002744137600529939), (Toys &amp; Games, 0.0001226133608724922), (Technology, Electronics &amp; Accessories, 7.853184069972485e-05), (Office &amp; School Supplies, 2.9972201446071267e-05), (Health, Fitness &amp; Dieting, 1.423119186938493e-07)]</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>[(Toys &amp; Games, 0.4809021055698395), (Music, 0.31854012608528137), (Movies &amp; TV, 0.1660892218351364), (Clothing, Shoes &amp; Jewelry, 0.022859986871480942), (Books, 0.00826181285083294), (Health &amp; Personal Care, 0.0016464880900457501), (Technology, Electronics &amp; Accessories, 0.001464522909373045), (Home &amp; Kitchen, 0.00019011611584573984), (Office &amp; School Supplies, 4.264999006409198e-05), (Health, Fitness &amp; Dieting, 3.0174790026649134e-06)]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>[(Toys &amp; Games, 0.9095186591148376), (Music, 0.028447072952985764), (Books, 0.026876181364059448), (Health &amp; Personal Care, 0.020965736359357834), (Clothing, Shoes &amp; Jewelry, 0.012741985730826855), (Movies &amp; TV, 0.0010114179458469152), (Home &amp; Kitchen, 0.0002637163270264864), (Office &amp; School Supplies, 9.921509627019987e-05), (Technology, Electronics &amp; Accessories, 5.874085400137119e-05), (Health, Fitness &amp; Dieting, 1.7240339730051346e-05)]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>[(Music, 0.8391128778457642), (Toys &amp; Games, 0.09269728511571884), (Health &amp; Personal Care, 0.0501200295984745), (Technology, Electronics &amp; Accessories, 0.01048657950013876), (Books, 0.003307758131995797), (Movies &amp; TV, 0.002938869409263134), (Clothing, Shoes &amp; Jewelry, 0.0011451616883277893), (Office &amp; School Supplies, 0.00017588448827154934), (Home &amp; Kitchen, 1.551103196106851e-05), (Health, Fitness &amp; Dieting, 6.90304062800351e-08)]</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>[(Books, 0.5687437057495117), (Home &amp; Kitchen, 0.2891566753387451), (Health &amp; Personal Care, 0.1039164736866951), (Technology, Electronics &amp; Accessories, 0.02033267170190811), (Clothing, Shoes &amp; Jewelry, 0.0057169185020029545), (Office &amp; School Supplies, 0.005235523916780949), (Toys &amp; Games, 0.004337666556239128), (Music, 0.0021595670841634274), (Movies &amp; TV, 0.00031252187909558415), (Health, Fitness &amp; Dieting, 8.829748549032956e-05)]</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.5787926316261292), (Music, 0.23249328136444092), (Clothing, Shoes &amp; Jewelry, 0.05786586180329323), (Movies &amp; TV, 0.04106135293841362), (Books, 0.038606904447078705), (Toys &amp; Games, 0.02464626356959343), (Health &amp; Personal Care, 0.017804261296987534), (Home &amp; Kitchen, 0.007485273294150829), (Health, Fitness &amp; Dieting, 0.0008275870350189507), (Office &amp; School Supplies, 0.0004166841390542686)]</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>[(Toys &amp; Games, 0.4524621367454529), (Books, 0.21334272623062134), (Music, 0.0809159055352211), (Health &amp; Personal Care, 0.08063814043998718), (Movies &amp; TV, 0.06603623926639557), (Technology, Electronics &amp; Accessories, 0.05612172186374664), (Home &amp; Kitchen, 0.036216460168361664), (Clothing, Shoes &amp; Jewelry, 0.011498159728944302), (Office &amp; School Supplies, 0.0024918140843510628), (Health, Fitness &amp; Dieting, 0.00027669797418639064)]</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>[(Music, 0.5708041787147522), (Technology, Electronics &amp; Accessories, 0.41715583205223083), (Movies &amp; TV, 0.0069319941103458405), (Books, 0.004409743007272482), (Toys &amp; Games, 0.0003201120998710394), (Office &amp; School Supplies, 0.0001802249753382057), (Health &amp; Personal Care, 0.0001577529328642413), (Home &amp; Kitchen, 2.9409387934720144e-05), (Clothing, Shoes &amp; Jewelry, 1.0745290637714788e-05), (Health, Fitness &amp; Dieting, 3.052276431603218e-09)]</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>[(Health &amp; Personal Care, 0.20292045176029205), (Movies &amp; TV, 0.18249955773353577), (Toys &amp; Games, 0.16546238958835602), (Home &amp; Kitchen, 0.11253389716148376), (Technology, Electronics &amp; Accessories, 0.09030253440141678), (Books, 0.08994101732969284), (Music, 0.08834807574748993), (Clothing, Shoes &amp; Jewelry, 0.06492365896701813), (Office &amp; School Supplies, 0.0030183084309101105), (Health, Fitness &amp; Dieting, 5.0054015446221456e-05)]</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>[(Books, 0.5526920557022095), (Music, 0.13674508035182953), (Health &amp; Personal Care, 0.11020515859127045), (Clothing, Shoes &amp; Jewelry, 0.055460285395383835), (Home &amp; Kitchen, 0.046421315521001816), (Technology, Electronics &amp; Accessories, 0.03695106506347656), (Toys &amp; Games, 0.030994411557912827), (Movies &amp; TV, 0.018877357244491577), (Office &amp; School Supplies, 0.011612203903496265), (Health, Fitness &amp; Dieting, 4.10942047892604e-05)]</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>[(Music, 0.6163856387138367), (Books, 0.35732367634773254), (Toys &amp; Games, 0.011177871376276016), (Movies &amp; TV, 0.011001515202224255), (Health &amp; Personal Care, 0.0031971593853086233), (Clothing, Shoes &amp; Jewelry, 0.00026753346901386976), (Technology, Electronics &amp; Accessories, 0.0002667676017154008), (Office &amp; School Supplies, 0.00025470356922596693), (Health, Fitness &amp; Dieting, 7.2970797191374e-05), (Home &amp; Kitchen, 5.222422623774037e-05)]</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>[(Health &amp; Personal Care, 0.5955347418785095), (Books, 0.34354427456855774), (Toys &amp; Games, 0.033274341374635696), (Clothing, Shoes &amp; Jewelry, 0.01684480346739292), (Home &amp; Kitchen, 0.010186614468693733), (Music, 0.00037581974174827337), (Technology, Electronics &amp; Accessories, 0.0002012291515711695), (Office &amp; School Supplies, 3.687116986839101e-05), (Health, Fitness &amp; Dieting, 7.401595780720527e-07), (Movies &amp; TV, 5.938043727837794e-07)]</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.5733887553215027), (Music, 0.17179906368255615), (Toys &amp; Games, 0.11581949889659882), (Clothing, Shoes &amp; Jewelry, 0.06970992684364319), (Health &amp; Personal Care, 0.04695715010166168), (Books, 0.018112298101186752), (Home &amp; Kitchen, 0.002935601631179452), (Movies &amp; TV, 0.0011840000515803695), (Office &amp; School Supplies, 9.373689681524411e-05), (Health, Fitness &amp; Dieting, 1.9516763316573815e-08)]</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>[(Books, 0.9873251914978027), (Movies &amp; TV, 0.00957633089274168), (Music, 0.0015816804952919483), (Toys &amp; Games, 0.0014137000543996692), (Technology, Electronics &amp; Accessories, 4.854612416238524e-05), (Health, Fitness &amp; Dieting, 4.309920041123405e-05), (Home &amp; Kitchen, 9.587117347109597e-06), (Health &amp; Personal Care, 1.5509858712903224e-06), (Office &amp; School Supplies, 2.5712691353874106e-07), (Clothing, Shoes &amp; Jewelry, 7.115698252846414e-08)]</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>[(Toys &amp; Games, 0.6688929200172424), (Books, 0.11765006929636002), (Technology, Electronics &amp; Accessories, 0.07526873797178268), (Health &amp; Personal Care, 0.05202295258641243), (Home &amp; Kitchen, 0.04216533154249191), (Clothing, Shoes &amp; Jewelry, 0.02274920977652073), (Music, 0.013904512859880924), (Office &amp; School Supplies, 0.00671758409589529), (Movies &amp; TV, 0.0005374189931899309), (Health, Fitness &amp; Dieting, 9.122952906182036e-05)]</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>[(Health &amp; Personal Care, 0.9454789757728577), (Technology, Electronics &amp; Accessories, 0.028254404664039612), (Clothing, Shoes &amp; Jewelry, 0.022215163335204124), (Books, 0.002945838961750269), (Movies &amp; TV, 0.0008735269075259566), (Home &amp; Kitchen, 0.0001674922532401979), (Toys &amp; Games, 4.410369729157537e-05), (Office &amp; School Supplies, 1.1670868843793869e-05), (Music, 8.753414476814214e-06), (Health, Fitness &amp; Dieting, 9.083500884798923e-08)]</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>[(Books, 0.5105414390563965), (Music, 0.371827095746994), (Toys &amp; Games, 0.10770414769649506), (Health &amp; Personal Care, 0.006605264265090227), (Home &amp; Kitchen, 0.0017569436458870769), (Clothing, Shoes &amp; Jewelry, 0.0008605732582509518), (Technology, Electronics &amp; Accessories, 0.00033328818972222507), (Movies &amp; TV, 0.0003172001161146909), (Office &amp; School Supplies, 4.2472707718843594e-05), (Health, Fitness &amp; Dieting, 1.1637077477644198e-05)]</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.6385327577590942), (Clothing, Shoes &amp; Jewelry, 0.2431536614894867), (Books, 0.04779611527919769), (Health &amp; Personal Care, 0.045490801334381104), (Toys &amp; Games, 0.023798225447535515), (Music, 0.000767096527852118), (Movies &amp; TV, 0.00027502328157424927), (Home &amp; Kitchen, 0.00011368787090759724), (Office &amp; School Supplies, 7.251770875882357e-05), (Health, Fitness &amp; Dieting, 4.556926214149826e-08)]</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>[(Music, 0.916454553604126), (Books, 0.05747893080115318), (Movies &amp; TV, 0.019794726744294167), (Clothing, Shoes &amp; Jewelry, 0.0029967292211949825), (Health &amp; Personal Care, 0.0018685561371967196), (Toys &amp; Games, 0.0010235147783532739), (Technology, Electronics &amp; Accessories, 0.0003743686538655311), (Health, Fitness &amp; Dieting, 3.4588474591146223e-06), (Office &amp; School Supplies, 3.35508116222627e-06), (Home &amp; Kitchen, 1.7986204738917877e-06)]</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>[(Music, 0.8602513074874878), (Books, 0.10912097245454788), (Movies &amp; TV, 0.022785130888223648), (Toys &amp; Games, 0.006634377408772707), (Technology, Electronics &amp; Accessories, 0.0010518222115933895), (Clothing, Shoes &amp; Jewelry, 7.289217319339514e-05), (Health &amp; Personal Care, 5.094447624287568e-05), (Home &amp; Kitchen, 1.9230104953749105e-05), (Health, Fitness &amp; Dieting, 1.2273358152015135e-05), (Office &amp; School Supplies, 1.004731757348054e-06)]</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>[(Toys &amp; Games, 0.608898937702179), (Technology, Electronics &amp; Accessories, 0.11273478716611862), (Movies &amp; TV, 0.08296990394592285), (Health &amp; Personal Care, 0.05290253087878227), (Books, 0.04834745451807976), (Clothing, Shoes &amp; Jewelry, 0.04603877291083336), (Home &amp; Kitchen, 0.03669900447130203), (Office &amp; School Supplies, 0.009065124206244946), (Music, 0.0022924761287868023), (Health, Fitness &amp; Dieting, 5.096548193250783e-05)]</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>[(Music, 0.833068311214447), (Technology, Electronics &amp; Accessories, 0.09007821977138519), (Toys &amp; Games, 0.06720764189958572), (Books, 0.009250564500689507), (Movies &amp; TV, 0.0003303896519355476), (Clothing, Shoes &amp; Jewelry, 4.0451624954584986e-05), (Health &amp; Personal Care, 2.2860074750497006e-05), (Home &amp; Kitchen, 1.2315296089582262e-06), (Office &amp; School Supplies, 4.1775476233851805e-07), (Health, Fitness &amp; Dieting, 2.9487643438130817e-09)]</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>[(Books, 0.613481879234314), (Health &amp; Personal Care, 0.28414928913116455), (Health, Fitness &amp; Dieting, 0.05469142645597458), (Music, 0.016396990045905113), (Movies &amp; TV, 0.012337456457316875), (Home &amp; Kitchen, 0.007874776609241962), (Technology, Electronics &amp; Accessories, 0.006507312413305044), (Clothing, Shoes &amp; Jewelry, 0.00275208568200469), (Toys &amp; Games, 0.0017037114594131708), (Office &amp; School Supplies, 0.00010512220615055412)]</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>[(Books, 0.4684135913848877), (Movies &amp; TV, 0.2827299237251282), (Health &amp; Personal Care, 0.1452144980430603), (Technology, Electronics &amp; Accessories, 0.06481293588876724), (Music, 0.023269547149538994), (Toys &amp; Games, 0.008931000716984272), (Home &amp; Kitchen, 0.0029366477392613888), (Clothing, Shoes &amp; Jewelry, 0.002366430126130581), (Office &amp; School Supplies, 0.0012869302881881595), (Health, Fitness &amp; Dieting, 3.853380258078687e-05)]</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>[(Books, 0.5857024192810059), (Toys &amp; Games, 0.18784335255622864), (Movies &amp; TV, 0.11818285286426544), (Technology, Electronics &amp; Accessories, 0.08077286928892136), (Music, 0.021881746128201485), (Office &amp; School Supplies, 0.00366923282854259), (Health &amp; Personal Care, 0.001042934600263834), (Home &amp; Kitchen, 0.0006212114822119474), (Clothing, Shoes &amp; Jewelry, 0.0002819703076966107), (Health, Fitness &amp; Dieting, 1.433487341273576e-06)]</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>[(Toys &amp; Games, 0.5361038446426392), (Books, 0.43182164430618286), (Music, 0.028541728854179382), (Movies &amp; TV, 0.0009496519924141467), (Technology, Electronics &amp; Accessories, 0.0007839486934244633), (Health, Fitness &amp; Dieting, 0.0005905403522774577), (Home &amp; Kitchen, 0.000560558692086488), (Health &amp; Personal Care, 0.0005273218848742545), (Clothing, Shoes &amp; Jewelry, 0.00010486516839591786), (Office &amp; School Supplies, 1.585025165695697e-05)]</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>[(Toys &amp; Games, 0.6263661980628967), (Books, 0.13192541897296906), (Movies &amp; TV, 0.0688692256808281), (Music, 0.06131145730614662), (Technology, Electronics &amp; Accessories, 0.05111066997051239), (Health &amp; Personal Care, 0.02340211719274521), (Home &amp; Kitchen, 0.018931448459625244), (Clothing, Shoes &amp; Jewelry, 0.014945792965590954), (Office &amp; School Supplies, 0.003052580403164029), (Health, Fitness &amp; Dieting, 8.508032624376938e-05)]</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>[(Books, 0.9990684390068054), (Music, 0.0005062444834038615), (Technology, Electronics &amp; Accessories, 0.00032813908183015883), (Toys &amp; Games, 5.193652032176033e-05), (Movies &amp; TV, 2.0323954231571406e-05), (Clothing, Shoes &amp; Jewelry, 1.6030066035455093e-05), (Health &amp; Personal Care, 5.585241069638869e-06), (Office &amp; School Supplies, 3.2589080092293443e-06), (Health, Fitness &amp; Dieting, 7.479763475259915e-09), (Home &amp; Kitchen, 2.264802567708557e-09)]</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>[(Toys &amp; Games, 0.526894748210907), (Books, 0.300582617521286), (Music, 0.12211595475673676), (Technology, Electronics &amp; Accessories, 0.04244430363178253), (Health &amp; Personal Care, 0.0049081179313361645), (Movies &amp; TV, 0.0016753256786614656), (Home &amp; Kitchen, 0.0007491494179703295), (Clothing, Shoes &amp; Jewelry, 0.0003721106913872063), (Health, Fitness &amp; Dieting, 0.00013114939793013036), (Office &amp; School Supplies, 0.00012652100122068077)]</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.3276154100894928), (Health &amp; Personal Care, 0.2049713134765625), (Toys &amp; Games, 0.16178812086582184), (Books, 0.10797638446092606), (Home &amp; Kitchen, 0.09536629915237427), (Technology, Electronics &amp; Accessories, 0.058996107429265976), (Movies &amp; TV, 0.019936855882406235), (Music, 0.016900042071938515), (Health, Fitness &amp; Dieting, 0.004593971185386181), (Office &amp; School Supplies, 0.0018554703565314412)]</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>[(Toys &amp; Games, 0.4523414969444275), (Music, 0.3959265351295471), (Technology, Electronics &amp; Accessories, 0.0795416608452797), (Books, 0.0563761442899704), (Movies &amp; TV, 0.007119541056454182), (Health &amp; Personal Care, 0.004829141311347485), (Clothing, Shoes &amp; Jewelry, 0.001963794231414795), (Home &amp; Kitchen, 0.0016117430059239268), (Office &amp; School Supplies, 0.00023095356300473213), (Health, Fitness &amp; Dieting, 5.893368870601989e-05)]</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>[(Toys &amp; Games, 0.9398289918899536), (Music, 0.03082733228802681), (Clothing, Shoes &amp; Jewelry, 0.014322495087981224), (Health &amp; Personal Care, 0.007330980617552996), (Books, 0.00432303361594677), (Technology, Electronics &amp; Accessories, 0.0031230635941028595), (Movies &amp; TV, 0.0001508919958723709), (Home &amp; Kitchen, 8.996700489660725e-05), (Office &amp; School Supplies, 3.0295111628220184e-06), (Health, Fitness &amp; Dieting, 2.9140261403881595e-07)]</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>[(Books, 0.46243658661842346), (Music, 0.362630695104599), (Health &amp; Personal Care, 0.08437297493219376), (Toys &amp; Games, 0.05600140988826752), (Movies &amp; TV, 0.01769334450364113), (Clothing, Shoes &amp; Jewelry, 0.008199307136237621), (Technology, Electronics &amp; Accessories, 0.006691007409244776), (Health, Fitness &amp; Dieting, 0.0009899802971631289), (Office &amp; School Supplies, 0.0008497689850628376), (Home &amp; Kitchen, 0.00013481311907526106)]</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>[(Music, 0.5809534192085266), (Books, 0.31764596700668335), (Health &amp; Personal Care, 0.024877997115254402), (Clothing, Shoes &amp; Jewelry, 0.02138877473771572), (Technology, Electronics &amp; Accessories, 0.020473383367061615), (Movies &amp; TV, 0.01918204501271248), (Toys &amp; Games, 0.010790830478072166), (Office &amp; School Supplies, 0.002724663121625781), (Home &amp; Kitchen, 0.001962012844160199), (Health, Fitness &amp; Dieting, 9.91106958281307e-07)]</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>[(Books, 0.5979061126708984), (Toys &amp; Games, 0.20725026726722717), (Health &amp; Personal Care, 0.12395791709423065), (Music, 0.023023094981908798), (Clothing, Shoes &amp; Jewelry, 0.01837487332522869), (Movies &amp; TV, 0.015177404507994652), (Home &amp; Kitchen, 0.010885552503168583), (Office &amp; School Supplies, 0.0021600353065878153), (Technology, Electronics &amp; Accessories, 0.0012525484198704362), (Health, Fitness &amp; Dieting, 1.229483950737631e-05)]</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>[(Music, 0.9332646131515503), (Toys &amp; Games, 0.040194716304540634), (Movies &amp; TV, 0.023276664316654205), (Books, 0.002709422493353486), (Clothing, Shoes &amp; Jewelry, 0.0002618628495838493), (Technology, Electronics &amp; Accessories, 0.000216703861951828), (Health &amp; Personal Care, 7.160509267123416e-05), (Home &amp; Kitchen, 1.8662769889488118e-06), (Office &amp; School Supplies, 1.6226297248067567e-06), (Health, Fitness &amp; Dieting, 9.264247751161747e-07)]</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>[(Toys &amp; Games, 0.9543005228042603), (Movies &amp; TV, 0.025980088859796524), (Health &amp; Personal Care, 0.009568766690790653), (Books, 0.005471537820994854), (Clothing, Shoes &amp; Jewelry, 0.0035778554156422615), (Music, 0.0009619200136512518), (Technology, Electronics &amp; Accessories, 7.489418203476816e-05), (Home &amp; Kitchen, 4.498017733567394e-05), (Office &amp; School Supplies, 1.693694321147632e-05), (Health, Fitness &amp; Dieting, 2.4792404929030454e-06)]</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>[(Music, 0.7661747932434082), (Books, 0.21509860455989838), (Toys &amp; Games, 0.00998589489609003), (Movies &amp; TV, 0.005602821707725525), (Technology, Electronics &amp; Accessories, 0.0019107779953628778), (Office &amp; School Supplies, 0.0005529680638574064), (Home &amp; Kitchen, 0.0004456708556972444), (Clothing, Shoes &amp; Jewelry, 0.00014652566460426897), (Health &amp; Personal Care, 7.735591498203576e-05), (Health, Fitness &amp; Dieting, 4.568417352857068e-06)]</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.5847565531730652), (Books, 0.25307899713516235), (Health &amp; Personal Care, 0.07693589478731155), (Music, 0.036511365324258804), (Technology, Electronics &amp; Accessories, 0.025950849056243896), (Toys &amp; Games, 0.010923590511083603), (Office &amp; School Supplies, 0.005514823831617832), (Movies &amp; TV, 0.0053572095930576324), (Home &amp; Kitchen, 0.0009681328083388507), (Health, Fitness &amp; Dieting, 2.541238700359827e-06)]</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>[(Health &amp; Personal Care, 0.5037728548049927), (Books, 0.23463174700737), (Music, 0.22240391373634338), (Movies &amp; TV, 0.018275676295161247), (Toys &amp; Games, 0.010835438966751099), (Clothing, Shoes &amp; Jewelry, 0.006655339617282152), (Technology, Electronics &amp; Accessories, 0.002841486129909754), (Office &amp; School Supplies, 0.0004099838843103498), (Home &amp; Kitchen, 0.00016220506222452968), (Health, Fitness &amp; Dieting, 1.1377390364941675e-05)]</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>[(Music, 0.4904259741306305), (Books, 0.26777154207229614), (Movies &amp; TV, 0.21801947057247162), (Toys &amp; Games, 0.019111188128590584), (Health &amp; Personal Care, 0.0027952492237091064), (Home &amp; Kitchen, 0.0010810722596943378), (Clothing, Shoes &amp; Jewelry, 0.0004745012556668371), (Technology, Electronics &amp; Accessories, 0.00027246380341239274), (Health, Fitness &amp; Dieting, 3.47355380654335e-05), (Office &amp; School Supplies, 1.3860948456567712e-05)]</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>[(Books, 0.8585229516029358), (Health &amp; Personal Care, 0.08811446279287338), (Home &amp; Kitchen, 0.03413092717528343), (Clothing, Shoes &amp; Jewelry, 0.00846615619957447), (Technology, Electronics &amp; Accessories, 0.00621776981279254), (Movies &amp; TV, 0.001503152190707624), (Music, 0.0010480426717549562), (Office &amp; School Supplies, 0.0010389444651082158), (Health, Fitness &amp; Dieting, 0.0006187261897139251), (Toys &amp; Games, 0.0003388326440472156)]</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>[(Toys &amp; Games, 0.5051194429397583), (Clothing, Shoes &amp; Jewelry, 0.39219772815704346), (Health &amp; Personal Care, 0.039949167519807816), (Music, 0.030172264203429222), (Technology, Electronics &amp; Accessories, 0.015330212190747261), (Movies &amp; TV, 0.010059408843517303), (Books, 0.004299761261790991), (Home &amp; Kitchen, 0.0025638199876993895), (Office &amp; School Supplies, 0.0003081630275119096), (Health, Fitness &amp; Dieting, 3.6080505250168926e-10)]</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>[(Books, 0.5491006970405579), (Music, 0.2850077450275421), (Movies &amp; TV, 0.09304771572351456), (Toys &amp; Games, 0.06577353179454803), (Health &amp; Personal Care, 0.003235473297536373), (Home &amp; Kitchen, 0.0023027684073895216), (Clothing, Shoes &amp; Jewelry, 0.0011388170532882214), (Technology, Electronics &amp; Accessories, 0.00037557887844741344), (Office &amp; School Supplies, 1.7544854927109554e-05), (Health, Fitness &amp; Dieting, 1.0647278259057202e-07)]</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>[(Movies &amp; TV, 0.6167064905166626), (Music, 0.366574227809906), (Books, 0.01667444035410881), (Toys &amp; Games, 3.11415278702043e-05), (Home &amp; Kitchen, 4.837009782932e-06), (Technology, Electronics &amp; Accessories, 4.08092364523327e-06), (Health &amp; Personal Care, 1.831801341722894e-06), (Office &amp; School Supplies, 1.3732202432947815e-06), (Clothing, Shoes &amp; Jewelry, 1.3639756843986106e-06), (Health, Fitness &amp; Dieting, 2.2365401264323737e-07)]</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>[(Books, 0.691883385181427), (Music, 0.2943573594093323), (Movies &amp; TV, 0.006397312507033348), (Toys &amp; Games, 0.0035461534280329943), (Health &amp; Personal Care, 0.0031456458382308483), (Technology, Electronics &amp; Accessories, 0.0004887236864306033), (Clothing, Shoes &amp; Jewelry, 0.00012678377970587462), (Health, Fitness &amp; Dieting, 3.887418279191479e-05), (Home &amp; Kitchen, 1.216732562170364e-05), (Office &amp; School Supplies, 3.6281626307754777e-06)]</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>[(Books, 0.31291985511779785), (Music, 0.17945417761802673), (Movies &amp; TV, 0.135723277926445), (Toys &amp; Games, 0.11316947638988495), (Clothing, Shoes &amp; Jewelry, 0.11226590722799301), (Technology, Electronics &amp; Accessories, 0.04227432981133461), (Health &amp; Personal Care, 0.04225582629442215), (Office &amp; School Supplies, 0.025723712518811226), (Home &amp; Kitchen, 0.021789928898215294), (Health, Fitness &amp; Dieting, 0.014423471875488758)]</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.3550044596195221), (Clothing, Shoes &amp; Jewelry, 0.2735426425933838), (Toys &amp; Games, 0.10828109830617905), (Books, 0.09368251264095306), (Health &amp; Personal Care, 0.05185587331652641), (Movies &amp; TV, 0.05158824846148491), (Home &amp; Kitchen, 0.036399345844984055), (Music, 0.016560669988393784), (Office &amp; School Supplies, 0.00715542770922184), (Health, Fitness &amp; Dieting, 0.005929727107286453)]</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>[(Books, 0.5792396664619446), (Toys &amp; Games, 0.3069618046283722), (Music, 0.0630897656083107), (Clothing, Shoes &amp; Jewelry, 0.021768270060420036), (Health &amp; Personal Care, 0.012714993208646774), (Movies &amp; TV, 0.008377470076084137), (Technology, Electronics &amp; Accessories, 0.005638790316879749), (Home &amp; Kitchen, 0.0016388437943533063), (Office &amp; School Supplies, 0.0005588661879301071), (Health, Fitness &amp; Dieting, 1.1594915122259408e-05)]</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>[(Toys &amp; Games, 0.7410732507705688), (Books, 0.19126395881175995), (Movies &amp; TV, 0.02023121528327465), (Music, 0.019031492993235588), (Technology, Electronics &amp; Accessories, 0.012614123523235321), (Office &amp; School Supplies, 0.008718408644199371), (Health &amp; Personal Care, 0.004367901477962732), (Clothing, Shoes &amp; Jewelry, 0.00137647008523345), (Home &amp; Kitchen, 0.0012745257699862123), (Health, Fitness &amp; Dieting, 4.8719517508288845e-05)]</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>[(Music, 0.709606409072876), (Toys &amp; Games, 0.20658139884471893), (Books, 0.060587964951992035), (Technology, Electronics &amp; Accessories, 0.01893472671508789), (Health &amp; Personal Care, 0.003396439366042614), (Office &amp; School Supplies, 0.0003026477061212063), (Movies &amp; TV, 0.0002657290897332132), (Clothing, Shoes &amp; Jewelry, 0.0001856265589594841), (Home &amp; Kitchen, 0.00013893218419980258), (Health, Fitness &amp; Dieting, 3.30217453381465e-08)]</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>[(Music, 0.8488656282424927), (Clothing, Shoes &amp; Jewelry, 0.10739029943943024), (Health &amp; Personal Care, 0.022274961695075035), (Movies &amp; TV, 0.015938125550746918), (Technology, Electronics &amp; Accessories, 0.004165612161159515), (Office &amp; School Supplies, 0.0007076041656546295), (Books, 0.00044878380140289664), (Home &amp; Kitchen, 0.00010627053416101262), (Toys &amp; Games, 0.00010273310908814892), (Health, Fitness &amp; Dieting, 1.374962010913805e-08)]</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>[(Books, 0.8730446100234985), (Music, 0.10037144273519516), (Toys &amp; Games, 0.018691563978791237), (Health &amp; Personal Care, 0.004112388473004103), (Movies &amp; TV, 0.0033765893895179033), (Home &amp; Kitchen, 0.0003668766003102064), (Health, Fitness &amp; Dieting, 1.605302168172784e-05), (Clothing, Shoes &amp; Jewelry, 1.0072661098092794e-05), (Office &amp; School Supplies, 8.402678759011906e-06), (Technology, Electronics &amp; Accessories, 2.021179170696996e-06)]</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>[(Books, 0.942391574382782), (Music, 0.05529026314616203), (Movies &amp; TV, 0.0018362147966399789), (Home &amp; Kitchen, 0.00040291438926942647), (Health &amp; Personal Care, 5.306389357428998e-05), (Clothing, Shoes &amp; Jewelry, 1.2180566955066752e-05), (Toys &amp; Games, 8.941236956161447e-06), (Technology, Electronics &amp; Accessories, 4.655405064113438e-06), (Office &amp; School Supplies, 2.62664997308093e-07), (Health, Fitness &amp; Dieting, 2.1092804586286817e-11)]</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>[(Books, 0.9797574877738953), (Music, 0.013049094006419182), (Toys &amp; Games, 0.004338725470006466), (Clothing, Shoes &amp; Jewelry, 0.0010371237294748425), (Movies &amp; TV, 0.001035724999383092), (Technology, Electronics &amp; Accessories, 0.0004458473704289645), (Health &amp; Personal Care, 0.0003253562608733773), (Office &amp; School Supplies, 9.974756721931044e-06), (Health, Fitness &amp; Dieting, 4.0661910816197633e-07), (Home &amp; Kitchen, 3.4255100445079734e-07)]</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>[(Books, 0.8304805755615234), (Movies &amp; TV, 0.1668153703212738), (Music, 0.002470514038577676), (Health &amp; Personal Care, 0.00021857743558939546), (Office &amp; School Supplies, 1.2102072105335537e-05), (Home &amp; Kitchen, 2.57976830653206e-06), (Toys &amp; Games, 2.703178267893236e-07), (Technology, Electronics &amp; Accessories, 5.389661339449958e-08), (Clothing, Shoes &amp; Jewelry, 2.0217553853285608e-08), (Health, Fitness &amp; Dieting, 7.752356395718252e-11)]</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>[(Toys &amp; Games, 0.5956607460975647), (Books, 0.2414054423570633), (Technology, Electronics &amp; Accessories, 0.1282336711883545), (Clothing, Shoes &amp; Jewelry, 0.02702598087489605), (Music, 0.005847493652254343), (Health &amp; Personal Care, 0.001385517418384552), (Office &amp; School Supplies, 0.0003619656781665981), (Home &amp; Kitchen, 7.866756641305983e-05), (Movies &amp; TV, 5.191085961087083e-07), (Health, Fitness &amp; Dieting, 1.4750672683305766e-08)]</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>[(Music, 0.9898808002471924), (Movies &amp; TV, 0.006203013006597757), (Books, 0.002158940304070711), (Health &amp; Personal Care, 0.0011600768193602562), (Technology, Electronics &amp; Accessories, 0.0004956325865350664), (Clothing, Shoes &amp; Jewelry, 7.99005720182322e-05), (Toys &amp; Games, 1.6456588127766736e-05), (Home &amp; Kitchen, 2.999066055053845e-06), (Office &amp; School Supplies, 2.1771174942841753e-06), (Health, Fitness &amp; Dieting, 4.479111836985794e-08)]</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>[(Movies &amp; TV, 0.3842146098613739), (Toys &amp; Games, 0.30836620926856995), (Books, 0.08290880173444748), (Health &amp; Personal Care, 0.06165529787540436), (Technology, Electronics &amp; Accessories, 0.05104604735970497), (Music, 0.04271969944238663), (Home &amp; Kitchen, 0.035352639853954315), (Clothing, Shoes &amp; Jewelry, 0.019205160439014435), (Office &amp; School Supplies, 0.014495979063212872), (Health, Fitness &amp; Dieting, 3.562487108865753e-05)]</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>[(Books, 0.7014792561531067), (Music, 0.2694462537765503), (Movies &amp; TV, 0.020396100357174873), (Toys &amp; Games, 0.005343523807823658), (Health &amp; Personal Care, 0.0031032937113195658), (Technology, Electronics &amp; Accessories, 0.0001339673181064427), (Clothing, Shoes &amp; Jewelry, 9.707351273391396e-05), (Office &amp; School Supplies, 3.433075903558347e-07), (Health, Fitness &amp; Dieting, 2.2204257277280703e-07), (Home &amp; Kitchen, 2.3845156960078384e-08)]</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>[(Toys &amp; Games, 0.643527626991272), (Technology, Electronics &amp; Accessories, 0.23917920887470245), (Music, 0.06742116063833237), (Health &amp; Personal Care, 0.02264535240828991), (Home &amp; Kitchen, 0.018493540585041046), (Books, 0.005074124317616224), (Clothing, Shoes &amp; Jewelry, 0.0016974795144051313), (Movies &amp; TV, 0.0013035547453910112), (Office &amp; School Supplies, 0.0006567788077518344), (Health, Fitness &amp; Dieting, 1.1059775033572805e-06)]</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.823959469795227), (Music, 0.07706436514854431), (Movies &amp; TV, 0.05287832021713257), (Toys &amp; Games, 0.01697540283203125), (Technology, Electronics &amp; Accessories, 0.013238242827355862), (Home &amp; Kitchen, 0.008160599507391453), (Books, 0.0032311812974512577), (Health, Fitness &amp; Dieting, 0.002774561056867242), (Health &amp; Personal Care, 0.0014211435336619616), (Office &amp; School Supplies, 0.00029662411543540657)]</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>[(Movies &amp; TV, 0.8747777938842773), (Technology, Electronics &amp; Accessories, 0.050593260675668716), (Books, 0.047474250197410583), (Music, 0.008801882155239582), (Home &amp; Kitchen, 0.008134733885526657), (Office &amp; School Supplies, 0.004566092975437641), (Toys &amp; Games, 0.002644161693751812), (Clothing, Shoes &amp; Jewelry, 0.0017846417613327503), (Health &amp; Personal Care, 0.0012199964839965105), (Health, Fitness &amp; Dieting, 3.21101310873928e-06)]</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>[(Office &amp; School Supplies, 0.30228886008262634), (Technology, Electronics &amp; Accessories, 0.22868554294109344), (Toys &amp; Games, 0.22852236032485962), (Clothing, Shoes &amp; Jewelry, 0.14789675176143646), (Health &amp; Personal Care, 0.041704971343278885), (Home &amp; Kitchen, 0.032232388854026794), (Books, 0.017594892531633377), (Movies &amp; TV, 0.0009814087534323335), (Health, Fitness &amp; Dieting, 5.3981646487955004e-05), (Music, 3.88064727303572e-05)]</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>[(Music, 0.47442346811294556), (Toys &amp; Games, 0.2512059509754181), (Books, 0.20809641480445862), (Technology, Electronics &amp; Accessories, 0.04367714375257492), (Clothing, Shoes &amp; Jewelry, 0.008582514710724354), (Movies &amp; TV, 0.00589710334315896), (Health &amp; Personal Care, 0.005426015239208937), (Office &amp; School Supplies, 0.0016469298861920834), (Home &amp; Kitchen, 0.0010344907641410828), (Health, Fitness &amp; Dieting, 9.97953065962065e-06)]</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>[(Music, 0.9022006988525391), (Books, 0.07014204561710358), (Health &amp; Personal Care, 0.011486389674246311), (Technology, Electronics &amp; Accessories, 0.008813860826194286), (Home &amp; Kitchen, 0.004210150334984064), (Movies &amp; TV, 0.0019999260548502207), (Toys &amp; Games, 0.0007420387119054794), (Office &amp; School Supplies, 0.00033472420182079077), (Clothing, Shoes &amp; Jewelry, 7.00315140420571e-05), (Health, Fitness &amp; Dieting, 1.1682553946457119e-07)]</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>[(Movies &amp; TV, 0.24466626346111298), (Books, 0.24127434194087982), (Health &amp; Personal Care, 0.20699630677700043), (Music, 0.17167897522449493), (Technology, Electronics &amp; Accessories, 0.11206686496734619), (Toys &amp; Games, 0.010318143293261528), (Clothing, Shoes &amp; Jewelry, 0.009948484599590302), (Home &amp; Kitchen, 0.0019578086212277412), (Health, Fitness &amp; Dieting, 0.0005935639492236078), (Office &amp; School Supplies, 0.0004991817404516041)]</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>[(Books, 0.5088262557983398), (Clothing, Shoes &amp; Jewelry, 0.22865518927574158), (Health &amp; Personal Care, 0.18399353325366974), (Toys &amp; Games, 0.05026590824127197), (Technology, Electronics &amp; Accessories, 0.01628403179347515), (Movies &amp; TV, 0.006494531873613596), (Music, 0.004437572322785854), (Home &amp; Kitchen, 0.0007335113477893174), (Office &amp; School Supplies, 0.0003044118930120021), (Health, Fitness &amp; Dieting, 5.039676125306869e-06)]</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>[(Toys &amp; Games, 0.593726634979248), (Clothing, Shoes &amp; Jewelry, 0.20484115183353424), (Health &amp; Personal Care, 0.18227533996105194), (Books, 0.016156494617462158), (Music, 0.001986831659451127), (Technology, Electronics &amp; Accessories, 0.0004892123979516327), (Movies &amp; TV, 0.00021205584926065058), (Office &amp; School Supplies, 0.0001777506695361808), (Home &amp; Kitchen, 0.00012608377437572926), (Health, Fitness &amp; Dieting, 8.392260497203097e-06)]</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>[(Music, 0.843885064125061), (Health &amp; Personal Care, 0.07045237720012665), (Books, 0.05890422314405441), (Technology, Electronics &amp; Accessories, 0.015010829083621502), (Clothing, Shoes &amp; Jewelry, 0.00501535227522254), (Toys &amp; Games, 0.004720194730907679), (Movies &amp; TV, 0.0015959297306835651), (Office &amp; School Supplies, 0.0003096358268521726), (Home &amp; Kitchen, 8.944954606704414e-05), (Health, Fitness &amp; Dieting, 1.6934242012212053e-05)]</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.9144152998924255), (Music, 0.03933683782815933), (Health &amp; Personal Care, 0.021935932338237762), (Clothing, Shoes &amp; Jewelry, 0.012227069586515427), (Toys &amp; Games, 0.008014136925339699), (Books, 0.002494331682100892), (Office &amp; School Supplies, 0.0009896416449919343), (Home &amp; Kitchen, 0.0003441064618527889), (Movies &amp; TV, 0.0002426116552669555), (Health, Fitness &amp; Dieting, 7.845502580927644e-10)]</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>[(Toys &amp; Games, 0.6274152994155884), (Technology, Electronics &amp; Accessories, 0.11896449327468872), (Clothing, Shoes &amp; Jewelry, 0.0966937243938446), (Movies &amp; TV, 0.07751152664422989), (Books, 0.05632101371884346), (Music, 0.009223251603543758), (Health &amp; Personal Care, 0.008527263067662716), (Home &amp; Kitchen, 0.0045302873477339745), (Office &amp; School Supplies, 0.0008119092672131956), (Health, Fitness &amp; Dieting, 1.1876660437337705e-06)]</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.9570212364196777), (Movies &amp; TV, 0.020278984680771828), (Books, 0.010644673369824886), (Home &amp; Kitchen, 0.005840330384671688), (Toys &amp; Games, 0.0021739467047154903), (Health, Fitness &amp; Dieting, 0.0018206826644018292), (Music, 0.0016250270418822765), (Technology, Electronics &amp; Accessories, 0.00035879513598047197), (Health &amp; Personal Care, 0.00017331661365460604), (Office &amp; School Supplies, 6.300093809841201e-05)]</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>[(Health &amp; Personal Care, 0.802394449710846), (Books, 0.16190274059772491), (Clothing, Shoes &amp; Jewelry, 0.021256880834698677), (Music, 0.00568760372698307), (Toys &amp; Games, 0.0038575325161218643), (Technology, Electronics &amp; Accessories, 0.003529355628415942), (Movies &amp; TV, 0.0009757322841323912), (Home &amp; Kitchen, 0.00028054165886715055), (Office &amp; School Supplies, 9.30177848204039e-05), (Health, Fitness &amp; Dieting, 2.2161104425322264e-05)]</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>[(Music, 0.7713050246238708), (Books, 0.22518295049667358), (Health &amp; Personal Care, 0.0015587140806019306), (Toys &amp; Games, 0.0009540062746964395), (Technology, Electronics &amp; Accessories, 0.0007654438377358019), (Health, Fitness &amp; Dieting, 0.00014830501459073275), (Movies &amp; TV, 3.584992737160064e-05), (Office &amp; School Supplies, 2.373547977185808e-05), (Clothing, Shoes &amp; Jewelry, 2.1036572434240952e-05), (Home &amp; Kitchen, 4.8942729335976765e-06)]</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>[(Movies &amp; TV, 0.5903984308242798), (Books, 0.19823500514030457), (Toys &amp; Games, 0.12420542538166046), (Music, 0.08045928180217743), (Technology, Electronics &amp; Accessories, 0.006102338898926973), (Health &amp; Personal Care, 0.00040573306614533067), (Clothing, Shoes &amp; Jewelry, 0.00016735683311708272), (Home &amp; Kitchen, 2.0239047444192693e-05), (Office &amp; School Supplies, 6.1688292589678895e-06), (Health, Fitness &amp; Dieting, 5.460031093917905e-09)]</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>[(Health &amp; Personal Care, 0.717199981212616), (Music, 0.17032985389232635), (Toys &amp; Games, 0.07831338047981262), (Books, 0.013568166643381119), (Movies &amp; TV, 0.012559948489069939), (Technology, Electronics &amp; Accessories, 0.007508367300033569), (Clothing, Shoes &amp; Jewelry, 0.00045463567948900163), (Office &amp; School Supplies, 4.708812411990948e-05), (Home &amp; Kitchen, 1.8495504264137708e-05), (Health, Fitness &amp; Dieting, 1.8408721658147442e-08)]</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>[(Books, 0.9998365640640259), (Health &amp; Personal Care, 8.216543210437521e-05), (Music, 3.5718428989639506e-05), (Technology, Electronics &amp; Accessories, 3.264642145950347e-05), (Movies &amp; TV, 8.32537352835061e-06), (Clothing, Shoes &amp; Jewelry, 4.34612411481794e-06), (Home &amp; Kitchen, 1.5349154125487985e-07), (Office &amp; School Supplies, 4.880563864162468e-08), (Health, Fitness &amp; Dieting, 2.2773569696710183e-08), (Toys &amp; Games, 7.396707690787707e-10)]</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>[(Music, 0.6391533017158508), (Toys &amp; Games, 0.10176584869623184), (Technology, Electronics &amp; Accessories, 0.08891455829143524), (Movies &amp; TV, 0.05365948751568794), (Health &amp; Personal Care, 0.045719441026449203), (Books, 0.042580146342515945), (Clothing, Shoes &amp; Jewelry, 0.026125917211174965), (Home &amp; Kitchen, 0.0019977064803242683), (Office &amp; School Supplies, 6.404986925190315e-05), (Health, Fitness &amp; Dieting, 1.9508099285303615e-05)]</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>[(Music, 0.8446571826934814), (Health &amp; Personal Care, 0.051206693053245544), (Technology, Electronics &amp; Accessories, 0.03240054473280907), (Clothing, Shoes &amp; Jewelry, 0.02940249629318714), (Movies &amp; TV, 0.02463548257946968), (Toys &amp; Games, 0.013368910178542137), (Books, 0.003833962604403496), (Home &amp; Kitchen, 0.000427876046160236), (Office &amp; School Supplies, 6.621119973715395e-05), (Health, Fitness &amp; Dieting, 5.350443075258227e-07)]</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.4531417787075043), (Toys &amp; Games, 0.24133871495723724), (Books, 0.21905922889709473), (Clothing, Shoes &amp; Jewelry, 0.033831462264060974), (Music, 0.028565259650349617), (Health &amp; Personal Care, 0.013659373857080936), (Office &amp; School Supplies, 0.004502126481384039), (Home &amp; Kitchen, 0.004299209453165531), (Movies &amp; TV, 0.0011067099403589964), (Health, Fitness &amp; Dieting, 0.0004960803198628128)]</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>[(Books, 0.554949164390564), (Toys &amp; Games, 0.40558162331581116), (Health &amp; Personal Care, 0.01597580686211586), (Clothing, Shoes &amp; Jewelry, 0.009129648096859455), (Movies &amp; TV, 0.00898823793977499), (Music, 0.005041403695940971), (Technology, Electronics &amp; Accessories, 0.000327878980897367), (Home &amp; Kitchen, 4.425758106663125e-06), (Office &amp; School Supplies, 1.6266417333099525e-06), (Health, Fitness &amp; Dieting, 2.2852059089473187e-07)]</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>[(Movies &amp; TV, 0.3926125764846802), (Books, 0.29760369658470154), (Music, 0.17500056326389313), (Health &amp; Personal Care, 0.057916898280382156), (Toys &amp; Games, 0.04405965656042099), (Technology, Electronics &amp; Accessories, 0.012937398627400398), (Office &amp; School Supplies, 0.009800060652196407), (Home &amp; Kitchen, 0.006325631868094206), (Clothing, Shoes &amp; Jewelry, 0.0029134417418390512), (Health, Fitness &amp; Dieting, 0.0008301329216919839)]</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>[(Toys &amp; Games, 0.9205684065818787), (Books, 0.0709371417760849), (Clothing, Shoes &amp; Jewelry, 0.006369831971824169), (Movies &amp; TV, 0.001831270637921989), (Technology, Electronics &amp; Accessories, 0.00012709548173006624), (Health &amp; Personal Care, 7.081509829731658e-05), (Home &amp; Kitchen, 5.321163189364597e-05), (Music, 4.068442285642959e-05), (Health, Fitness &amp; Dieting, 9.601442343409872e-07), (Office &amp; School Supplies, 5.655815016325505e-07)]</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>[(Music, 0.9898465275764465), (Health &amp; Personal Care, 0.005577460862696171), (Movies &amp; TV, 0.002335510915145278), (Books, 0.0013306159526109695), (Toys &amp; Games, 0.0007873900467529893), (Technology, Electronics &amp; Accessories, 0.00011732395068975165), (Clothing, Shoes &amp; Jewelry, 4.879411335423356e-06), (Home &amp; Kitchen, 2.608828992833878e-07), (Office &amp; School Supplies, 2.998501713591395e-08), (Health, Fitness &amp; Dieting, 4.465945835363527e-09)]</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.7666711807250977), (Music, 0.09094081819057465), (Health &amp; Personal Care, 0.054506514221429825), (Technology, Electronics &amp; Accessories, 0.044261638075113297), (Movies &amp; TV, 0.022157300263643265), (Books, 0.014381474815309048), (Office &amp; School Supplies, 0.003462524153292179), (Toys &amp; Games, 0.002146059414371848), (Home &amp; Kitchen, 0.0013796421699225903), (Health, Fitness &amp; Dieting, 9.288299770560116e-05)]</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>[(Movies &amp; TV, 0.8327091336250305), (Music, 0.07029961794614792), (Books, 0.06534647196531296), (Toys &amp; Games, 0.0314018577337265), (Home &amp; Kitchen, 0.00014944601571187377), (Technology, Electronics &amp; Accessories, 3.4587665140861645e-05), (Health &amp; Personal Care, 2.3151738787419163e-05), (Office &amp; School Supplies, 2.088549626932945e-05), (Clothing, Shoes &amp; Jewelry, 1.4517449017148465e-05), (Health, Fitness &amp; Dieting, 2.0133633427121822e-07)]</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>[(Books, 0.7537145614624023), (Health &amp; Personal Care, 0.14232172071933746), (Movies &amp; TV, 0.07485166192054749), (Music, 0.02470390498638153), (Technology, Electronics &amp; Accessories, 0.0027074089739471674), (Home &amp; Kitchen, 0.0006241041701287031), (Toys &amp; Games, 0.00051678012823686), (Clothing, Shoes &amp; Jewelry, 0.00041549326851963997), (Health, Fitness &amp; Dieting, 8.528697799192742e-05), (Office &amp; School Supplies, 5.911607513553463e-05)]</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>[(Books, 0.9005414843559265), (Movies &amp; TV, 0.03815736994147301), (Health &amp; Personal Care, 0.018294479697942734), (Home &amp; Kitchen, 0.01780848391354084), (Music, 0.010289803147315979), (Health, Fitness &amp; Dieting, 0.009815116412937641), (Toys &amp; Games, 0.0024660248309373856), (Technology, Electronics &amp; Accessories, 0.00235716812312603), (Clothing, Shoes &amp; Jewelry, 0.000235024795983918), (Office &amp; School Supplies, 3.511743125272915e-05)]</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>[(Books, 0.9663417935371399), (Music, 0.0172080360352993), (Movies &amp; TV, 0.006573514547199011), (Health &amp; Personal Care, 0.006440293043851852), (Toys &amp; Games, 0.0020371724385768175), (Health, Fitness &amp; Dieting, 0.0012218743795529008), (Home &amp; Kitchen, 0.00010783374455058947), (Clothing, Shoes &amp; Jewelry, 5.498791142599657e-05), (Technology, Electronics &amp; Accessories, 1.3331068657862488e-05), (Office &amp; School Supplies, 1.1718118457793025e-06)]</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>[(Music, 0.3886104226112366), (Toys &amp; Games, 0.3078145384788513), (Books, 0.19286923110485077), (Technology, Electronics &amp; Accessories, 0.0731147825717926), (Clothing, Shoes &amp; Jewelry, 0.017415549606084824), (Movies &amp; TV, 0.008475909940898418), (Home &amp; Kitchen, 0.005273311864584684), (Health &amp; Personal Care, 0.004794827662408352), (Office &amp; School Supplies, 0.0016291984356939793), (Health, Fitness &amp; Dieting, 2.2772430838813307e-06)]</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>[(Music, 0.29513558745384216), (Health &amp; Personal Care, 0.27426403760910034), (Books, 0.2477034330368042), (Technology, Electronics &amp; Accessories, 0.15768176317214966), (Movies &amp; TV, 0.008822740986943245), (Toys &amp; Games, 0.008500696159899235), (Clothing, Shoes &amp; Jewelry, 0.006224087439477444), (Home &amp; Kitchen, 0.0007632427732460201), (Office &amp; School Supplies, 0.000732723216060549), (Health, Fitness &amp; Dieting, 0.00017166731413453817)]</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>[(Books, 0.4315989911556244), (Toys &amp; Games, 0.2997904121875763), (Music, 0.14154314994812012), (Health &amp; Personal Care, 0.08394137769937515), (Clothing, Shoes &amp; Jewelry, 0.016876941546797752), (Technology, Electronics &amp; Accessories, 0.011346930637955666), (Office &amp; School Supplies, 0.010402573272585869), (Home &amp; Kitchen, 0.004152519162744284), (Movies &amp; TV, 0.00031697246595285833), (Health, Fitness &amp; Dieting, 3.010604632436298e-05)]</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.35727420449256897), (Books, 0.3068300485610962), (Technology, Electronics &amp; Accessories, 0.18235041201114655), (Home &amp; Kitchen, 0.09362092614173889), (Health &amp; Personal Care, 0.041723210364580154), (Office &amp; School Supplies, 0.009241092950105667), (Toys &amp; Games, 0.006346702575683594), (Health, Fitness &amp; Dieting, 0.0014920663088560104), (Music, 0.0007757868734188378), (Movies &amp; TV, 0.00034559855703264475)]</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>[(Books, 0.7106083035469055), (Toys &amp; Games, 0.1170375719666481), (Health &amp; Personal Care, 0.07227587699890137), (Music, 0.046451907604932785), (Movies &amp; TV, 0.031222308054566383), (Technology, Electronics &amp; Accessories, 0.013983175158500671), (Clothing, Shoes &amp; Jewelry, 0.004163358826190233), (Health, Fitness &amp; Dieting, 0.00230991980060935), (Office &amp; School Supplies, 0.0010686772875487804), (Home &amp; Kitchen, 0.000878971884958446)]</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>[(Music, 0.778152585029602), (Books, 0.21058693528175354), (Health &amp; Personal Care, 0.009092668071389198), (Movies &amp; TV, 0.0016050691483542323), (Toys &amp; Games, 0.00031923927599564195), (Health, Fitness &amp; Dieting, 0.0001819377503124997), (Technology, Electronics &amp; Accessories, 3.9643367927055806e-05), (Home &amp; Kitchen, 1.9308919945615344e-05), (Clothing, Shoes &amp; Jewelry, 1.4361100966198137e-06), (Office &amp; School Supplies, 1.1537092632352142e-06)]</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>[(Toys &amp; Games, 0.922444224357605), (Books, 0.038632772862911224), (Music, 0.0322684645652771), (Health &amp; Personal Care, 0.003181782551109791), (Movies &amp; TV, 0.001445395522750914), (Technology, Electronics &amp; Accessories, 0.001094302861019969), (Clothing, Shoes &amp; Jewelry, 0.0008784924284555018), (Home &amp; Kitchen, 5.047736340202391e-05), (Office &amp; School Supplies, 3.264966153437854e-06), (Health, Fitness &amp; Dieting, 8.735731853448669e-07)]</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>[(Books, 0.7671414613723755), (Music, 0.0769282728433609), (Technology, Electronics &amp; Accessories, 0.06506060808897018), (Clothing, Shoes &amp; Jewelry, 0.03962711989879608), (Toys &amp; Games, 0.017200786620378494), (Movies &amp; TV, 0.014106543734669685), (Home &amp; Kitchen, 0.009258377365767956), (Office &amp; School Supplies, 0.006131456233561039), (Health &amp; Personal Care, 0.004362165462225676), (Health, Fitness &amp; Dieting, 0.00018328869191464037)]</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>[(Music, 0.392344206571579), (Technology, Electronics &amp; Accessories, 0.21251121163368225), (Books, 0.15398727357387543), (Movies &amp; TV, 0.06428798288106918), (Home &amp; Kitchen, 0.051396723836660385), (Toys &amp; Games, 0.045396026223897934), (Clothing, Shoes &amp; Jewelry, 0.028062796220183372), (Office &amp; School Supplies, 0.025650909170508385), (Health &amp; Personal Care, 0.025263171643018723), (Health, Fitness &amp; Dieting, 0.0010997653007507324)]</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>[(Books, 0.519748866558075), (Music, 0.3525339961051941), (Movies &amp; TV, 0.06162833794951439), (Toys &amp; Games, 0.03147859871387482), (Health &amp; Personal Care, 0.02587108314037323), (Clothing, Shoes &amp; Jewelry, 0.004516276065260172), (Health, Fitness &amp; Dieting, 0.0028701310511678457), (Technology, Electronics &amp; Accessories, 0.001177362515591085), (Home &amp; Kitchen, 0.00016573519678786397), (Office &amp; School Supplies, 9.663775927037932e-06)]</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>[(Toys &amp; Games, 0.9198678731918335), (Books, 0.07952418923377991), (Technology, Electronics &amp; Accessories, 0.00030681240605190396), (Music, 0.00018099740555044264), (Clothing, Shoes &amp; Jewelry, 7.531334995292127e-05), (Health &amp; Personal Care, 3.9880840631667525e-05), (Movies &amp; TV, 3.358471985848155e-06), (Home &amp; Kitchen, 1.2733603398373816e-06), (Office &amp; School Supplies, 3.279898521668656e-07), (Health, Fitness &amp; Dieting, 1.7368532168049455e-09)]</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>[(Books, 0.9988842606544495), (Toys &amp; Games, 0.0007103927782736719), (Clothing, Shoes &amp; Jewelry, 0.00022964180971030146), (Music, 0.00015374737267848104), (Health, Fitness &amp; Dieting, 9.442172085982747e-06), (Movies &amp; TV, 4.710649591288529e-06), (Home &amp; Kitchen, 2.855181492122938e-06), (Office &amp; School Supplies, 2.0799300273210974e-06), (Technology, Electronics &amp; Accessories, 1.5900511698418995e-06), (Health &amp; Personal Care, 1.2983390433873865e-06)]</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>[(Books, 0.6297427415847778), (Health &amp; Personal Care, 0.17006005346775055), (Clothing, Shoes &amp; Jewelry, 0.10416531562805176), (Toys &amp; Games, 0.034199878573417664), (Technology, Electronics &amp; Accessories, 0.03029198758304119), (Music, 0.014760260470211506), (Home &amp; Kitchen, 0.009787395596504211), (Office &amp; School Supplies, 0.005869875196367502), (Movies &amp; TV, 0.0010726653272286057), (Health, Fitness &amp; Dieting, 4.98188819619827e-05)]</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>[(Health &amp; Personal Care, 0.2789466679096222), (Technology, Electronics &amp; Accessories, 0.258647084236145), (Music, 0.1770700067281723), (Books, 0.14074887335300446), (Toys &amp; Games, 0.05583929643034935), (Clothing, Shoes &amp; Jewelry, 0.0529303178191185), (Movies &amp; TV, 0.024655193090438843), (Office &amp; School Supplies, 0.007543718907982111), (Home &amp; Kitchen, 0.0034338522236794233), (Health, Fitness &amp; Dieting, 0.00018498317513149232)]</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>[(Music, 0.3521052300930023), (Toys &amp; Games, 0.32114559412002563), (Books, 0.11672552675008774), (Clothing, Shoes &amp; Jewelry, 0.10115857422351837), (Home &amp; Kitchen, 0.04193843901157379), (Health &amp; Personal Care, 0.03449993580579758), (Movies &amp; TV, 0.021083025261759758), (Technology, Electronics &amp; Accessories, 0.006268650759011507), (Office &amp; School Supplies, 0.004058565478771925), (Health, Fitness &amp; Dieting, 0.0010164257837459445)]</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>[(Books, 0.8497206568717957), (Home &amp; Kitchen, 0.05249179154634476), (Health &amp; Personal Care, 0.025631485506892204), (Clothing, Shoes &amp; Jewelry, 0.022766923531889915), (Movies &amp; TV, 0.021661220118403435), (Toys &amp; Games, 0.015554089099168777), (Office &amp; School Supplies, 0.005366557277739048), (Technology, Electronics &amp; Accessories, 0.004034621641039848), (Health, Fitness &amp; Dieting, 0.0018251677975058556), (Music, 0.0009474568068981171)]</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>[(Books, 0.7951391339302063), (Office &amp; School Supplies, 0.12574639916419983), (Toys &amp; Games, 0.02950579859316349), (Technology, Electronics &amp; Accessories, 0.023911114782094955), (Music, 0.017181970179080963), (Clothing, Shoes &amp; Jewelry, 0.006114074029028416), (Health &amp; Personal Care, 0.001162657979875803), (Movies &amp; TV, 0.0011334631126374006), (Home &amp; Kitchen, 0.00010533016757108271), (Health, Fitness &amp; Dieting, 2.2991788029003146e-08)]</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>[(Books, 0.7693926692008972), (Toys &amp; Games, 0.09622231125831604), (Music, 0.07405660301446915), (Health &amp; Personal Care, 0.039461180567741394), (Movies &amp; TV, 0.012958351522684097), (Home &amp; Kitchen, 0.004889628849923611), (Technology, Electronics &amp; Accessories, 0.0011909109307453036), (Clothing, Shoes &amp; Jewelry, 0.0011477693915367126), (Office &amp; School Supplies, 0.0005634804838337004), (Health, Fitness &amp; Dieting, 0.0001171323237940669)]</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>[(Books, 0.8909235000610352), (Movies &amp; TV, 0.08091656863689423), (Toys &amp; Games, 0.016051756218075752), (Health, Fitness &amp; Dieting, 0.005729526747018099), (Music, 0.004516647197306156), (Health &amp; Personal Care, 0.0010476801544427872), (Home &amp; Kitchen, 0.00039402692345902324), (Technology, Electronics &amp; Accessories, 0.00032968883169814944), (Clothing, Shoes &amp; Jewelry, 4.7415465814992785e-05), (Office &amp; School Supplies, 4.31138469139114e-05)]</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>[(Books, 0.4635433256626129), (Toys &amp; Games, 0.16741059720516205), (Clothing, Shoes &amp; Jewelry, 0.15078598260879517), (Movies &amp; TV, 0.10973280668258667), (Technology, Electronics &amp; Accessories, 0.04938988760113716), (Music, 0.03882181644439697), (Health &amp; Personal Care, 0.0185078177601099), (Home &amp; Kitchen, 0.000990238506346941), (Health, Fitness &amp; Dieting, 0.0006852805963717401), (Office &amp; School Supplies, 0.00013221209519542754)]</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>[(Books, 0.6406357288360596), (Health &amp; Personal Care, 0.28052008152008057), (Clothing, Shoes &amp; Jewelry, 0.057362861931324005), (Technology, Electronics &amp; Accessories, 0.021397527307271957), (Office &amp; School Supplies, 3.654028114397079e-05), (Home &amp; Kitchen, 2.7445425075711682e-05), (Movies &amp; TV, 1.3205420145823155e-05), (Music, 5.268827408144716e-06), (Toys &amp; Games, 8.985287536233955e-07), (Health, Fitness &amp; Dieting, 4.706869844994799e-07)]</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>[(Health &amp; Personal Care, 0.3858318328857422), (Toys &amp; Games, 0.3315558433532715), (Music, 0.20430892705917358), (Movies &amp; TV, 0.0413065068423748), (Clothing, Shoes &amp; Jewelry, 0.01914050243794918), (Books, 0.009327405132353306), (Technology, Electronics &amp; Accessories, 0.008178453892469406), (Office &amp; School Supplies, 0.0003031145897693932), (Home &amp; Kitchen, 4.6696510253241286e-05), (Health, Fitness &amp; Dieting, 7.607769134665432e-07)]</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>[(Books, 0.6687945127487183), (Toys &amp; Games, 0.2511345148086548), (Technology, Electronics &amp; Accessories, 0.04152635484933853), (Music, 0.0172649584710598), (Health &amp; Personal Care, 0.01031957846134901), (Clothing, Shoes &amp; Jewelry, 0.005105230491608381), (Movies &amp; TV, 0.003064768621698022), (Office &amp; School Supplies, 0.0020917216315865517), (Home &amp; Kitchen, 0.0006876236293464899), (Health, Fitness &amp; Dieting, 1.0772600944619626e-05)]</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>[(Books, 0.34314513206481934), (Music, 0.2675859034061432), (Movies &amp; TV, 0.23848436772823334), (Technology, Electronics &amp; Accessories, 0.07868251949548721), (Health &amp; Personal Care, 0.03696231544017792), (Clothing, Shoes &amp; Jewelry, 0.02006642147898674), (Toys &amp; Games, 0.010106059722602367), (Health, Fitness &amp; Dieting, 0.003017975250259042), (Home &amp; Kitchen, 0.001709749805741012), (Office &amp; School Supplies, 0.00023951538605615497)]</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>[(Toys &amp; Games, 0.4676353335380554), (Technology, Electronics &amp; Accessories, 0.3332826495170593), (Books, 0.10169105231761932), (Music, 0.07861566543579102), (Movies &amp; TV, 0.011135687120258808), (Office &amp; School Supplies, 0.004972770344465971), (Health &amp; Personal Care, 0.001348682097159326), (Home &amp; Kitchen, 0.0009616129682399333), (Clothing, Shoes &amp; Jewelry, 0.00033608530065976083), (Health, Fitness &amp; Dieting, 2.043601853074506e-05)]</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>[(Toys &amp; Games, 0.9042985439300537), (Music, 0.08328036963939667), (Books, 0.01165321096777916), (Technology, Electronics &amp; Accessories, 0.0003929764498025179), (Movies &amp; TV, 0.00027310859877616167), (Clothing, Shoes &amp; Jewelry, 6.43058810965158e-05), (Health &amp; Personal Care, 2.920412771345582e-05), (Office &amp; School Supplies, 5.88881403018604e-06), (Home &amp; Kitchen, 2.438294359308202e-06), (Health, Fitness &amp; Dieting, 7.559842751803103e-10)]</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>[(Books, 0.634329080581665), (Toys &amp; Games, 0.29547157883644104), (Music, 0.05823986232280731), (Movies &amp; TV, 0.005022635217756033), (Health &amp; Personal Care, 0.002742813667282462), (Health, Fitness &amp; Dieting, 0.0025955589953809977), (Home &amp; Kitchen, 0.0009487529750913382), (Clothing, Shoes &amp; Jewelry, 0.0003024090838152915), (Technology, Electronics &amp; Accessories, 0.00025520939379930496), (Office &amp; School Supplies, 9.206891991198063e-05)]</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>[(Books, 0.3720388412475586), (Music, 0.31686335802078247), (Health &amp; Personal Care, 0.10503657162189484), (Toys &amp; Games, 0.06779472529888153), (Clothing, Shoes &amp; Jewelry, 0.06490134447813034), (Technology, Electronics &amp; Accessories, 0.04576100781559944), (Movies &amp; TV, 0.015585726127028465), (Office &amp; School Supplies, 0.006270549260079861), (Home &amp; Kitchen, 0.00569900730624795), (Health, Fitness &amp; Dieting, 4.893679215456359e-05)]</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>[(Books, 0.24687595665454865), (Movies &amp; TV, 0.22323381900787354), (Music, 0.1907346546649933), (Technology, Electronics &amp; Accessories, 0.13092589378356934), (Clothing, Shoes &amp; Jewelry, 0.12073741853237152), (Toys &amp; Games, 0.0372309684753418), (Health &amp; Personal Care, 0.03653399646282196), (Office &amp; School Supplies, 0.008071794174611568), (Home &amp; Kitchen, 0.0036880511324852705), (Health, Fitness &amp; Dieting, 0.0019674699287861586)]</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>[(Toys &amp; Games, 0.8363372087478638), (Music, 0.08540820330381393), (Books, 0.04506966099143028), (Clothing, Shoes &amp; Jewelry, 0.02001230977475643), (Technology, Electronics &amp; Accessories, 0.009403648786246777), (Health &amp; Personal Care, 0.0032147399615496397), (Movies &amp; TV, 0.0002469727478455752), (Office &amp; School Supplies, 0.0001343944895779714), (Health, Fitness &amp; Dieting, 0.00011238176375627518), (Home &amp; Kitchen, 6.0440623201429844e-05)]</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>[(Music, 0.9894178509712219), (Books, 0.005815804935991764), (Movies &amp; TV, 0.0029275291599333286), (Technology, Electronics &amp; Accessories, 0.0008981266291812062), (Clothing, Shoes &amp; Jewelry, 0.0004985254490748048), (Health &amp; Personal Care, 0.0003108310920652002), (Home &amp; Kitchen, 9.97796087176539e-05), (Toys &amp; Games, 1.5313156836782582e-05), (Office &amp; School Supplies, 1.1403978533053305e-05), (Health, Fitness &amp; Dieting, 4.790398179466138e-06)]</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>[(Music, 0.5751824975013733), (Movies &amp; TV, 0.30665022134780884), (Books, 0.11234869062900543), (Toys &amp; Games, 0.002310394775122404), (Technology, Electronics &amp; Accessories, 0.001698728883638978), (Home &amp; Kitchen, 0.0007665969314984977), (Clothing, Shoes &amp; Jewelry, 0.0004251429345458746), (Health &amp; Personal Care, 0.0003758746024686843), (Office &amp; School Supplies, 0.0002412994799669832), (Health, Fitness &amp; Dieting, 5.422676849775598e-07)]</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>[(Books, 0.9858561754226685), (Technology, Electronics &amp; Accessories, 0.009915152564644814), (Health &amp; Personal Care, 0.002850909484550357), (Office &amp; School Supplies, 0.0007437875028699636), (Clothing, Shoes &amp; Jewelry, 0.00023323654022533447), (Movies &amp; TV, 0.00017919707170221955), (Toys &amp; Games, 0.0001267290790565312), (Health, Fitness &amp; Dieting, 4.695052484748885e-05), (Home &amp; Kitchen, 2.759542257990688e-05), (Music, 2.0137456886004657e-05)]</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>[(Books, 0.34594589471817017), (Movies &amp; TV, 0.290982723236084), (Clothing, Shoes &amp; Jewelry, 0.2626451551914215), (Toys &amp; Games, 0.07185059785842896), (Health &amp; Personal Care, 0.019284779205918312), (Technology, Electronics &amp; Accessories, 0.005924521014094353), (Home &amp; Kitchen, 0.0024166638031601906), (Music, 0.0008927226881496608), (Office &amp; School Supplies, 5.481695188791491e-05), (Health, Fitness &amp; Dieting, 2.1038047179899877e-06)]</td>
+    </tr>
+    <tr>
+      <th>135</th>
+      <td>[(Books, 0.710067868232727), (Toys &amp; Games, 0.09383516758680344), (Technology, Electronics &amp; Accessories, 0.061469707638025284), (Health &amp; Personal Care, 0.048343099653720856), (Movies &amp; TV, 0.044889263808727264), (Music, 0.022390110418200493), (Office &amp; School Supplies, 0.012279067188501358), (Home &amp; Kitchen, 0.003604978322982788), (Clothing, Shoes &amp; Jewelry, 0.0030786748975515366), (Health, Fitness &amp; Dieting, 4.204749711789191e-05)]</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.7321777939796448), (Books, 0.13958078622817993), (Toys &amp; Games, 0.06566974520683289), (Clothing, Shoes &amp; Jewelry, 0.04632159322500229), (Health &amp; Personal Care, 0.00864350888878107), (Home &amp; Kitchen, 0.003805721877142787), (Office &amp; School Supplies, 0.0032513749320060015), (Movies &amp; TV, 0.00037600172800011933), (Music, 0.00017343732179142535), (Health, Fitness &amp; Dieting, 1.028052096785359e-07)]</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>[(Music, 0.8787568807601929), (Toys &amp; Games, 0.056601833552122116), (Books, 0.024902062490582466), (Health &amp; Personal Care, 0.018968788906931877), (Movies &amp; TV, 0.011220583692193031), (Home &amp; Kitchen, 0.007431104779243469), (Clothing, Shoes &amp; Jewelry, 0.0017795232124626637), (Technology, Electronics &amp; Accessories, 0.00023969031462911516), (Health, Fitness &amp; Dieting, 8.066117152338848e-05), (Office &amp; School Supplies, 1.88150424946798e-05)]</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.7597541213035583), (Music, 0.17670927941799164), (Movies &amp; TV, 0.02148023433983326), (Toys &amp; Games, 0.014872678555548191), (Clothing, Shoes &amp; Jewelry, 0.011945128440856934), (Health &amp; Personal Care, 0.011610448360443115), (Books, 0.002552527002990246), (Home &amp; Kitchen, 0.0008096090168692172), (Office &amp; School Supplies, 0.0002658507146406919), (Health, Fitness &amp; Dieting, 1.4952128424283728e-07)]</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>[(Music, 0.6499381065368652), (Books, 0.33146822452545166), (Movies &amp; TV, 0.007206697482615709), (Health &amp; Personal Care, 0.005575791001319885), (Technology, Electronics &amp; Accessories, 0.0020104534924030304), (Toys &amp; Games, 0.001794561860151589), (Clothing, Shoes &amp; Jewelry, 0.0015469759237021208), (Health, Fitness &amp; Dieting, 0.00020210156799294055), (Home &amp; Kitchen, 0.0001783564075594768), (Office &amp; School Supplies, 7.87194148870185e-05)]</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>[(Books, 0.7961850166320801), (Music, 0.19563989341259003), (Health &amp; Personal Care, 0.003671846119686961), (Movies &amp; TV, 0.003386084223166108), (Clothing, Shoes &amp; Jewelry, 0.0008071358315646648), (Technology, Electronics &amp; Accessories, 0.00020712589321192354), (Toys &amp; Games, 8.567401528125629e-05), (Health, Fitness &amp; Dieting, 1.3177462278690655e-05), (Home &amp; Kitchen, 4.039760369778378e-06), (Office &amp; School Supplies, 4.496726546676655e-08)]</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.9963741898536682), (Technology, Electronics &amp; Accessories, 0.0022653723135590553), (Books, 0.0011139678535982966), (Home &amp; Kitchen, 0.0001918858615681529), (Office &amp; School Supplies, 3.2140338589670137e-05), (Health &amp; Personal Care, 1.8885843019234017e-05), (Health, Fitness &amp; Dieting, 2.216767370555317e-06), (Toys &amp; Games, 5.31091870925593e-07), (Music, 3.432199946473702e-07), (Movies &amp; TV, 3.362869449574646e-07)]</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>[(Music, 0.28579798340797424), (Movies &amp; TV, 0.26626619696617126), (Toys &amp; Games, 0.23091068863868713), (Books, 0.1386917233467102), (Technology, Electronics &amp; Accessories, 0.028324982151389122), (Health &amp; Personal Care, 0.024831606075167656), (Office &amp; School Supplies, 0.011577114462852478), (Home &amp; Kitchen, 0.007970953360199928), (Clothing, Shoes &amp; Jewelry, 0.0056222896091639996), (Health, Fitness &amp; Dieting, 6.465223577833967e-06)]</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>[(Toys &amp; Games, 0.4848187267780304), (Books, 0.47124534845352173), (Music, 0.038190700113773346), (Movies &amp; TV, 0.00409269891679287), (Health &amp; Personal Care, 0.0007259059348143637), (Health, Fitness &amp; Dieting, 0.0005389880388975143), (Clothing, Shoes &amp; Jewelry, 0.00018118033767677844), (Technology, Electronics &amp; Accessories, 0.0001655524829402566), (Home &amp; Kitchen, 3.647116318461485e-05), (Office &amp; School Supplies, 4.432385139807593e-06)]</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>[(Books, 0.5375857353210449), (Toys &amp; Games, 0.1892787665128708), (Music, 0.15946388244628906), (Movies &amp; TV, 0.04819273576140404), (Clothing, Shoes &amp; Jewelry, 0.03665348142385483), (Technology, Electronics &amp; Accessories, 0.01385315041989088), (Health &amp; Personal Care, 0.012111564166843891), (Home &amp; Kitchen, 0.0013916072202846408), (Health, Fitness &amp; Dieting, 0.0008257149602286518), (Office &amp; School Supplies, 0.0006433699163608253)]</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>[(Music, 0.40981364250183105), (Toys &amp; Games, 0.34190282225608826), (Books, 0.14147260785102844), (Movies &amp; TV, 0.06154999881982803), (Clothing, Shoes &amp; Jewelry, 0.02405715174973011), (Health &amp; Personal Care, 0.011786751449108124), (Technology, Electronics &amp; Accessories, 0.008689424954354763), (Home &amp; Kitchen, 0.00041098365909419954), (Office &amp; School Supplies, 0.00030849871109239757), (Health, Fitness &amp; Dieting, 8.192911082005594e-06)]</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>[(Clothing, Shoes &amp; Jewelry, 0.301494836807251), (Music, 0.251122385263443), (Technology, Electronics &amp; Accessories, 0.20943576097488403), (Toys &amp; Games, 0.12785661220550537), (Books, 0.06935963034629822), (Health &amp; Personal Care, 0.03762838989496231), (Home &amp; Kitchen, 0.0019746865145862103), (Office &amp; School Supplies, 0.0006041626911610365), (Movies &amp; TV, 0.0005029985914006829), (Health, Fitness &amp; Dieting, 2.052616582659539e-05)]</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>[(Music, 0.5423106551170349), (Movies &amp; TV, 0.24897423386573792), (Books, 0.09204714745283127), (Health &amp; Personal Care, 0.06572999805212021), (Toys &amp; Games, 0.03375024348497391), (Home &amp; Kitchen, 0.007040575612336397), (Technology, Electronics &amp; Accessories, 0.006792572792619467), (Office &amp; School Supplies, 0.0017413655295968056), (Clothing, Shoes &amp; Jewelry, 0.0015949012013152242), (Health, Fitness &amp; Dieting, 1.8291928427061066e-05)]</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>[(Technology, Electronics &amp; Accessories, 0.40253445506095886), (Books, 0.3055829405784607), (Health &amp; Personal Care, 0.11897158622741699), (Clothing, Shoes &amp; Jewelry, 0.06912965327501297), (Toys &amp; Games, 0.03941241651773453), (Home &amp; Kitchen, 0.030699407681822777), (Music, 0.022907953709363937), (Office &amp; School Supplies, 0.005084694363176823), (Movies &amp; TV, 0.004565662704408169), (Health, Fitness &amp; Dieting, 0.0011112196370959282)]</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>[(Books, 0.9832030534744263), (Music, 0.013747738674283028), (Movies &amp; TV, 0.0029863393865525723), (Toys &amp; Games, 3.3490738132968545e-05), (Health, Fitness &amp; Dieting, 2.0211864466546103e-05), (Technology, Electronics &amp; Accessories, 8.371574949705973e-06), (Clothing, Shoes &amp; Jewelry, 4.6399563302657043e-07), (Health &amp; Personal Care, 1.9969473896708223e-07), (Office &amp; School Supplies, 8.268197149163825e-08), (Home &amp; Kitchen, 1.7278601660564163e-08)]</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>[(Health &amp; Personal Care, 0.38382041454315186), (Books, 0.21414344012737274), (Technology, Electronics &amp; Accessories, 0.14461500942707062), (Clothing, Shoes &amp; Jewelry, 0.09131655097007751), (Music, 0.06753947585821152), (Toys &amp; Games, 0.06031623110175133), (Movies &amp; TV, 0.029635917395353317), (Home &amp; Kitchen, 0.005412712227553129), (Office &amp; School Supplies, 0.0029620868153870106), (Health, Fitness &amp; Dieting, 0.00023818282352294773)]</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>[(Toys &amp; Games, 0.7894985675811768), (Health &amp; Personal Care, 0.08061278611421585), (Clothing, Shoes &amp; Jewelry, 0.05367305874824524), (Home &amp; Kitchen, 0.04479691758751869), (Movies &amp; TV, 0.01291290856897831), (Books, 0.010670083574950695), (Technology, Electronics &amp; Accessories, 0.00566552858799696), (Music, 0.0014659471344202757), (Office &amp; School Supplies, 0.0007040986092761159), (Health, Fitness &amp; Dieting, 1.8492244180379203e-08)]</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>[(Books, 0.9960916638374329), (Technology, Electronics &amp; Accessories, 0.001802949351258576), (Health &amp; Personal Care, 0.0013415151042863727), (Movies &amp; TV, 0.00034510632394813), (Toys &amp; Games, 0.0001905491080833599), (Health, Fitness &amp; Dieting, 0.00010753516107797623), (Music, 5.328212137101218e-05), (Clothing, Shoes &amp; Jewelry, 3.660392758320086e-05), (Office &amp; School Supplies, 2.7493933885125443e-05), (Home &amp; Kitchen, 3.426627472435939e-06)]</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>[(Books, 0.5671474933624268), (Toys &amp; Games, 0.4312477111816406), (Movies &amp; TV, 0.0008512313361279666), (Music, 0.0005290505941957235), (Health, Fitness &amp; Dieting, 8.349201380042359e-05), (Technology, Electronics &amp; Accessories, 5.3896219469606876e-05), (Health &amp; Personal Care, 3.713524711201899e-05), (Clothing, Shoes &amp; Jewelry, 2.4185090296668932e-05), (Home &amp; Kitchen, 1.910731225507334e-05), (Office &amp; School Supplies, 6.677847977698548e-06)]</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>[(Health &amp; Personal Care, 0.5858106017112732), (Technology, Electronics &amp; Accessories, 0.37318915128707886), (Home &amp; Kitchen, 0.0163867324590683), (Toys &amp; Games, 0.015987293794751167), (Music, 0.0042487625032663345), (Books, 0.0031627300195395947), (Office &amp; School Supplies, 0.000718466064427048), (Clothing, Shoes &amp; Jewelry, 0.00034235441125929356), (Movies &amp; TV, 0.00015164368960540742), (Health, Fitness &amp; Dieting, 2.2144868125906214e-06)]</td>
+    </tr>
+    <tr>
+      <th>155</th>
+      <td>[(Books, 0.641809344291687), (Toys &amp; Games, 0.21601073443889618), (Movies &amp; TV, 0.07693687826395035), (Music, 0.025044547393918037), (Home &amp; Kitchen, 0.018381183966994286), (Technology, Electronics &amp; Accessories, 0.012470164336264133), (Clothing, Shoes &amp; Jewelry, 0.002489021746441722), (Health &amp; Personal Care, 0.002470435108989477), (Health, Fitness &amp; Dieting, 0.002301163272932172), (Office &amp; School Supplies, 0.002086543943732977)]</td>
+    </tr>
+    <tr>
+      <th>156</th>
+      <td>[(Toys &amp; Games, 0.6746699810028076), (Music, 0.27818530797958374), (Movies &amp; TV, 0.025911031290888786), (Books, 0.014898840337991714), (Technology, Electronics &amp; Accessories, 0.004400317557156086), (Health &amp; Personal Care, 0.0011764562223106623), (Clothing, Shoes &amp; Jewelry, 0.0007311885128729045), (Home &amp; Kitchen, 2.561491055530496e-05), (Office &amp; School Supplies, 1.0785986432892969e-06), (Health, Fitness &amp; Dieting, 1.3796308451219375e-07)]</td>
+    </tr>
+    <tr>
+      <th>157</th>
+      <td>[(Music, 0.9948463439941406), (Health &amp; Personal Care, 0.004187362734228373), (Books, 0.00047904346138238907), (Movies &amp; TV, 0.00046104672946967185), (Clothing, Shoes &amp; Jewelry, 1.944416726473719e-05), (Toys &amp; Games, 3.723651161635644e-06), (Home &amp; Kitchen, 2.867782541216002e-06), (Technology, Electronics &amp; Accessories, 8.952837760034527e-08), (Health, Fitness &amp; Dieting, 2.7002105440487867e-08), (Office &amp; School Supplies, 2.5481833532126075e-08)]</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>[(Books, 0.9943795800209045), (Toys &amp; Games, 0.002550440840423107), (Movies &amp; TV, 0.0019550761207938194), (Health, Fitness &amp; Dieting, 0.0004997265641577542), (Music, 0.0003974478750023991), (Home &amp; Kitchen, 9.629697888158262e-05), (Health &amp; Personal Care, 8.866387361194938e-05), (Clothing, Shoes &amp; Jewelry, 2.1291793018463068e-05), (Technology, Electronics &amp; Accessories, 9.397277608513832e-06), (Office &amp; School Supplies, 2.0348368252598448e-06)]</td>
+    </tr>
+    <tr>
+      <th>159</th>
+      <td>[(Toys &amp; Games, 0.7250413298606873), (Technology, Electronics &amp; Accessories, 0.12550830841064453), (Office &amp; School Supplies, 0.1059192568063736), (Health &amp; Personal Care, 0.02673937939107418), (Books, 0.01090994756668806), (Clothing, Shoes &amp; Jewelry, 0.0030921967700123787), (Music, 0.0022852239198982716), (Home &amp; Kitchen, 0.0003173126024194062), (Movies &amp; TV, 0.00018706326954998076), (Health, Fitness &amp; Dieting, 1.3270027299228104e-09)]</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>[(Toys &amp; Games, 0.8762303590774536), (Technology, Electronics &amp; Accessories, 0.10969097167253494), (Clothing, Shoes &amp; Jewelry, 0.008360366337001324), (Books, 0.00411666464060545), (Music, 0.0011480679968371987), (Health &amp; Personal Care, 0.0003139273321721703), (Home &amp; Kitchen, 6.691358430543914e-05), (Office &amp; School Supplies, 5.7991997891804203e-05), (Movies &amp; TV, 1.4642522728536278e-05), (Health, Fitness &amp; Dieting, 1.0663105065589207e-08)]</td>
+    </tr>
+    <tr>
+      <th>161</th>
+      <td>[(Music, 0.6354303956031799), (Toys &amp; Games, 0.29911577701568604), (Health &amp; Personal Care, 0.04399927705526352), (Books, 0.01710456609725952), (Home &amp; Kitchen, 0.002329037291929126), (Movies &amp; TV, 0.0014732637209817767), (Clothing, Shoes &amp; Jewelry, 0.00030886277090758085), (Office &amp; School Supplies, 0.0001991311291931197), (Technology, Electronics &amp; Accessories, 3.9263297367142513e-05), (Health, Fitness &amp; Dieting, 3.6386936130838876e-07)]</td>
+    </tr>
+    <tr>
+      <th>162</th>
+      <td>[(Toys &amp; Games, 0.3303707540035248), (Technology, Electronics &amp; Accessories, 0.2357054352760315), (Music, 0.13166719675064087), (Health &amp; Personal Care, 0.11098094284534454), (Office &amp; School Supplies, 0.08801455795764923), (Clothing, Shoes &amp; Jewelry, 0.06794542819261551), (Books, 0.027804357931017876), (Home &amp; Kitchen, 0.0044720349833369255), (Movies &amp; TV, 0.0030237522441893816), (Health, Fitness &amp; Dieting, 1.5475852706003934e-05)]</td>
+    </tr>
+  </tbody>
+</table>
