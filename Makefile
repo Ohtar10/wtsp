@@ -31,9 +31,8 @@ docker-deps:
 docker:
 	mkdir -p docker-build
 	cp env/docker/Dockerfile docker-build/Dockerfile
-	cp env/conda/wtsp-full-linux-no-gpu.yaml docker-build/environment.yaml
-	cp cli/dist/wtsp-0.1.0.tar.gz docker-build/wtsp-0.1.0.tar.gz
-	(cd docker-build; docker image build -t ohtar10/wtsp:0.1.0 .)
+	cp cli/dist/wtsp-0.1.1.tar.gz docker-build/wtsp-0.1.1.tar.gz
+	(cd docker-build; docker image build -t ohtar10/wtsp:0.1.1 .)
 
 docker-all: docker-clean docker-deps docker
 

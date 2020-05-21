@@ -162,3 +162,4 @@ datasets/flower_photos.tgz
 .java-version
 .travis.yml
 .vscode
+docker-build/
