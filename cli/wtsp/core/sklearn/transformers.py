@@ -60,7 +60,7 @@ class CountTransformer(BaseEstimator, TransformerMixin):
         Transforms the provided data set to count
         by the provided column.
         """
-        data = X.copy()
+        data = X
         data = data.groupby(self.groupby).agg({self.count_col: ["count"]})
         data = flat_columns(data)
         data = data[data[f"{self.count_col}count"] >= self.min_count]
@@ -83,7 +83,7 @@ class DataFrameFilter(BaseEstimator, TransformerMixin):
         return self  # do nothing
 
     def transform(self, X: pd.DataFrame, y=None):
-        data = X.copy()
+        data = X
         for field, value in self.field_values.items():
             data = data[data[field].isin([value])]
         return data
@@ -106,7 +106,7 @@ class MultiValueColumnExpander(BaseEstimator, TransformerMixin):
         return self  # do nothing
 
     def transform(self, X: pd.DataFrame, y=None):
-        data = X.copy()
+        data = X
         split_fn = lambda x: x.split(self.value_split_char)
         data[self.expand_column] = data[self.expand_column].apply(split_fn)
         return data.explode(self.expand_column)
@@ -175,7 +175,7 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         ensure_nltk_resource_is_available("punkt")
-        data = X.copy()
+        data = X
         tag_document_fn = create_tagged_document_fn(self.tags_column, self.corpus_column)
         return data.apply(tag_document_fn, axis=1)
 
@@ -231,7 +231,7 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        data = X.copy()
+        data = X
         tagged_docs = data[self.document_column].apply(word_tokenize)
         embeddings = tagged_docs.apply(self.d2v_model.infer_vector)
         data["d2v_embedding"] = embeddings
@@ -269,7 +269,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
         self.label_encoder = None
 
     def fit(self, X, y=None):
-        data = X.copy()
+        data = X
         categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
         category_encoder = MultiLabelBinarizer()
         category_encoder.fit(categories)
@@ -277,7 +277,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        data = X.copy()
+        data = X
         categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
         encoded_labels = self.label_encoder.transform(categories)
         encoded_labels = [arr for arr in encoded_labels]
@@ -360,7 +360,7 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X, y=None):
-        data = X.copy()
+        data = X
         features = data[self.features_column].values
         features = np.array([e for e in features])
         features = features.reshape(features.shape[0], features.shape[1], 1)
@@ -409,7 +409,7 @@ class ClusterAggregator(BaseEstimator, TransformerMixin):
         return self  # do nothing
 
     def transform(self, X, y=None):
-        data = X.copy()
+        data = X
 
         if not self.clusters:
             self.clusters = self.__fit_clusters(data)
@@ -466,7 +466,7 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         self.__load_models()
-        data = X.copy()
+        data = X
         data["d2v_embeddings"] = data[self.corpus_column].apply(self.__featurize_text)
         data['predictions'] = data["d2v_embeddings"].apply(self.__classify_embedding)
         return data
@@ -512,7 +512,6 @@ def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
     it will flat the column names given the
     colnames.
     """
-    df = df.copy()
     df.columns = [''.join(col).strip() for col in df.columns]
     if colnames:
         return df.rename(columns=colnames)
