@@ -1,8 +1,10 @@
 """Scikit learn transformers of data."""
 import logging
+import math
 import os
 import pickle
 import warnings
+import multiprocessing
 from operator import itemgetter
 from typing import Dict
 
@@ -210,11 +212,15 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         tagged_documents = X[self.tag_doc_column]
 
+        # Always use 90% of the capacity
+        workers = math.floor(multiprocessing.cpu_count() * .9)
+        multiprocessing.cpu_count() * .9
         d2v_model = Doc2Vec(vector_size=self.vec_size,
                             alpha=self.alpha,
                             min_alpha=self.min_alpha,
                             min_count=self.min_count,
-                            dm=self.dm)
+                            dm=self.dm,
+                            workers=workers)
 
         d2v_model.build_vocab(tagged_documents)
 
@@ -264,7 +270,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
     additional column. The encoder can be saved for
     later usage.
     """
-    def __init__(self, label_column="categories"):
+    def __init__(self, label_column="category"):
         self.label_column = label_column
         self.label_encoder = None
 
@@ -436,7 +442,7 @@ class ClusterAggregator(BaseEstimator, TransformerMixin):
                       eps=self.eps,
                       min_samples=self.n_neighbors,
                       metric="minkowski",
-                      n_jobs=-1).fit(points)
+                      n_jobs=-2).fit(points)
 
 
 class ClusterProductPredictor(BaseEstimator, TransformerMixin):

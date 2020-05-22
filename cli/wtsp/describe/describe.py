@@ -19,7 +19,8 @@ class Describer(DataLoader, Filterable):
                  count_col: str,
                  domain: str,
                  filters: str = None,
-                 min_count: int = 5000):
+                 min_count: int = 5000,
+                 explode: bool = False):
         DataLoader.__init__(self)
         Filterable.__init__(self, filters, can_be_none=True)
         self.output_dir = output_dir
@@ -27,6 +28,7 @@ class Describer(DataLoader, Filterable):
         self.count_col = count_col
         self.domain = domain
         self.min_count = min_count
+        self.explode = explode
 
     def describe(self, input_data):
         """Describe.
@@ -46,7 +48,7 @@ class Describer(DataLoader, Filterable):
             filter_transformer = DataFrameFilter(self.filters)
             steps.append(("data_filter", filter_transformer))
 
-        if self.domain == "documents":
+        if self.domain == "documents" and self.explode:
             multi_val_transformer = MultiValueColumnExpander(self.groupby)
             steps.append(("column_expander", multi_val_transformer))
 

@@ -48,7 +48,7 @@ class DocumentEmbeddingsTrainer(Trainer, DataLoader):
     Orchestrates the document embedding training.
     """
     def __init__(self, work_dir,
-                 label_col="categories",
+                 label_col="category",
                  doc_col="document",
                  lr=0.01,
                  epochs=10,
@@ -111,7 +111,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
     def __init__(self, work_dir: str,
                  classes: int,
                  document_column: str = "document",
-                 label_column: str = "categories",
+                 label_col: str = "category",
                  test_size=0.3,
                  vec_size=100,
                  epochs=100,
@@ -122,7 +122,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         self.work_dir = work_dir
         self.classes = classes
         self.document_column = document_column
-        self.label_column = label_column
+        self.label_column = label_col
         self.test_size=test_size
         self.vec_size = vec_size
         self.epochs = epochs
