@@ -34,10 +34,10 @@ if seed :
 else:
     sample = df.filter(df[args.stratacol] == classes[0]).sample(fraction)
 
-for clazz in classes:
+for clazz in classes[1:]:
     if seed :
-        sample = df.filter(df[args.stratacol] == clazz).sample(fraction, seed)
+        sample = sample.union(df.filter(df[args.stratacol] == clazz).sample(fraction, seed))
     else:
-        sample = df.filter(df[args.stratacol] == clazz).sample(fraction)
+        sample = sample.union(df.filter(df[args.stratacol] == clazz).sample(fraction))
 
 sample.coalesce(len(classes)).write.mode("overwrite").parquet(args.output)
