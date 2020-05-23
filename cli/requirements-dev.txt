@@ -9,6 +9,7 @@ shapely==1.7.0
 gensim==3.8.0
 scikit-learn==0.22.1
 pandas==1.0.3
+modin[ray]==0.7.3
 click==7.1.2
 pyarrow==0.15.1
 

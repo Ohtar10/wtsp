@@ -2,7 +2,7 @@ import os
 import logging
 from sklearn.pipeline import Pipeline
 
-from wtsp.core.base import DataLoader, Filterable
+from wtsp.core.base import DataLoader, Filterable, DEFAULT_TWEETS_COLUMNS, DEFAULT_PRODUCT_DOCS_COLUMNS
 from wtsp.core.sklearn.transformers import CountTransformer, DataFrameFilter, MultiValueColumnExpander
 from wtsp.exceptions import DescribeException
 from wtsp.view import view
@@ -37,7 +37,12 @@ class Describer(DataLoader, Filterable):
         grouped by the specified values at class
         creation.
         """
-        data = self.load_data(input_data)
+        if self.domain == "tweets":
+            columns = DEFAULT_TWEETS_COLUMNS
+        else:
+            columns = DEFAULT_PRODUCT_DOCS_COLUMNS
+
+        data = self.load_data(input_data, columns)
 
         count_transformer = CountTransformer(self.groupby,
                                              self.count_col,

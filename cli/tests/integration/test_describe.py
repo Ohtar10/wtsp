@@ -63,7 +63,7 @@ def test_describe_products():
                                           "--output-dir",
                                           output_path,
                                           "--groupby",
-                                          "categories",
+                                          "category",
                                           "--min-count",
                                           10,
                                           input_data])
@@ -85,7 +85,7 @@ def test_describe_products_with_explode():
                                           "--output-dir",
                                           output_path,
                                           "--groupby",
-                                          "categories",
+                                          "category",
                                           "--min-count",
                                           10,
                                           "--explode",

@@ -1,7 +1,7 @@
 """Tweets training module."""
 
 import os
-import pandas as pd
+import modin.pandas as pd
 import numpy as np
 import logging
 from sklearn.neighbors import NearestNeighbors
@@ -89,7 +89,7 @@ class GeoTweetsNearestNeighbors(DataLoader):
         return f"Result generated successfully at: {output_dir}"
 
     def __transform_data(self, input_data: str) -> pd.DataFrame:
-        data = self.load_data(input_data)
+        data = self.load_data(input_data, DEFAULT_TWEETS_COLUMNS)
         geometry_field = self.params["location_column"]
         pipeline = Pipeline(
             [

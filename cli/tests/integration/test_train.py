@@ -32,7 +32,7 @@ def test_train_product_embeddings():
     runner = CliRunner()
     input_data = common.get_full_path(tests_path, common.RAW_PRODUCTS_PATH)
     output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
-    params = "label_col=categories,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+    params = "label_col=category,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
                                       "train",
@@ -61,7 +61,7 @@ def test_train_product_classifier():
     # we are going to assume the working directory already has a embeddings model trained
     copy_folder_recursively(embeddings_path, models_path)
 
-    params = "label_col=categories,doc_col=document,classes=10,test_size=0.3," \
+    params = "label_col=category,doc_col=document,classes=10,test_size=0.3," \
              "lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
@@ -132,7 +132,7 @@ def test_train_products_no_model_should_fail():
     runner = CliRunner()
     input_data = common.get_full_path(tests_path, common.RAW_PRODUCTS_PATH)
     output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
-    params = "label_col=categories,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+    params = "label_col=category,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
                                       "train",
@@ -162,7 +162,7 @@ def test_train_products_no_params_should_fail():
 def test_train_products_no_input_data_should_fail():
     runner = CliRunner()
     output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
-    params = "label_col=categories,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+    params = "label_col=category,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
                                       "train",

@@ -3,7 +3,7 @@
 import logging
 
 import click
-
+import sys
 from wtsp.__version__ import __version__
 from wtsp.core.base import DEFAULT_WORK_DIR
 from wtsp.describe.describe import Describer
@@ -68,7 +68,7 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
         print(result)
     except WTSPBaseException as e:
         print(e)
-        exit(1)
+        sys.exit(e)
 
 
 @describe.command("products")
@@ -93,7 +93,7 @@ def describe_products(ctx, output_dir, groupby, count, min_count, explode, input
         print(result)
     except WTSPBaseException as e:
         print(e)
-        exit(1)
+        sys.exit(e)
 
 
 @wtsp.group()
@@ -138,7 +138,7 @@ def train_tweets(ctx, model, filters, params, output_dir, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
-        exit(1)
+        sys.exit(e)
 
 
 @train.command("products")
@@ -183,7 +183,7 @@ def train_products(ctx, model, params, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
-        exit(1)
+        sys.exit(e)
 
 
 @wtsp.command("predict")
@@ -216,4 +216,6 @@ def transform(ctx, filters, params, input_data):
         print(result)
     except WTSPBaseException as e:
         print(e)
-        exit(1)
+        sys.exit(e)
+    except Exception as e:
+        print(e)

@@ -7,7 +7,7 @@ from pathlib import Path
 import os
 from typing import Optional, Dict
 
-import pandas as pd
+import modin.pandas as pd
 
 from wtsp.exceptions import InvalidArgumentException, DataLoadException
 from wtsp.utils import parse_kwargs
@@ -22,6 +22,7 @@ DEFAULT_TWEETS_COLUMNS = ["id",
                           "place_geometry",
                           "created_timestamp"]
 
+DEFAULT_PRODUCT_DOCS_COLUMNS = ["category", "document"]
 
 DEFAULT_WORK_DIR = f"{str(Path.home())}/wtsp"
 
@@ -35,11 +36,11 @@ class DataLoader:
     def __init__(self, engine="pyarrow"):
         self.engine = engine
 
-    def load_data(self, input_data):
+    def load_data(self, input_data, columns=None):
         if not input_data or not os.path.exists(input_data):
             raise InvalidArgumentException("The provided input data path is not valid")
         try:
-            return pd.read_parquet(input_data, engine=self.engine)
+            return pd.read_parquet(input_data, engine=self.engine, columns=columns)
         except Exception as e:
             raise DataLoadException("The provided input data is not a valid parquet file", e)
 

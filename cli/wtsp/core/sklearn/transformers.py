@@ -28,7 +28,7 @@ with warnings.catch_warnings():
 
 import geopandas as gpd
 import numpy as np
-import pandas as pd
+import modin.pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from nltk.tokenize import word_tokenize
@@ -120,18 +120,21 @@ class GeoPandasTransformer(BaseEstimator, TransformerMixin):
     Given a normal pandas data frame with a geometry column
     it will convert it into a geo pandas data frame.
     """
-    def __init__(self, geometry_field, columns):
+    def __init__(self, geometry_field, columns, as_geopandas=False):
         self.geometry_field = geometry_field
         self.columns = columns
+        self.as_geopandas = as_geopandas
 
     def fit(self, X, y=None):
         return self  # do nothing
 
-    def transform(self, X, y=None):
+    def transform(self, X: pd.DataFrame, y=None):
         data = X[self.columns]
         data = data[data[self.geometry_field].notnull()]
         data[self.geometry_field] = data[self.geometry_field].apply(parse_geometry)
-        return gpd.GeoDataFrame(data, geometry=self.geometry_field)
+        if self.as_geopandas:
+            return gpd.GeoDataFrame(data, geometry=self.geometry_field)
+        return data
 
 
 class GeoPointTransformer(BaseEstimator, TransformerMixin):
@@ -178,8 +181,9 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         ensure_nltk_resource_is_available("punkt")
         data = X
-        tag_document_fn = create_tagged_document_fn(self.tags_column, self.corpus_column)
-        return data.apply(tag_document_fn, axis=1)
+        tagged_docs = data.agg(lambda x: TaggedDocument(words=word_tokenize(x[self.corpus_column]),
+                                                        tags=[x[self.tags_column]]), axis=1)
+        return tagged_docs[0]
 
 
 class Doc2VecWrapper(BaseEstimator, TransformerMixin):
@@ -210,11 +214,10 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         self.d2v_model = None
 
     def fit(self, X, y=None):
-        tagged_documents = X[self.tag_doc_column]
+        tagged_documents = X.values
 
         # Always use 90% of the capacity
         workers = math.floor(multiprocessing.cpu_count() * .9)
-        multiprocessing.cpu_count() * .9
         d2v_model = Doc2Vec(vector_size=self.vec_size,
                             alpha=self.alpha,
                             min_alpha=self.min_alpha,

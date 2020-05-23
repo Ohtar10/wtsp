@@ -11,3 +11,4 @@ scikit-learn==0.22.1
 pandas==1.0.3
 click==7.1.2
 pyarrow==0.15.1
+modin[ray]==0.7.3

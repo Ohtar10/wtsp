@@ -1,7 +1,7 @@
 import logging
 import os
 
-import pandas as pd
+import modin.pandas as pd
 from sklearn.pipeline import Pipeline
 
 from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable
@@ -25,7 +25,7 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
         self.work_dir = work_dir
 
     def transform(self, input_data: str):
-        data = self.load_data(input_data)
+        data = self.load_data(input_data, DEFAULT_TWEETS_COLUMNS)
 
         location_column = self.params["location_column"]
 
@@ -84,3 +84,4 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
                              center=center,
                              print_classes=True,
                              score_threshold=self.params["min_score"])
+        return f"Transformation finished successfully. Results saved in {result_dir}"

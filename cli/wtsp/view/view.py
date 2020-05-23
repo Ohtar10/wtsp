@@ -8,7 +8,7 @@ import random
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
+import modin.pandas as pd
 import math
 
 import folium
@@ -190,28 +190,28 @@ def plot_clusters_on_map(clusters,
                    tiles=tiles)
 
     def style_function(row):
-        color = colors[row.cluster]
+        color = colors[row["cluster"]]
         return lambda x: {'fillColor': color,
                           'fillOpacity': 0.6,
                           'weight': 1}
 
     def highlight_function(row):
-        color = colors[row.cluster]
+        color = colors[row["cluster"]]
         return lambda x: {'fillColor': color,
                           'fillOpacity': 0.8,
                           'weight': 1}
 
     def create_tooltip(row):
         if print_classes:
-            cluster_id = row.cluster
+            cluster_id = row["cluster"]
             size = row['size']
-            classes = row.predictions
+            classes = row["predictions"]
             classes = [f"{cl} - {score * 100:.2f}%" for cl, score in classes if score >= score_threshold]
             classes = '<br>'.join(classes)
             return folium.map.Tooltip(text=f"Cluster id: {cluster_id}<br>Size: {size}<br>{classes}",
                                       style="color: DodgerBlue")
         else:
-            return folium.map.Tooltip(text=f"Cluster id: {row.cluster}<br>Size: {row['size']}",
+            return folium.map.Tooltip(text=f"Cluster id: {row['cluster']}<br>Size: {row['size']}",
                                       style="color: DodgerBlue")
 
     def create_polygon(row):
@@ -223,6 +223,8 @@ def plot_clusters_on_map(clusters,
                        highlight_function=highlight_function(row),
                        tooltip=tooltip).add_to(m)
 
-    clusters.apply(create_polygon, axis=1)
+    records = clusters.to_dict(orient="records")
+    for row in records:
+        create_polygon(row)
 
     m.save(save_path)

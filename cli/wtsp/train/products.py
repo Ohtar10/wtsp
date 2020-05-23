@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 
-from wtsp.core.base import Parametrizable, DataLoader, Trainer
+from wtsp.core.base import Parametrizable, DataLoader, Trainer, DEFAULT_PRODUCT_DOCS_COLUMNS
 from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
@@ -75,7 +75,7 @@ class DocumentEmbeddingsTrainer(Trainer, DataLoader):
             self.__setattr__(k, v)
 
     def train(self, input_data: str) -> str:
-        data = self.load_data(input_data)
+        data = self.load_data(input_data, DEFAULT_PRODUCT_DOCS_COLUMNS)
 
         document_tagger = DocumentTagger(self.label_col,
                                          self.doc_col)
@@ -89,7 +89,10 @@ class DocumentEmbeddingsTrainer(Trainer, DataLoader):
                                      dm=self.dm)
 
         try:
+            logging.info("Tagging documents...")
             tagged_docs = document_tagger.transform(data)
+            del data  # free up memory from the original dataset
+            logging.info("Training document embeddings...")
             d2v_wrapper.fit(tagged_docs)
         except Exception as e:
             logging.error("There is a problem processing the data, see the error message", e)
@@ -132,7 +135,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
             self.__setattr__(k, v)
 
     def train(self, input_data: str) -> str:
-        data = self.load_data(input_data)
+        data = self.load_data(input_data, DEFAULT_PRODUCT_DOCS_COLUMNS)
         d2v_model_path = f"{self.work_dir}/products/models/embeddings/d2v_model.model"
         if not os.path.exists(d2v_model_path):
             raise ModelTrainingException("No product embeddings found in the working directory. "
