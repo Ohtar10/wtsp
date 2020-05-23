@@ -43,7 +43,7 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
                                                eps=eps,
                                                n_neighbors=n_neighbors)
 
-        logging.debug("Loading ML models")
+        logging.info("Loading ML models")
         models_path = f"{self.work_dir}/products/models/"
         label_encoder_path= f"{models_path}/classifier/category_encoder.model"
         d2v_model_path = f"{models_path}/embeddings/d2v_model.model"
@@ -65,13 +65,14 @@ class WhereToSellProductsTransformer(DataLoader, Filterable, Parametrizable):
         )
 
         try:
-            logging.debug("Transforming and predicting the data.")
+            logging.info("Transforming and predicting the data.")
             classified_clusters: pd.DataFrame = pipeline.transform(data)
         except Exception as e:
             logging.error("There is a problem processing the data, see the error message", e)
             raise WTSPBaseException("There is a problem processing the data, see the error message", e)
 
         # visualization
+        logging.info("Generating visualizations...")
         filter_key = next(iter(self.filters))
         filter_value = self.filters[filter_key]
         result_dir = f"{self.work_dir}/where_to_sell_in/{filter_key}={filter_value}"

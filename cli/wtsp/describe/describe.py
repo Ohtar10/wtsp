@@ -61,7 +61,7 @@ class Describer(DataLoader, Filterable):
 
         pipeline = Pipeline(steps=steps)
 
-        logging.debug("Executing the describe pipeline")
+        logging.info(f"Describing elements in {input_data}")
 
         try:
             counts = pipeline.transform(data)
@@ -81,7 +81,7 @@ class Describer(DataLoader, Filterable):
 
         os.makedirs(output_dir, exist_ok=True)
 
-        logging.debug("Saving results in destination folder")
+        logging.info(f"Saving results in destination folder: {output_dir}")
         counts.to_csv(f"{output_dir}/counts.csv")
         x_label = "Categories" if self.domain == "documents" else "Cities"
         view.plot_counts(counts, title, x_label=x_label, save_path=f"{output_dir}/bar_chart.png")

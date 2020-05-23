@@ -29,7 +29,7 @@ class TweetsTrainer(Filterable, Parametrizable):
 
     def train(self, input_data: str) -> str:
         if self.model == "nearest-neighbors":
-            logging.debug(f"About to train the nearest-neighbors on {input_data}")
+            logging.info(f"Training nearest-neighbors on {input_data}")
             trainer = GeoTweetsNearestNeighbors(self.filters,
                                                 self.params,
                                                 self.output_dir)
@@ -58,10 +58,10 @@ class GeoTweetsNearestNeighbors(DataLoader):
 
     def train(self, input_data: str) -> str:
         # Transform the data
-        logging.debug(f"Transforming input data to get the geo-points")
+        logging.info(f"Transforming input data to get the geo-points")
         points = self.__transform_data(input_data)
         # Train the nearest neighbors
-        logging.debug(f"Training the nearest neighbors model...")
+        logging.info(f"Training the nearest neighbors model...")
         try:
             distances = self.__train_nearest_neighbors(points)
         except Exception as e:

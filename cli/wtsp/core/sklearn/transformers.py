@@ -63,6 +63,7 @@ class CountTransformer(BaseEstimator, TransformerMixin):
         by the provided column.
         """
         data = X
+        logging.info("Aggregating and counting records...")
         data = data.groupby(self.groupby).agg({self.count_col: ["count"]})
         data = flat_columns(data)
         data = data[data[f"{self.count_col}count"] >= self.min_count]
@@ -86,6 +87,7 @@ class DataFrameFilter(BaseEstimator, TransformerMixin):
 
     def transform(self, X: pd.DataFrame, y=None):
         data = X
+        logging.info("Filtering records...")
         for field, value in self.field_values.items():
             data = data[data[field].isin([value])]
         return data
@@ -109,6 +111,7 @@ class MultiValueColumnExpander(BaseEstimator, TransformerMixin):
 
     def transform(self, X: pd.DataFrame, y=None):
         data = X
+        logging.info(f"Expanding values in {self.expand_column}")
         split_fn = lambda x: x.split(self.value_split_char)
         data[self.expand_column] = data[self.expand_column].apply(split_fn)
         return data.explode(self.expand_column)
@@ -214,8 +217,6 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         self.d2v_model = None
 
     def fit(self, X, y=None):
-        tagged_documents = X.values
-
         # Always use 90% of the capacity
         workers = math.floor(multiprocessing.cpu_count() * .9)
         d2v_model = Doc2Vec(vector_size=self.vec_size,
@@ -225,8 +226,12 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
                             dm=self.dm,
                             workers=workers)
 
+        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
+        logging.info(f"Building vocabulary out of {X.shape[0]} documents...")
         d2v_model.build_vocab(tagged_documents)
+        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
 
+        logging.info("Calculating embeddings...")
         for epoch in range(self.epochs):
             logging.info(f"Epoch {epoch}/{self.epochs}...")
             d2v_model.train(tagged_documents,
@@ -238,6 +243,15 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         self.d2v_model = d2v_model
 
         return self
+
+    @staticmethod
+    def __create_tagged_document_generator(documents: pd.DataFrame):
+        def generator():
+            n = 0
+            while n < documents.shape[0]:
+                yield documents[n]
+                n += 1
+        return generator()
 
     def transform(self, X, y=None):
         data = X

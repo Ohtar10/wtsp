@@ -89,7 +89,7 @@ class DocumentEmbeddingsTrainer(Trainer, DataLoader):
                                      dm=self.dm)
 
         try:
-            logging.info("Tagging documents...")
+            logging.info("Creating tagged documents...")
             tagged_docs = document_tagger.transform(data)
             del data  # free up memory from the original dataset
             logging.info("Training document embeddings...")
@@ -154,21 +154,20 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         # Since we only need to execute transform in some and fit in others
         # we invoke them directly instead of chaining them in a pipeline
         try:
-            logging.debug("Transforming documents into embeddings...")
+            logging.info("Transforming documents into embeddings...")
             document_embeddings = embeddings_transformer.transform(data)
 
-            logging.debug("Encoding the categories...")
+            logging.info("Encoding the categories...")
             encoded_embeddings = category_encoder.fit_transform(document_embeddings)
         except Exception as e:
             logging.error("There is a problem processing the data, see the error message", e)
             raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # train test split to validate at the end
-        logging.debug("Training the Neural Network...")
         y = encoded_embeddings["encoded_label"].values
         X_train, X_test, y_train, y_test = train_test_split(encoded_embeddings, y, test_size=self.test_size)
 
-        logging.debug("Training the Neural Network...")
+        logging.info("Training the Neural Network...")
         try:
             prod_classifier_cnn.fit(X_train, y_train)
         except Exception as e:
@@ -176,6 +175,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
             raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # score against the testing set
+        logging.info("Scoring against the testing set...")
         features = X_test["d2v_embedding"].values
         X_test_rs = np.array([e for e in features])
         X_test_rs = X_test_rs.reshape(X_test_rs.shape[0], X_test_rs.shape[1], 1)
@@ -185,6 +185,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         cr = classification_report(y_true, y_pred)
 
         # persist the results
+        logging.info("Saving results...")
         output_dir = f"{self.work_dir}/products/models/classifier"
         os.makedirs(output_dir, exist_ok=True)
         category_encoder.save_model(f"{output_dir}/category_encoder.model")
