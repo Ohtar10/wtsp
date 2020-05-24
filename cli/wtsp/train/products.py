@@ -12,6 +12,7 @@ from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, Categ
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
 from wtsp.view.view import plot_cnn_history, plot_classification_report
+import modin.pandas as pd
 
 
 class ProductsTrainer(Parametrizable):
@@ -176,11 +177,10 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
 
         # score against the testing set
         logging.info("Scoring against the testing set...")
-        features = X_test["d2v_embedding"].values
-        X_test_rs = np.array([e for e in features])
-        X_test_rs = X_test_rs.reshape(X_test_rs.shape[0], X_test_rs.shape[1], 1)
+        features = pd.DataFrame(X_test["d2v_embedding"].tolist(), index=X_test.index)
+        X_test_rs = features.values.reshape(features.shape[0], features.shape[1], 1)
         y_pred = np.where(prod_classifier_cnn.ann_model.predict(X_test_rs) > 0.5, 1., 0.)
-        y_true = np.array([l for l in y_test])
+        y_true = np.array(y_test.tolist())
         acc = accuracy_score(y_true, y_pred)
         cr = classification_report(y_true, y_pred)
 

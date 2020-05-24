@@ -238,7 +238,7 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         logging.info(f"Building vocabulary out of {len(word_freq)} words...")
         d2v_model.build_vocab_from_freq(word_freq, corpus_count=X.shape[0])
 
-        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
+        tagged_documents = X
         logging.info("Calculating embeddings...")
         for epoch in range(self.epochs):
             logging.info(f"Meta epoch {epoch}/{self.epochs}...")
@@ -254,24 +254,16 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
 
         return self
 
-    @staticmethod
-    def __create_tagged_document_generator(documents: pd.DataFrame):
-        def generator():
-            n = 0
-            while n < documents.shape[0]:
-                yield documents[n]
-                n += 1
-        return generator()
-
     def transform(self, X, y=None):
         ensure_nltk_resource_is_available("punkt")
         ensure_nltk_resource_is_available("stopwords")
         data = X
         tokenizer = RegexpTokenizer(r'\w+')
         stop_words = set(stopwords.words('english'))
-        tagged_docs = data[self.document_column].apply(
-            lambda x: [w.lower() for w in tokenizer.tokenize(x) if w.lower() not in stop_words])
-        embeddings = tagged_docs.apply(self.d2v_model.infer_vector)
+        tagged_docs = data.apply(
+            lambda x: [w.lower() for w in tokenizer.tokenize(x[self.document_column]) if w.lower() not in stop_words],
+            axis=1).rename(columns={0: 'tokens'})
+        embeddings = tagged_docs.apply(lambda x: self.d2v_model.infer_vector(x['tokens']), axis=1, result_type='expand')
         data["d2v_embedding"] = embeddings
         return data
 
@@ -384,10 +376,9 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         self.__build_ann_architecture()
-        X_train = X[self.features_column].values
-        X_train = np.array([e for e in X_train])
-        y_true = np.array([l for l in y])
-        X_rs = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
+        X_train = pd.DataFrame(X[self.features_column].tolist(), index=X.index)
+        y_true = np.array(y.tolist())
+        X_rs = X_train.values.reshape(X_train.shape[0], X_train.shape[1], 1)
         early_stopping = EarlyStopping(monitor='val_loss', patience=10, min_delta=1e-7, restore_best_weights=True)
         history = self.ann_model.fit(X_rs, y_true,
                                      epochs=self.epochs,
