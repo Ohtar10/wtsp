@@ -32,7 +32,7 @@ def test_train_product_embeddings():
     runner = CliRunner()
     input_data = common.get_full_path(tests_path, common.RAW_PRODUCTS_PATH)
     output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
-    params = "label_col=category,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+    params = "label_col=category,doc_col=document,lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025,min_count=1"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
                                       "train",

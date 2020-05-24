@@ -26,7 +26,7 @@ class ProductsTrainer(Parametrizable):
 
         self.work_dir = work_dir
         self.model = model
-        self.params :Dict[str, object] = parse_kwargs(params)
+        self.params: Dict[str, object] = parse_kwargs(params)
 
     def train(self, input_data) -> str:
         trainer: Optional[Trainer] = None

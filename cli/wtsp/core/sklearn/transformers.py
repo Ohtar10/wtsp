@@ -31,7 +31,8 @@ import numpy as np
 import modin.pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
 from shapely import wkt
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import MultiLabelBinarizer
@@ -183,9 +184,13 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         ensure_nltk_resource_is_available("punkt")
+        ensure_nltk_resource_is_available("stopwords")
         data = X
-        tagged_docs = data.agg(lambda x: TaggedDocument(words=word_tokenize(x[self.corpus_column]),
-                                                        tags=[x[self.tags_column]]), axis=1)
+        tokenizer = RegexpTokenizer(r'\w+')
+        stop_words = set(stopwords.words('english'))
+        tagged_docs = data.agg(lambda x: TaggedDocument(
+            words=[word.lower() for word in tokenizer.tokenize(x[self.corpus_column]) if word.lower() not in stop_words],
+            tags=[x[self.tags_column]]), axis=1)
         return tagged_docs[0]
 
 
@@ -226,20 +231,25 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
                             dm=self.dm,
                             workers=workers)
 
-        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
-        logging.info(f"Building vocabulary out of {X.shape[0]} documents...")
-        d2v_model.build_vocab(tagged_documents)
-        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
+        logging.info(f"Calculating word frequency out of {X.shape[0]} documents...")
+        word_freq = X.apply(lambda x: x.words).explode().value_counts()
+        total_words = word_freq.sum()
+        word_freq = word_freq[word_freq >= self.min_count].to_dict()
+        logging.info(f"Building vocabulary out of {len(word_freq)} words...")
+        d2v_model.build_vocab_from_freq(word_freq, corpus_count=X.shape[0])
 
+        tagged_documents = Doc2VecWrapper.__create_tagged_document_generator(X)
         logging.info("Calculating embeddings...")
         for epoch in range(self.epochs):
-            logging.info(f"Epoch {epoch}/{self.epochs}...")
+            logging.info(f"Meta epoch {epoch}/{self.epochs}...")
             d2v_model.train(tagged_documents,
                             total_examples=d2v_model.corpus_count,
-                            epochs=d2v_model.epochs)
+                            epochs=d2v_model.epochs,
+                            total_words=total_words)
             d2v_model.alpha -= self.lr
             d2v_model.min_alpha = d2v_model.alpha
 
+        d2v_model.delete_temporary_training_data()
         self.d2v_model = d2v_model
 
         return self
@@ -254,8 +264,13 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         return generator()
 
     def transform(self, X, y=None):
+        ensure_nltk_resource_is_available("punkt")
+        ensure_nltk_resource_is_available("stopwords")
         data = X
-        tagged_docs = data[self.document_column].apply(word_tokenize)
+        tokenizer = RegexpTokenizer(r'\w+')
+        stop_words = set(stopwords.words('english'))
+        tagged_docs = data[self.document_column].apply(
+            lambda x: [w.lower() for w in tokenizer.tokenize(x) if w.lower() not in stop_words])
         embeddings = tagged_docs.apply(self.d2v_model.infer_vector)
         data["d2v_embedding"] = embeddings
         return data
@@ -514,7 +529,12 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
         self.classes = category_encoder.classes_.tolist()
 
     def __featurize_text(self, text):
-        return self.d2v_model.infer_vector(word_tokenize(text))
+        ensure_nltk_resource_is_available("punkt")
+        ensure_nltk_resource_is_available("stopwords")
+        tokenizer = RegexpTokenizer(r'\w+')
+        stop_words = set(stopwords.words('english'))
+        tokens = [token.lower() for token in tokenizer.tokenize(text) if token.lower() not in stop_words]
+        return self.d2v_model.infer_vector(tokens)
 
     def __classify_embedding(self, embedding, with_classes=True, sort=True):
         entry_arr = np.array([embedding]).reshape(1, -1, 1)
@@ -563,9 +583,14 @@ def create_tagged_document_fn(tags_column, corpus_column):
     and tags.
     """
     def create_tagged_document(row):
+        ensure_nltk_resource_is_available("punkt")
+        ensure_nltk_resource_is_available("stopwords")
         categories = row[tags_column]
         document = row[corpus_column]
-        tagged_document = TaggedDocument(words=word_tokenize(document), tags=categories.split(";"))
+        tokenizer = RegexpTokenizer(r'\w+')
+        stop_words = set(stopwords.words('english'))
+        words = [word.lower() for word in tokenizer.tokenize(document) if word.lower() not in stop_words]
+        tagged_document = TaggedDocument(words=words, tags=categories.split(";"))
         index = [tags_column, corpus_column, "tagged_document"]
         return pd.Series([categories, document, tagged_document], index=index)
 
