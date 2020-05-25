@@ -12,7 +12,6 @@ from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, Categ
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
 from wtsp.view.view import plot_cnn_history, plot_classification_report
-import modin.pandas as pd
 
 
 class ProductsTrainer(Parametrizable):
@@ -159,15 +158,18 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
             document_embeddings = embeddings_transformer.transform(data)
 
             logging.info("Encoding the categories...")
-            encoded_embeddings = category_encoder.fit_transform(document_embeddings)
+            encoded_categories = category_encoder.fit_transform(data)
         except Exception as e:
             logging.error("There is a problem processing the data, see the error message", e)
             raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
         # train test split to validate at the end
-        y = encoded_embeddings["encoded_label"].values
-        X_train, X_test, y_train, y_test = train_test_split(encoded_embeddings, y, test_size=self.test_size)
-
+        y = encoded_categories
+        X_train, X_test, y_train, y_test = train_test_split(document_embeddings, y, test_size=self.test_size)
+        # Free up some space
+        del document_embeddings
+        del data
+        del encoded_categories
         logging.info("Training the Neural Network...")
         try:
             prod_classifier_cnn.fit(X_train, y_train)
@@ -177,12 +179,10 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
 
         # score against the testing set
         logging.info("Scoring against the testing set...")
-        features = pd.DataFrame(X_test["d2v_embedding"].tolist(), index=X_test.index)
-        X_test_rs = features.values.reshape(features.shape[0], features.shape[1], 1)
+        X_test_rs = X_test.values.reshape(X_test.shape[0], X_test.shape[1], 1)
         y_pred = np.where(prod_classifier_cnn.ann_model.predict(X_test_rs) > 0.5, 1., 0.)
-        y_true = np.array(y_test.tolist())
-        acc = accuracy_score(y_true, y_pred)
-        cr = classification_report(y_true, y_pred)
+        acc = accuracy_score(y_test, y_pred)
+        cr = classification_report(y_test, y_pred)
 
         # persist the results
         logging.info("Saving results...")

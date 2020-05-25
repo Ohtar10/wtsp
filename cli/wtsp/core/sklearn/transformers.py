@@ -263,9 +263,9 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         tagged_docs = data.apply(
             lambda x: [w.lower() for w in tokenizer.tokenize(x[self.document_column]) if w.lower() not in stop_words],
             axis=1).rename(columns={0: 'tokens'})
-        embeddings = tagged_docs.apply(lambda x: self.d2v_model.infer_vector(x['tokens']), axis=1, result_type='expand')
-        data["d2v_embedding"] = embeddings
-        return data
+        embeddings = tagged_docs._to_pandas().apply(lambda x: self.d2v_model.infer_vector(x['tokens']),
+                                                    axis=1, result_type='expand')
+        return embeddings
 
     def save_model(self, save_path):
         # always overwrite
@@ -300,7 +300,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         data = X
-        categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
+        categories = data[self.label_column].apply(lambda cat: cat.split(";"))
         category_encoder = MultiLabelBinarizer()
         category_encoder.fit(categories)
         self.label_encoder = category_encoder
@@ -308,11 +308,9 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
 
     def transform(self, X, y=None):
         data = X
-        categories = data[self.label_column].apply(lambda cat: cat.split(";")).values.tolist()
+        categories = data[self.label_column].apply(lambda cat: cat.split(";"))
         encoded_labels = self.label_encoder.transform(categories)
-        encoded_labels = [arr for arr in encoded_labels]
-        data["encoded_label"] = encoded_labels
-        return data
+        return encoded_labels
 
     def save_model(self, save_path):
         with open(save_path, 'wb') as model_file:
@@ -376,11 +374,9 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         self.__build_ann_architecture()
-        X_train = pd.DataFrame(X[self.features_column].tolist(), index=X.index)
-        y_true = np.array(y.tolist())
-        X_rs = X_train.values.reshape(X_train.shape[0], X_train.shape[1], 1)
+        X_rs = X.values.reshape(X.shape[0], X.shape[1], 1)
         early_stopping = EarlyStopping(monitor='val_loss', patience=10, min_delta=1e-7, restore_best_weights=True)
-        history = self.ann_model.fit(X_rs, y_true,
+        history = self.ann_model.fit(X_rs, y,
                                      epochs=self.epochs,
                                      batch_size=self.batch_size,
                                      validation_split=self.validation_split,
