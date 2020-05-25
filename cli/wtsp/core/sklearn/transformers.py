@@ -190,7 +190,7 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
         stop_words = set(stopwords.words('english'))
         tagged_docs = data.agg(lambda x: TaggedDocument(
             words=[word.lower() for word in tokenizer.tokenize(x[self.corpus_column]) if word.lower() not in stop_words],
-            tags=[x[self.tags_column]]), axis=1)
+            tags=x[self.tags_column].str.split(';')), axis=1)
         return tagged_docs[0]
 
 
