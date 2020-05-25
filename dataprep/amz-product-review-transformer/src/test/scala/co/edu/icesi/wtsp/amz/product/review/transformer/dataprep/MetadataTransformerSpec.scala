@@ -25,7 +25,8 @@ class MetadataTransformerSpec extends FlatSpec
     val metadataTransformer = MetadataTransformer(spark, categoryParser)
     val result = metadataTransformer.transform(input)
 
-    assertDataFrameEquals(expected.sort($"category"), result.sort($"category"))
+    assertDataFrameEquals(expected.sort($"categories", $"document"),
+      result.sort($"categories", $"document"))
   }
   it should "fail on invalid input data" in {
     val input = spark.read.json(filteredProductMetadataPath)
@@ -69,7 +70,7 @@ class MetadataTransformerSpec extends FlatSpec
       .select($"asin").distinct().count()
 
     val result = metadataTransformer.transform(productMetadata)
-      .filter($"category" === clothesName).count()
+      .filter($"categories" === clothesName).count()
 
     result shouldBe expected
 

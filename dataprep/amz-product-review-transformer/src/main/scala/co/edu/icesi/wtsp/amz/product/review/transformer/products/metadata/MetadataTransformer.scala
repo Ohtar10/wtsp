@@ -1,6 +1,6 @@
 package co.edu.icesi.wtsp.amz.product.review.transformer.products.metadata
 
-import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Common, JobLogging}
+import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Common, JobLogging, TransformCategoryUDF}
 import org.apache.spark.ml.Transformer
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
@@ -20,37 +20,27 @@ class MetadataTransformer(val spark: SparkSession,
 
   override def transform(dataset: Dataset[_]): DataFrame = {
     logInfo(spark, "Transforming product metadata")
-    val expandedCategories = expandCategories(dataset)
-    transformedMetadata = transformCategories(expandedCategories)
+    val flattenedCategories = flattenCategories(dataset)
+    transformedMetadata = transformCategories(flattenedCategories)
     transformDocuments(transformedMetadata)
   }
 
-  private def expandCategories(df: Dataset[_]): DataFrame = {
+  private def flattenCategories(df: Dataset[_]): DataFrame = {
     logInfo(spark, "Expanding categories")
     df.select($"asin",
-      explode(flatten($"categories")).as("category"),
+      flatten($"categories").as("categories"),
       $"title",
       $"description")
   }
 
-  private def generateCategoryColumn(): Column = {
-    logInfo(spark, "Generating category map case column")
-    val categoryMap = categoryParser.getCategoryMappings()
-    val categories = categoryParser.getCategories()
-    val firstCase = when($"category".isin(categoryMap(categories.head):_*), categories.head)
-    categories.tail.foldLeft(firstCase){ (column, category) =>
-      column.when($"category".isin(categoryMap(category):_*), category)
-    }.otherwise("skip").as("category")
-  }
-
   private def transformCategories(df: DataFrame): DataFrame = {
     logInfo(spark, "Transforming categories according to mapping")
-    val categoryColumn = generateCategoryColumn()
+    val transform_categories = TransformCategoryUDF.build(categoryParser)
     df.select($"asin",
       $"title",
       trim($"description").as("description"),
-      categoryColumn)
-      .filter($"category".isNotNull && $"category" =!= "skip")
+      transform_categories($"categories").as("categories")
+    ).filter($"categories".isNotNull && length($"categories") > 0)
       .distinct()
   }
 
@@ -60,7 +50,7 @@ class MetadataTransformer(val spark: SparkSession,
       length(trim($"title")) >= 3 &&
       $"description".isNotNull &&
       length(trim($"description")) >= documentTextMinCharacters)
-      .select($"category", concat_ws("\n", $"title", $"description").as("document"))
+      .select($"categories", concat_ws("\n", $"title", $"description").as("document"))
   }
 
   def getTransformedMetadata: DataFrame = transformedMetadata

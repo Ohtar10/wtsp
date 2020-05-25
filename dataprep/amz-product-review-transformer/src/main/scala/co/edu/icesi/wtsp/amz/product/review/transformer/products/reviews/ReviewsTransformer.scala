@@ -37,7 +37,7 @@ class ReviewsTransformer(spark: SparkSession,
   private def filterReviewsByProducts(dataset: Dataset[_]): DataFrame = {
     logInfo(spark, "Filtering reviews by the surviving product categories")
     dataset.as("rev").join(productMetadata.as("prod"), $"rev.asin" === $"prod.asin")
-      .select($"prod.category",
+      .select($"prod.categories",
         trim(regexp_replace($"rev.summary", textBlacklistRegex, "")).as("summary"),
         trim(regexp_replace($"rev.reviewText", textBlacklistRegex, "")).as("review_text"))
   }
@@ -48,7 +48,7 @@ class ReviewsTransformer(spark: SparkSession,
               && length(trim($"summary")) >= 3
               && $"review_text".isNotNull
               && length(trim($"review_text")) >= documentTextMinCharacters)
-      .select($"category", concat_ws("\n", $"summary", $"review_text").as("document"))
+      .select($"categories", concat_ws("\n", $"summary", $"review_text").as("document"))
   }
 
   override def copy(extra: ParamMap): Transformer = ???
