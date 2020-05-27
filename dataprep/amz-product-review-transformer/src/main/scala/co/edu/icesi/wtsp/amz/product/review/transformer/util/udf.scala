@@ -13,7 +13,7 @@ class TransformCategoryUDF(categoryParser: CategoryParser, separator: String) ex
 
   val transformCategoryFn: Seq[String] => String = (categoryList: Seq[String]) => {
     if (categoryList != null)
-      categoryList.filter(v => validCategories.contains(v)).map(v => inverseMap(v)).toSet.mkString(separator)
+      categoryList.filter(v => validCategories.contains(v)).map(v => inverseMap(v)).sorted.toSet.mkString(separator)
     else
       ""
   }

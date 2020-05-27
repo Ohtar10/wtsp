@@ -4,9 +4,9 @@ import co.edu.icesi.wtsp.amz.product.review.transformer.util.{CategoryParser, Co
 import org.apache.spark.ml.Transformer
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.util.Identifiable
-import org.apache.spark.sql.{Column, DataFrame, Dataset, SparkSession}
-import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
 class MetadataTransformer(val spark: SparkSession,
                           val categoryParser: CategoryParser)
