@@ -8,6 +8,7 @@ import multiprocessing
 from operator import itemgetter
 from typing import Dict
 
+from keras.optimizers import Adam
 from scipy.spatial.qhull import ConvexHull
 from shapely.geometry import Polygon, Point
 from sklearn.cluster import OPTICS
@@ -175,9 +176,10 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
     data frame containing the tagged document
     of the corpus column.
     """
-    def __init__(self, tags_column, corpus_column):
+    def __init__(self, tags_column, corpus_column, remove_stop_words=False):
         self.tags_column = tags_column
         self.corpus_column = corpus_column
+        self.remove_stop_words = remove_stop_words
 
     def fit(self, X, y=None):
         return self  # Do nothing
@@ -187,10 +189,13 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
         ensure_nltk_resource_is_available("stopwords")
         data = X
         tokenizer = RegexpTokenizer(r'\w+')
-        stop_words = set(stopwords.words('english'))
+        if self.remove_stop_words:
+            stop_words = set(stopwords.words('english'))
+        else:
+            stop_words = set()
         tagged_docs = data.agg(lambda x: TaggedDocument(
             words=[word.lower() for word in tokenizer.tokenize(x[self.corpus_column]) if word.lower() not in stop_words],
-            tags=x[self.tags_column].str.split(';')), axis=1)
+            tags=x[self.tags_column].split(';')), axis=1)
         return tagged_docs[0]
 
 
@@ -209,7 +214,8 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
                  alpha=0.1,
                  min_alpha=0.0001,
                  min_count=1,
-                 dm=0):
+                 dm=0,
+                 remove_stop_words=False):
         self.document_column = document_column
         self.tag_doc_column = tag_doc_column
         self.lr = lr
@@ -220,6 +226,7 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         self.min_count = min_count
         self.dm = dm
         self.d2v_model = None
+        self.remove_stop_words = remove_stop_words
 
     def fit(self, X, y=None):
         # Always use 90% of the capacity
@@ -259,7 +266,10 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
         ensure_nltk_resource_is_available("stopwords")
         data = X
         tokenizer = RegexpTokenizer(r'\w+')
-        stop_words = set(stopwords.words('english'))
+        if self.remove_stop_words:
+            stop_words = set(stopwords.words('english'))
+        else:
+            stop_words = set()
         tagged_docs = data.apply(
             lambda x: [w.lower() for w in tokenizer.tokenize(x[self.document_column]) if w.lower() not in stop_words],
             axis=1).rename(columns={0: 'tokens'})
@@ -324,7 +334,10 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
     definition of the Convolutional Neural Network that classifies
     products in based on the document embeddings that represents them.
     """
-    def __init__(self, features_column, label_column, classes,
+    def __init__(self, features_column,
+                 label_column,
+                 classes,
+                 learning_rate=0.001,
                  vec_size=100,
                  epochs=100,
                  batch_size=1000,
@@ -334,6 +347,7 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         self.label_column = label_column
         self.vec_size = vec_size
         self.classes = classes
+        self.learning_rate = learning_rate
         self.epochs = epochs
         self.batch_size = batch_size
         self.validation_split = validation_split
@@ -346,10 +360,10 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         embedding_input = Input(shape=(self.vec_size, 1), dtype='float32', name='comment_text')
 
         # Define convolutional layers
-        conv = Conv1D(64, 3, activation='tanh', input_shape=(self.vec_size,), kernel_regularizer=regularizers.l2())(
+        conv = Conv1D(128, 3, activation='tanh', input_shape=(self.vec_size,), kernel_regularizer=regularizers.l2())(
             embedding_input)
         conv = MaxPool1D(2, strides=None, padding='valid')(conv)
-        conv = Conv1D(128, 3, activation='tanh')(conv)
+        conv = Conv1D(64, 3, activation='tanh')(conv)
         conv = SpatialDropout1D(0.2)(conv)
         conv = MaxPool1D(2, strides=None, padding='valid')(conv)
         conv = Conv1D(128, 3, activation='tanh')(conv)
@@ -361,14 +375,16 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
 
         # Define dense layers
         # minimize the dense layers - maybe add one of 64
-        x = Dense(128, activation='relu')(conv_output)
+        x = Dense(512, activation='relu', kernel_regularizer=regularizers.l2())(conv_output)
+        x = Dense(128, activation='relu')(x)
         x = Dropout(0.5)(x)
 
         # And finally make the predictions using the previous layer as input
         main_output = Dense(self.classes, activation='softmax', name='prediction')(x)
 
         ann_model = Model(inputs=embedding_input, outputs=main_output)
-        ann_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        optimizer = Adam(learning_rate=self.learning_rate)
+        ann_model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
         self.ann_model = ann_model
 
@@ -475,7 +491,8 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
                  d2v_model_path,
                  category_encoder_path,
                  prod_predictor_path,
-                 prod_predictor_name):
+                 prod_predictor_name,
+                 remove_stop_words=False):
         self.corpus_column = corpus_column
         self.d2v_model_path = d2v_model_path
         self.category_encoder_path = category_encoder_path
@@ -485,6 +502,7 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
         self.d2v_model = None
         self.category_encoder = None
         self.prod_predictor_model = None
+        self.remove_stop_words = remove_stop_words
 
     def fit(self, X, y=None):
         return self  # do nothing
@@ -519,7 +537,10 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
         ensure_nltk_resource_is_available("punkt")
         ensure_nltk_resource_is_available("stopwords")
         tokenizer = RegexpTokenizer(r'\w+')
-        stop_words = set(stopwords.words('english'))
+        if self.remove_stop_words:
+            stop_words = set(stopwords.words('english'))
+        else:
+            stop_words = set()
         tokens = [token.lower() for token in tokenizer.tokenize(text) if token.lower() not in stop_words]
         return self.d2v_model.infer_vector(tokens)
 
@@ -561,7 +582,7 @@ def parse_geometry(geom):
         return None
 
 
-def create_tagged_document_fn(tags_column, corpus_column):
+def create_tagged_document_fn(tags_column, corpus_column, remove_stop_words=False):
     """Create tagged documents.
 
     Designed to be applied to a pandas
@@ -575,7 +596,10 @@ def create_tagged_document_fn(tags_column, corpus_column):
         categories = row[tags_column]
         document = row[corpus_column]
         tokenizer = RegexpTokenizer(r'\w+')
-        stop_words = set(stopwords.words('english'))
+        if remove_stop_words:
+            stop_words = set(stopwords.words('english'))
+        else:
+            stop_words = set()
         words = [word.lower() for word in tokenizer.tokenize(document) if word.lower() not in stop_words]
         tagged_document = TaggedDocument(words=words, tags=categories.split(";"))
         index = [tags_column, corpus_column, "tagged_document"]

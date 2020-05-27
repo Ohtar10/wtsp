@@ -48,7 +48,7 @@ class DocumentEmbeddingsTrainer(Trainer, DataLoader):
     Orchestrates the document embedding training.
     """
     def __init__(self, work_dir,
-                 label_col="category",
+                 label_col="categories",
                  doc_col="document",
                  lr=0.01,
                  epochs=10,

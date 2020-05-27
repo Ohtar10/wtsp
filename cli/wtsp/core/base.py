@@ -22,7 +22,7 @@ DEFAULT_TWEETS_COLUMNS = ["id",
                           "place_geometry",
                           "created_timestamp"]
 
-DEFAULT_PRODUCT_DOCS_COLUMNS = ["category", "document"]
+DEFAULT_PRODUCT_DOCS_COLUMNS = ["categories", "document"]
 
 DEFAULT_WORK_DIR = f"{str(Path.home())}/wtsp"
 
