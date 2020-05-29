@@ -16,8 +16,8 @@ from sklearn.cluster import OPTICS
 # To suppress tensorflow warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
-    #from tensorflow import logging as tf_logging
-    #tf_logging.set_verbosity(tf_logging.ERROR)
+    # from tensorflow import logging as tf_logging
+    # tf_logging.set_verbosity(tf_logging.ERROR)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     import tensorflow as tf
     from keras import regularizers
@@ -26,13 +26,12 @@ with warnings.catch_warnings():
     from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
     from keras.models import Model
 
-
 import geopandas as gpd
 import numpy as np
 import modin.pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
-from nltk.tokenize import RegexpTokenizer
+from nltk.tokenize import RegexpTokenizer, word_tokenize
 from nltk.corpus import stopwords
 from shapely import wkt
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -81,6 +80,7 @@ class DataFrameFilter(BaseEstimator, TransformerMixin):
     input data frame according to the provided
     filed values.
     """
+
     def __init__(self, field_values: Dict[str, object]):
         self.field_values = field_values
 
@@ -104,6 +104,7 @@ class MultiValueColumnExpander(BaseEstimator, TransformerMixin):
     and explode the records by each individual value in
     the multi value column.
     """
+
     def __init__(self, expand_column, value_split_char=";"):
         self.expand_column = expand_column
         self.value_split_char = value_split_char
@@ -125,6 +126,7 @@ class GeoPandasTransformer(BaseEstimator, TransformerMixin):
     Given a normal pandas data frame with a geometry column
     it will convert it into a geo pandas data frame.
     """
+
     def __init__(self, geometry_field, columns, as_geopandas=False):
         self.geometry_field = geometry_field
         self.columns = columns
@@ -151,6 +153,7 @@ class GeoPointTransformer(BaseEstimator, TransformerMixin):
     column in the data frame or return only the points as
     a numpy array.
     """
+
     def __init__(self, location_column, only_points=False):
         self.location_column = location_column
         self.only_points = only_points
@@ -176,6 +179,7 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
     data frame containing the tagged document
     of the corpus column.
     """
+
     def __init__(self, tags_column, corpus_column, remove_stop_words=False):
         self.tags_column = tags_column
         self.corpus_column = corpus_column
@@ -187,16 +191,10 @@ class DocumentTagger(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         ensure_nltk_resource_is_available("punkt")
         ensure_nltk_resource_is_available("stopwords")
-        data = X
-        tokenizer = RegexpTokenizer(r'\w+')
-        if self.remove_stop_words:
-            stop_words = set(stopwords.words('english'))
-        else:
-            stop_words = set()
-        tagged_docs = data.agg(lambda x: TaggedDocument(
-            words=[word.lower() for word in tokenizer.tokenize(x[self.corpus_column]) if word.lower() not in stop_words],
-            tags=x[self.tags_column].split(';')), axis=1)
-        return tagged_docs[0]
+        tokenizer = DocumentTokenizer(t_type='regex', regex=r'\w+')
+        return X.apply(lambda row: TaggedDocument(words=tokenizer.tokenize(row[self.corpus_column]),
+                                                  tags=row[self.tags_column].split(';')),
+                       axis=1)
 
 
 class Doc2VecWrapper(BaseEstimator, TransformerMixin):
@@ -206,6 +204,7 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
     take the pandas data frame as input and train
     a document embedding model on it.
     """
+
     def __init__(self, document_column,
                  tag_doc_column="tagged_document",
                  lr=0.01,
@@ -237,16 +236,12 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
                             min_count=self.min_count,
                             dm=self.dm,
                             workers=workers)
-
-        logging.info(f"Calculating word frequency out of {X.shape[0]} documents...")
-        word_freq = X.apply(lambda x: x.words).explode().value_counts()
-        total_words = word_freq.sum()
-        word_freq = word_freq[word_freq >= self.min_count].to_dict()
-        logging.info(f"Building vocabulary out of {len(word_freq)} words...")
-        d2v_model.build_vocab_from_freq(word_freq, corpus_count=X.shape[0])
-
-        tagged_documents = X
+        logging.info(f"Building vocabulary out of {X.shape[0]} documents...")
+        tagged_documents = X[0]
+        total_words = tagged_documents.apply(lambda row: len(row.words)).sum()
+        d2v_model.build_vocab(tagged_documents)
         logging.info("Calculating embeddings...")
+
         for epoch in range(self.epochs):
             logging.info(f"Meta epoch {epoch}/{self.epochs}...")
             d2v_model.train(tagged_documents,
@@ -258,24 +253,13 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
 
         d2v_model.delete_temporary_training_data()
         self.d2v_model = d2v_model
-
         return self
 
     def transform(self, X, y=None):
-        ensure_nltk_resource_is_available("punkt")
-        ensure_nltk_resource_is_available("stopwords")
-        data = X
-        tokenizer = RegexpTokenizer(r'\w+')
-        if self.remove_stop_words:
-            stop_words = set(stopwords.words('english'))
-        else:
-            stop_words = set()
-        tagged_docs = data.apply(
-            lambda x: [w.lower() for w in tokenizer.tokenize(x[self.document_column]) if w.lower() not in stop_words],
-            axis=1).rename(columns={0: 'tokens'})
-        embeddings = tagged_docs._to_pandas().apply(lambda x: self.d2v_model.infer_vector(x['tokens']),
-                                                    axis=1, result_type='expand')
-        return embeddings
+        tagger = DocumentTagger(self.tag_doc_column, self.document_column)
+        embeddings = tagger.transform(X)
+        embeddings = embeddings.apply(lambda row: self.d2v_model.infer_vector(row[0].words), axis=1)
+        return embeddings._to_pandas().apply(lambda row: row[0], axis=1, result_type='expand')
 
     def save_model(self, save_path):
         # always overwrite
@@ -304,6 +288,7 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
     additional column. The encoder can be saved for
     later usage.
     """
+
     def __init__(self, label_column="category"):
         self.label_column = label_column
         self.label_encoder = None
@@ -334,6 +319,7 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
     definition of the Convolutional Neural Network that classifies
     products in based on the document embeddings that represents them.
     """
+
     def __init__(self, features_column,
                  label_column,
                  classes,
@@ -342,7 +328,6 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
                  epochs=100,
                  batch_size=1000,
                  validation_split=0.2):
-
         self.features_column = features_column
         self.label_column = label_column
         self.vec_size = vec_size
@@ -431,6 +416,7 @@ class ClusterAggregator(BaseEstimator, TransformerMixin):
     common clusters in terms of its corpus
     and points that composes it.
     """
+
     def __init__(self, columns,
                  location_column,
                  agg_colnames,
@@ -487,6 +473,7 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
     data frame as input and with the given models,
     it will predict the product class for each.
     """
+
     def __init__(self, corpus_column,
                  d2v_model_path,
                  category_encoder_path,
@@ -536,12 +523,8 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
     def __featurize_text(self, text):
         ensure_nltk_resource_is_available("punkt")
         ensure_nltk_resource_is_available("stopwords")
-        tokenizer = RegexpTokenizer(r'\w+')
-        if self.remove_stop_words:
-            stop_words = set(stopwords.words('english'))
-        else:
-            stop_words = set()
-        tokens = [token.lower() for token in tokenizer.tokenize(text) if token.lower() not in stop_words]
+        tokenizer = DocumentTokenizer(t_type='regex', regex=r'\w+')
+        tokens = tokenizer.tokenize(text)
         return self.d2v_model.infer_vector(tokens)
 
     def __classify_embedding(self, embedding, with_classes=True, sort=True):
@@ -554,6 +537,41 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
         if sort:
             pred.sort(key=itemgetter(1), reverse=True)
         return pred
+
+
+class DocumentTokenizer:
+    def __init__(self, t_type: str = 'word_tokenizer',
+                 regex: str = r'\w+',
+                 lower: bool = True,
+                 remove_stop_words: bool = False):
+        self.t_type = t_type
+        self.regex = regex
+        self.lower = lower
+        self.remove_stop_words = remove_stop_words
+        self.tokenizer = self.__init_tokenizer()
+
+    def __init_tokenizer(self):
+        if self.t_type == 'word_tokenizer':
+            return word_tokenize
+        elif self.t_type == 'regex':
+            return RegexpTokenizer(self.regex)
+
+    def tokenize(self, string: str):
+        tokens = []
+        if self.t_type == 'word_tokenizer':
+            tokens = self.tokenizer(string)
+        elif self.t_type == 'regex':
+            tokens = self.tokenizer.tokenize(string)
+
+        if self.lower:
+            tokens = [token.lower() for token in tokens]
+
+        if self.remove_stop_words:
+            stop_words = set(stopwords.words('english'))
+            return [word for word in tokens if word not in stop_words]
+        else:
+            return tokens
+
 
 
 def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
@@ -590,12 +608,13 @@ def create_tagged_document_fn(tags_column, corpus_column, remove_stop_words=Fals
     a gensim TaggedDocument with the text
     and tags.
     """
+
     def create_tagged_document(row):
         ensure_nltk_resource_is_available("punkt")
         ensure_nltk_resource_is_available("stopwords")
         categories = row[tags_column]
         document = row[corpus_column]
-        tokenizer = RegexpTokenizer(r'\w+')
+        tokenizer = DocumentTokenizer()
         if remove_stop_words:
             stop_words = set(stopwords.words('english'))
         else:
@@ -640,6 +659,7 @@ def is_valid_polygon(location_column):
 
     Verifies that the input data is a valid polygon.
     """
+
     def is_valid_polygon_fn(geometry):
         points = geometry[location_column].values
         if isinstance(points, Point):

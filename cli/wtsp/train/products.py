@@ -142,6 +142,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
                                          "This is needed to train the classifier")
         embeddings_transformer = Doc2VecWrapper.load(d2v_model_path,
                                                      document_column=self.document_column)
+        embeddings_transformer.tag_doc_column = self.label_column
         category_encoder = CategoryEncoder(label_column=self.label_column)
         prod_classifier_cnn = ProductsCNN(features_column="d2v_embedding",
                                           label_column="encoded_label",
