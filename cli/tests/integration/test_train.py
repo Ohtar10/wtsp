@@ -62,7 +62,7 @@ def test_train_product_classifier():
     copy_folder_recursively(embeddings_path, models_path)
 
     params = "label_col=categories,doc_col=document,classes=10,test_size=0.3," \
-             "lr=0.0002,epochs=10,vec_size=300,alpha=0.025,min_alpha=0.00025"
+             "lr=0.01,epochs=10,vec_size=300"
     result = runner.invoke(cli.wtsp, ['--work-dir',
                                       output_path,
                                       "train",

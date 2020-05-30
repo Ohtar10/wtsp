@@ -74,7 +74,7 @@ def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_d
 @describe.command("products")
 @click.pass_context
 @click.option("-o", "--output-dir", help="Path where the describe results will be printed out.")
-@click.option("-g", "--groupby", default="category", help="The group by column to use.")
+@click.option("-g", "--groupby", default="categories", help="The group by column to use.")
 @click.option("-c", "--count", default="document", help="The value to count by group.")
 @click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
 @click.option('--explode', default=False, is_flag=True, help='Enable exploding of the groupby column.')

@@ -118,6 +118,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
                  test_size=0.3,
                  vec_size=100,
                  epochs=100,
+                 lr=0.001,
                  batch_size=1000,
                  validation_split=0.2,
                  **kwargs):
@@ -131,6 +132,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         self.epochs = epochs
         self.batch_size = batch_size
         self.validation_split = validation_split
+        self.lr = lr
         for k, v in kwargs.items():
             self.__setattr__(k, v)
 
@@ -147,6 +149,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         prod_classifier_cnn = ProductsCNN(features_column="d2v_embedding",
                                           label_column="encoded_label",
                                           classes=self.classes,
+                                          learning_rate=self.lr,
                                           vec_size=self.vec_size,
                                           epochs=self.epochs,
                                           batch_size=self.batch_size,

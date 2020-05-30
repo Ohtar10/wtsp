@@ -345,17 +345,15 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         embedding_input = Input(shape=(self.vec_size, 1), dtype='float32', name='comment_text')
 
         # Define convolutional layers
-        conv = Conv1D(128, 3, activation='tanh', input_shape=(self.vec_size,), kernel_regularizer=regularizers.l2())(
+        conv = Conv1D(256, 5, activation='tanh', kernel_regularizer=regularizers.l2())(
             embedding_input)
-        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
-        conv = Conv1D(64, 3, activation='tanh')(conv)
+        conv = MaxPool1D(2, strides=1, padding='valid')(conv)
+        conv = Conv1D(128, 4, activation='tanh')(conv)
         conv = SpatialDropout1D(0.2)(conv)
-        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
-        conv = Conv1D(128, 3, activation='tanh')(conv)
-        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
+        conv = MaxPool1D(2, strides=1, padding='valid')(conv)
+        conv = Conv1D(64, 4, activation='tanh')(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
         conv = SpatialDropout1D(0.1)(conv)
-        conv = Conv1D(64, 3, activation='tanh')(conv)
-        conv = MaxPool1D(2, strides=None, padding='valid')(conv)
         conv_output = Flatten()(conv)
 
         # Define dense layers
