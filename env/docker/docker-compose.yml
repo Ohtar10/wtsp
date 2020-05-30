@@ -7,7 +7,7 @@ services:
       - LC_ALL=C.utf-8
       - LANG=C.utf-8
       - MODIN_OUT_OF_CORE=true
-      - MODIN_CPUS=10
+      - MODIN_CPUS=4
       # 60GB
       - MODIN_MEMORY=60000000000
     # Just to avoid letting this container to die.
