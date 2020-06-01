@@ -36,7 +36,8 @@ lint:
 	flake8 --statistics --count .
 
 test:
-	pytest -v -s --cov=wtsp tests
+	export DATA_FRAME_ENGINE=pandas && pytest -v -s --cov=wtsp tests
+	export DATA_FRAME_ENGINE=modin && pytest -v -s --cov=wtsp tests
 
 dist:
 	python setup.py sdist

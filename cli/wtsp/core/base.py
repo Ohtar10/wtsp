@@ -3,14 +3,17 @@
 Contains the base classes and functionalities for the
 rest of the project.
 """
-from pathlib import Path
 import os
+from pathlib import Path
 from typing import Optional, Dict
-
-import modin.pandas as pd
-
+from wtsp.core import get_df_engine
 from wtsp.exceptions import InvalidArgumentException, DataLoadException
 from wtsp.utils import parse_kwargs
+
+if get_df_engine() == 'pandas':
+    import pandas as pd
+else:
+    import modin.pandas as pd
 
 DEFAULT_TWEETS_COLUMNS = ["id",
                           "tweet",

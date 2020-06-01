@@ -7,6 +7,7 @@ import warnings
 import multiprocessing
 from operator import itemgetter
 from typing import Dict
+from wtsp.core import get_df_engine
 
 from keras.optimizers import Adam
 from scipy.spatial.qhull import ConvexHull
@@ -237,7 +238,12 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
                             dm=self.dm,
                             workers=workers)
         logging.info(f"Building vocabulary out of {X.shape[0]} documents...")
-        tagged_documents = X[0]
+
+        if get_df_engine() == "pandas":
+            tagged_documents = X
+        else:
+            tagged_documents = X[0]
+
         total_words = tagged_documents.apply(lambda row: len(row.words)).sum()
         d2v_model.build_vocab(tagged_documents)
         logging.info("Calculating embeddings...")
@@ -258,8 +264,13 @@ class Doc2VecWrapper(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         tagger = DocumentTagger(self.tag_doc_column, self.document_column)
         embeddings = tagger.transform(X)
-        embeddings = embeddings.apply(lambda row: self.d2v_model.infer_vector(row[0].words), axis=1)
-        return embeddings._to_pandas().apply(lambda row: row[0], axis=1, result_type='expand')
+
+        if get_df_engine() == "pandas":
+            return embeddings.to_frame().apply(lambda row: self.d2v_model.infer_vector(row[0].words), axis=1,
+                                               result_type='expand')
+        else:
+            embeddings = embeddings.apply(lambda row: self.d2v_model.infer_vector(row[0].words), axis=1)
+            return embeddings._to_pandas().apply(lambda row: row[0], axis=1, result_type='expand')
 
     def save_model(self, save_path):
         # always overwrite
