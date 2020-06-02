@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_ad8e981ac09942faa79aebf3d6e00957 {
+                #map_a06006cdd45d485a8697fb24671f7473 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,13 +35,13 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_ad8e981ac09942faa79aebf3d6e00957" ></div>
+            <div class="folium-map" id="map_a06006cdd45d485a8697fb24671f7473" ></div>
         
 </body>
 <script>    
     
-            var map_ad8e981ac09942faa79aebf3d6e00957 = L.map(
-                "map_ad8e981ac09942faa79aebf3d6e00957",
+            var map_a06006cdd45d485a8697fb24671f7473 = L.map(
+                "map_a06006cdd45d485a8697fb24671f7473",
                 {
                     center: [34.0, -118.0],
                     crs: L.CRS.EPSG3857,
@@ -55,187 +55,187 @@
 
         
     
-            var tile_layer_f8ac6995fe7441a6aaf3408dde22a1fe = L.tileLayer(
+            var tile_layer_cc5e05e6688048f2932b415f2d7b396c = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_ad8e981ac09942faa79aebf3d6e00957);
+            ).addTo(map_a06006cdd45d485a8697fb24671f7473);
         
     
-        function geo_json_f6852d386bd041bfa2b8f288488a35bb_styler(feature) {
+        function geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_styler(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#2adddd", "fillOpacity": 0.6, "weight": 1};
             }
         }
-        function geo_json_f6852d386bd041bfa2b8f288488a35bb_highlighter(feature) {
+        function geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#2adddd", "fillOpacity": 0.8, "weight": 1};
             }
         }
-        function geo_json_f6852d386bd041bfa2b8f288488a35bb_onEachFeature(feature, layer) {
+        function geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    geo_json_f6852d386bd041bfa2b8f288488a35bb.resetStyle(e.target);
+                    geo_json_1e19ee11b2d9409f9a0e5784b33da2fd.resetStyle(e.target);
                 },
                 mouseover: function(e) {
-                    e.target.setStyle(geo_json_f6852d386bd041bfa2b8f288488a35bb_highlighter(e.target.feature));
+                    e.target.setStyle(geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_highlighter(e.target.feature));
                 },
                 click: function(e) {
-                    map_ad8e981ac09942faa79aebf3d6e00957.fitBounds(e.target.getBounds());
+                    map_a06006cdd45d485a8697fb24671f7473.fitBounds(e.target.getBounds());
                 }
             });
         };
-        var geo_json_f6852d386bd041bfa2b8f288488a35bb = L.geoJson(null, {
-                onEachFeature: geo_json_f6852d386bd041bfa2b8f288488a35bb_onEachFeature,
+        var geo_json_1e19ee11b2d9409f9a0e5784b33da2fd = L.geoJson(null, {
+                onEachFeature: geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_onEachFeature,
             
-                style: geo_json_f6852d386bd041bfa2b8f288488a35bb_styler,
-        }).addTo(map_ad8e981ac09942faa79aebf3d6e00957);
+                style: geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_styler,
+        }).addTo(map_a06006cdd45d485a8697fb24671f7473);
 
-        function geo_json_f6852d386bd041bfa2b8f288488a35bb_add (data) {
-            geo_json_f6852d386bd041bfa2b8f288488a35bb.addData(data);
+        function geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_add (data) {
+            geo_json_1e19ee11b2d9409f9a0e5784b33da2fd.addData(data);
         }
-            geo_json_f6852d386bd041bfa2b8f288488a35bb_add({"features": [{"geometry": {"coordinates": [[[-118.26970294, 34.11099196], [-118.28496453, 34.08980465], [-118.27700195, 34.07299093], [-118.24007468, 34.07323873], [-118.26970294, 34.11099196]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_1e19ee11b2d9409f9a0e5784b33da2fd_add({"features": [{"geometry": {"coordinates": [[[-118.26970294, 34.11099196], [-118.28496453, 34.08980465], [-118.27700195, 34.07299093], [-118.24007468, 34.07323873], [-118.26970294, 34.11099196]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
         
     
-            geo_json_f6852d386bd041bfa2b8f288488a35bb.bindTooltip(
+            geo_json_1e19ee11b2d9409f9a0e5784b33da2fd.bindTooltip(
                 `<div style="color: DodgerBlue">
-                     Cluster id: 1<br>Size: 5<br>Books - 16.45%<br>Health, Fitness & Dieting - 10.71%<br>Health & Personal Care - 10.26%<br>Clothing, Shoes & Jewelry - 10.11%<br>Home & Kitchen - 10.09%
+                     Cluster id: 1<br>Size: 5<br>Books - 85.04%
                  </div>`,
                 {"sticky": true}
             );
         
     
-        function geo_json_6bab055bc184420ca37a8571e2060de9_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"fillColor": "#8000ff", "fillOpacity": 0.6, "weight": 1};
-            }
-        }
-        function geo_json_6bab055bc184420ca37a8571e2060de9_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"fillColor": "#8000ff", "fillOpacity": 0.8, "weight": 1};
-            }
-        }
-        function geo_json_6bab055bc184420ca37a8571e2060de9_onEachFeature(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    geo_json_6bab055bc184420ca37a8571e2060de9.resetStyle(e.target);
-                },
-                mouseover: function(e) {
-                    e.target.setStyle(geo_json_6bab055bc184420ca37a8571e2060de9_highlighter(e.target.feature));
-                },
-                click: function(e) {
-                    map_ad8e981ac09942faa79aebf3d6e00957.fitBounds(e.target.getBounds());
-                }
-            });
-        };
-        var geo_json_6bab055bc184420ca37a8571e2060de9 = L.geoJson(null, {
-                onEachFeature: geo_json_6bab055bc184420ca37a8571e2060de9_onEachFeature,
-            
-                style: geo_json_6bab055bc184420ca37a8571e2060de9_styler,
-        }).addTo(map_ad8e981ac09942faa79aebf3d6e00957);
-
-        function geo_json_6bab055bc184420ca37a8571e2060de9_add (data) {
-            geo_json_6bab055bc184420ca37a8571e2060de9.addData(data);
-        }
-            geo_json_6bab055bc184420ca37a8571e2060de9_add({"features": [{"geometry": {"coordinates": [[[-118.34366794, 34.07845063], [-118.33124226, 34.09585433], [-118.32685398, 34.10275902], [-118.32938914, 34.10063701], [-118.34366794, 34.07845063]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
-        
-    
-            geo_json_6bab055bc184420ca37a8571e2060de9.bindTooltip(
-                `<div style="color: DodgerBlue">
-                     Cluster id: 2<br>Size: 4<br>Books - 13.60%<br>Home & Kitchen - 10.92%<br>Health & Personal Care - 10.86%<br>Music - 10.33%<br>Clothing, Shoes & Jewelry - 10.27%<br>Health, Fitness & Dieting - 10.13%
-                 </div>`,
-                {"sticky": true}
-            );
-        
-    
-        function geo_json_43622d800d0e4fd0ad576e03d2a764df_styler(feature) {
+        function geo_json_52a1a53f2d73462baff7258e794bd8e9_styler(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#ff0000", "fillOpacity": 0.6, "weight": 1};
             }
         }
-        function geo_json_43622d800d0e4fd0ad576e03d2a764df_highlighter(feature) {
+        function geo_json_52a1a53f2d73462baff7258e794bd8e9_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#ff0000", "fillOpacity": 0.8, "weight": 1};
             }
         }
-        function geo_json_43622d800d0e4fd0ad576e03d2a764df_onEachFeature(feature, layer) {
+        function geo_json_52a1a53f2d73462baff7258e794bd8e9_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    geo_json_43622d800d0e4fd0ad576e03d2a764df.resetStyle(e.target);
+                    geo_json_52a1a53f2d73462baff7258e794bd8e9.resetStyle(e.target);
                 },
                 mouseover: function(e) {
-                    e.target.setStyle(geo_json_43622d800d0e4fd0ad576e03d2a764df_highlighter(e.target.feature));
+                    e.target.setStyle(geo_json_52a1a53f2d73462baff7258e794bd8e9_highlighter(e.target.feature));
                 },
                 click: function(e) {
-                    map_ad8e981ac09942faa79aebf3d6e00957.fitBounds(e.target.getBounds());
+                    map_a06006cdd45d485a8697fb24671f7473.fitBounds(e.target.getBounds());
                 }
             });
         };
-        var geo_json_43622d800d0e4fd0ad576e03d2a764df = L.geoJson(null, {
-                onEachFeature: geo_json_43622d800d0e4fd0ad576e03d2a764df_onEachFeature,
+        var geo_json_52a1a53f2d73462baff7258e794bd8e9 = L.geoJson(null, {
+                onEachFeature: geo_json_52a1a53f2d73462baff7258e794bd8e9_onEachFeature,
             
-                style: geo_json_43622d800d0e4fd0ad576e03d2a764df_styler,
-        }).addTo(map_ad8e981ac09942faa79aebf3d6e00957);
+                style: geo_json_52a1a53f2d73462baff7258e794bd8e9_styler,
+        }).addTo(map_a06006cdd45d485a8697fb24671f7473);
 
-        function geo_json_43622d800d0e4fd0ad576e03d2a764df_add (data) {
-            geo_json_43622d800d0e4fd0ad576e03d2a764df.addData(data);
+        function geo_json_52a1a53f2d73462baff7258e794bd8e9_add (data) {
+            geo_json_52a1a53f2d73462baff7258e794bd8e9.addData(data);
         }
-            geo_json_43622d800d0e4fd0ad576e03d2a764df_add({"features": [{"geometry": {"coordinates": [[[-118.30649935, 33.94529845], [-118.26719659, 33.94156418], [-118.27411759, 33.9542253], [-118.30649935, 33.94529845]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_52a1a53f2d73462baff7258e794bd8e9_add({"features": [{"geometry": {"coordinates": [[[-118.34366794, 34.07845063], [-118.33124226, 34.09585433], [-118.32685398, 34.10275902], [-118.32938914, 34.10063701], [-118.34366794, 34.07845063]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
         
     
-            geo_json_43622d800d0e4fd0ad576e03d2a764df.bindTooltip(
+            geo_json_52a1a53f2d73462baff7258e794bd8e9.bindTooltip(
                 `<div style="color: DodgerBlue">
-                     Cluster id: 4<br>Size: 3<br>Books - 12.43%<br>Clothing, Shoes & Jewelry - 12.25%<br>Technology, Electronics & Accessories - 10.27%<br>Health & Personal Care - 10.16%
+                     Cluster id: 2<br>Size: 4<br>Books - 49.97%<br>Home & Kitchen - 16.96%
                  </div>`,
                 {"sticky": true}
             );
         
     
-        function geo_json_ed708bcf71d34555aa97dcc3e9c1524d_styler(feature) {
+        function geo_json_346ecedb437a45d1b702d1b475a1d99f_styler(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#d4dd80", "fillOpacity": 0.6, "weight": 1};
             }
         }
-        function geo_json_ed708bcf71d34555aa97dcc3e9c1524d_highlighter(feature) {
+        function geo_json_346ecedb437a45d1b702d1b475a1d99f_highlighter(feature) {
             switch(feature.id) {
                 default:
                     return {"fillColor": "#d4dd80", "fillOpacity": 0.8, "weight": 1};
             }
         }
-        function geo_json_ed708bcf71d34555aa97dcc3e9c1524d_onEachFeature(feature, layer) {
+        function geo_json_346ecedb437a45d1b702d1b475a1d99f_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    geo_json_ed708bcf71d34555aa97dcc3e9c1524d.resetStyle(e.target);
+                    geo_json_346ecedb437a45d1b702d1b475a1d99f.resetStyle(e.target);
                 },
                 mouseover: function(e) {
-                    e.target.setStyle(geo_json_ed708bcf71d34555aa97dcc3e9c1524d_highlighter(e.target.feature));
+                    e.target.setStyle(geo_json_346ecedb437a45d1b702d1b475a1d99f_highlighter(e.target.feature));
                 },
                 click: function(e) {
-                    map_ad8e981ac09942faa79aebf3d6e00957.fitBounds(e.target.getBounds());
+                    map_a06006cdd45d485a8697fb24671f7473.fitBounds(e.target.getBounds());
                 }
             });
         };
-        var geo_json_ed708bcf71d34555aa97dcc3e9c1524d = L.geoJson(null, {
-                onEachFeature: geo_json_ed708bcf71d34555aa97dcc3e9c1524d_onEachFeature,
+        var geo_json_346ecedb437a45d1b702d1b475a1d99f = L.geoJson(null, {
+                onEachFeature: geo_json_346ecedb437a45d1b702d1b475a1d99f_onEachFeature,
             
-                style: geo_json_ed708bcf71d34555aa97dcc3e9c1524d_styler,
-        }).addTo(map_ad8e981ac09942faa79aebf3d6e00957);
+                style: geo_json_346ecedb437a45d1b702d1b475a1d99f_styler,
+        }).addTo(map_a06006cdd45d485a8697fb24671f7473);
 
-        function geo_json_ed708bcf71d34555aa97dcc3e9c1524d_add (data) {
-            geo_json_ed708bcf71d34555aa97dcc3e9c1524d.addData(data);
+        function geo_json_346ecedb437a45d1b702d1b475a1d99f_add (data) {
+            geo_json_346ecedb437a45d1b702d1b475a1d99f.addData(data);
         }
-            geo_json_ed708bcf71d34555aa97dcc3e9c1524d_add({"features": [{"geometry": {"coordinates": [[[-118.4342623, 34.06113687], [-118.45422389, 34.067974], [-118.45317744, 34.06622164], [-118.4342623, 34.06113687]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+            geo_json_346ecedb437a45d1b702d1b475a1d99f_add({"features": [{"geometry": {"coordinates": [[[-118.30649935, 33.94529845], [-118.26719659, 33.94156418], [-118.27411759, 33.9542253], [-118.30649935, 33.94529845]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
         
     
-            geo_json_ed708bcf71d34555aa97dcc3e9c1524d.bindTooltip(
+            geo_json_346ecedb437a45d1b702d1b475a1d99f.bindTooltip(
                 `<div style="color: DodgerBlue">
-                     Cluster id: 7<br>Size: 3<br>Books - 14.80%<br>Health & Personal Care - 11.47%<br>Clothing, Shoes & Jewelry - 10.90%<br>Health, Fitness & Dieting - 10.25%
+                     Cluster id: 4<br>Size: 3<br>Books - 59.91%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#8000ff", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#8000ff", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_a06006cdd45d485a8697fb24671f7473.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee = L.geoJson(null, {
+                onEachFeature: geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_onEachFeature,
+            
+                style: geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_styler,
+        }).addTo(map_a06006cdd45d485a8697fb24671f7473);
+
+        function geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_add (data) {
+            geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee.addData(data);
+        }
+            geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee_add({"features": [{"geometry": {"coordinates": [[[-118.4342623, 34.06113687], [-118.45422389, 34.067974], [-118.45317744, 34.06622164], [-118.4342623, 34.06113687]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_3f83dde92fcd4c5d8cc27ddf73de22ee.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 7<br>Size: 3<br>Books - 96.32%
                  </div>`,
                 {"sticky": true}
             );
