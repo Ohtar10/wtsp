@@ -356,22 +356,34 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         embedding_input = Input(shape=(self.vec_size, 1), dtype='float32', name='comment_text')
 
         # Define convolutional layers
-        conv = Conv1D(256, 5, activation='tanh', kernel_regularizer=regularizers.l2())(
-            embedding_input)
-        conv = MaxPool1D(2, strides=1, padding='valid')(conv)
-        conv = Conv1D(128, 4, activation='tanh')(conv)
-        conv = SpatialDropout1D(0.2)(conv)
-        conv = MaxPool1D(2, strides=1, padding='valid')(conv)
-        conv = Conv1D(64, 4, activation='tanh')(conv)
-        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+        conv = Conv1D(384, 5, activation='relu')(embedding_input)
         conv = SpatialDropout1D(0.1)(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+
+        conv = Conv1D(192, 2, activation='relu')(conv)
+        conv = SpatialDropout1D(0.1)(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+
+        conv = Conv1D(96, 2, activation='relu')(conv)
+        conv = SpatialDropout1D(0.1)(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+
+        conv = Conv1D(48, 2, activation='relu')(conv)
+        conv = SpatialDropout1D(0.1)(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+
+        conv = Conv1D(32, 2, activation='relu')(conv)
+        conv = SpatialDropout1D(0.1)(conv)
+        conv = MaxPool1D(2, strides=2, padding='valid')(conv)
+
         conv_output = Flatten()(conv)
 
         # Define dense layers
         # minimize the dense layers - maybe add one of 64
-        x = Dense(512, activation='relu', kernel_regularizer=regularizers.l2())(conv_output)
-        x = Dense(128, activation='relu')(x)
-        x = Dropout(0.5)(x)
+        x = Dense(416, activation='tanh')(conv_output)
+        x = Dropout(0.2)(x)
+        x = Dense(208, activation='tanh')(x)
+        x = Dropout(0.2)(x)
 
         # And finally make the predictions using the previous layer as input
         main_output = Dense(self.classes, activation='softmax', name='prediction')(x)

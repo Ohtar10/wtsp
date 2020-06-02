@@ -163,3 +163,4 @@ datasets/flower_photos.tgz
 .travis.yml
 .vscode
 docker-build/
+models/
