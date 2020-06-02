@@ -40,7 +40,7 @@ def test_train_products_command():
 
 def test_transform_command():
     runner = CliRunner()
-    result = runner.invoke(cli.transform, ['--help'])
+    result = runner.invoke(cli.predict, ['--help'])
     assert result.exit_code == 0
-    assert all(item in result.output.split() for item in cli.transform.__doc__.split())
+    assert all(item in result.output.split() for item in cli.predict.__doc__.split())
 
