@@ -322,6 +322,10 @@ class CategoryEncoder(BaseEstimator, TransformerMixin):
         with open(save_path, 'wb') as model_file:
             pickle.dump(self.label_encoder, model_file)
 
+    def load_model(self, load_path):
+        with open(load_path, 'rb') as model_file:
+            self.label_encoder = pickle.load(model_file)
+
 
 class ProductsCNN(BaseEstimator, TransformerMixin):
     """Products Classifier CNN.
@@ -396,7 +400,7 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         self.__build_ann_architecture()
-        X_rs = X.values.reshape(X.shape[0], X.shape[1], 1)
+        X_rs = X.reshape(X.shape[0], X.shape[1], 1)
         early_stopping = EarlyStopping(monitor='val_loss', patience=10, min_delta=1e-7, restore_best_weights=True)
         history = self.ann_model.fit(X_rs, y,
                                      epochs=self.epochs,

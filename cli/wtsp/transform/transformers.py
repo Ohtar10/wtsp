@@ -1,3 +1,4 @@
+import pickle
 import logging
 import os
 
@@ -152,4 +153,8 @@ class EmbeddingsTransformer(DataLoader):
         else:
             np.savez_compressed(f"{result_file}", x=X, y=y)
 
-        return f"Transformation finished successfully. Results saved in {result_file}"
+        category_encoder_path = f"{result_dir}category_encoder.save"
+        with open(category_encoder_path, 'wb') as file:
+            pickle.dump(categories_encoder, file)
+
+        return f"Transformation finished successfully. Results saved in {result_dir}"

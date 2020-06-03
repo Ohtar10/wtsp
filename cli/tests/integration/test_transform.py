@@ -103,7 +103,9 @@ def test_transform_embeddings():
     ])
 
     assert result.exit_code == 0
-    # validate the existence of the output directory
-    result_dir = f"{output_path}/embeddings/document_embeddings.npz"
-    assert os.path.exists(result_dir)
+    # validate the existence of the output files
+    result_embeddings = f"{output_path}/embeddings/document_embeddings.npz"
+    assert os.path.exists(result_embeddings)
+    result_cat_encoder = f"{output_path}/embeddings/category_encoder.save"
+    assert os.path.exists(result_cat_encoder)
     common.delete_path(output_path)

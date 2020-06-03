@@ -1,6 +1,7 @@
 """Contains logic to train products related models"""
 import logging
 import os
+import pickle
 from typing import Dict, Optional
 
 import numpy as np
@@ -121,6 +122,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
                  lr=0.001,
                  batch_size=1000,
                  validation_split=0.2,
+                 from_embeddings=False,
                  **kwargs):
         super().__init__()
         self.work_dir = work_dir
@@ -133,11 +135,12 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         self.batch_size = batch_size
         self.validation_split = validation_split
         self.lr = lr
+        self.from_embeddings = from_embeddings
+        self.category_encoder = None
         for k, v in kwargs.items():
             self.__setattr__(k, v)
 
-    def train(self, input_data: str) -> str:
-        data = self.load_data(input_data, DEFAULT_PRODUCT_DOCS_COLUMNS)
+    def __transform_embeddings(self, data):
         d2v_model_path = f"{self.work_dir}/products/models/embeddings/d2v_model.model"
         if not os.path.exists(d2v_model_path):
             raise ModelTrainingException("No product embeddings found in the working directory. "
@@ -145,7 +148,56 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         embeddings_transformer = Doc2VecWrapper.load(d2v_model_path,
                                                      document_column=self.document_column)
         embeddings_transformer.tag_doc_column = self.label_column
+
+        try:
+            logging.info("Transforming documents into embeddings...")
+            return embeddings_transformer.transform(data)
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
+
+    def __dataset_from_embeddings(self, input_data: str):
+        category_encoder_path = f"{input_data}/category_encoder.save"
+        self.category_encoder = CategoryEncoder()
+        self.category_encoder.load_model(category_encoder_path)
+
+        embeddings_path = f"{input_data}/document_embeddings.npz"
+        embeddings = np.load(embeddings_path)
+
+        if 'x_train' in embeddings:
+            return embeddings['x_train'], embeddings['x_test'], embeddings['y_train'], embeddings['y_test']
+        else:
+            return train_test_split(embeddings['x'], embeddings['y'])
+
+    def __dataset_from_scratch(self, input_data: str):
+        data = self.load_data(input_data, DEFAULT_PRODUCT_DOCS_COLUMNS)
+        document_embeddings = self.__transform_embeddings(data)
         category_encoder = CategoryEncoder(label_column=self.label_column)
+        try:
+            logging.info("Encoding the categories...")
+            encoded_categories = category_encoder.fit_transform(data)
+            self.category_encoder = category_encoder
+        except Exception as e:
+            logging.error("There is a problem processing the data, see the error message", e)
+            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
+
+        # train test split to validate at the end
+        y = encoded_categories
+        X_train, X_test, y_train, y_test = train_test_split(document_embeddings.values, y, test_size=self.test_size)
+        # Free up some space
+        del document_embeddings
+        del data
+        del encoded_categories
+        return X_train, X_test, y_train, y_test
+
+    def train(self, input_data: str) -> str:
+
+        if self.from_embeddings:
+            X_train, X_test, y_train, y_test = self.__dataset_from_embeddings(input_data)
+        else:
+            X_train, X_test, y_train, y_test = self.__dataset_from_scratch(input_data)
+
+        logging.info("Training the Neural Network...")
         prod_classifier_cnn = ProductsCNN(features_column="d2v_embedding",
                                           label_column="encoded_label",
                                           classes=self.classes,
@@ -154,27 +206,6 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
                                           epochs=self.epochs,
                                           batch_size=self.batch_size,
                                           validation_split=self.validation_split)
-
-        # Since we only need to execute transform in some and fit in others
-        # we invoke them directly instead of chaining them in a pipeline
-        try:
-            logging.info("Transforming documents into embeddings...")
-            document_embeddings = embeddings_transformer.transform(data)
-
-            logging.info("Encoding the categories...")
-            encoded_categories = category_encoder.fit_transform(data)
-        except Exception as e:
-            logging.error("There is a problem processing the data, see the error message", e)
-            raise ModelTrainingException("There is a problem processing the data, see the error message", e)
-
-        # train test split to validate at the end
-        y = encoded_categories
-        X_train, X_test, y_train, y_test = train_test_split(document_embeddings, y, test_size=self.test_size)
-        # Free up some space
-        del document_embeddings
-        del data
-        del encoded_categories
-        logging.info("Training the Neural Network...")
         try:
             prod_classifier_cnn.fit(X_train, y_train)
         except Exception as e:
@@ -183,7 +214,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
 
         # score against the testing set
         logging.info("Scoring against the testing set...")
-        X_test_rs = X_test.values.reshape(X_test.shape[0], X_test.shape[1], 1)
+        X_test_rs = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
         y_pred = np.where(prod_classifier_cnn.ann_model.predict(X_test_rs) > 0.5, 1., 0.)
         acc = accuracy_score(y_test, y_pred)
         cr = classification_report(y_test, y_pred)
@@ -192,7 +223,10 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         logging.info("Saving results...")
         output_dir = f"{self.work_dir}/products/models/classifier"
         os.makedirs(output_dir, exist_ok=True)
-        category_encoder.save_model(f"{output_dir}/category_encoder.model")
+
+        if not self.from_embeddings:
+            self.category_encoder.save_model(f"{output_dir}/category_encoder.model")
+
         prod_classifier_cnn.save_model(f"{output_dir}", "prod_classifier")
 
         # plot the history
@@ -203,7 +237,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         title = f"Products classification report (Acc: {acc:.2f})"
         file = f"{output_dir}/classification_report.png"
         plot_classification_report(cr,
-                                   category_encoder.label_encoder.classes_,
+                                   self.category_encoder.label_encoder.classes_,
                                    file,
                                    title)
         return f"Product classifier trained successfully. Result is stored at: {output_dir}"

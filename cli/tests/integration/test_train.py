@@ -85,6 +85,37 @@ def test_train_product_classifier():
     common.delete_path(output_path)
 
 
+def test_train_product_classifier_from_embeddings():
+    runner = CliRunner()
+    output_path = common.get_full_path(tests_path, common.TEST_WORK_DIR_PATH)
+
+    embeddings_path = common.get_full_path(tests_path, common.TRANSFORMED_EMBEDDINGS_PATH)
+    # we are going to assume the working directory already has a embeddings model trained
+
+    params = "from_embeddings=True,label_col=categories,doc_col=document,classes=10,test_size=0.3," \
+             "lr=0.01,epochs=10,vec_size=300"
+    result = runner.invoke(cli.wtsp, ['--work-dir',
+                                      output_path,
+                                      "train",
+                                      "products",
+                                      "--model",
+                                      "classifier",
+                                      "--params",
+                                      params,
+                                      embeddings_path])
+    assert result.exit_code == 0
+    # validate the existence of the output directory
+    result_dir = f"{output_path}/products/models/classifier"
+    assert os.path.exists(result_dir)
+    # and the content
+    assert not os.path.exists(f"{result_dir}/category_encoder.model")
+    assert os.path.exists(f"{result_dir}/prod_classifier-def.yaml")
+    assert os.path.exists(f"{result_dir}/prod_classifier-weights.h5")
+    assert os.path.exists(f"{result_dir}/training_history.png")
+    assert os.path.exists(f"{result_dir}/classification_report.png")
+    common.delete_path(output_path)
+
+
 def test_train_tweets_no_filters_should_fail():
     runner = CliRunner()
     input_data = common.get_full_path(tests_path, common.RAW_TWEETS_PATH)
