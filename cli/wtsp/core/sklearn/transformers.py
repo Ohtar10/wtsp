@@ -49,7 +49,7 @@ class CountTransformer(BaseEstimator, TransformerMixin):
     by specific field.
     """
 
-    def __init__(self, groupby: str, count_col: str, min_count: int = 5000):
+    def __init__(self, groupby: str, count_col: str, min_count: int = 1000):
         """Creates a count transformer."""
         self.min_count = min_count
         self.groupby = groupby

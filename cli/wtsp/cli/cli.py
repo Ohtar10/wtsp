@@ -52,7 +52,7 @@ def describe(ctx):
 @click.option("-o", "--output-dir", help="Path where the describe results will be printed out.")
 @click.option("-g", "--groupby", default="place_name", help="The group by column to use.")
 @click.option("-c", "--count", default="tweet", help="The value to count by group.")
-@click.option("-mc", "--min-count", default=5000, help="Only present counts above this minimum count")
+@click.option("-mc", "--min-count", default=1000, help="Only present counts above this minimum count")
 @click.argument("input-data", required=True)
 def describe_tweets(ctx, filters, output_dir, groupby, count, min_count, input_data):
     """Describe tweets.
