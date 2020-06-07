@@ -1,176 +1,34 @@
-"""Scikit learn transformers of data."""
 import logging
 import math
+import multiprocessing
 import os
 import pickle
 import warnings
-import multiprocessing
-from operator import itemgetter
-from typing import Dict
-from wtsp.core import get_df_engine
 
-from keras.optimizers import Adam
-from scipy.spatial.qhull import ConvexHull, QhullError
-from shapely.geometry import Polygon, Point
-from sklearn.cluster import OPTICS
+import numpy as np
+from gensim.models import Doc2Vec
+from gensim.models.doc2vec import TaggedDocument
+from modin import pandas as pd
+from nltk import word_tokenize, RegexpTokenizer
+from nltk.corpus import stopwords
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import MultiLabelBinarizer
+
+from wtsp.core import get_df_engine
+from wtsp.utils import ensure_nltk_resource_is_available
 
 # To suppress tensorflow warnings
+
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     # from tensorflow import logging as tf_logging
     # tf_logging.set_verbosity(tf_logging.ERROR)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     import tensorflow as tf
-    from keras import regularizers
+    from keras import Input, Model
     from keras.callbacks import EarlyStopping
-    from keras.engine.saving import model_from_yaml
-    from keras.layers import Input, Dense, Conv1D, Flatten, MaxPool1D, Dropout, SpatialDropout1D
-    from keras.models import Model
-
-import geopandas as gpd
-import numpy as np
-import modin.pandas as pd
-from gensim.models import Doc2Vec
-from gensim.models.doc2vec import TaggedDocument
-from nltk.tokenize import RegexpTokenizer, word_tokenize
-from nltk.corpus import stopwords
-from shapely import wkt
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import MultiLabelBinarizer
-
-from wtsp.utils import ensure_nltk_resource_is_available
-
-
-class CountTransformer(BaseEstimator, TransformerMixin):
-    """Count Transformer.
-
-    Transforms the provided data in such way
-    that can be used to count values
-    by specific field.
-    """
-
-    def __init__(self, groupby: str, count_col: str, min_count: int = 1000):
-        """Creates a count transformer."""
-        self.min_count = min_count
-        self.groupby = groupby
-        self.count_col = count_col
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X: pd.DataFrame, y=None):
-        """Transform for count.
-
-        Transforms the provided data set to count
-        by the provided column.
-        """
-        data = X
-        logging.info("Aggregating and counting records...")
-        data = data.groupby(self.groupby).agg({self.count_col: ["count"]})
-        data = flat_columns(data)
-        data = data[data[f"{self.count_col}count"] >= self.min_count]
-        data.reset_index(inplace=True)
-        data.sort_values(f"{self.count_col}count", ascending=False, inplace=True)
-        return data
-
-
-class DataFrameFilter(BaseEstimator, TransformerMixin):
-    """Data Frame Filter.
-
-    This transformer will simply filter the
-    input data frame according to the provided
-    filed values.
-    """
-
-    def __init__(self, field_values: Dict[str, object]):
-        self.field_values = field_values
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X: pd.DataFrame, y=None):
-        data = X
-        logging.info("Filtering records...")
-        for field, value in self.field_values.items():
-            data = data[data[field].isin([value])]
-        return data
-
-
-class MultiValueColumnExpander(BaseEstimator, TransformerMixin):
-    """Multi value column expander.
-
-    Use this when you have a data frame with a multi value
-    column represented as a string separated by a specific
-    character. This transformer will take the data frame
-    and explode the records by each individual value in
-    the multi value column.
-    """
-
-    def __init__(self, expand_column, value_split_char=";"):
-        self.expand_column = expand_column
-        self.value_split_char = value_split_char
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X: pd.DataFrame, y=None):
-        data = X
-        logging.info(f"Expanding values in {self.expand_column}")
-        split_fn = lambda x: x.split(self.value_split_char)
-        data[self.expand_column] = data[self.expand_column].apply(split_fn)
-        return data.explode(self.expand_column)
-
-
-class GeoPandasTransformer(BaseEstimator, TransformerMixin):
-    """Geo Pandas Transformer.
-
-    Given a normal pandas data frame with a geometry column
-    it will convert it into a geo pandas data frame.
-    """
-
-    def __init__(self, geometry_field, columns, as_geopandas=False):
-        self.geometry_field = geometry_field
-        self.columns = columns
-        self.as_geopandas = as_geopandas
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X: pd.DataFrame, y=None):
-        data = X[self.columns]
-        data = data[data[self.geometry_field].notnull()]
-        data[self.geometry_field] = data[self.geometry_field].apply(parse_geometry)
-        if self.as_geopandas:
-            return gpd.GeoDataFrame(data, geometry=self.geometry_field)
-        return data
-
-
-class GeoPointTransformer(BaseEstimator, TransformerMixin):
-    """Geo Point transformer.
-
-    Given a geo pandas data frame and
-    a location column, it will get the points
-    as x, y coordinates and either add them as an additional
-    column in the data frame or return only the points as
-    a numpy array.
-    """
-
-    def __init__(self, location_column, only_points=False):
-        self.location_column = location_column
-        self.only_points = only_points
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X, y=None):
-        data = X[X[self.location_column].notnull()]
-        points = data[self.location_column].apply(lambda p: [p.x, p.y])
-        if self.only_points:
-            points = np.array(points.values.tolist())
-            return points
-        else:
-            data["location_coordinates"] = points
-            return data
+    from keras.layers import Conv1D, SpatialDropout1D, MaxPool1D, Flatten, Dense, Dropout
+    from keras.optimizers import Adam
 
 
 class DocumentTagger(BaseEstimator, TransformerMixin):
@@ -434,137 +292,6 @@ class ProductsCNN(BaseEstimator, TransformerMixin):
         self.ann_model.save_weights(weights_path)
 
 
-class ClusterAggregator(BaseEstimator, TransformerMixin):
-    """Cluster Aggergator.
-
-    This transformer will aggregate all the
-    common clusters in terms of its corpus
-    and points that composes it.
-    """
-
-    def __init__(self, columns,
-                 location_column,
-                 agg_colnames,
-                 clusters=None,
-                 n_neighbors=10,
-                 eps=0.004,
-                 filter_noise=True):
-        self.columns = columns
-        self.location_column = location_column
-        self.agg_colnames = agg_colnames
-        self.filter_noise = filter_noise
-        self.clusters = clusters
-        self.n_neighbors = n_neighbors
-        self.eps = eps
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X, y=None):
-        data = X
-
-        if not self.clusters:
-            self.clusters = self.__fit_clusters(data)
-
-        data['cluster'] = self.clusters.labels_
-        data = data[["cluster", "tweet"] + self.columns]
-
-        if self.filter_noise:
-            data = data[data.cluster != -1]
-
-        data = data.groupby("cluster").filter(is_valid_polygon(self.location_column))
-        data = data.groupby("cluster").agg({
-            self.location_column: ['count', calculate_polygon],
-            'tweet': [concatenate_text()]
-        })
-        data = flat_columns(data, self.agg_colnames)
-        data = data[data["polygon"].notna()]
-        return data.reset_index()
-
-    def __fit_clusters(self, X):
-        points_getter = GeoPointTransformer(location_column=self.location_column,
-                                            only_points=True)
-        points = points_getter.transform(X)
-        return OPTICS(cluster_method="dbscan",
-                      eps=self.eps,
-                      min_samples=self.n_neighbors,
-                      metric="minkowski",
-                      n_jobs=-2).fit(points)
-
-
-class ClusterProductPredictor(BaseEstimator, TransformerMixin):
-    """Cluster Product Predictor.
-
-    This transformer takes a aggregates cluster
-    data frame as input and with the given models,
-    it will predict the product class for each.
-    """
-
-    def __init__(self, corpus_column,
-                 d2v_model_path,
-                 category_encoder_path,
-                 prod_predictor_path,
-                 prod_predictor_name,
-                 remove_stop_words=False):
-        self.corpus_column = corpus_column
-        self.d2v_model_path = d2v_model_path
-        self.category_encoder_path = category_encoder_path
-        self.prod_predictor_path = prod_predictor_path
-        self.prod_predictor_name = prod_predictor_name
-        self.classes = None
-        self.d2v_model = None
-        self.category_encoder = None
-        self.prod_predictor_model = None
-        self.remove_stop_words = remove_stop_words
-
-    def fit(self, X, y=None):
-        return self  # do nothing
-
-    def transform(self, X, y=None):
-        self.__load_models()
-        data = X
-        data["d2v_embeddings"] = data[self.corpus_column].apply(self.__featurize_text)
-        data['predictions'] = data["d2v_embeddings"].apply(self.__classify_embedding)
-        return data
-
-    def __load_models(self):
-        d2v_model = Doc2Vec.load(self.d2v_model_path)
-
-        with open(self.category_encoder_path, "rb") as file:
-            category_encoder = pickle.load(file)
-
-        ann_def_path = f"{self.prod_predictor_path}/{self.prod_predictor_name}-def.yaml"
-        ann_weights_path = f"{self.prod_predictor_path}/{self.prod_predictor_name}-weights.h5"
-
-        with open(ann_def_path, 'r') as file:
-            prod_predictor_model = model_from_yaml(file.read())
-
-        prod_predictor_model.load_weights(ann_weights_path)
-
-        self.d2v_model = d2v_model
-        self.category_encoder = category_encoder
-        self.prod_predictor_model = prod_predictor_model
-        self.classes = category_encoder.classes_.tolist()
-
-    def __featurize_text(self, text):
-        ensure_nltk_resource_is_available("punkt")
-        ensure_nltk_resource_is_available("stopwords")
-        tokenizer = DocumentTokenizer(t_type='regex', regex=r'\w+')
-        tokens = tokenizer.tokenize(text)
-        return self.d2v_model.infer_vector(tokens)
-
-    def __classify_embedding(self, embedding, with_classes=True, sort=True):
-        entry_arr = np.array([embedding]).reshape(1, -1, 1)
-        pred = self.prod_predictor_model.predict(entry_arr)[0]
-
-        if with_classes:
-            pred = pred.T.tolist()
-            pred = [(cat, score) for cat, score in list(zip(self.classes, pred))]
-        if sort:
-            pred.sort(key=itemgetter(1), reverse=True)
-        return pred
-
-
 class DocumentTokenizer:
     def __init__(self, t_type: str = 'word_tokenizer',
                  regex: str = r'\w+',
@@ -597,32 +324,6 @@ class DocumentTokenizer:
             return [word for word in tokens if word not in stop_words]
         else:
             return tokens
-
-
-def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
-    """Flat columns.
-
-    Given a multi-indexed pandas DataFrame,
-    it will flat the column names given the
-    colnames.
-    """
-    df.columns = [''.join(col).strip() for col in df.columns]
-    if colnames:
-        return df.rename(columns=colnames)
-    return df
-
-
-def parse_geometry(geom):
-    """Parse Geometry.
-
-    If a valid WKT geometry is provided
-    it will convert it ino a shapely geometry.
-    Otherwise None is returned.
-    """
-    if geom:
-        return wkt.loads(geom)
-    else:
-        return None
 
 
 def create_tagged_document_fn(tags_column, corpus_column, remove_stop_words=False):
@@ -663,48 +364,6 @@ def concatenate_text(sep='\n'):
         return sep.join(text)
 
     return concat
-
-
-def calculate_polygon(points):
-    """Calculate polygon
-    This function will calculate the polygon
-    enclosing all the points provided as argument.
-    It will use the convex-hull geometric function."""
-    points = np.array([list(p.coords[0]) for p in points])
-    try:
-        hull = ConvexHull(points)
-        x = points[hull.vertices, 0]
-        y = points[hull.vertices, 1]
-        boundaries = list(zip(x, y))
-        return Polygon(boundaries)
-    except QhullError:
-        logging.warning(
-            f"There was an error calculating the polygon for cluster with points: {points}. "
-            f"This wil be skipped from the final results",
-            exc_info=True)
-
-    return None
-
-
-def is_valid_polygon(location_column):
-    """Check if provided polygon is valid.
-
-    Verifies that the input data is a valid polygon.
-    """
-
-    def is_valid_polygon_fn(geometry):
-        points = geometry[location_column].values
-        if isinstance(points, Point):
-            return False
-        if points.shape[0] < 3:
-            return False
-        coords = np.array([p.coords[0] for p in points])
-        upoints = np.unique(coords)
-        if upoints.shape[0] < 3:
-            return False
-        return True
-
-    return is_valid_polygon_fn
 
 
 def init_tensorflow():

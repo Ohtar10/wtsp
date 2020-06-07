@@ -1,16 +1,17 @@
 """Tweets training module."""
 
+import logging
 import os
+from typing import Dict
+
 import modin.pandas as pd
 import numpy as np
-import logging
 from sklearn.neighbors import NearestNeighbors
 from sklearn.pipeline import Pipeline
 
 from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable
-from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, GeoPointTransformer
-from typing import Dict
-
+from wtsp.core.sklearn.transformers.clustering import GeoPandasTransformer, GeoPointTransformer
+from wtsp.core.sklearn.transformers.generic import DataFrameFilter
 from wtsp.exceptions import ModelTrainingException, InvalidArgumentException
 from wtsp.view.view import plot_nearest_neighbors, plot_points
 

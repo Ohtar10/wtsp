@@ -1,7 +1,6 @@
 """Contains logic to train products related models"""
 import logging
 import os
-import pickle
 from typing import Dict, Optional
 
 import numpy as np
@@ -9,7 +8,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 
 from wtsp.core.base import Parametrizable, DataLoader, Trainer, DEFAULT_PRODUCT_DOCS_COLUMNS
-from wtsp.core.sklearn.transformers import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
+from wtsp.core.sklearn.transformers.documents import DocumentTagger, Doc2VecWrapper, CategoryEncoder, ProductsCNN
 from wtsp.exceptions import InvalidArgumentException, ModelTrainingException
 from wtsp.utils import parse_kwargs
 from wtsp.view.view import plot_cnn_history, plot_classification_report

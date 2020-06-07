@@ -11,8 +11,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MultiLabelBinarizer
 
 from wtsp.core.base import DEFAULT_TWEETS_COLUMNS, DataLoader, Filterable, Parametrizable, DEFAULT_PRODUCT_DOCS_COLUMNS
-from wtsp.core.sklearn.transformers import DataFrameFilter, GeoPandasTransformer, ClusterAggregator, \
-    ClusterProductPredictor
+from wtsp.core.sklearn.transformers.clustering import GeoPandasTransformer, ClusterAggregator, ClusterProductPredictor
+from wtsp.core.sklearn.transformers.generic import DataFrameFilter
 from wtsp.exceptions import WTSPBaseException
 from wtsp.view.view import plot_clusters_on_map
 from wtsp.core import get_df_engine

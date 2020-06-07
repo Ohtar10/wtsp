@@ -108,7 +108,7 @@ def test_train_product_classifier_from_embeddings():
     result_dir = f"{output_path}/products/models/classifier"
     assert os.path.exists(result_dir)
     # and the content
-    assert not os.path.exists(f"{result_dir}/category_encoder.model")
+    assert os.path.exists(f"{result_dir}/category_encoder.model")
     assert os.path.exists(f"{result_dir}/prod_classifier-def.yaml")
     assert os.path.exists(f"{result_dir}/prod_classifier-weights.h5")
     assert os.path.exists(f"{result_dir}/training_history.png")
