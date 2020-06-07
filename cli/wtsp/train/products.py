@@ -157,7 +157,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
             raise ModelTrainingException("There is a problem processing the data, see the error message", e)
 
     def __dataset_from_embeddings(self, input_data: str):
-        category_encoder_path = f"{input_data}/category_encoder.save"
+        category_encoder_path = f"{input_data}/category_encoder.model"
         self.category_encoder = CategoryEncoder()
         self.category_encoder.load_model(category_encoder_path)
 
@@ -224,8 +224,7 @@ class ProductsClassifierTrainer(Trainer, DataLoader):
         output_dir = f"{self.work_dir}/products/models/classifier"
         os.makedirs(output_dir, exist_ok=True)
 
-        if not self.from_embeddings:
-            self.category_encoder.save_model(f"{output_dir}/category_encoder.model")
+        self.category_encoder.save_model(f"{output_dir}/category_encoder.model")
 
         prod_classifier_cnn.save_model(f"{output_dir}", "prod_classifier")
 
