@@ -5,8 +5,15 @@ This repository contains all my work for my MsC in Computer Science project.
 
 Where To Sell Products (wtsp) is a project in which I try to solve this very same question. The idea is to characterize geographic areas in terms of its relationship with a selected set of products. The relationship is built from natural language, i.e., I gathered geotagged text data from Twitter and product reviews from Amazon. For the former I generated spatial clusters from which all the tweets are aggregated to form a single cluster-corpus. For the latter I trained a convolutional neural network to classify product categories given several review text. Finally each cluster-corpus is submitted to the classifier to emit a relevance score for some categories. The result is displayed on a map of a study area, e.g., a city, in which the clusters are shown with their corresponding relationship score with certain products and services.
 
-## Demo of wtsp in Los Angeles
-![](./media/wtsp-demo.gif)
+## Demo
+### Los Angeles (2013-07)
+![](./media/wtsp-demo-la.gif)
+
+### Vancouver (2013-07)
+![](./media/wtsp-demo-vancouver.gif)
+
+### New York (2013-07)
+![](./media/wtsp-demo-newyork.gif)
 
 ## Repository Structure
 * [Data Preparation (dataprep)](dataprep/)
