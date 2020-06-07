@@ -10,5 +10,5 @@ This project contains two pipelines:
 * Product Review Filter: This pipeline will simply take the original datasets and filter the documents that comply with a specified set of product categories.
 * Product Review Transformer: This pipeline will take a provided set of categories and product reviews and will transform then into documents ready for embedding training.
 
-## [Pyspark](pyspark)
-This directory contains simple pyspark scripts that are too simple for a full fledged project but also it is necessary to run in spark if the dataset is too big.
+## [Scripts](scripts)
+This directory contains simple python/pyspark scripts that are too simple for a full fledged project.
