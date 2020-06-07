@@ -24,11 +24,11 @@ Where To Sell Products (wtsp) is a project in which I try to solve this very sam
 ## System Requirements
 * Java 1.8.x
 * Apache Spark >= 2.3
-* Conda >= 4.7.x
-* Python 3.6.x
-* CUDA 9.1
-* Tensorflow 1.12.0
-* Keras 2.2.4
+* Conda >= 4.8.x
+* Python 3.7.x
+* CUDA 10.1
+* Tensorflow 2.1.0
+* Keras 2.3.1
 
 ## Workflow
 ### 1. Gather the data
