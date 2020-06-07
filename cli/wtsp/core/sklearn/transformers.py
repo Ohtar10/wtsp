@@ -10,7 +10,7 @@ from typing import Dict
 from wtsp.core import get_df_engine
 
 from keras.optimizers import Adam
-from scipy.spatial.qhull import ConvexHull
+from scipy.spatial.qhull import ConvexHull, QhullError
 from shapely.geometry import Polygon, Point
 from sklearn.cluster import OPTICS
 
@@ -478,6 +478,7 @@ class ClusterAggregator(BaseEstimator, TransformerMixin):
             'tweet': [concatenate_text()]
         })
         data = flat_columns(data, self.agg_colnames)
+        data = data[data["polygon"].notna()]
         return data.reset_index()
 
     def __fit_clusters(self, X):
@@ -598,7 +599,6 @@ class DocumentTokenizer:
             return tokens
 
 
-
 def flat_columns(df: pd.DataFrame, colnames: Dict[str, str] = None):
     """Flat columns.
 
@@ -671,12 +671,19 @@ def calculate_polygon(points):
     enclosing all the points provided as argument.
     It will use the convex-hull geometric function."""
     points = np.array([list(p.coords[0]) for p in points])
-    hull = ConvexHull(points)
-    x = points[hull.vertices, 0]
-    y = points[hull.vertices, 1]
-    boundaries = list(zip(x, y))
+    try:
+        hull = ConvexHull(points)
+        x = points[hull.vertices, 0]
+        y = points[hull.vertices, 1]
+        boundaries = list(zip(x, y))
+        return Polygon(boundaries)
+    except QhullError:
+        logging.warning(
+            f"There was an error calculating the polygon for cluster with points: {points}. "
+            f"This wil be skipped from the final results",
+            exc_info=True)
 
-    return Polygon(boundaries)
+    return None
 
 
 def is_valid_polygon(location_column):
