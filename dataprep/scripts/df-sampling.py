@@ -3,13 +3,13 @@ from pyspark.sql.functions import explode, col, split, array_contains, concat_ws
 import argparse
 import sys
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="This program takes a stratified sample from the provided dataset.")
 parser.add_argument("--fraction", help="Fraction of sample")
 parser.add_argument("--seed", help="Random seed for reproducibility")
 parser.add_argument("--input", help="Input path of the dataset to sample")
-parser.add_argument("--output", help="Output path to sink the result")
+parser.add_argument("--output", help="Output path to store the result")
 parser.add_argument("--class-col", help="Category column to keep the strata proportions")
-parser.add_argument("--split-char", help="Specifying this parameter indicates the class-col contains multiple values separated by this character")
+parser.add_argument("--split-char", default=";", help="Specifying this parameter indicates the class-col contains multiple values separated by this character")
 args = parser.parse_args()
 
 if not args.fraction:
