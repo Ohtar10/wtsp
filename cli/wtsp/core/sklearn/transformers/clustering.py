@@ -13,6 +13,7 @@ from shapely.geometry import Polygon, Point
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.cluster import OPTICS
 
+from wtsp.core.sklearn.transformers import init_tensorflow
 from wtsp.core.sklearn.transformers.documents import concatenate_text, DocumentTokenizer
 from wtsp.core.sklearn.transformers.generic import flat_columns
 from wtsp.utils import ensure_nltk_resource_is_available
@@ -164,6 +165,7 @@ class ClusterProductPredictor(BaseEstimator, TransformerMixin):
         return data
 
     def __load_models(self):
+        init_tensorflow()
         d2v_model = Doc2Vec.load(self.d2v_model_path)
 
         with open(self.category_encoder_path, "rb") as file:

@@ -15,6 +15,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import MultiLabelBinarizer
 
 from wtsp.core import get_df_engine
+from wtsp.core.sklearn.transformers import init_tensorflow
 from wtsp.utils import ensure_nltk_resource_is_available
 
 # To suppress tensorflow warnings
@@ -24,7 +25,6 @@ with warnings.catch_warnings():
     # from tensorflow import logging as tf_logging
     # tf_logging.set_verbosity(tf_logging.ERROR)
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-    import tensorflow as tf
     from keras import Input, Model
     from keras.callbacks import EarlyStopping
     from keras.layers import Conv1D, SpatialDropout1D, MaxPool1D, Flatten, Dense, Dropout
@@ -366,14 +366,3 @@ def concatenate_text(sep='\n'):
     return concat
 
 
-def init_tensorflow():
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        gpu_devices = tf.config.experimental.list_physical_devices('GPU')
-        if gpu_devices:
-            from tensorflow.compat.v1 import ConfigProto, InteractiveSession
-            config = ConfigProto()
-            config.gpu_options.allow_growth = True
-            config.gpu_options.per_process_gpu_memory_fraction = 0.6
-            # Necessary to default a session in tensorflow for keras to grab
-            session = InteractiveSession(config=config)
