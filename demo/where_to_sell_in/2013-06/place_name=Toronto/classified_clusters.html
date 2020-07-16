@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ec819d0c07eb4458b159292af5411b49 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_ec819d0c07eb4458b159292af5411b49" ></div>
+        
+</body>
+<script>    
+    
+            var map_ec819d0c07eb4458b159292af5411b49 = L.map(
+                "map_ec819d0c07eb4458b159292af5411b49",
+                {
+                    center: [43.7, -79.4],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_7f202716a09c4bbb8e629c6c47ccb6e0 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_ec819d0c07eb4458b159292af5411b49);
+        
+    
+        function geo_json_4a74cb4e19ba4027810dd112936bbccc_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#09a9ee", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_4a74cb4e19ba4027810dd112936bbccc_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#09a9ee", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_4a74cb4e19ba4027810dd112936bbccc_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_4a74cb4e19ba4027810dd112936bbccc.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_4a74cb4e19ba4027810dd112936bbccc_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_4a74cb4e19ba4027810dd112936bbccc = L.geoJson(null, {
+                onEachFeature: geo_json_4a74cb4e19ba4027810dd112936bbccc_onEachFeature,
+            
+                style: geo_json_4a74cb4e19ba4027810dd112936bbccc_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_4a74cb4e19ba4027810dd112936bbccc_add (data) {
+            geo_json_4a74cb4e19ba4027810dd112936bbccc.addData(data);
+        }
+            geo_json_4a74cb4e19ba4027810dd112936bbccc_add({"features": [{"geometry": {"coordinates": [[[-79.41349922, 43.78236977], [-79.4224204, 43.780415], [-79.41647975, 43.77520071], [-79.41147737, 43.77799412], [-79.41349922, 43.78236977]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_4a74cb4e19ba4027810dd112936bbccc.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 0<br>Size: 8<br>Home & Kitchen - 87.15%<br>Technology, Electronics & Accessories - 11.80%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_2ec49cd422bd4c528477ee756b56ff9c_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#c0eb8d", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_2ec49cd422bd4c528477ee756b56ff9c_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#c0eb8d", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_2ec49cd422bd4c528477ee756b56ff9c_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_2ec49cd422bd4c528477ee756b56ff9c.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_2ec49cd422bd4c528477ee756b56ff9c_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_2ec49cd422bd4c528477ee756b56ff9c = L.geoJson(null, {
+                onEachFeature: geo_json_2ec49cd422bd4c528477ee756b56ff9c_onEachFeature,
+            
+                style: geo_json_2ec49cd422bd4c528477ee756b56ff9c_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_2ec49cd422bd4c528477ee756b56ff9c_add (data) {
+            geo_json_2ec49cd422bd4c528477ee756b56ff9c.addData(data);
+        }
+            geo_json_2ec49cd422bd4c528477ee756b56ff9c_add({"features": [{"geometry": {"coordinates": [[[-79.45253243, 43.73081404], [-79.45712533, 43.72566793], [-79.45036308, 43.71452648], [-79.44754268, 43.71161496], [-79.44446417, 43.71180997], [-79.4444609, 43.71181652], [-79.4410202, 43.7236327], [-79.44201596, 43.72682726], [-79.45253243, 43.73081404]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_2ec49cd422bd4c528477ee756b56ff9c.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 1<br>Size: 38<br>Health & Personal Care - 65.55%<br>Sports & Outdoors - 16.94%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_6a533fa2167a4227822764defe7043ce_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#d9da7d", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_6a533fa2167a4227822764defe7043ce_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#d9da7d", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_6a533fa2167a4227822764defe7043ce_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_6a533fa2167a4227822764defe7043ce.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_6a533fa2167a4227822764defe7043ce_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_6a533fa2167a4227822764defe7043ce = L.geoJson(null, {
+                onEachFeature: geo_json_6a533fa2167a4227822764defe7043ce_onEachFeature,
+            
+                style: geo_json_6a533fa2167a4227822764defe7043ce_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_6a533fa2167a4227822764defe7043ce_add (data) {
+            geo_json_6a533fa2167a4227822764defe7043ce.addData(data);
+        }
+            geo_json_6a533fa2167a4227822764defe7043ce_add({"features": [{"geometry": {"coordinates": [[[-79.4305967, 43.67417036], [-79.427701, 43.6697345], [-79.4267941, 43.6735798], [-79.4301818, 43.6747167], [-79.4305967, 43.67417036]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_6a533fa2167a4227822764defe7043ce.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 2<br>Size: 6<br>Books - 71.03%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_72ee1a4d4d8c4c50bf6890284dde2467_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff9b52", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_72ee1a4d4d8c4c50bf6890284dde2467_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff9b52", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_72ee1a4d4d8c4c50bf6890284dde2467_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_72ee1a4d4d8c4c50bf6890284dde2467.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_72ee1a4d4d8c4c50bf6890284dde2467_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_72ee1a4d4d8c4c50bf6890284dde2467 = L.geoJson(null, {
+                onEachFeature: geo_json_72ee1a4d4d8c4c50bf6890284dde2467_onEachFeature,
+            
+                style: geo_json_72ee1a4d4d8c4c50bf6890284dde2467_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_72ee1a4d4d8c4c50bf6890284dde2467_add (data) {
+            geo_json_72ee1a4d4d8c4c50bf6890284dde2467.addData(data);
+        }
+            geo_json_72ee1a4d4d8c4c50bf6890284dde2467_add({"features": [{"geometry": {"coordinates": [[[-79.43238876, 43.66810067], [-79.44006652, 43.67139613], [-79.44010271, 43.67134891], [-79.44134579, 43.66081959], [-79.43631265, 43.66220075], [-79.43238876, 43.66810067]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_72ee1a4d4d8c4c50bf6890284dde2467.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 3<br>Size: 13<br>Sports & Outdoors - 43.26%<br>Clothing, Shoes & Jewelry - 37.07%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_9e2ca8d1b8114497b176e18d7500e16c_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff8c49", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_9e2ca8d1b8114497b176e18d7500e16c_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff8c49", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_9e2ca8d1b8114497b176e18d7500e16c_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_9e2ca8d1b8114497b176e18d7500e16c.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_9e2ca8d1b8114497b176e18d7500e16c_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_9e2ca8d1b8114497b176e18d7500e16c = L.geoJson(null, {
+                onEachFeature: geo_json_9e2ca8d1b8114497b176e18d7500e16c_onEachFeature,
+            
+                style: geo_json_9e2ca8d1b8114497b176e18d7500e16c_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_9e2ca8d1b8114497b176e18d7500e16c_add (data) {
+            geo_json_9e2ca8d1b8114497b176e18d7500e16c.addData(data);
+        }
+            geo_json_9e2ca8d1b8114497b176e18d7500e16c_add({"features": [{"geometry": {"coordinates": [[[-79.40121749, 43.67597675], [-79.404736, 43.675343], [-79.431385, 43.660771], [-79.44015861, 43.65517785], [-79.43761178, 43.64496615], [-79.4362229, 43.6429448], [-79.428887, 43.6330905], [-79.42634583, 43.63163349], [-79.41468358, 43.62896601], [-79.41183212, 43.62945054], [-79.37580269, 43.63664649], [-79.36664472, 43.64329227], [-79.365947, 43.644374], [-79.362722, 43.6540687], [-79.36180251, 43.66011565], [-79.36632588, 43.66579611], [-79.3719084, 43.6692508], [-79.37545, 43.67062], [-79.38853561, 43.67437006], [-79.40121749, 43.67597675]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_9e2ca8d1b8114497b176e18d7500e16c.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 4<br>Size: 833<br>Clothing, Shoes & Jewelry - 53.23%<br>Sports & Outdoors - 17.67%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_f241cd62a9b04492859ba0c66c701e1c_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#4659fb", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_f241cd62a9b04492859ba0c66c701e1c_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#4659fb", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_f241cd62a9b04492859ba0c66c701e1c_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_f241cd62a9b04492859ba0c66c701e1c.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_f241cd62a9b04492859ba0c66c701e1c_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_f241cd62a9b04492859ba0c66c701e1c = L.geoJson(null, {
+                onEachFeature: geo_json_f241cd62a9b04492859ba0c66c701e1c_onEachFeature,
+            
+                style: geo_json_f241cd62a9b04492859ba0c66c701e1c_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_f241cd62a9b04492859ba0c66c701e1c_add (data) {
+            geo_json_f241cd62a9b04492859ba0c66c701e1c.addData(data);
+        }
+            geo_json_f241cd62a9b04492859ba0c66c701e1c_add({"features": [{"geometry": {"coordinates": [[[-79.35877428, 43.65695584], [-79.35732052, 43.65284708], [-79.3555, 43.65366667], [-79.35434753, 43.6586601], [-79.356319, 43.66053868], [-79.35769142, 43.66129004], [-79.35877428, 43.65695584]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_f241cd62a9b04492859ba0c66c701e1c.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 5<br>Size: 7<br>Toys & Games - 58.11%<br>Home & Kitchen - 19.83%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_381104c9b6c943319d397195d60a68a8_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#27dade", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_381104c9b6c943319d397195d60a68a8_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#27dade", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_381104c9b6c943319d397195d60a68a8_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_381104c9b6c943319d397195d60a68a8.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_381104c9b6c943319d397195d60a68a8_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_381104c9b6c943319d397195d60a68a8 = L.geoJson(null, {
+                onEachFeature: geo_json_381104c9b6c943319d397195d60a68a8_onEachFeature,
+            
+                style: geo_json_381104c9b6c943319d397195d60a68a8_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_381104c9b6c943319d397195d60a68a8_add (data) {
+            geo_json_381104c9b6c943319d397195d60a68a8.addData(data);
+        }
+            geo_json_381104c9b6c943319d397195d60a68a8_add({"features": [{"geometry": {"coordinates": [[[-79.43644151, 43.63709443], [-79.44193591, 43.63708301], [-79.4376981, 43.6369513], [-79.43644151, 43.63709443]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_381104c9b6c943319d397195d60a68a8.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 6<br>Size: 3<br>Health & Personal Care - 53.39%<br>Home & Kitchen - 29.72%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#6efebe", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#6efebe", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d = L.geoJson(null, {
+                onEachFeature: geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_onEachFeature,
+            
+                style: geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_add (data) {
+            geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d.addData(data);
+        }
+            geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d_add({"features": [{"geometry": {"coordinates": [[[-79.44532808, 43.63886016], [-79.447593, 43.642502], [-79.44929805, 43.64143261], [-79.44930647, 43.64140671], [-79.44928198, 43.64138792], [-79.44532808, 43.63886016]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_bcffaeceff0942cdabd4e13fcfd8cf7d.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 7<br>Size: 9<br>Music - 44.68%<br>Books - 19.53%<br>Movies & TV - 15.32%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_07cccc66dd034777afd4bc52422a586f_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff592d", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_07cccc66dd034777afd4bc52422a586f_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff592d", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_07cccc66dd034777afd4bc52422a586f_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_07cccc66dd034777afd4bc52422a586f.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_07cccc66dd034777afd4bc52422a586f_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_07cccc66dd034777afd4bc52422a586f = L.geoJson(null, {
+                onEachFeature: geo_json_07cccc66dd034777afd4bc52422a586f_onEachFeature,
+            
+                style: geo_json_07cccc66dd034777afd4bc52422a586f_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_07cccc66dd034777afd4bc52422a586f_add (data) {
+            geo_json_07cccc66dd034777afd4bc52422a586f.addData(data);
+        }
+            geo_json_07cccc66dd034777afd4bc52422a586f_add({"features": [{"geometry": {"coordinates": [[[-79.4223764, 43.6878958], [-79.42291, 43.6809], [-79.42285, 43.68038], [-79.4211, 43.68018], [-79.41748877, 43.68061511], [-79.41738229, 43.68071923], [-79.41737815, 43.68073734], [-79.4173617, 43.68365328], [-79.4223764, 43.6878958]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_07cccc66dd034777afd4bc52422a586f.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 8<br>Size: 17<br>Health & Personal Care - 37.40%<br>Home & Kitchen - 28.72%<br>Sports & Outdoors - 23.02%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_d9360608c759462b90f663a97a1751d6_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#56f7ca", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_d9360608c759462b90f663a97a1751d6_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#56f7ca", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_d9360608c759462b90f663a97a1751d6_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_d9360608c759462b90f663a97a1751d6.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_d9360608c759462b90f663a97a1751d6_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_d9360608c759462b90f663a97a1751d6 = L.geoJson(null, {
+                onEachFeature: geo_json_d9360608c759462b90f663a97a1751d6_onEachFeature,
+            
+                style: geo_json_d9360608c759462b90f663a97a1751d6_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_d9360608c759462b90f663a97a1751d6_add (data) {
+            geo_json_d9360608c759462b90f663a97a1751d6.addData(data);
+        }
+            geo_json_d9360608c759462b90f663a97a1751d6_add({"features": [{"geometry": {"coordinates": [[[-79.4129452, 43.6880401], [-79.41102289, 43.68396817], [-79.4093342, 43.6850787], [-79.40825496, 43.68944408], [-79.4092098, 43.6908605], [-79.4129, 43.6898], [-79.4129452, 43.6880401]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_d9360608c759462b90f663a97a1751d6.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 9<br>Size: 11<br>Home & Kitchen - 54.27%<br>Health & Personal Care - 33.89%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_5b4d3d2e308e4b82b11469c381a2cba9_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff351b", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_5b4d3d2e308e4b82b11469c381a2cba9_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff351b", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_5b4d3d2e308e4b82b11469c381a2cba9_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_5b4d3d2e308e4b82b11469c381a2cba9.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_5b4d3d2e308e4b82b11469c381a2cba9_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_5b4d3d2e308e4b82b11469c381a2cba9 = L.geoJson(null, {
+                onEachFeature: geo_json_5b4d3d2e308e4b82b11469c381a2cba9_onEachFeature,
+            
+                style: geo_json_5b4d3d2e308e4b82b11469c381a2cba9_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_5b4d3d2e308e4b82b11469c381a2cba9_add (data) {
+            geo_json_5b4d3d2e308e4b82b11469c381a2cba9.addData(data);
+        }
+            geo_json_5b4d3d2e308e4b82b11469c381a2cba9_add({"features": [{"geometry": {"coordinates": [[[-79.39081509, 43.68213215], [-79.38846502, 43.69045672], [-79.39626762, 43.69070352], [-79.3967316, 43.68797006], [-79.39427598, 43.68380939], [-79.39081509, 43.68213215]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_5b4d3d2e308e4b82b11469c381a2cba9.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 10<br>Size: 12<br>Home & Kitchen - 42.06%<br>Health & Personal Care - 40.43%<br>Sports & Outdoors - 10.49%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_630b2efbaf044c26b081ab8edc8a02c3_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#1acfe3", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_630b2efbaf044c26b081ab8edc8a02c3_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#1acfe3", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_630b2efbaf044c26b081ab8edc8a02c3_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_630b2efbaf044c26b081ab8edc8a02c3.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_630b2efbaf044c26b081ab8edc8a02c3_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_630b2efbaf044c26b081ab8edc8a02c3 = L.geoJson(null, {
+                onEachFeature: geo_json_630b2efbaf044c26b081ab8edc8a02c3_onEachFeature,
+            
+                style: geo_json_630b2efbaf044c26b081ab8edc8a02c3_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_630b2efbaf044c26b081ab8edc8a02c3_add (data) {
+            geo_json_630b2efbaf044c26b081ab8edc8a02c3.addData(data);
+        }
+            geo_json_630b2efbaf044c26b081ab8edc8a02c3_add({"features": [{"geometry": {"coordinates": [[[-79.402708, 43.705836], [-79.39726629, 43.69777322], [-79.39278737, 43.70807823], [-79.39651106, 43.7124361], [-79.39942349, 43.71173961], [-79.40233444, 43.70944304], [-79.402708, 43.705836]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_630b2efbaf044c26b081ab8edc8a02c3.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 11<br>Size: 17<br>Sports & Outdoors - 38.66%<br>Clothing, Shoes & Jewelry - 14.66%<br>Toys & Games - 11.85%<br>Home & Kitchen - 11.85%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_1fb6270824fb4ba58860165aa5046002_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#a8f79c", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_1fb6270824fb4ba58860165aa5046002_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#a8f79c", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_1fb6270824fb4ba58860165aa5046002_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_1fb6270824fb4ba58860165aa5046002.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_1fb6270824fb4ba58860165aa5046002_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_1fb6270824fb4ba58860165aa5046002 = L.geoJson(null, {
+                onEachFeature: geo_json_1fb6270824fb4ba58860165aa5046002_onEachFeature,
+            
+                style: geo_json_1fb6270824fb4ba58860165aa5046002_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_1fb6270824fb4ba58860165aa5046002_add (data) {
+            geo_json_1fb6270824fb4ba58860165aa5046002.addData(data);
+        }
+            geo_json_1fb6270824fb4ba58860165aa5046002_add({"features": [{"geometry": {"coordinates": [[[-79.45985262, 43.66875701], [-79.4532727, 43.6707], [-79.4574738, 43.6762258], [-79.4588601, 43.6776189], [-79.46192, 43.67438], [-79.45998238, 43.66896197], [-79.45995746, 43.66890796], [-79.45985262, 43.66875701]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_1fb6270824fb4ba58860165aa5046002.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 12<br>Size: 17<br>Home & Kitchen - 40.17%<br>Books - 28.87%<br>Office & School Supplies - 16.10%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_e4b5d4be04294eea863d46c30dec81c7_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#5247fc", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_e4b5d4be04294eea863d46c30dec81c7_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#5247fc", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_e4b5d4be04294eea863d46c30dec81c7_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_e4b5d4be04294eea863d46c30dec81c7.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_e4b5d4be04294eea863d46c30dec81c7_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_e4b5d4be04294eea863d46c30dec81c7 = L.geoJson(null, {
+                onEachFeature: geo_json_e4b5d4be04294eea863d46c30dec81c7_onEachFeature,
+            
+                style: geo_json_e4b5d4be04294eea863d46c30dec81c7_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_e4b5d4be04294eea863d46c30dec81c7_add (data) {
+            geo_json_e4b5d4be04294eea863d46c30dec81c7.addData(data);
+        }
+            geo_json_e4b5d4be04294eea863d46c30dec81c7_add({"features": [{"geometry": {"coordinates": [[[-79.46912781, 43.66690197], [-79.4700157, 43.66436068], [-79.46990785, 43.66427709], [-79.46387543, 43.66406379], [-79.46391293, 43.66411711], [-79.46912781, 43.66690197]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_e4b5d4be04294eea863d46c30dec81c7.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 13<br>Size: 6<br>Sports & Outdoors - 21.53%<br>Health & Personal Care - 16.16%<br>Home & Kitchen - 13.77%<br>Toys & Games - 11.25%<br>Clothing, Shoes & Jewelry - 10.68%<br>Books - 10.21%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_d5cc7e2ee396493e969a4454b7972fcf_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#169bf2", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_d5cc7e2ee396493e969a4454b7972fcf_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#169bf2", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_d5cc7e2ee396493e969a4454b7972fcf_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_d5cc7e2ee396493e969a4454b7972fcf.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_d5cc7e2ee396493e969a4454b7972fcf_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_d5cc7e2ee396493e969a4454b7972fcf = L.geoJson(null, {
+                onEachFeature: geo_json_d5cc7e2ee396493e969a4454b7972fcf_onEachFeature,
+            
+                style: geo_json_d5cc7e2ee396493e969a4454b7972fcf_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_d5cc7e2ee396493e969a4454b7972fcf_add (data) {
+            geo_json_d5cc7e2ee396493e969a4454b7972fcf.addData(data);
+        }
+            geo_json_d5cc7e2ee396493e969a4454b7972fcf_add({"features": [{"geometry": {"coordinates": [[[-79.32682, 43.662684], [-79.3303408, 43.6701209], [-79.34074302, 43.66298652], [-79.34078092, 43.66296051], [-79.34014817, 43.65940307], [-79.33164733, 43.66047628], [-79.33130228, 43.66055901], [-79.32682, 43.662684]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_d5cc7e2ee396493e969a4454b7972fcf.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 14<br>Size: 21<br>Books - 39.91%<br>Home & Kitchen - 17.62%<br>Health & Personal Care - 14.28%<br>Toys & Games - 13.98%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_7b11108a10f94835b726fe3b668a4176_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff2211", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_7b11108a10f94835b726fe3b668a4176_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff2211", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_7b11108a10f94835b726fe3b668a4176_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_7b11108a10f94835b726fe3b668a4176.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_7b11108a10f94835b726fe3b668a4176_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_7b11108a10f94835b726fe3b668a4176 = L.geoJson(null, {
+                onEachFeature: geo_json_7b11108a10f94835b726fe3b668a4176_onEachFeature,
+            
+                style: geo_json_7b11108a10f94835b726fe3b668a4176_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_7b11108a10f94835b726fe3b668a4176_add (data) {
+            geo_json_7b11108a10f94835b726fe3b668a4176.addData(data);
+        }
+            geo_json_7b11108a10f94835b726fe3b668a4176_add({"features": [{"geometry": {"coordinates": [[[-79.34312351, 43.68262355], [-79.34748128, 43.67877256], [-79.34748, 43.67844], [-79.33946, 43.66847], [-79.3381124, 43.6751297], [-79.3380501, 43.676948], [-79.34312351, 43.68262355]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_7b11108a10f94835b726fe3b668a4176.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 15<br>Size: 19<br>Health & Personal Care - 59.31%<br>Sports & Outdoors - 13.56%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_aad123a200014a738479de730b03b769_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff6b37", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_aad123a200014a738479de730b03b769_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff6b37", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_aad123a200014a738479de730b03b769_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_aad123a200014a738479de730b03b769.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_aad123a200014a738479de730b03b769_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_aad123a200014a738479de730b03b769 = L.geoJson(null, {
+                onEachFeature: geo_json_aad123a200014a738479de730b03b769_onEachFeature,
+            
+                style: geo_json_aad123a200014a738479de730b03b769_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_aad123a200014a738479de730b03b769_add (data) {
+            geo_json_aad123a200014a738479de730b03b769.addData(data);
+        }
+            geo_json_aad123a200014a738479de730b03b769_add({"features": [{"geometry": {"coordinates": [[[-79.35358157, 43.67869391], [-79.35912142, 43.67823061], [-79.3582666, 43.6733455], [-79.35358157, 43.67869391]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_aad123a200014a738479de730b03b769.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 16<br>Size: 6<br>Toys & Games - 37.57%<br>Home & Kitchen - 32.51%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_0baec2372a9e4d1d974026f12b1a8ebe_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#7affb7", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_0baec2372a9e4d1d974026f12b1a8ebe_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#7affb7", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_0baec2372a9e4d1d974026f12b1a8ebe_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_0baec2372a9e4d1d974026f12b1a8ebe.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_0baec2372a9e4d1d974026f12b1a8ebe_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_0baec2372a9e4d1d974026f12b1a8ebe = L.geoJson(null, {
+                onEachFeature: geo_json_0baec2372a9e4d1d974026f12b1a8ebe_onEachFeature,
+            
+                style: geo_json_0baec2372a9e4d1d974026f12b1a8ebe_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_0baec2372a9e4d1d974026f12b1a8ebe_add (data) {
+            geo_json_0baec2372a9e4d1d974026f12b1a8ebe.addData(data);
+        }
+            geo_json_0baec2372a9e4d1d974026f12b1a8ebe_add({"features": [{"geometry": {"coordinates": [[[-79.30001766, 43.69509106], [-79.30369144, 43.6894068], [-79.3024246, 43.6863645], [-79.2970696, 43.68330146], [-79.29611111, 43.68638889], [-79.29436571, 43.69260789], [-79.30001766, 43.69509106]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_0baec2372a9e4d1d974026f12b1a8ebe.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 17<br>Size: 25<br>Sports & Outdoors - 24.88%<br>Health & Personal Care - 20.24%<br>Technology, Electronics & Accessories - 19.16%<br>Clothing, Shoes & Jewelry - 14.76%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_36a492a35aa641a3bfe832127fedcb3c_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#5e35fe", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_36a492a35aa641a3bfe832127fedcb3c_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#5e35fe", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_36a492a35aa641a3bfe832127fedcb3c_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_36a492a35aa641a3bfe832127fedcb3c.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_36a492a35aa641a3bfe832127fedcb3c_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_36a492a35aa641a3bfe832127fedcb3c = L.geoJson(null, {
+                onEachFeature: geo_json_36a492a35aa641a3bfe832127fedcb3c_onEachFeature,
+            
+                style: geo_json_36a492a35aa641a3bfe832127fedcb3c_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_36a492a35aa641a3bfe832127fedcb3c_add (data) {
+            geo_json_36a492a35aa641a3bfe832127fedcb3c.addData(data);
+        }
+            geo_json_36a492a35aa641a3bfe832127fedcb3c_add({"features": [{"geometry": {"coordinates": [[[-79.29835492, 43.70048881], [-79.29614293, 43.70469396], [-79.29716969, 43.70420884], [-79.29835492, 43.70048881]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_36a492a35aa641a3bfe832127fedcb3c.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 18<br>Size: 8<br>Toys & Games - 17.37%<br>Clothing, Shoes & Jewelry - 16.55%<br>Health & Personal Care - 16.00%<br>Sports & Outdoors - 14.65%<br>Books - 11.98%<br>Home & Kitchen - 10.79%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_c4de636bc7134cb79f2516465eb42bbc_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#8000ff", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_c4de636bc7134cb79f2516465eb42bbc_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#8000ff", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_c4de636bc7134cb79f2516465eb42bbc_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_c4de636bc7134cb79f2516465eb42bbc.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_c4de636bc7134cb79f2516465eb42bbc_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_c4de636bc7134cb79f2516465eb42bbc = L.geoJson(null, {
+                onEachFeature: geo_json_c4de636bc7134cb79f2516465eb42bbc_onEachFeature,
+            
+                style: geo_json_c4de636bc7134cb79f2516465eb42bbc_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_c4de636bc7134cb79f2516465eb42bbc_add (data) {
+            geo_json_c4de636bc7134cb79f2516465eb42bbc.addData(data);
+        }
+            geo_json_c4de636bc7134cb79f2516465eb42bbc_add({"features": [{"geometry": {"coordinates": [[[-79.30442114, 43.723337], [-79.305105, 43.721666], [-79.30473567, 43.7177864], [-79.3013194, 43.7173629], [-79.30072291, 43.71760027], [-79.30059485, 43.7177198], [-79.30059536, 43.7177211], [-79.30413938, 43.72308331], [-79.30434951, 43.72330444], [-79.30436296, 43.72331224], [-79.30441652, 43.72333669], [-79.30442114, 43.723337]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_c4de636bc7134cb79f2516465eb42bbc.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 19<br>Size: 21<br>Books - 28.56%<br>Office & School Supplies - 23.60%<br>Health & Personal Care - 22.14%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_87597aeaabd843f9bf5bc64c679881b7_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#218cf4", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_87597aeaabd843f9bf5bc64c679881b7_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#218cf4", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_87597aeaabd843f9bf5bc64c679881b7_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_87597aeaabd843f9bf5bc64c679881b7.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_87597aeaabd843f9bf5bc64c679881b7_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_87597aeaabd843f9bf5bc64c679881b7 = L.geoJson(null, {
+                onEachFeature: geo_json_87597aeaabd843f9bf5bc64c679881b7_onEachFeature,
+            
+                style: geo_json_87597aeaabd843f9bf5bc64c679881b7_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_87597aeaabd843f9bf5bc64c679881b7_add (data) {
+            geo_json_87597aeaabd843f9bf5bc64c679881b7.addData(data);
+        }
+            geo_json_87597aeaabd843f9bf5bc64c679881b7_add({"features": [{"geometry": {"coordinates": [[[-79.27918368, 43.70566508], [-79.2789418, 43.70017427], [-79.2765798, 43.7005479], [-79.2768088, 43.7047213], [-79.27915647, 43.70582003], [-79.27918368, 43.70566508]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_87597aeaabd843f9bf5bc64c679881b7.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 20<br>Size: 17<br>Toys & Games - 75.05%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_408716ff9f7843449988da7df42c9a54_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#7610ff", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_408716ff9f7843449988da7df42c9a54_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#7610ff", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_408716ff9f7843449988da7df42c9a54_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_408716ff9f7843449988da7df42c9a54.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_408716ff9f7843449988da7df42c9a54_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_408716ff9f7843449988da7df42c9a54 = L.geoJson(null, {
+                onEachFeature: geo_json_408716ff9f7843449988da7df42c9a54_onEachFeature,
+            
+                style: geo_json_408716ff9f7843449988da7df42c9a54_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_408716ff9f7843449988da7df42c9a54_add (data) {
+            geo_json_408716ff9f7843449988da7df42c9a54.addData(data);
+        }
+            geo_json_408716ff9f7843449988da7df42c9a54_add({"features": [{"geometry": {"coordinates": [[[-79.49973094, 43.69119708], [-79.5063696, 43.6946813], [-79.50758, 43.69403], [-79.50847112, 43.69272384], [-79.50673938, 43.68837735], [-79.5041699, 43.68813938], [-79.50354701, 43.68815083], [-79.50228426, 43.68846349], [-79.49973094, 43.69119708]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_408716ff9f7843449988da7df42c9a54.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 21<br>Size: 25<br>Music - 76.41%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_d83fc36ba4984b029dceceb7867ced55_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#84ffb2", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_d83fc36ba4984b029dceceb7867ced55_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#84ffb2", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_d83fc36ba4984b029dceceb7867ced55_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_d83fc36ba4984b029dceceb7867ced55.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_d83fc36ba4984b029dceceb7867ced55_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_d83fc36ba4984b029dceceb7867ced55 = L.geoJson(null, {
+                onEachFeature: geo_json_d83fc36ba4984b029dceceb7867ced55_onEachFeature,
+            
+                style: geo_json_d83fc36ba4984b029dceceb7867ced55_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_d83fc36ba4984b029dceceb7867ced55_add (data) {
+            geo_json_d83fc36ba4984b029dceceb7867ced55.addData(data);
+        }
+            geo_json_d83fc36ba4984b029dceceb7867ced55_add({"features": [{"geometry": {"coordinates": [[[-79.41303916, 43.71793198], [-79.41291131, 43.71783643], [-79.41291643, 43.72173952], [-79.4155849, 43.722238], [-79.41312028, 43.71802334], [-79.41303916, 43.71793198]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_d83fc36ba4984b029dceceb7867ced55.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 22<br>Size: 11<br>Sports & Outdoors - 28.02%<br>Toys & Games - 27.47%<br>Movies & TV - 13.17%<br>Music - 12.07%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_9591153aec3746208350ce4941b3b7e1_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#396bf9", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_9591153aec3746208350ce4941b3b7e1_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#396bf9", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_9591153aec3746208350ce4941b3b7e1_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_9591153aec3746208350ce4941b3b7e1.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_9591153aec3746208350ce4941b3b7e1_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_9591153aec3746208350ce4941b3b7e1 = L.geoJson(null, {
+                onEachFeature: geo_json_9591153aec3746208350ce4941b3b7e1_onEachFeature,
+            
+                style: geo_json_9591153aec3746208350ce4941b3b7e1_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_9591153aec3746208350ce4941b3b7e1_add (data) {
+            geo_json_9591153aec3746208350ce4941b3b7e1.addData(data);
+        }
+            geo_json_9591153aec3746208350ce4941b3b7e1_add({"features": [{"geometry": {"coordinates": [[[-79.52099062, 43.72015549], [-79.5171529, 43.7170883], [-79.51840214, 43.72191677], [-79.51852617, 43.7219663], [-79.52099062, 43.72015549]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_9591153aec3746208350ce4941b3b7e1.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 23<br>Size: 11<br>Home & Kitchen - 32.51%<br>Music - 15.92%<br>Toys & Games - 15.15%<br>Health & Personal Care - 13.71%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#4af2cf", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#4af2cf", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_6cf25d84277c44dbbe75b2cb0d5911ec.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_6cf25d84277c44dbbe75b2cb0d5911ec = L.geoJson(null, {
+                onEachFeature: geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_onEachFeature,
+            
+                style: geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_add (data) {
+            geo_json_6cf25d84277c44dbbe75b2cb0d5911ec.addData(data);
+        }
+            geo_json_6cf25d84277c44dbbe75b2cb0d5911ec_add({"features": [{"geometry": {"coordinates": [[[-79.26066, 43.74229], [-79.2616716, 43.73751594], [-79.26159658, 43.73737999], [-79.2573951, 43.7333537], [-79.2542019, 43.73441447], [-79.2520546, 43.7358724], [-79.26066, 43.74229]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_6cf25d84277c44dbbe75b2cb0d5911ec.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 24<br>Size: 16<br>Books - 49.82%<br>Music - 37.35%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_1ad1a9d83db74503b8e0dc538e843361_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#fcb763", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_1ad1a9d83db74503b8e0dc538e843361_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#fcb763", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_1ad1a9d83db74503b8e0dc538e843361_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_1ad1a9d83db74503b8e0dc538e843361.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_1ad1a9d83db74503b8e0dc538e843361_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_1ad1a9d83db74503b8e0dc538e843361 = L.geoJson(null, {
+                onEachFeature: geo_json_1ad1a9d83db74503b8e0dc538e843361_onEachFeature,
+            
+                style: geo_json_1ad1a9d83db74503b8e0dc538e843361_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_1ad1a9d83db74503b8e0dc538e843361_add (data) {
+            geo_json_1ad1a9d83db74503b8e0dc538e843361.addData(data);
+        }
+            geo_json_1ad1a9d83db74503b8e0dc538e843361_add({"features": [{"geometry": {"coordinates": [[[-79.26086495, 43.75199562], [-79.265503, 43.7583433], [-79.26443528, 43.74981546], [-79.26086495, 43.75199562]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_1ad1a9d83db74503b8e0dc538e843361.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 25<br>Size: 16<br>Music - 28.45%<br>Toys & Games - 20.34%<br>Technology, Electronics & Accessories - 16.23%<br>Home & Kitchen - 14.85%<br>Books - 10.54%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_0e66efd566de44ea9cfa5811a230de9f_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#3febd5", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_0e66efd566de44ea9cfa5811a230de9f_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#3febd5", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_0e66efd566de44ea9cfa5811a230de9f_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_0e66efd566de44ea9cfa5811a230de9f.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_0e66efd566de44ea9cfa5811a230de9f_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_0e66efd566de44ea9cfa5811a230de9f = L.geoJson(null, {
+                onEachFeature: geo_json_0e66efd566de44ea9cfa5811a230de9f_onEachFeature,
+            
+                style: geo_json_0e66efd566de44ea9cfa5811a230de9f_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_0e66efd566de44ea9cfa5811a230de9f_add (data) {
+            geo_json_0e66efd566de44ea9cfa5811a230de9f.addData(data);
+        }
+            geo_json_0e66efd566de44ea9cfa5811a230de9f_add({"features": [{"geometry": {"coordinates": [[[-79.33944714, 43.76950727], [-79.34107223, 43.78042367], [-79.34968342, 43.77870417], [-79.351247, 43.770712], [-79.34689688, 43.76387768], [-79.33990359, 43.76369476], [-79.33944714, 43.76950727]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_0e66efd566de44ea9cfa5811a230de9f.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 26<br>Size: 26<br>Home & Kitchen - 56.05%<br>Sports & Outdoors - 28.67%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#2e7bf7", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#2e7bf7", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a = L.geoJson(null, {
+                onEachFeature: geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_onEachFeature,
+            
+                style: geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_add (data) {
+            geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a.addData(data);
+        }
+            geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a_add({"features": [{"geometry": {"coordinates": [[[-79.23496787, 43.79097454], [-79.23712376, 43.79472384], [-79.2356303, 43.78286], [-79.23496787, 43.79097454]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_a3b05e9ed0264a0ca5ea9f82b9c9566a.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 27<br>Size: 16<br>Home & Kitchen - 31.39%<br>Health & Personal Care - 29.58%<br>Music - 11.44%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_de3887716f5440b3b85db931cd3ef8c6_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#b4f295", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_de3887716f5440b3b85db931cd3ef8c6_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#b4f295", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_de3887716f5440b3b85db931cd3ef8c6_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_de3887716f5440b3b85db931cd3ef8c6.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_de3887716f5440b3b85db931cd3ef8c6_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_de3887716f5440b3b85db931cd3ef8c6 = L.geoJson(null, {
+                onEachFeature: geo_json_de3887716f5440b3b85db931cd3ef8c6_onEachFeature,
+            
+                style: geo_json_de3887716f5440b3b85db931cd3ef8c6_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_de3887716f5440b3b85db931cd3ef8c6_add (data) {
+            geo_json_de3887716f5440b3b85db931cd3ef8c6.addData(data);
+        }
+            geo_json_de3887716f5440b3b85db931cd3ef8c6_add({"features": [{"geometry": {"coordinates": [[[-79.50579235, 43.62171574], [-79.5042345, 43.6146345], [-79.49723121, 43.61709964], [-79.50291905, 43.62068682], [-79.50579235, 43.62171574]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_de3887716f5440b3b85db931cd3ef8c6.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 28<br>Size: 10<br>Health & Personal Care - 77.03%<br>Books - 10.97%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_abe8ffe16e124d418a17c89911674625_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#02b7eb", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_abe8ffe16e124d418a17c89911674625_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#02b7eb", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_abe8ffe16e124d418a17c89911674625_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_abe8ffe16e124d418a17c89911674625.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_abe8ffe16e124d418a17c89911674625_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_abe8ffe16e124d418a17c89911674625 = L.geoJson(null, {
+                onEachFeature: geo_json_abe8ffe16e124d418a17c89911674625_onEachFeature,
+            
+                style: geo_json_abe8ffe16e124d418a17c89911674625_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_abe8ffe16e124d418a17c89911674625_add (data) {
+            geo_json_abe8ffe16e124d418a17c89911674625.addData(data);
+        }
+            geo_json_abe8ffe16e124d418a17c89911674625_add({"features": [{"geometry": {"coordinates": [[[-79.3464, 43.704588], [-79.3417267, 43.70585555], [-79.34203565, 43.70686682], [-79.3464, 43.704588]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_abe8ffe16e124d418a17c89911674625.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 29<br>Size: 5<br>Books - 88.41%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_e296134725c04cf89b0a0b89b6d99c66_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#9cfba4", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_e296134725c04cf89b0a0b89b6d99c66_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#9cfba4", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_e296134725c04cf89b0a0b89b6d99c66_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_e296134725c04cf89b0a0b89b6d99c66.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_e296134725c04cf89b0a0b89b6d99c66_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_e296134725c04cf89b0a0b89b6d99c66 = L.geoJson(null, {
+                onEachFeature: geo_json_e296134725c04cf89b0a0b89b6d99c66_onEachFeature,
+            
+                style: geo_json_e296134725c04cf89b0a0b89b6d99c66_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_e296134725c04cf89b0a0b89b6d99c66_add (data) {
+            geo_json_e296134725c04cf89b0a0b89b6d99c66.addData(data);
+        }
+            geo_json_e296134725c04cf89b0a0b89b6d99c66_add({"features": [{"geometry": {"coordinates": [[[-79.32856852, 43.72676177], [-79.3371852, 43.7165667], [-79.3356583, 43.7151148], [-79.33441225, 43.71415241], [-79.3308467, 43.7117176], [-79.3279984, 43.717179], [-79.32763852, 43.71939101], [-79.32777776, 43.72498857], [-79.32856852, 43.72676177]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_e296134725c04cf89b0a0b89b6d99c66.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 30<br>Size: 25<br>Home & Kitchen - 27.29%<br>Sports & Outdoors - 26.76%<br>Health & Personal Care - 18.18%<br>Clothing, Shoes & Jewelry - 12.30%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_7c8ea38460ce425cba2aeaa24c29c81a_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#6a22fe", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_7c8ea38460ce425cba2aeaa24c29c81a_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#6a22fe", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_7c8ea38460ce425cba2aeaa24c29c81a_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_7c8ea38460ce425cba2aeaa24c29c81a.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_7c8ea38460ce425cba2aeaa24c29c81a_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_7c8ea38460ce425cba2aeaa24c29c81a = L.geoJson(null, {
+                onEachFeature: geo_json_7c8ea38460ce425cba2aeaa24c29c81a_onEachFeature,
+            
+                style: geo_json_7c8ea38460ce425cba2aeaa24c29c81a_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_7c8ea38460ce425cba2aeaa24c29c81a_add (data) {
+            geo_json_7c8ea38460ce425cba2aeaa24c29c81a.addData(data);
+        }
+            geo_json_7c8ea38460ce425cba2aeaa24c29c81a_add({"features": [{"geometry": {"coordinates": [[[-79.34081345, 43.72956766], [-79.34096765, 43.72963351], [-79.34099318, 43.72962863], [-79.34118441, 43.72956558], [-79.3447595, 43.7283809], [-79.34100002, 43.72943332], [-79.34081345, 43.72956766]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_7c8ea38460ce425cba2aeaa24c29c81a.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 31<br>Size: 12<br>Movies & TV - 65.41%<br>Music - 20.36%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#0fc4e7", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#0fc4e7", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66 = L.geoJson(null, {
+                onEachFeature: geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_onEachFeature,
+            
+                style: geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_add (data) {
+            geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66.addData(data);
+        }
+            geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66_add({"features": [{"geometry": {"coordinates": [[[-79.20775071, 43.80930725], [-79.208645, 43.8155734], [-79.21054367, 43.81397685], [-79.21705973, 43.80719218], [-79.21713373, 43.80709488], [-79.2167077, 43.80444323], [-79.20808255, 43.80688042], [-79.20775071, 43.80930725]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_ff5e7a89a0f040d5b8e65ed528fe0b66.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 32<br>Size: 23<br>Toys & Games - 46.65%<br>Home & Kitchen - 24.31%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_90dade2fdf174aeda00d0c422330959f_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#62fbc4", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_90dade2fdf174aeda00d0c422330959f_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#62fbc4", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_90dade2fdf174aeda00d0c422330959f_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_90dade2fdf174aeda00d0c422330959f.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_90dade2fdf174aeda00d0c422330959f_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_90dade2fdf174aeda00d0c422330959f = L.geoJson(null, {
+                onEachFeature: geo_json_90dade2fdf174aeda00d0c422330959f_onEachFeature,
+            
+                style: geo_json_90dade2fdf174aeda00d0c422330959f_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_90dade2fdf174aeda00d0c422330959f_add (data) {
+            geo_json_90dade2fdf174aeda00d0c422330959f.addData(data);
+        }
+            geo_json_90dade2fdf174aeda00d0c422330959f_add({"features": [{"geometry": {"coordinates": [[[-79.21126289, 43.81746753], [-79.2112291, 43.821951], [-79.21152385, 43.82239047], [-79.21175196, 43.82230298], [-79.21178409, 43.8222834], [-79.21178283, 43.82213334], [-79.21159327, 43.81791884], [-79.21138711, 43.817473], [-79.21126289, 43.81746753]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_90dade2fdf174aeda00d0c422330959f.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 33<br>Size: 8<br>Toys & Games - 52.80%<br>Technology, Electronics & Accessories - 13.04%<br>Music - 11.77%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_c9be236f1a04453da3bb0469a3c20a35_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff7b40", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_c9be236f1a04453da3bb0469a3c20a35_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff7b40", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_c9be236f1a04453da3bb0469a3c20a35_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_c9be236f1a04453da3bb0469a3c20a35.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_c9be236f1a04453da3bb0469a3c20a35_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_c9be236f1a04453da3bb0469a3c20a35 = L.geoJson(null, {
+                onEachFeature: geo_json_c9be236f1a04453da3bb0469a3c20a35_onEachFeature,
+            
+                style: geo_json_c9be236f1a04453da3bb0469a3c20a35_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_c9be236f1a04453da3bb0469a3c20a35_add (data) {
+            geo_json_c9be236f1a04453da3bb0469a3c20a35.addData(data);
+        }
+            geo_json_c9be236f1a04453da3bb0469a3c20a35_add({"features": [{"geometry": {"coordinates": [[[-79.55796519, 43.67150386], [-79.55493014, 43.67770021], [-79.55492825, 43.67776242], [-79.5549468, 43.67774949], [-79.55503754, 43.677686], [-79.55703889, 43.67612236], [-79.55718479, 43.6755317], [-79.55796519, 43.67150386]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_c9be236f1a04453da3bb0469a3c20a35.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 34<br>Size: 12<br>Toys & Games - 47.01%<br>Books - 16.65%<br>Health & Personal Care - 10.16%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_5e56ee24d4b64e60a54f019e3c07f21b_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff1008", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_5e56ee24d4b64e60a54f019e3c07f21b_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff1008", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_5e56ee24d4b64e60a54f019e3c07f21b_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_5e56ee24d4b64e60a54f019e3c07f21b.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_5e56ee24d4b64e60a54f019e3c07f21b_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_5e56ee24d4b64e60a54f019e3c07f21b = L.geoJson(null, {
+                onEachFeature: geo_json_5e56ee24d4b64e60a54f019e3c07f21b_onEachFeature,
+            
+                style: geo_json_5e56ee24d4b64e60a54f019e3c07f21b_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_5e56ee24d4b64e60a54f019e3c07f21b_add (data) {
+            geo_json_5e56ee24d4b64e60a54f019e3c07f21b.addData(data);
+        }
+            geo_json_5e56ee24d4b64e60a54f019e3c07f21b_add({"features": [{"geometry": {"coordinates": [[[-79.5981814, 43.7297021], [-79.59682787, 43.7353515], [-79.60241345, 43.73475923], [-79.60376124, 43.73118818], [-79.60380664, 43.73096846], [-79.60193178, 43.73030239], [-79.5981814, 43.7297021]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_5e56ee24d4b64e60a54f019e3c07f21b.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 35<br>Size: 12<br>Books - 84.71%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_5129085292d145cc9e9833e84e46ad56_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#f0c46c", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_5129085292d145cc9e9833e84e46ad56_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#f0c46c", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_5129085292d145cc9e9833e84e46ad56_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_5129085292d145cc9e9833e84e46ad56.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_5129085292d145cc9e9833e84e46ad56_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_5129085292d145cc9e9833e84e46ad56 = L.geoJson(null, {
+                onEachFeature: geo_json_5129085292d145cc9e9833e84e46ad56_onEachFeature,
+            
+                style: geo_json_5129085292d145cc9e9833e84e46ad56_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_5129085292d145cc9e9833e84e46ad56_add (data) {
+            geo_json_5129085292d145cc9e9833e84e46ad56.addData(data);
+        }
+            geo_json_5129085292d145cc9e9833e84e46ad56_add({"features": [{"geometry": {"coordinates": [[[-79.58760056, 43.75048068], [-79.59250777, 43.73622219], [-79.59152539, 43.73489207], [-79.58622, 43.73469], [-79.57952174, 43.7480465], [-79.58760056, 43.75048068]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_5129085292d145cc9e9833e84e46ad56.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 36<br>Size: 26<br>Clothing, Shoes & Jewelry - 27.56%<br>Toys & Games - 19.23%<br>Health & Personal Care - 18.49%<br>Sports & Outdoors - 14.93%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#90feab", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#90feab", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_4fbce52d37b84d5e9ed8f8906157fcc5.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_4fbce52d37b84d5e9ed8f8906157fcc5 = L.geoJson(null, {
+                onEachFeature: geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_onEachFeature,
+            
+                style: geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_add (data) {
+            geo_json_4fbce52d37b84d5e9ed8f8906157fcc5.addData(data);
+        }
+            geo_json_4fbce52d37b84d5e9ed8f8906157fcc5_add({"features": [{"geometry": {"coordinates": [[[-79.5989061, 43.75018849], [-79.60281859, 43.75180982], [-79.60246314, 43.74804356], [-79.60216741, 43.74805823], [-79.5989061, 43.75018849]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_4fbce52d37b84d5e9ed8f8906157fcc5.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 37<br>Size: 12<br>Music - 80.52%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_5eeb92b4dad54f28beeef406b210e523_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#e4cf74", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_5eeb92b4dad54f28beeef406b210e523_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#e4cf74", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_5eeb92b4dad54f28beeef406b210e523_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_5eeb92b4dad54f28beeef406b210e523.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_5eeb92b4dad54f28beeef406b210e523_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_5eeb92b4dad54f28beeef406b210e523 = L.geoJson(null, {
+                onEachFeature: geo_json_5eeb92b4dad54f28beeef406b210e523_onEachFeature,
+            
+                style: geo_json_5eeb92b4dad54f28beeef406b210e523_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_5eeb92b4dad54f28beeef406b210e523_add (data) {
+            geo_json_5eeb92b4dad54f28beeef406b210e523.addData(data);
+        }
+            geo_json_5eeb92b4dad54f28beeef406b210e523_add({"features": [{"geometry": {"coordinates": [[[-79.51431849, 43.75810269], [-79.52575213, 43.75454631], [-79.5148804, 43.74779627], [-79.51021485, 43.74831336], [-79.51431849, 43.75810269]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_5eeb92b4dad54f28beeef406b210e523.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 38<br>Size: 36<br>Music - 97.50%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_f24e314da58e4751b2609ed9472aa505_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff4724", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_f24e314da58e4751b2609ed9472aa505_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff4724", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_f24e314da58e4751b2609ed9472aa505_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_f24e314da58e4751b2609ed9472aa505.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_f24e314da58e4751b2609ed9472aa505_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_f24e314da58e4751b2609ed9472aa505 = L.geoJson(null, {
+                onEachFeature: geo_json_f24e314da58e4751b2609ed9472aa505_onEachFeature,
+            
+                style: geo_json_f24e314da58e4751b2609ed9472aa505_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_f24e314da58e4751b2609ed9472aa505_add (data) {
+            geo_json_f24e314da58e4751b2609ed9472aa505.addData(data);
+        }
+            geo_json_f24e314da58e4751b2609ed9472aa505_add({"features": [{"geometry": {"coordinates": [[[-79.52076443, 43.77345364], [-79.52419663, 43.77058448], [-79.5227039, 43.762728], [-79.52024003, 43.76126778], [-79.51993661, 43.76132135], [-79.51757873, 43.76473049], [-79.51524061, 43.76885452], [-79.52076443, 43.77345364]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_f24e314da58e4751b2609ed9472aa505.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 39<br>Size: 27<br>Technology, Electronics & Accessories - 33.11%<br>Books - 22.68%<br>Music - 10.46%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_ef23bae443d24544a56f78156c21d35d_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#cce385", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_ef23bae443d24544a56f78156c21d35d_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#cce385", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_ef23bae443d24544a56f78156c21d35d_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_ef23bae443d24544a56f78156c21d35d.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_ef23bae443d24544a56f78156c21d35d_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_ef23bae443d24544a56f78156c21d35d = L.geoJson(null, {
+                onEachFeature: geo_json_ef23bae443d24544a56f78156c21d35d_onEachFeature,
+            
+                style: geo_json_ef23bae443d24544a56f78156c21d35d_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_ef23bae443d24544a56f78156c21d35d_add (data) {
+            geo_json_ef23bae443d24544a56f78156c21d35d.addData(data);
+        }
+            geo_json_ef23bae443d24544a56f78156c21d35d_add({"features": [{"geometry": {"coordinates": [[[-79.50705973, 43.76010344], [-79.50008014, 43.75763136], [-79.49799156, 43.7589733], [-79.49430529, 43.76374782], [-79.49549796, 43.76758473], [-79.49937508, 43.77355901], [-79.5043471, 43.77474918], [-79.50536542, 43.77353669], [-79.50705973, 43.76010344]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_ef23bae443d24544a56f78156c21d35d.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 40<br>Size: 39<br>Home & Kitchen - 55.95%<br>Toys & Games - 16.54%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#32e3da", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#32e3da", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_2dd4abd2eb364ccabaf72c0f77e67b78.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_2dd4abd2eb364ccabaf72c0f77e67b78 = L.geoJson(null, {
+                onEachFeature: geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_onEachFeature,
+            
+                style: geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_add (data) {
+            geo_json_2dd4abd2eb364ccabaf72c0f77e67b78.addData(data);
+        }
+            geo_json_2dd4abd2eb364ccabaf72c0f77e67b78_add({"features": [{"geometry": {"coordinates": [[[-79.48853, 43.754516], [-79.4934914, 43.75034674], [-79.4924004, 43.7457618], [-79.48588464, 43.73892852], [-79.485, 43.74116667], [-79.48853, 43.754516]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_2dd4abd2eb364ccabaf72c0f77e67b78.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 41<br>Size: 37<br>Office & School Supplies - 38.70%<br>Home & Kitchen - 16.50%<br>Health & Personal Care - 16.11%<br>Technology, Electronics & Accessories - 13.70%<br>Toys & Games - 10.94%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_98bd2ac0ef8c46cbabca04b363645fb4_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff0000", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_98bd2ac0ef8c46cbabca04b363645fb4_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ff0000", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_98bd2ac0ef8c46cbabca04b363645fb4_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_98bd2ac0ef8c46cbabca04b363645fb4.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_98bd2ac0ef8c46cbabca04b363645fb4_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_98bd2ac0ef8c46cbabca04b363645fb4 = L.geoJson(null, {
+                onEachFeature: geo_json_98bd2ac0ef8c46cbabca04b363645fb4_onEachFeature,
+            
+                style: geo_json_98bd2ac0ef8c46cbabca04b363645fb4_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_98bd2ac0ef8c46cbabca04b363645fb4_add (data) {
+            geo_json_98bd2ac0ef8c46cbabca04b363645fb4.addData(data);
+        }
+            geo_json_98bd2ac0ef8c46cbabca04b363645fb4_add({"features": [{"geometry": {"coordinates": [[[-79.38493478, 43.76388113], [-79.38291656, 43.76322579], [-79.38132461, 43.76634189], [-79.38128413, 43.76648296], [-79.38133484, 43.76666036], [-79.38136778, 43.76665798], [-79.38143131, 43.76662755], [-79.38150499, 43.76658978], [-79.38331505, 43.76548179], [-79.38493478, 43.76388113]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_98bd2ac0ef8c46cbabca04b363645fb4.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 42<br>Size: 24<br>Movies & TV - 40.45%<br>Books - 16.79%<br>Music - 13.18%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        function geo_json_b788f3301bce4537b0b7b6647a0af74b_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ffa95b", "fillOpacity": 0.6, "weight": 1};
+            }
+        }
+        function geo_json_b788f3301bce4537b0b7b6647a0af74b_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "#ffa95b", "fillOpacity": 0.8, "weight": 1};
+            }
+        }
+        function geo_json_b788f3301bce4537b0b7b6647a0af74b_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    geo_json_b788f3301bce4537b0b7b6647a0af74b.resetStyle(e.target);
+                },
+                mouseover: function(e) {
+                    e.target.setStyle(geo_json_b788f3301bce4537b0b7b6647a0af74b_highlighter(e.target.feature));
+                },
+                click: function(e) {
+                    map_ec819d0c07eb4458b159292af5411b49.fitBounds(e.target.getBounds());
+                }
+            });
+        };
+        var geo_json_b788f3301bce4537b0b7b6647a0af74b = L.geoJson(null, {
+                onEachFeature: geo_json_b788f3301bce4537b0b7b6647a0af74b_onEachFeature,
+            
+                style: geo_json_b788f3301bce4537b0b7b6647a0af74b_styler,
+        }).addTo(map_ec819d0c07eb4458b159292af5411b49);
+
+        function geo_json_b788f3301bce4537b0b7b6647a0af74b_add (data) {
+            geo_json_b788f3301bce4537b0b7b6647a0af74b.addData(data);
+        }
+            geo_json_b788f3301bce4537b0b7b6647a0af74b_add({"features": [{"geometry": {"coordinates": [[[-79.5603828, 43.6402761], [-79.55966002, 43.64279039], [-79.56080852, 43.64130079], [-79.56232942, 43.63794601], [-79.56165992, 43.63851825], [-79.5603828, 43.6402761]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        
+    
+            geo_json_b788f3301bce4537b0b7b6647a0af74b.bindTooltip(
+                `<div style="color: DodgerBlue">
+                     Cluster id: 43<br>Size: 6<br>Toys & Games - 48.58%<br>Home & Kitchen - 17.79%<br>Books - 15.31%
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
