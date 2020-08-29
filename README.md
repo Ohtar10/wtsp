@@ -16,10 +16,9 @@ Where To Sell Products (wtsp) is a project in which I try to solve this very sam
 ![](./media/wtsp-demo-newyork.gif)
 
 ## Repository Structure
-* [Data Preparation (dataprep)](dataprep/)
-* [Notebooks](notebooks/)
-* [Documentation](documentation/)
-* [Runtime environments (env)](env/)
+* [Data Preparation (dataprep)](dataprep/): It contains Apache Spark data engineering pipelines to prepare the raw sources for model training.
+* [Notebooks](notebooks/): It contains several notebooks with the plain experiments while developing the project, as well as a notebook showcasing the CLI usage.
+* [Runtime environments (env)](env/): It contains conda and docker environment configuration recipies and files.
 
 ## System Requirements
 * Java 1.8.x
