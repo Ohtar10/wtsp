@@ -81,6 +81,9 @@ To download the image:
 docker image push ohtar10/wtsp:0.1.1
 ```
 
+## Acknowledgements
+This work could have not been done without the help and guidance of my advisors: Dr. Norha M. Villegas, and Dr. Javier Díaz Cely, whom I owe my utmost gratitude.
+
 ## License
 
 GNU GENERAL PUBLIC LICENSE
