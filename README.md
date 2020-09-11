@@ -15,6 +15,15 @@ Where To Sell Products (wtsp) is a project in which I try to solve this very sam
 ### New York (2013-07)
 ![](./media/wtsp-demo-newyork.gif)
 
+## Live Demo
+| City       | Date     | 
+| :------------- | :----------: |
+|  Los Angeles | [June 2013](demo/where_to_sell_in/2013-06/place_name=Los%20Angeles/classified_clusters.html)   |
+|  Los Angeles | [July 2013](demo/where_to_sell_in/2013-07/place_name=Los%20Angeles/classified_clusters.html)   |
+|  Los Angeles | [August 2013](demo/where_to_sell_in/2013-08/place_name=Los%20Angeles/classified_clusters.html)   |
+|  Los Angeles | [September 2013](demo/where_to_sell_in/2013-09/place_name=Los%20Angeles/classified_clusters.html)   |
+
+
 ## Repository Structure
 * [Data Preparation (dataprep)](dataprep/): It contains Apache Spark data engineering pipelines to prepare the raw sources for model training.
 * [Notebooks](notebooks/): It contains several notebooks with the plain experiments while developing the project, as well as a notebook showcasing the CLI usage.
