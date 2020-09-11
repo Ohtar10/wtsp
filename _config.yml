@@ -1,1 +1,5 @@
 theme: jekyll-theme-cayman
+jekyll-spaceship:
+    # default enabled processors
+    processors:
+      - table-processorv
