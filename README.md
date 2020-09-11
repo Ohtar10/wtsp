@@ -23,6 +23,18 @@ Where To Sell Products (wtsp) is a project in which I try to solve this very sam
 |  Los Angeles | [July 2013](demo/where_to_sell_in/2013-07/place_name=Los%20Angeles/classified_clusters.html)   |
 |  Los Angeles | [August 2013](demo/where_to_sell_in/2013-08/place_name=Los%20Angeles/classified_clusters.html)   |
 |  Los Angeles | [September 2013](demo/where_to_sell_in/2013-09/place_name=Los%20Angeles/classified_clusters.html)   |
+|  New York | [June 2013](demo/where_to_sell_in/2013-06/place_name=New%20York/classified_clusters.html)   |
+|  New York | [July 2013](demo/where_to_sell_in/2013-07/place_name=New%20York/classified_clusters.html)   |
+|  New York | [August 2013](demo/where_to_sell_in/2013-08/place_name=New%20York/classified_clusters.html)   |
+|  New York | [September 2013](demo/where_to_sell_in/2013-09/place_name=New%20York/classified_clusters.html)   |
+|  Vancouver | [June 2013](demo/where_to_sell_in/2013-06/place_name=Vancouver/classified_clusters.html)   |
+|  Vancouver | [July 2013](demo/where_to_sell_in/2013-07/place_name=Vancouver/classified_clusters.html)   |
+|  Vancouver | [August 2013](demo/where_to_sell_in/2013-08/place_name=Vancouver/classified_clusters.html)   |
+|  Vancouver | [September 2013](demo/where_to_sell_in/2013-09/place_name=Vancouver/classified_clusters.html)   |
+|  Toronto | [June 2013](demo/where_to_sell_in/2013-06/place_name=Toronto/classified_clusters.html)   |
+|  Toronto | [July 2013](demo/where_to_sell_in/2013-07/place_name=Toronto/classified_clusters.html)   |
+|  Toronto | [August 2013](demo/where_to_sell_in/2013-08/place_name=Toronto/classified_clusters.html)   |
+|  Toronto | [September 2013](demo/where_to_sell_in/2013-09/place_name=Toronto/classified_clusters.html)   |
 {:.mbtablestyle}
 
 ## Repository Structure
