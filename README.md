@@ -71,7 +71,7 @@ Use the [cli](cli/) to predict the detect and classify the geographic
 areas.
 
 ## Detailed process
-A more detailed process is written in jupyter notebooks [here](notebooks/jupyter/)
+A more detailed process is written in jupyter notebooks [here](notebooks/)
 
 ## Docker
 I have created a docker image with the environment and cli pre-installed and configured to run experments starting from pre-processed data https://hub.docker.com/r/ohtar10/wtsp.
