@@ -64,10 +64,10 @@ This job takes the twitter data, filters out the tweets that are not geotagged a
 This job takes the raw amazon product reviews and product metadata and converts them into 'documents' where each document has categories and either a review text or a product description.
 
 ### 3. Train the product classifier
-Install the [cli](cli/) and follow the instructions to create the embeddings and train the classifier with the transformed product documents.
+Install the [cli](https://github.com/Ohtar10/wtsp/tree/master/cli) and follow the instructions to create the embeddings and train the classifier with the transformed product documents.
 
 ### 4. Predict the geographic area categories
-Use the [cli](cli/) to predict the detect and classify the geographic
+Use the [cli](https://github.com/Ohtar10/wtsp/tree/master/cli) to predict the detect and classify the geographic
 areas.
 
 ## Detailed process
