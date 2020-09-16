@@ -75,7 +75,7 @@ A more detailed process is written in jupyter notebooks [here](notebooks/)
 
 ## Results
 ### Artifacts
-We generated several artifacts that we made publicly available for further research, which can be downloaded from [this link](https://correoicesiedu-my.sharepoint.com/:f:/g/personal/luis_ferro1_correo_icesi_edu_co/EoiMCq-lAODNCqytYOGsJ1AcBftgH0b8104mCQlCBK7y_WA?e=HM9jce), the content is described as follows:
+We generated several artifacts that we made publicly available for further research, which can be downloaded from [this link](https://correoicesiedu-my.sharepoint.com/:f:/g/personal/luis_ferro1_correo_icesi_edu_co/EoiMCqlAODNCqytYOGsJ1AcBftgH0b8104mCQlCBK7y_WA?e=8F5ayt), the content is described as follows:
 
 * **dataset.zip:** It contains the generated product document embeddings along with a sklearn category multilabel binarizer to decode the categories.
 * **d2v_model.zip:** It contains the Gensim Doc2Vec model that can be used to generate new product
