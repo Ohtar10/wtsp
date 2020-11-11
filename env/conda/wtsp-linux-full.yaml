@@ -326,4 +326,6 @@ dependencies:
     - tqdm==4.46.0
     - yarl==1.4.2
     - zict==2.0.0
+    - transformers==3.1.0
+    - tokenizers==0.9.3
 
