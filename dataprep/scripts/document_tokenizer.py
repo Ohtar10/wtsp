@@ -18,26 +18,28 @@ args = parser.parse_args()
 
 
 def word_count(df, column, regex, vocab_size):
-    return df.select(F.split(F.lower(F.col(column)), ' ').alias('words'))\
+    return df.select(F.split(F.lower(F.col(column)), regex).alias('words'))\
     .select(F.explode(F.col('words')).alias('words'))\
-    .select(F.regexp_replace(F.col('words'), regex, '').alias('words'))\
     .filter("length(trim('words')) > 0")\
     .groupBy('words').count()\
     .orderBy('count', ascending=False)\
     .limit(vocab_size)
 
 def build_word_index(word_count):
-    word_index = word_count.withColumn('id', F.monotonically_increasing_id()).select(F.col('words'), F.col('id'))
+    word_index = word_count.withColumn('id', F.monotonically_increasing_id() + 1).select(F.col('words'), F.col('id'))
     word_index = word_index.rdd.map(lambda row: (row[0], row[1])).collect()
     return dict(word_index)
 
 def tokenize(df, column, regex, word_index, maxlen):
     words_to_indices = F.udf(lambda words: [word_index[w] for w in words if w in word_index][:maxlen])
+    pad_sequence = F.udf(lambda words: [0] * (maxlen - len(words)) + words)
     remove_from_regex = F.udf(lambda words: [re.sub(regex, '', w) for w in words])
     return df.withColumn(f'tokenized_{column}', 
-        words_to_indices(
-            remove_from_regex(
-                F.split(F.lower(F.col(column)), ' ')
+        pad_sequence(
+            words_to_indices(
+                remove_from_regex(
+                    F.split(F.lower(F.col(column)), ' ')
+                )
             )
         )
     )
