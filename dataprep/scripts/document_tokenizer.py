@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
+import pyspark.sql.types as types
 import argparse
 import sys
 import re
@@ -31,9 +32,9 @@ def build_word_index(word_count):
     return dict(word_index)
 
 def tokenize(df, column, regex, word_index, maxlen):
-    words_to_indices = F.udf(lambda words: [word_index[w] for w in words if w in word_index][:maxlen])
-    pad_sequence = F.udf(lambda words: [0] * (maxlen - len(words)) + words)
-    remove_from_regex = F.udf(lambda words: [re.sub(regex, '', w) for w in words])
+    words_to_indices = F.udf(lambda words: [word_index[w] for w in words if w in word_index][:maxlen], types.ArrayType(types.IntegerType()))
+    pad_sequence = F.udf(lambda words: [0] * (maxlen - len(words)) + words, types.ArrayType(types.IntegerType()))
+    remove_from_regex = F.udf(lambda words: [re.sub(regex, '', w) for w in words], types.ArrayType(types.IntegerType()))
     return df.withColumn(f'tokenized_{column}', 
         pad_sequence(
             words_to_indices(
