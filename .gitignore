@@ -166,3 +166,4 @@ docker-build/
 models/
 datasets/
 deprecated/
+artifacts/
