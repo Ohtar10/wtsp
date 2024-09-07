@@ -21,7 +21,10 @@ dependencies:
   - folium
   - geopandas
   - shapely
+  - xlrd
   - pip:
     - modin[ray]
+    - tokenizers
+    - transformers==3.1.0
 
 
