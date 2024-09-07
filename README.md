@@ -1,5 +1,5 @@
 # Where To Sell Products
-#### Author: Luis Eduardo Ferro Diez <a href="mailto:luisedof10@gmail.com">luisedof10@gmail.com</a>
+#### Author: Luis Eduardo Ferro Diez <a href="mailto:contact@ohtar.mozmail.com">contact@ohtar.mozmail.com</a>
 
 This repository contains all my work for my MsC in Computer Science project.
 
